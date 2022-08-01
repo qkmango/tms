@@ -37,7 +37,9 @@ public class SystemServiceImpl implements SystemService {
 
     @Override
     public User getUserAllInfo(User user) {
-        return dao.getUserAllInfo(user);
+        User userAllInfo = dao.getUserAllInfo(user);
+        userAllInfo.setPermissionType(user.getPermissionType());
+        return userAllInfo;
     }
 
 }

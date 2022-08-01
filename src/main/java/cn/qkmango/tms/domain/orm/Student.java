@@ -7,10 +7,9 @@ import cn.qkmango.tms.domain.bind.PermissionType;
  * 学生实体类
  *
  * 继承自父类 User 的属性
- *     protected Integer id;
- *     protected String password;
- *     protected String name;
- *
+ * protected Integer id;
+ * protected String password;
+ * protected String name;
  */
 public class Student extends User {
 
@@ -23,10 +22,11 @@ public class Student extends User {
     //所属专业
     private Integer specialized;
 
-    public Student() { }
+    public Student() {
+    }
 
-    public Student(Integer id, String password, String name, PermissionType permissionType, Integer sex, String birth, Integer clazz, Integer specialized) {
-        super(id, password, name, permissionType);
+    public Student(Integer id, String password, String name, String email, PermissionType permissionType, Integer sex, String birth, Integer clazz, Integer specialized) {
+        super(id, password, name, email, permissionType);
         this.sex = sex;
         this.birth = birth;
         this.clazz = clazz;

@@ -5,6 +5,7 @@ import cn.qkmango.tms.common.exception.UpdateException;
 import cn.qkmango.tms.domain.orm.Building;
 import cn.qkmango.tms.domain.orm.Elective;
 import cn.qkmango.tms.domain.orm.Room;
+import cn.qkmango.tms.domain.orm.User;
 import cn.qkmango.tms.domain.vo.UpdatePasswordVO;
 import cn.qkmango.tms.query.updateQuery.dao.UpdateDao;
 import cn.qkmango.tms.query.updateQuery.service.UpdateService;
@@ -71,6 +72,15 @@ public class UpdateServiceImpl implements UpdateService {
         int affectedRows = updateDao.updateYear(year,newYear);
         if (affectedRows != 1) {
             throw new UpdateException(messageSource.getMessage("db.updateYear.failure",null,locale));
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateUserBasicInfo(User updateUser,Locale locale) throws UpdateException {
+        int affectedRows = updateDao.updateUserBasicInfo(updateUser);
+        if (affectedRows != 1) {
+            throw new UpdateException(messageSource.getMessage("db.updateUserBasicInfo.failure",null,locale));
         }
     }
 }

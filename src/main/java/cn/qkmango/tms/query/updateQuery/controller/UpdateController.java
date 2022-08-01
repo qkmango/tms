@@ -17,6 +17,7 @@ import cn.qkmango.tms.query.updateQuery.service.UpdateService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -158,6 +159,28 @@ public class UpdateController {
 
         return map;
     }
+
+    @PostMapping("updateUserBasicInfo.do")
+    public Map<String, Object> updateUserBasicInfo(HttpSession session,
+                                                   @Validated(Update.UpdateUserBasicInfo.class)
+                                                   User updateUser,
+                                                   BindingResult result,
+                                                   Locale locale) throws UpdateException {
+
+        User user = (User) session.getAttribute("user");
+        updateUser.setId(user.getId());
+        updateUser.setPermissionType(user.getPermissionType());
+
+        updateService.updateUserBasicInfo(updateUser,locale);
+
+        ResponseMap map = new ResponseMap();
+        map.setSuccess(true);
+        map.setMessage(messageSource.getMessage("db.updateUserBasicInfo.success",null,locale));
+
+        return map;
+
+    }
+
 
 
 }

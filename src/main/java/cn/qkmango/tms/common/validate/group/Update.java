@@ -11,4 +11,5 @@ public interface Update {
     interface UpdateRoom{}
     interface UpdateStudentScore {}
     interface UpdateSystemKeyValue {}
+    interface UpdateUserBasicInfo {}
 }

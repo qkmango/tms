@@ -1,30 +1,38 @@
 package cn.qkmango.tms.domain.orm;
 
 import cn.qkmango.tms.common.validate.group.Query.login;
+import cn.qkmango.tms.common.validate.group.Update;
 import cn.qkmango.tms.domain.bind.PermissionType;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.StringJoiner;
 
 public class User {
-    @NotNull(message = "{valid.User.id.NotNull}",groups = login.class)
+    @NotNull(message = "{valid.User.id.NotNull}", groups = login.class)
     protected Integer id;
 
-    @NotNull(message = "{valid.User.password.NotNull}",groups = login.class)
+    @NotNull(message = "{valid.User.password.NotNull}", groups = login.class)
     protected String password;
 
     protected String name;
 
-    @NotNull(message = "{valid.User.permissionType.NotNull}",groups = login.class)
+    @NotBlank(message = "{valid.User.email.NotBlank}",groups = Update.UpdateUserBasicInfo.class)
+    @Email(message = "{valid.User.email.Email}", groups = Update.UpdateUserBasicInfo.class)
+    private String email;
+
+    @NotNull(message = "{valid.User.permissionType.NotNull}", groups = login.class)
     protected PermissionType permissionType;
 
     public User() {
     }
 
-    public User(Integer id, String password, String name, PermissionType permissionType) {
+    public User(Integer id, String password, String name, String email, PermissionType permissionType) {
         this.id = id;
         this.password = password;
         this.name = name;
+        this.email = email;
         this.permissionType = permissionType;
     }
 
@@ -60,12 +68,21 @@ public class User {
         this.permissionType = permissionType;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("password='" + password + "'")
                 .add("name='" + name + "'")
+                .add("email='" + email + "'")
                 .add("permissionType=" + permissionType)
                 .toString();
     }
