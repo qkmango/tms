@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<base href="../../../" />
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+
+
+<div class="layui-form layui-form-pane" id="info" lay-filter="info">
+    <div class="layui-form-item">
+        <label class="layui-form-label">选课ID</label>
+        <div class="layui-input-block">
+            <input type="number" name="elective" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">课程名</label>
+        <div class="layui-input-block">
+            <input type="text" name="course" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">老师</label>
+        <div class="layui-input-block">
+            <input type="text" name="teacher" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">学年</label>
+        <div class="layui-input-block">
+            <input type="number" name="courseYear" class="layui-input" readonly>
+        </div>
+        <label class="layui-form-label">学期</label>
+        <div class="layui-input-block">
+            <input type="text" name="term" class="layui-input" readonly>
+        </div>
+    </div>
+</div>
+
+<div class="layui-form layui-form-pane" id="teachEvaluateAdd" lay-filter="teachEvaluateAdd">
+    <div class="layui-form-item">
+
+        <label class="layui-form-label">教材态度</label>
+        <div class="layui-input-block">
+            <div class="layui-input-inline">
+                <select name="attitude" lay-verify="required" lay-search="">
+                    <option value=""></option>
+                    <option value="1">1 好</option>
+                    <option value="2">2 较好</option>
+                    <option value="3">3 一般</option>
+                    <option value="4">4 较差</option>
+                    <option value="5">5 差</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">学责任心强，对学生认真负责，遵守教学纪律</div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">教学准备</label>
+        <div class="layui-input-block">
+            <div class="layui-input-inline">
+                <select name="prepare" lay-verify="required" lay-search="">
+                    <option value=""></option>
+                    <option value="1">1 好</option>
+                    <option value="2">2 较好</option>
+                    <option value="3">3 一般</option>
+                    <option value="4">4 较差</option>
+                    <option value="5">5 差</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">课前准备充分，内容熟练，讲课流畅</div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">教学内容</label>
+        <div class="layui-input-block">
+            <div class="layui-input-inline">
+                <select name="content" lay-verify="required" lay-search="">
+                    <option value=""></option>
+                    <option value="1">1 好</option>
+                    <option value="2">2 较好</option>
+                    <option value="3">3 一般</option>
+                    <option value="4">4 较差</option>
+                    <option value="5">5 差</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">教学内容能够满足学生学习需求，体系完整，条例清晰，重、难点突出</div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">教学方法</label>
+        <div class="layui-input-block">
+            <div class="layui-input-inline">
+                <select name="method" lay-verify="required" lay-search="">
+                    <option value=""></option>
+                    <option value="1">1 好</option>
+                    <option value="2">2 较好</option>
+                    <option value="3">3 一般</option>
+                    <option value="4">4 较差</option>
+                    <option value="5">5 差</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">教学方式方法多样，注重课堂互动和学生能力培养</div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">教学思路</label>
+        <div class="layui-input-block">
+            <div class="layui-input-inline">
+                <select name="thinking" lay-verify="required" lay-search="">
+                    <option value=""></option>
+                    <option value="1">1 好</option>
+                    <option value="2">2 较好</option>
+                    <option value="3">3 一般</option>
+                    <option value="4">4 较差</option>
+                    <option value="5">5 差</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">教学思路清晰，逻辑性强，注重知识的应用性和实用性</div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">教学语言</label>
+        <div class="layui-input-block">
+            <div class="layui-input-inline">
+                <select name="talk" lay-verify="required" lay-search="">
+                    <option value=""></option>
+                    <option value="1">1 好</option>
+                    <option value="2">2 较好</option>
+                    <option value="3">3 一般</option>
+                    <option value="4">4 较差</option>
+                    <option value="5">5 差</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">能用标准的普通话或外语教学，语速适中，语言流畅，清晰易懂</div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">教学工具</label>
+        <div class="layui-input-block">
+            <div class="layui-input-inline">
+                <select name="tool" lay-verify="required" lay-search="">
+                    <option value=""></option>
+                    <option value="1">1 好</option>
+                    <option value="2">2 较好</option>
+                    <option value="3">3 一般</option>
+                    <option value="4">4 较差</option>
+                    <option value="5">5 差</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">板书工整，多媒体课件设计合理，各类教学工具运用得当</div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">作业与辅导</label>
+        <div class="layui-input-block">
+            <div class="layui-input-inline">
+                <select name="coaching" lay-verify="required" lay-search="">
+                    <option value=""></option>
+                    <option value="1">1 好</option>
+                    <option value="2">2 较好</option>
+                    <option value="3">3 一般</option>
+                    <option value="4">4 较差</option>
+                    <option value="5">5 差</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">作业适当，批改认真；细心、仔细地回答学生提问；课后有交流</div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">综合评价</label>
+        <div class="layui-input-block">
+            <div class="layui-input-inline">
+                <select name="composite" lay-verify="required" lay-search="">
+                    <option value=""></option>
+                    <option value="1">1 好</option>
+                    <option value="2">2 较好</option>
+                    <option value="3">3 一般</option>
+                    <option value="4">4 较差</option>
+                    <option value="5">5 差</option>
+                </select>
+            </div>
+            <div class="layui-form-mid layui-word-aux">您对该教师授课质量的总体评价</div>
+        </div>
+    </div>
+
+
+    <div class="layui-form-item layui-form-text">
+        <label class="layui-form-label">评语</label>
+        <div class="layui-input-block">
+            <textarea placeholder="请输入内容" class="layui-textarea" name="remark"></textarea>
+        </div>
+    </div>
+
+    
+    
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal layui-layout-right" lay-submit lay-filter="saveBtn">确认保存</button>
+        </div>
+    </div>
+</div>
+
+<script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+	
+	var cocoMessage = window.top.cocoMessage;
+
+    let obj = window.top.GLOBAL.map.get('page/student/evaluate/teach-evaluate-add.html');
+
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+            if(obj == null) {
+                cocoMessage.error('获取对象失败');
+                return;
+            }
+
+            form.val("info", { 
+                "course": obj.course,
+                "courseYear": obj.courseYear,
+                "elective": obj.elective,
+                "teacher": obj.teacher,
+                "term": obj.term?'第二学期':'第一学期'
+            });
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+			console.log(data.field);
+            data.field.elective=obj.elective;
+			
+			$.ajax({
+				url:'insert/insertTeachEvaluate.do',
+				data:data.field,
+				type:'post',
+				dataType:'json',
+				success:function(data) {
+					if(data.success) {
+						var iframeIndex = parent.layer.getFrameIndex(window.name);
+						parent.layer.close(iframeIndex);
+						cocoMessage.success(2000,data.message);
+					} else {
+						cocoMessage.error(2000,data.message);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					cocoMessage.error(2000,jqXHR.status+'');
+				}
+			})
+        });
+
+        return false;
+    });
+</script>
+
+</body>
+</html>

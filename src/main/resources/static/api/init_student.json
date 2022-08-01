@@ -1,0 +1,39 @@
+{
+	"homeInfo": {
+		"title": "首页",
+		"href": "page/welcome-student.html"
+	},
+	"logoInfo": {
+		"title": "学生",
+		"image": "images/logo.png",
+		"href": ""
+	},
+	"menuInfo": [
+		{
+			"title": "成绩查询",
+			"icon": "fa fa-address-book",
+			"href": "page/student/course/course.html",
+			"target": "_self"
+		},{
+			"title": "选课",
+			"icon": "fa fa-address-book",
+			"href": "page/student/elective/elective.html",
+			"target": "_self"
+		}, {
+			"title": "课表",
+			"icon": "fa fa-address-book",
+			"href": "page/student/common/timetable.html",
+			"target": "_self"
+		}, {
+			"title": "评价",
+			"icon": "fa fa-address-book",
+			"target": "_self",
+			"child": [{
+				"title": "教学评价",
+				"href": "page/student/evaluate/teach-evaluate.html",
+				"icon": "fa fa-tachometer",
+				"target": "_self"
+			}]
+		}
+	]
+}

@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>layui</title>
+	<meta name="renderer" content="webkit">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<base href="../../../" />
+	<link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css" media="all">
+	<link rel="stylesheet" href="css/public.css" media="all">
+</head>
+<body>
+	<div class="layuimini-container">
+		<div class="layuimini-main">
+			<div style="margin: 10px 10px 10px 10px">
+				<form class="layui-form layui-form-pane" action="" lay-filter='addCourse' id="addCourse">
+					
+					<fieldset class="table-search-fieldset">
+						<legend>课程信息</legend>
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label">课程名</label>
+								<div class="layui-input-inline">
+									<input type="text" name="name" autocomplete="off" class="layui-input" lay-verify="required">
+								</div>
+							</div>
+							
+							<div class="layui-inline">
+								<label class="layui-form-label">学分</label>
+								<div class="layui-input-inline">
+									<select name="credit" id="credit" lay-filter="credit" lay-verify="required">
+										<option value="">全部</option>
+										<option value="1">1</option>
+										<option value="2">2</option>
+										<option value="3">3</option>
+										<option value="4">4</option>
+									</select>
+								</div>
+							</div>
+							
+							<div class="layui-inline">
+							    <label class="layui-form-label">班级年级</label>
+								<div class="layui-input-inline">
+								  <input type="text" name="clazzYear" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							
+							<div class="layui-inline">
+								<label class="layui-form-label">课程年度</label>
+								<div class="layui-input-inline">
+								    <input type="text" name="courseYear" autocomplete="off" class="layui-input" lay-verify="required|year">
+								</div>
+							</div>
+							
+							<div class="layui-inline">
+								<label class="layui-form-label">学期</label>
+								<div class="layui-input-inline">
+								  <select name="term" id="term" lay-filter="term" lay-verify="required">
+									  <option value="">全部</option>
+									  <option value="false">第1学期</option>
+									  <option value="true">第2学期</option>
+								  </select>
+								</div>
+							</div>
+							
+							<div class="layui-inline">
+								<label class="layui-form-label">院系</label>
+								<div class="layui-input-inline">
+									<select name="faculty" id="faculty" lay-filter="faculty">
+										<option value="">全部</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">专业</label>
+								<div class="layui-input-inline">
+									<select name="specialized" id="specialized" lay-filter="specialized">
+										<option value="">全部</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="layui-inline">
+								<label class="layui-form-label">班级</label>
+								<div class="layui-input-inline">
+									<div class="layui-input-inline">
+										<select name="clazz" id="clazz" lay-filter="clazz" lay-verify="required">
+											<option value="">全部</option>
+										</select>
+									</div>
+								</div>
+							</div>
+							
+						</div>
+					</fieldset>
+					<fieldset class="table-search-fieldset">
+						<legend>授课老师</legend>
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label">院系</label>
+								<div class="layui-input-inline">
+									<select id="teacher_faculty" lay-filter="teacher_faculty">
+										<option value="">全部</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">性别</label>
+								<div class="layui-input-inline">
+									<select id="teacher_sex" lay-filter="teacher_sex">
+										<option value="">全部</option>
+										<option value="1">男</option>
+										<option value="0">女</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">授课老师</label>
+								<div class="layui-input-inline">
+									<select name="teacher" id="teacher" lay-filter="teacher" lay-verify="required">
+										<option value="">全部</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						
+					</fieldset>
+
+					<fieldset class="table-search-fieldset courseInfoItem">
+						<legend>节次0</legend>
+						<div class="layui-form-item">
+							<div  class="layui-inline">
+							    <label class="layui-form-label">类型</label>
+							    <div class="layui-input-inline">
+							    	<select name="courseInfos[0].courseType" lay-verify="required">
+							    		<option value="">全部</option>
+							    		<option value="theory">理论课</option>
+							    		<option value="practice">实践课</option>
+							    	</select>
+							    </div>
+							</div>
+							<div  class="layui-inline">
+							    <label class="layui-form-label">单双周</label>
+							    <div class="layui-input-inline">
+							    	<select name="courseInfos[0].weekType" lay-verify="required">
+							    		<option value="all">不限</option>
+							    		<option value="sgl">单周</option>
+							    		<option value="dbl">双周</option>
+							    	</select>
+							    </div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">起始周</label>
+								<div class="layui-input-inline">
+									<input type="number" name="courseInfos[0].beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">持续周</label>
+								<div class="layui-input-inline">
+									<input type="number" name="courseInfos[0].lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">星期</label>
+								<div class="layui-input-inline">
+									<select name="courseInfos[0].weekDay" lay-verify="required">
+										<option value="">全部</option>
+										<option value="Monday">周一</option>
+										<option value="Tuesday">周二</option>
+										<option value="Wednesday">周三</option>
+										<option value="Thursday">周四</option>
+										<option value="Friday">周五</option>
+										<option value="Saturday">周六</option>
+										<option value="Sunday">周日</option>
+									</select>
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">起始节</label>
+								<div class="layui-input-inline">
+									<input type="number" name="courseInfos[0].begin" autocomplete="off" class="layui-input" lay-verify="required|int|begin">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">持续节</label>
+								<div class="layui-input-inline">
+									<input type="number" name="courseInfos[0].length" autocomplete="off" class="layui-input" lay-verify="required|int|length" placeholder="1-4">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">教室ID</label>
+								<div class="layui-input-inline">
+									<input type="number" name="courseInfos[0].address" autocomplete="off" class="layui-input" lay-verify="required">
+								</div>
+							</div>
+						</div>
+					</fieldset>
+					<div class="layui-inline" id="btnArea">
+						<button type="button" class="layui-btn" id="add"><i class="layui-icon">&#xe61f;</i>添加节次</button>
+						<button type="button" class="layui-btn layui-btn-danger" id="del"><i class="layui-icon">&#xe640;</i>删除节次</button>
+						<button type="submit" class="layui-btn layui-btn-normal" form="addCourse" lay-submit lay-filter="data-submit-btn">
+							<i class="layui-icon">&#xe605;</i>提交
+						</button>
+					</div>
+				</form>
+			</div>
+			
+
+		</div>
+	</div>
+	<script type="text/javascript" src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+	<script type="text/javascript" src="lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="page/admin/course/add-course.js" charset="utf-8"></script>
+</body>
+</html>

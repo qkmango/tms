@@ -1,0 +1,92 @@
+body {
+    margin: 15px 15px 15px 15px;
+    background: #f2f2f2;
+}
+
+.layuimini-container {
+    border: 1px solid #f2f2f2;
+    border-radius: 5px;
+    background-color: #ffffff
+}
+
+.layuimini-main {
+    margin: 10px 10px 10px 10px;
+}
+
+/**必填红点 */
+.layuimini-form > .layui-form-item > .required:after {
+    content: '*';
+    color: red;
+    position: absolute;
+    margin-left: 4px;
+    font-weight: bold;
+    line-height: 1.8em;
+    top: 6px;
+    right: 5px;
+}
+
+.layuimini-form > .layui-form-item > .layui-form-label {
+    width: 120px !important;
+}
+
+.layuimini-form > .layui-form-item > .layui-input-block {
+    margin-left: 150px !important;
+}
+
+.layuimini-form > .layui-form-item > .layui-input-block > tip {
+    display: inline-block;
+    margin-top: 10px;
+    line-height: 10px;
+    font-size: 10px;
+    color: #a29c9c;
+}
+
+/**搜索框*/
+.layuimini-container .table-search-fieldset {
+    margin: 0;
+    border: 1px solid #e6e6e6;
+    padding: 10px 20px 5px 20px;
+    color: #6b6b6b;
+}
+
+/**自定义滚动条样式 */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #9c9da0;
+    -webkit-border-radius: 2em;
+    -moz-border-radius: 2em;
+    border-radius: 2em
+}
+
+:root {
+    --green_1:#2ebc4f;
+    --green_2:#6db33f;
+    --green_3:#1aaf5d;
+    --green_4:#42b983;
+    --green_5:#2ea44f;
+    --green_6:#2b9148;
+	--blue_1:rgb(41, 151, 255);
+	--blue_2:#0779E4;
+	--orange:#ff5500;
+	--bgcolor_moon:#090724;
+	--bgcolor_sun:#f6f8fa;
+	--footer:#545462;
+
+    --success:#67C23A;
+    --warning:#E6A23C;
+    --danger:#F56C6C;
+
+
+    --theme_color:var(--green_4);
+}

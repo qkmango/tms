@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.qkmango.tms.query.basicQuery.dao.SystemQueryDao">
+
+    <select id="getSystemCurrYearAndTerm" resultType="cn.qkmango.tms.domain.orm.SystemKeyValue">
+        select `key`,`value`
+        from t_system
+        where
+        `key` in ('currYear','currTerm')
+    </select>
+
+    <select id="getSystemKeyValueList" resultType="cn.qkmango.tms.domain.orm.SystemKeyValue">
+        select `key`,`value`,description
+        from t_system
+    </select>
+
+</mapper>

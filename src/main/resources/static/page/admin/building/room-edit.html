@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<base href="../../../" />
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layui-form-pane" id="editRoomForm" lay-filter="editRoomForm">
+	
+	<div class="layui-form-item">
+	    <label class="layui-form-label">所属楼宇</label>
+		<div class="layui-input-block">
+		  <select name="building" id="building" lay-filter="building" lay-verify="required">
+			  <option value="">全部</option>
+		  </select>
+		</div>
+	</div>
+	
+    <div class="layui-form-item">
+        <label class="layui-form-label">教室号</label>
+        <div class="layui-input-block">
+            <input type="number" name="number" lay-verify="required|roomNumber|int" class="layui-input">
+        </div>
+    </div>
+    
+    <div class="layui-form-item">
+        <label class="layui-form-label">教室名</label>
+        <div class="layui-input-block">
+            <input type="text" name="name" class="layui-input" lay-verify="required">
+        </div>
+    </div>
+	
+	<div class="layui-form-item">
+	    <label class="layui-form-label">教室类型</label>
+	    <div class="layui-input-block">
+	        <select name="roomType" id="roomType" lay-filter="roomType" lay-verify="required">
+				<option value="">全部</option>
+				<option value="bz">标准教室</option>
+				<option value="jt">阶梯教室</option>
+				<option value="sy">实验室</option>
+				<option value="sx">实训教室</option>
+				<option value="wj">微机教室</option>
+				<option value="q">其他</option>
+	        </select>
+	    </div>
+	</div>
+	
+	<div class="layui-form-item">
+	    <label class="layui-form-label">容纳人数</label>
+	    <div class="layui-input-block">
+	        <input type="capacity" name="capacity" lay-verify="required|capacity|int" class="layui-input">
+	    </div>
+	</div>
+    
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal layui-layout-right" lay-submit lay-filter="saveBtn">确认保存</button>
+        </div>
+    </div>
+</div>
+<script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="lib/util/utils.js" charset="utf-8"></script>
+
+<script>
+	
+	var cocoMessage = window.top.cocoMessage;
+	
+    layui.use(['form'], function () {
+        var form = layui.form;
+        var layer = layui.layer;
+        var $ = layui.$;
+		
+		form.verify({
+			//楼栋号验证
+			roomNumber:function(value,item){
+				return value>=101&&value<=999?false:'教室号取值在101-999';
+			},
+			int:function(value,item) {
+				return value%1===0?false:"取值为整数"
+			},
+			capacity:function(value,item) {
+				return value>0?false:"必须大于0"
+			}
+		})
+			
+		const roomId = getUrlParam('id');
+		if(roomId == null) {
+			cocoMessage.error('获取教室ID失败');
+			return;
+		}
+			
+		//获取楼列表并渲染
+		$.ajax({
+			url:'query/list/getBuildingList.do',
+			async:false,
+			type:'post',
+			dataType:'json',
+			success:function(res) {
+				if(res.success) {
+					let html = '<option value="">全部</option>';
+					$.each(res.data,function(index,item){
+						html += '<option value='+item.id+'>'+item.number+'号楼 '+item.name+'</option>';
+					})
+					$('#building').html(html);
+					form.render('select','editRoomForm');
+				} else {
+					cocoMessage.error(2000,res.message);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				cocoMessage.error(2000,jqXHR.status+'');
+			}
+		})
+		
+		//获取教室信息并会写
+		$.ajax({
+			url:'query/pagination/getRoomPagination.do',
+			data:{
+				pagination:false,
+				id:roomId
+			},
+			type:'get',
+			dataType:'json',
+			success:function(res) {
+				if(res.success) {
+					var room = res.data[0];
+					form.val("editRoomForm", {
+					  "number": room.number,
+					  "name": room.name,
+					  "building":room.building,
+					  "roomType":room.roomType,
+					  "capacity":room.capacity
+					});
+				} else {
+					cocoMessage.error(res.message);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				cocoMessage.error(jqXHR.status+'');
+			}
+		})
+		
+		
+		
+		
+		
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+			console.log(data.field);
+			data.field.id = roomId,
+			
+			$.ajax({
+				url:'update/updateRoom.do',
+				data:data.field,
+				type:'post',
+				dataType:'json',
+				success:function(data) {
+					if(data.success) {
+						var iframeIndex = parent.layer.getFrameIndex(window.name);
+						parent.layer.close(iframeIndex);
+						cocoMessage.success(2000,data.message);
+					} else {
+						cocoMessage.error(2000,data.message);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					cocoMessage.error(2000,jqXHR.status+'');
+				}
+			})
+        });
+
+        return false;
+    });
+	
+	
+	
+	
+	
+</script>
+
+</body>
+</html>

@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="cn.qkmango.tms.query.basicQuery.dao.ListQueryDao">
+
+    <select id="getFacultyList" resultType="cn.qkmango.tms.domain.orm.Faculty">
+        SELECT id, name
+        FROM t_faculty
+    </select>
+
+    <select id="getSpecializedList" resultType="cn.qkmango.tms.domain.orm.Specialized">
+        SELECT
+        id,name,faculty
+        FROM
+        t_specialized
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="faculty != null and faculty != ''">
+                and faculty = #{faculty}
+            </if>
+            <if test="name != null and name != ''">
+                and name like '%' #{name} '%'
+            </if>
+        </where>
+    </select>
+
+    <select id="getClazzList" resultType="cn.qkmango.tms.domain.orm.Clazz">
+        SELECT id,name,specialized,clazzYear
+        FROM
+        t_clazz
+        <where>
+            <if test="id != null and id != ''">
+                id = #{id}
+            </if>
+            <if test="name != null and name != ''">
+                and name like '%' #{name} '%'
+            </if>
+            <if test="specialized != null and specialized != ''">
+                and specialized = #{specialized}
+            </if>
+            <if test="clazzYear != null and clazzYear != ''">
+                and clazzYear = #{clazzYear}
+            </if>
+        </where>
+    </select>
+
+    <select id="getCourseListByTeacherAndClazz" resultType="cn.qkmango.tms.domain.orm.Course">
+        SELECT course.id, course.name
+        FROM t_teacher teacher,
+             t_course course,
+             t_specialized specialized,
+             t_clazz clazz
+
+        WHERE teacher.id = #{teacher}
+          and clazz.id = #{clazz}
+          and course.teacher = teacher.id
+          and course.clazz = clazz.id
+          and clazz.specialized = specialized.id
+    </select>
+
+    <!-- 获取未分页的总记录条数 -->
+    <select id="getCount" resultType="int">
+        SELECT FOUND_ROWS()
+    </select>
+
+
+    <select id="getTeacherList" resultType="cn.qkmango.tms.domain.orm.Teacher">
+        select id,name
+        FROM t_teacher
+        <where>
+            <if test="faculty!=null and faculty!=''">
+                faculty = #{faculty}
+            </if>
+            <if test="profes!=null and profes!=''">
+                and profes = #{profes}
+            </if>
+            <if test="sex!=null">
+                and sex = #{sex}
+            </if>
+        </where>
+    </select>
+
+    <select id="getBuildingList" resultType="cn.qkmango.tms.domain.orm.Building">
+        select id, number, name, buildingType
+        from t_building
+        <where>
+            <if test="id!=null">
+                id = #{id}
+            </if>
+            <if test="number!=null">
+                and number = #{number}
+            </if>
+            <if test="buildingType!=null">
+                <if test="buildingType == @cn.qkmango.tms.domain.bind.building.BuildingType@pedagogical">
+                    and buildingType = 'pedagogical'
+                </if>
+                <if test="buildingType == @cn.qkmango.tms.domain.bind.building.BuildingType@experimental">
+                    and buildingType = 'experimental'
+                </if>
+                <if test="buildingType == @cn.qkmango.tms.domain.bind.building.BuildingType@other">
+                    and buildingType = 'other'
+                </if>
+            </if>
+            <if test="name!=null and name!=''">
+                and name like '%' #{name} '%'
+            </if>
+        </where>
+        order by number asc
+    </select>
+
+    <select id="getYearList" resultType="cn.qkmango.tms.domain.orm.Year">
+        select year,name from t_year
+        <where>
+            <if test="year != null and year != ''">
+                year = #{year}
+            </if>
+            <if test="name != null and name != ''">
+                and name = #{name}
+            </if>
+        </where>
+        order by year asc
+    </select>
+
+    <select id="getStudentElectiveCourseList" resultType="hashmap">
+        SELECT
+        course.id,
+        course.name,
+        course.credit,
+        course.courseYear,
+        course.term,
+        teacher.name as teacher,
+        <choose>
+            <when test="alreadyElective == true">
+                true as alreadyElective
+            </when>
+            <when test="alreadyElective == false">
+                false as alreadyElective
+            </when>
+            <otherwise>
+                if(course.id in (SELECT course FROM t_elective WHERE student=#{id}),true,false) as alreadyElective
+            </otherwise>
+        </choose>
+        FROM
+        t_course course,
+        t_teacher teacher
+        WHERE course.clazz=(SELECT clazz FROM t_student WHERE id=#{id})
+        AND course.teacher=teacher.id
+        <choose>
+            <when test="alreadyElective == true">
+                and course.id in (SELECT course FROM t_elective WHERE student=#{id})
+            </when>
+            <when test="alreadyElective == false">
+                and course.id not in (SELECT course FROM t_elective WHERE student=#{id})
+            </when>
+        </choose>
+    </select>
+
+    <select id="getStudentTimetable" resultType="cn.qkmango.tms.domain.model.OnceCourseInfo">
+        SELECT course.id,
+               course.name,
+               teacher.name    teacher,
+               course_info.beginWeek,
+               course_info.lengthWeek,
+               course_info.weekDay,
+               course_info.begin,
+               course_info.length,
+               course_info.weekType,
+               room.number     roomNumber,
+               building.number buildingNumber
+        FROM t_elective elective,
+             t_course course,
+             t_course_info course_info,
+             t_building building,
+             t_room room,
+             t_teacher teacher
+
+        WHERE elective.student = #{id}
+          AND course.courseYear = #{year}
+          AND course.term = #{term}
+          AND elective.course = course.id
+          AND course.teacher = teacher.id
+          AND course_info.course = course.id
+          AND course_info.address = room.id
+          AND room.building = building.id
+    </select>
+
+    <select id="getInfoOfTimeTable" resultType="cn.qkmango.tms.domain.model.TimeTable">
+        SELECT student.name studentName,
+               clazz.name   clazzName
+        FROM t_student student,
+             t_clazz clazz
+        WHERE student.id = #{studentId}
+          AND student.clazz = clazz.id
+    </select>
+
+    <select id="getStudentBasicInfo" resultType="hashmap">
+        select student.id,
+               student.name,
+               student.sex,
+               student.birth,
+               clazz.name       as clazz,
+               specialized.name as specialized,
+               faculty.name     as faculty
+        from t_student student,
+             t_clazz clazz,
+             t_specialized specialized,
+             t_faculty faculty
+        where student.id = #{id}
+          and student.clazz = clazz.id
+          and clazz.specialized = specialized.id
+          and specialized.faculty = faculty.id
+    </select>
+
+    <select id="getTeachEvaluateList" resultType="map">
+        SELECT
+            elective.id AS elective,
+            course.NAME AS course,
+            teacher.NAME AS teacher,
+            course.courseYear,
+            course.term,
+            IF((elective.id in (SELECT elective FROM t_teach_evaluate WHERE student=#{id})),true,false) as haveDone
+        FROM
+            t_elective elective,
+            t_course course,
+            t_teacher teacher
+        WHERE elective.student = #{id}
+          AND course.courseYear = #{currYear}
+          AND course.term = #{currTerm}
+          AND course.teacher = teacher.id
+          AND elective.course = course.id
+    </select>
+
+
+</mapper>

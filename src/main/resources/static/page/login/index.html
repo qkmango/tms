@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>登陆</title>
+<base href="../../" />
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<script type="text/javascript" src="lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="lib/coco-message/coco-message.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/layui-v2.6.3/css/modules/layui-icon-extend/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="page/login/style.css" />
+</head>
+<body>
+	
+	<div id="locale">
+		<button id="zh_CN" onclick="changeLocale('zh_CN')">中文</button>
+		<button id="en_US" onclick="changeLocale('en_US')">English</button><br>
+	</div>
+	
+	<div class="header">
+		<img src="images/only_logo_color.png" class="logo_img" />
+	</div>
+	
+	<h1 class="title">Sign in to System</h1>
+	
+	<div class="main">
+		<form class="form">
+			<p class="login_field">
+				<span>学号</span>
+				<span class="tip"></span>
+			</p>
+			<input type="text" id="id" value="1" />
+			<p class="login_field">
+				<span>密码</span>
+				<span class="tip"></span>
+			</p>
+			<input type="password" id="password" value="1" />
+			<p class="login_field">
+				<span>用户</span>
+				<span class="tip"></span>
+			</p>
+			<select id="permissionType">
+				<option value="student">学生</option>
+				<option value="teacher">教师</option>
+				<option value="admin" selected>管理员</option>
+			</select>
+			
+			<input type="button" id="login_btn" value="Sign in">
+		</form>
+		<div class="lable">用户名和密码均为[5-10]位字母或数字组合</div>
+	</div>
+	
+	<div class="link">
+		<a href="http://qkmango.cn" target="_blank"><i class="iconfont">&#xe605;</i> homepage</a>
+		<a href="https://gitee.com/qkmango" target="_blank"><i class="iconfont">&#xe609;</i> Gitee</a>
+		<a href="https://github.com/qkmango" target="_blank"><i class="iconfont">&#xe689;</i> Github</a>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="lib/util/cookie.js"></script>
+<script type="text/javascript" src="page/login/script.js"></script>

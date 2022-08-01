@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>登陆</title>
+<base href="../../" />
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<script type="text/javascript" src="lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="lib/coco-message/coco-message.js"></script>
+<link rel="stylesheet" type="text/css" href="lib/layui-v2.6.3/css/modules/layui-icon-extend/iconfont.css" />
+<link rel="stylesheet" type="text/css" href="page/login/style.css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts@4/dist/echarts.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/echarts-gl@1/dist/echarts-gl.min.js"></script>
+<style>
+	html {
+		height: 100%;
+	}
+	.header,.title,.main {
+		position: relative;
+		left: 100px;
+	}
+	body {
+		position: fixed;
+	}
+	body {
+		height: 100%; 
+		margin: 0;
+	}
+	#container{
+		height: 100%;
+		width: 100%;
+		position:fixed
+	}
+	#locale {
+		position: fixed;
+		right: 20px;
+		top: 10px;
+	}
+	
+	.link {
+		position: fixed;
+		padding: 0;
+		bottom: 10px;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 252px;
+	}
+	.link>a:first-child {
+		margin-left: 0;
+	}
+</style>
+
+</head>
+<body>
+	
+	<div id="container"></div>
+	
+	<div id="locale">
+		<button id="zh_CN" onclick="changeLocale('zh_CN')">中文</button>
+		<button id="en_US" onclick="changeLocale('en_US')">English</button><br>
+	</div>
+	
+	<div class="header">
+		<img src="images/only_logo_color.png" class="logo_img" />
+	</div>
+	
+	<h1 class="title">Sign in to System</h1>
+	
+	<div class="main">
+		<form class="form">
+			<p class="login_field">
+				<span>学号</span>
+				<span class="tip"></span>
+			</p>
+			<input type="text" id="id" value="1" />
+			<p class="login_field">
+				<span>密码</span>
+				<span class="tip"></span>
+			</p>
+			<input type="password" id="password" value="1" />
+			<p class="login_field">
+				<span>用户</span>
+				<span class="tip"></span>
+			</p>
+			<select id="permissionType">
+				<option value="student">学生</option>
+				<option value="teacher">教师</option>
+				<option value="admin" selected>管理员</option>
+			</select>
+			
+			<input type="button" id="login_btn" value="Sign in">
+		</form>
+		<div class="lable">用户名和密码均为[5-10]位字母或数字组合</div>
+	</div>
+	
+	<div class="link">
+		<a href="http://qkmango.cn" target="_blank"><i class="iconfont">&#xe605;</i> homepage</a>
+		<a href="https://gitee.com/qkmango" target="_blank"><i class="iconfont">&#xe609;</i> Gitee</a>
+		<a href="https://github.com/qkmango" target="_blank"><i class="iconfont">&#xe689;</i> Github</a>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="lib/util/cookie.js"></script>
+<script type="text/javascript" src="page/login/script.js"></script>
+
+<script type="text/javascript">
+	var dom = document.getElementById("container");
+	var myChart = echarts.init(dom);
+	var app = {};
+	option = null;
+
+	function createNodes(widthCount, heightCount) {
+		var nodes = [];
+		for (var i = 0; i < widthCount; i++) {
+			for (var j = 0; j < heightCount; j++) {
+				nodes.push({
+					x: Math.random() * window.innerWidth,
+					y: Math.random() * window.innerHeight,
+					value: 1
+				});
+			}
+		}
+		return nodes;
+	}
+
+	function createEdges(widthCount, heightCount) {
+		var edges = [];
+		for (var i = 0; i < widthCount; i++) {
+			for (var j = 0; j < heightCount; j++) {
+				if (i < widthCount - 1) {
+					edges.push({
+						source: i + j * widthCount,
+						target: i + 1 + j * widthCount,
+						value: 1
+					});
+				}
+				if (j < heightCount - 1) {
+					edges.push({
+						source: i + j * widthCount,
+						target: i + (j + 1) * widthCount,
+						value: 1
+					});
+				}
+			}
+		}
+		return edges;
+	}
+
+	var nodes = createNodes(40, 40);
+	var edges = createEdges(40, 40);
+
+	option = {
+		series: [{
+			type: 'graphGL',
+			nodes: nodes,
+			edges: edges,
+			itemStyle: {
+				color: 'rgba(3,102,214,.5)'
+			},
+			lineStyle: {
+				color: 'rgba(3,102,214,.5)',
+				width: 3
+			},
+			forceAtlas2: {
+				steps: 5,
+				jitterTolerence: 10,
+				edgeWeightInfluence: 4
+			}
+		}]
+	};;
+	if (option && typeof option === "object") {
+		myChart.setOption(option, true);
+	}
+</script>

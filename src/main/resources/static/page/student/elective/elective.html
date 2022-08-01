@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+	<base href="../../../" />
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+		<fieldset class="table-search-fieldset">
+		    <legend>搜索信息</legend>
+		    <div style="margin: 10px 10px 10px 10px">
+		        <form class="layui-form layui-form-pane" lay-filter='queryParams' id="queryParams">
+		            <div class="layui-form-item">
+
+		                <div class="layui-inline">
+		                	<label class="layui-form-label">是否已选</label>
+		                	<div class="layui-input-block">
+		                		<input type="radio" name="alreadyElective" value="" title="全部" checked>
+		                		<input type="radio" name="alreadyElective" value="true" title="已选">
+		                		<input type="radio" name="alreadyElective" value="false" title="未选">
+		                	</div>
+		                </div>
+		                <div class="layui-inline">
+		                    <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+		                </div>
+		            </div>
+		        </form>
+		    </div>
+		</fieldset>
+
+
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="addAll"> 选择 </button>
+                <!-- <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button> -->
+            </div>
+        </script>
+
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+        <script type="text/html" id="currentTableBar">
+            <!-- <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a> -->
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">退选</a>
+        </script>
+
+    </div>
+</div>
+<script src="lib/layui-v2.6.3/layui_update.js" charset="utf-8"></script>
+<script>
+
+	var cocoMessage = window.top.cocoMessage;
+
+    layui.use(['form', 'table'], function () {
+        var $ = layui.jquery,
+            form = layui.form,
+            table = layui.table;
+
+        table.render({
+            elem: '#currentTableId',
+            url: 'query/list/getStudentElectiveCourseList.do',
+			page: false,
+            toolbar: '#toolbarDemo',
+            defaultToolbar: ['filter', 'exports', 'print', {
+                title: '提示',
+                layEvent: 'LAYTABLE_TIPS',
+                icon: 'layui-icon-tips'
+            }],
+            cols: [[
+                {type: "checkbox", width: 50},
+                {field: 'id',title: 'ID',width: 60},
+                {field: 'name',title: '课程名'},
+                {field: 'credit',title: '学分',width: 60},
+                {field: 'courseYear',title: '学年',templet: function (data){
+                	return data.courseYear + ' - ' + (data.courseYear+1);
+                }},
+                {field: 'term',title: '学期',width: 60,templet:function(data){
+                	return data.term?2:1;
+                }},
+                {field: 'teacher',title: '老师'},
+                {field: 'alreadyElective',title: '选择状态',width: 100,templet:function(data){
+                	return data.alreadyElective==1?'<span class="layui-badge layui-bg-blue">已选</span>':'<span class="layui-badge-rim">未选</span>';
+                }},
+				// {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"},
+				{title: '操作',width: 100,templet:function(data){
+					return data.alreadyElective==1?'<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">退选</a>':'<a class="layui-btn layui-btn-xs layui-badge layui-bg-blue data-count-addOne" lay-event="addOne">选择</a>';
+				}}
+            ]],
+            skin: 'line',
+			parseData: function(res){
+			    return {
+			      "code": res.success?0:-1,
+			      "msg": res.message,
+			      "count": res.count,
+			      "data": res.data
+			    };
+			}
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+			console.log(data.field)
+            var result = JSON.stringify(data.field);
+            //执行搜索重载
+            table.reload('currentTableId', {
+				where: data.field
+            }, 'data');
+            return false;
+        });
+
+
+        /**
+         * toolbar监听事件
+         */
+        table.on('toolbar(currentTableFilter)', function (obj) {
+			var checkStatus = table.checkStatus(obj.config.id);
+			let courseIds = [];
+
+			for(var i=0;i<checkStatus.data.length;i++) {
+				courseIds.push(checkStatus.data[i].id);
+			}
+
+            if (obj.event === 'addAll') {  // 监听添加操作
+				$.ajax({
+					url:'insert/insertElective.do',
+					data:{
+						'courseIds':courseIds
+					},
+					traditional:true,
+					type:'post',
+					dataType:'json',
+					success:function(data) {
+						if(data.success) {
+							cocoMessage.success(2000,data.message);
+							table.reload("currentTableId");
+						} else {
+							cocoMessage.error(2000,data.message);
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						cocoMessage.error(2000,jqXHR.status+'');
+					}
+				})
+            }
+        });
+
+        //监听表格复选框选择
+        table.on('checkbox(currentTableFilter)', function (obj) {
+            console.log(obj)
+			var checkStatus = table.checkStatus('currentTableId')
+			,data = checkStatus.data;
+			console.log(data)
+        });
+
+        table.on('tool(currentTableFilter)', function (obj) {
+            var courseId = obj.data.id;
+            if (obj.event === 'delete') {
+				$.ajax({
+					url:'delete/deleteElective.do',
+					data:{
+						'courseId':obj.data.id
+					},
+					traditional:true,
+					type:'post',
+					dataType:'json',
+					success:function(data) {
+						if(data.success) {
+							cocoMessage.success(2000,data.message);
+							table.reload("currentTableId");
+						} else {
+							cocoMessage.error(2000,data.message);
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						cocoMessage.error(2000,jqXHR.status+'');
+					}
+				})
+                return false;
+            } else if(obj.event === 'addOne') {
+				console.log(obj.data.id)
+
+				let courseIds = [];
+				courseIds.push(obj.data.id);
+
+				$.ajax({
+					url:'insert/insertElective.do',
+					data:{
+						'courseIds':courseIds
+					},
+					traditional:true,
+					type:'post',
+					dataType:'json',
+					success:function(data) {
+						if(data.success) {
+							cocoMessage.success(2000,data.message);
+							table.reload("currentTableId");
+						} else {
+							cocoMessage.error(2000,data.message);
+						}
+					},
+					error: function (jqXHR, textStatus, errorThrown) {
+						cocoMessage.error(2000,jqXHR.status+'');
+					}
+				})
+
+				return false;
+			}
+        });
+
+    });
+</script>
+
+</body>
+</html>

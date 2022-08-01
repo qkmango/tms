@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.qkmango.tms.query.updateQuery.dao.UpdateDao">
+
+    <update id="updateStudentScore">
+        UPDATE t_elective
+        SET score = #{score}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateBuilding">
+        UPDATE t_building
+        SET number=#{number},name=#{name},buildingType=#{buildingType}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateRoom">
+        UPDATE t_room
+        SET number=#{number},name=#{name},building=#{building},capacity=#{capacity},roomType=#{roomType}
+        WHERE id = #{id}
+    </update>
+
+    <update id="updateYear">
+        UPDATE t_year
+        SET year=#{newYear},name=CONCAT_WS('-',#{newYear},#{newYear}+1)
+        WHERE year = #{year}
+    </update>
+
+    <update id="updatePassword">
+        UPDATE
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@student">
+            t_student
+        </if>
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@teacher">
+            t_teacher
+        </if>
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@admin">
+            t_admin
+        </if>
+        SET password = #{newPassword}
+        WHERE id = #{id}
+          and password = #{oldPassword}
+    </update>
+
+
+</mapper>

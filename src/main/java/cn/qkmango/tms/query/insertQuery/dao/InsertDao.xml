@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.qkmango.tms.query.insertQuery.dao.InsertDao">
+
+
+    <insert id="insertCourse">
+        insert into t_course(name, credit, clazz, teacher,courseYear,term)
+        values (#{name}, #{credit}, #{clazz}, #{teacher}, #{courseYear}, #{term})
+    </insert>
+
+    <insert id="insertCourseInfo" parameterType="list">
+        insert into t_course_info(course, courseType, weekType, beginWeek, lengthWeek, weekDay, begin, length, address)
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            (#{item.course},#{item.courseType},#{item.weekType},#{item.beginWeek},#{item.lengthWeek},#{item.weekDay},#{item.begin},#{item.length},#{item.address})
+        </foreach>
+    </insert>
+
+    <insert id="insertBuilding">
+        insert into t_building (number, name, buildingType)
+        values (#{number},#{name},#{buildingType});
+    </insert>
+
+    <insert id="insertRoom">
+        insert into t_room (number, name, building, capacity, roomType)
+        values (#{number},#{name},#{building},#{capacity},#{roomType});
+    </insert>
+
+
+    <select id="lastInsertId" resultType="int">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <insert id="insertYear">
+        insert into t_year(year,name)
+        values (#{year},CONCAT_WS('-',#{year},#{year}+1))
+    </insert>
+
+    <insert id="insertElective">
+        insert into t_elective(student,course)
+        values
+        <foreach collection="courseIds" item="id" separator=",">
+            (#{studentId},#{id})
+        </foreach>
+    </insert>
+
+    <insert id="insertTeachEvaluate">
+        insert into t_teach_evaluate(
+            elective,
+            student,
+            attitude,
+            prepare,
+            content,
+            method,
+            thinking,
+            talk,
+            tool,
+            coaching,
+            composite,
+            remark
+        )
+        values (
+            #{elective},
+            #{student},
+            #{attitude},
+            #{prepare},
+            #{content},
+            #{method},
+            #{thinking},
+            #{talk},
+            #{tool},
+            #{coaching},
+            #{composite},
+            #{remark}
+        )
+    </insert>
+
+
+</mapper>

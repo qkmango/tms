@@ -1,0 +1,22 @@
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+.mvn
+src/test
+src/main/java/cn/qkmango/tms/test
+
+src/main/resources/static/page/*.html
+src/main/resources/static/test
+src/main/resources/static/**/*.bak.*
+src/main/resources/static/api/test.json
+src/main/resources/static/page/teacher/data.json
+src/main/resources/static/data/*
+target

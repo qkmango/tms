@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<base href="../../../" />
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/public.css" media="all">
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+    </style>
+</head>
+<body>
+<div class="layui-form layui-form-pane" id="addRoomForm" lay-filter="addRoomForm">
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">键</label>
+        <div class="layui-input-block">
+            <input type="text" name="key" lay-verify="required|text" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">值</label>
+        <div class="layui-input-block">
+            <input type="text" name="value" lay-verify="required|text" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">描述</label>
+        <div class="layui-input-block">
+            <input type="text" name="description" lay-verify="required|text" class="layui-input">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn layui-btn-normal layui-layout-right" lay-submit lay-filter="saveBtn">确认保存</button>
+        </div>
+    </div>
+</div>
+<script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+
+	var cocoMessage = window.top.cocoMessage;
+
+    layui.use(['form'], function () {
+        var form = layui.form,
+            layer = layui.layer,
+            $ = layui.$;
+
+
+        //监听提交
+        form.on('submit(saveBtn)', function (data) {
+			console.log(data.field);
+
+			$.ajax({
+				url:'insert/system/insertSystemKeyValue.do',
+				data:data.field,
+				type:'post',
+				dataType:'json',
+				success:function(data) {
+					if(data.success) {
+						var iframeIndex = parent.layer.getFrameIndex(window.name);
+						parent.layer.close(iframeIndex);
+						cocoMessage.success(2000,data.message);
+					} else {
+						cocoMessage.error(2000,data.message);
+					}
+				},
+				error: function (jqXHR, textStatus, errorThrown) {
+					cocoMessage.error(2000,jqXHR.status+'');
+				}
+			})
+        });
+
+        return false;
+    });
+</script>
+
+</body>
+</html>

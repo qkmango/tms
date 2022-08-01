@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>layui</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<base href="../../../" />
+    <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css" media="all">
+    <link rel="stylesheet" href="css/public.css" media="all">
+</head>
+<body>
+<div class="layuimini-container">
+    <div class="layuimini-main">
+
+        <fieldset class="table-search-fieldset">
+            <legend>搜索信息</legend>
+            <div style="margin: 10px 10px 10px 10px">
+                <form class="layui-form layui-form-pane" lay-filter='queryParams' id="queryParams">
+                    <div class="layui-form-item">
+						
+                        <div class="layui-inline">
+                            <label class="layui-form-label">教室号</label>
+                            <div class="layui-input-inline">
+                                <input type="number" name="number" autocomplete="off" class="layui-input">
+                            </div>
+                        </div>
+						
+						<div class="layui-inline">
+						    <label class="layui-form-label">教室名称</label>
+						    <div class="layui-input-inline">
+						        <input type="text" name="name" autocomplete="off" class="layui-input">
+						    </div>
+						</div>
+						
+						<div class="layui-inline">
+						    <label class="layui-form-label">教室类型</label>
+						    <div class="layui-input-inline">
+						        <select name="roomType" id="roomType" lay-filter="roomType">
+									<option value="">全部</option>
+									<option value="bz">标准教室</option>
+									<option value="jt">阶梯教室</option>
+									<option value="sy">实验室</option>
+									<option value="sx">实训教室</option>
+									<option value="wj">微机教室</option>
+									<option value="q">其他</option>
+						        </select>
+						    </div>
+						</div>
+						
+                        <div class="layui-inline">
+                            <label class="layui-form-label">所属楼宇</label>
+							<div class="layui-input-inline">
+							  <select name="building" id="building" lay-filter="building">
+								  <option value="">全部</option>
+							  </select>
+							</div>
+                        </div>
+						
+						
+                        
+                        <div class="layui-inline">
+                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </fieldset>
+
+        <script type="text/html" id="toolbarDemo">
+            <div class="layui-btn-container">
+                <button class="layui-btn layui-btn-normal data-add-btn" lay-event="add"><i class="layui-icon">&#xe61f;</i>添加</button>
+            </div>
+        </script>
+
+        <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
+
+        <script type="text/html" id="currentTableBar">
+            <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a>
+            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a>
+        </script>
+
+    </div>
+</div>
+<script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script>
+	
+	var $;
+	var form;
+	var table;
+	var cocoMessage = window.top.cocoMessage;
+	
+    layui.use(['form', 'table'], function () {
+        $ = layui.jquery;
+        form = layui.form;
+        table = layui.table;
+		
+		//获取并渲染楼下来列表信息
+		getBuildingList();
+
+        table.render({
+            elem: '#currentTableId',
+            url: 'query/pagination/getRoomPagination.do',
+            toolbar: '#toolbarDemo',
+            defaultToolbar: ['filter', 'exports', 'print'],
+            cols: [[
+                // {type: "checkbox", width: 50},
+                {field: 'number', width: 120, title: '教室号', sort: true},
+                {field: 'name',title: '教室名'},
+				
+				{field: 'roomType', width: 150, title: '教室类型',templet: function (data){
+					switch(data.roomType) {
+						case 'bz': return '标准教室';
+						case 'jt': return '阶梯教室';
+						case 'sy': return '实验室';
+						case 'sx': return '实训教室';
+						case 'wj': return '微机教室';
+						case 'q': return '其他';
+					}
+				}},
+                {field: 'capacity', title: '容纳人数', sort: true},
+				
+                {field: 'buildingNumber', title: '所属教学楼号', sort: true},
+                {field: 'buildingName', title: '所属教学楼名'},
+                {field: 'buildingType', width: 150, title: '所属教学楼类型',templet: function (data){
+					switch(data.buildingType) {
+						case 'j': return '教学楼';
+						case 's': return '实验楼';
+						case 'q': return '其他';
+					}
+				}},
+				{title: '操作',  width: 150, toolbar: '#currentTableBar', align: "center"}
+            ]],
+            limits: [20, 40, 40, 60, 80, 100],
+            limit: 20,
+            page: true,
+			skin: 'line',
+			parseData: function(res){
+			    return {
+			      "code": res.success?0:-1,
+			      "msg": res.message,
+			      "count": res.count,
+			      "data": res.data
+			    };
+			}
+        });
+
+        // 监听搜索操作
+        form.on('submit(data-search-btn)', function (data) {
+            var result = JSON.stringify(data.field);
+
+            //执行搜索重载
+            table.reload('currentTableId', {
+                page: {
+                    curr: 1
+                }
+                , where: data.field
+            }, 'data');
+
+            return false;
+        });
+
+        /**
+         * toolbar监听事件
+         */
+        table.on('toolbar(currentTableFilter)', function (obj) {
+            if (obj.event === 'add') {  // 监听添加操作
+                var index = layer.open({
+                    title: '添加教室',
+                    type: 2,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['620px', '383px'],
+					offset: '0px',
+                    content: 'page/admin/building/room-add.html',
+					end:function() {
+						table.reload("currentTableId");
+					}
+                });
+            }
+        });
+
+        table.on('tool(currentTableFilter)', function (obj) {
+            var data = obj.data;
+            if (obj.event === 'edit') {
+
+                var index = layer.open({
+                    title: '编辑教室',
+                    type: 2,
+                    shade: 0.2,
+                    maxmin:true,
+                    shadeClose: true,
+                    area: ['620px', '383px'],
+					offset: '0px',
+                    content: 'page/admin/building/room-edit.html?id='+data.id,end:function() {
+						table.reload("currentTableId");
+					}
+                });
+                return false;
+            } else if (obj.event === 'delete') {
+                layer.confirm('真的删除行么', function (index) {
+                	$.ajax({
+                		url:'delete/deleteRoom.do',
+                		data:{id:obj.data.id},
+                		type:'post',
+                		dataType:'json',
+                		success:function(data) {
+                			if(data.success) {
+                				obj.del();
+                				cocoMessage.success(2000,data.message);
+                			} else {
+                				cocoMessage.error(2000,data.message);
+                			}
+                			layer.close(index);
+                		},
+                		error: function (jqXHR, textStatus, errorThrown) {
+                			layer.close(index);
+                			cocoMessage.error(2000,jqXHR.status+'');
+                		}
+                	})
+                });
+            }
+        });
+
+    });
+</script>
+<script type="text/javascript">
+	
+	/**
+	 * 获取楼列表并渲染
+	 */
+	function getBuildingList() {
+		$.ajax({
+			url:'query/list/getBuildingList.do',
+			type:'get',
+			dataType:'json',
+			success:function(res) {
+				if(res.success) {
+					let html = '<option value="">全部</option>';
+					$.each(res.data,function(index,item){
+						html += '<option value='+item.id+'>'+item.number+'号楼 '+item.name+'</option>';
+					})
+					
+					$('#building').html(html);
+					form.render('select','queryParams');
+					
+					
+				} else {
+					cocoMessage.error(2000,res.message);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				cocoMessage.error(2000,jqXHR.status+'');
+			}
+		})
+	}
+	
+</script>
+
+</body>
+</html>
