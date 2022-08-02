@@ -6,6 +6,7 @@ import cn.qkmango.tms.domain.orm.Building;
 import cn.qkmango.tms.domain.orm.Elective;
 import cn.qkmango.tms.domain.orm.Room;
 import cn.qkmango.tms.domain.orm.User;
+import cn.qkmango.tms.domain.vo.RetrievePasswordVO;
 import cn.qkmango.tms.domain.vo.UpdatePasswordVO;
 
 import java.util.Locale;
@@ -23,4 +24,6 @@ public interface UpdateService {
     void updateYear(Integer year,Integer newYear, Locale locale) throws UpdateException;
 
     void updateUserBasicInfo(User updateUser,Locale locale) throws UpdateException;
+
+    void updateRetrievePassword(RetrievePasswordVO vo, Locale locale) throws UpdateException;
 }

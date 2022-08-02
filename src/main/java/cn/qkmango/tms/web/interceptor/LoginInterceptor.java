@@ -24,7 +24,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         }
 
         // String message = messageSource.getMessage("response.login.LoginInterceptor", null, request.getLocale());
-        // System.out.println(message);
+        // Sys.out.println(message);
         ResponseUtil.responseJson(response,"{\"success\": false,\"message\": \"未登录!\"}");
         return false;
 

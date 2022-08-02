@@ -22,4 +22,6 @@ public interface UpdateDao {
     int updatePassword(UpdatePasswordVO updatePasswordVO);
 
     int updateUserBasicInfo(User updateUser);
+
+    int updateRetrievePassword(User user);
 }

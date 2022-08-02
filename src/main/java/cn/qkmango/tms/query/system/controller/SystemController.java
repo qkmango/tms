@@ -4,8 +4,8 @@ import cn.qkmango.tms.common.exception.LoginException;
 import cn.qkmango.tms.common.exception.PermissionException;
 import cn.qkmango.tms.common.map.ResponseMap;
 import cn.qkmango.tms.common.validate.group.Query.login;
+import cn.qkmango.tms.common.validate.group.Sys;
 import cn.qkmango.tms.domain.orm.User;
-// import cn.qkmango.tms.email.service.EmailService;
 import cn.qkmango.tms.query.system.service.SystemService;
 import org.apache.catalina.Manager;
 import org.apache.catalina.connector.Request;
@@ -31,9 +31,6 @@ public class SystemController {
 
     @Resource
     private SystemService systemService;
-
-    // @Resource
-    // private EmailService emailService;
 
     @Resource
     private ReloadableResourceBundleMessageSource messageSource;
@@ -133,6 +130,20 @@ public class SystemController {
         String res = "{\"success\":true,\"active\":"+active+"}";
 
         return res;
+    }
+
+    @RequestMapping("/sendRetrievePasswordCaptcha.do")
+    public Map<String, Object> sendRetrievePasswordCaptcha(@Validated(Sys.RetrievePasswordCaptcha.class) User user,
+                                                          BindingResult result,
+                                                          Locale locale) throws Exception {
+
+        systemService.sendRetrievePasswordCaptcha(user, locale);
+
+        ResponseMap map = new ResponseMap(2);
+        map.setSuccess(true);
+        map.setMessage(messageSource.getMessage("response.sendRetrievePasswordCaptcha.success",null,locale));
+
+        return map;
     }
 
 

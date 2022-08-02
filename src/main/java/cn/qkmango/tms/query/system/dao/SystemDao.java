@@ -8,4 +8,6 @@ public interface SystemDao {
     User login(User user);
 
     User getUserAllInfo(User user);
+
+    int hasUser(User user);
 }

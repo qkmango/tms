@@ -6,10 +6,12 @@ import cn.qkmango.tms.domain.orm.Building;
 import cn.qkmango.tms.domain.orm.Elective;
 import cn.qkmango.tms.domain.orm.Room;
 import cn.qkmango.tms.domain.orm.User;
+import cn.qkmango.tms.domain.vo.RetrievePasswordVO;
 import cn.qkmango.tms.domain.vo.UpdatePasswordVO;
 import cn.qkmango.tms.query.updateQuery.dao.UpdateDao;
 import cn.qkmango.tms.query.updateQuery.service.UpdateService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,6 +26,9 @@ public class UpdateServiceImpl implements UpdateService {
 
     @Resource
     private ReloadableResourceBundleMessageSource messageSource;
+
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
 
 
     @Override
@@ -81,6 +86,22 @@ public class UpdateServiceImpl implements UpdateService {
         int affectedRows = updateDao.updateUserBasicInfo(updateUser);
         if (affectedRows != 1) {
             throw new UpdateException(messageSource.getMessage("db.updateUserBasicInfo.failure",null,locale));
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateRetrievePassword(RetrievePasswordVO vo, Locale locale) throws UpdateException {
+        User user = vo.getUser();
+        String code = stringRedisTemplate.opsForValue().get(user.getEmail());
+        if (vo.getCode().equals(code)) {
+            int affectedRows = updateDao.updateRetrievePassword(user);
+            if (affectedRows != 1) {
+                throw new UpdateException(messageSource.getMessage("db.updatePassword.success",null,locale));
+            }
+            stringRedisTemplate.delete(user.getEmail());
+        } else {
+            throw new UpdateException(messageSource.getMessage("db.updatePassword.success",null,locale));
         }
     }
 }

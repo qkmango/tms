@@ -1,6 +1,7 @@
 package cn.qkmango.tms.domain.orm;
 
 import cn.qkmango.tms.common.validate.group.Query.login;
+import cn.qkmango.tms.common.validate.group.Sys;
 import cn.qkmango.tms.common.validate.group.Update;
 import cn.qkmango.tms.domain.bind.PermissionType;
 
@@ -10,7 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.util.StringJoiner;
 
 public class User {
-    @NotNull(message = "{valid.User.id.NotNull}", groups = login.class)
+    @NotNull(message = "{valid.User.id.NotNull}", groups = {login.class, Sys.RetrievePasswordCaptcha.class})
     protected Integer id;
 
     @NotNull(message = "{valid.User.password.NotNull}", groups = login.class)
@@ -18,11 +19,11 @@ public class User {
 
     protected String name;
 
-    @NotBlank(message = "{valid.User.email.NotBlank}",groups = Update.UpdateUserBasicInfo.class)
-    @Email(message = "{valid.User.email.Email}", groups = Update.UpdateUserBasicInfo.class)
+    @NotBlank(message = "{valid.User.email.NotBlank}", groups = {Update.UpdateUserBasicInfo.class, Sys.RetrievePasswordCaptcha.class})
+    @Email(message = "{valid.User.email.Email}", groups = {Update.UpdateUserBasicInfo.class, Sys.RetrievePasswordCaptcha.class})
     private String email;
 
-    @NotNull(message = "{valid.User.permissionType.NotNull}", groups = login.class)
+    @NotNull(message = "{valid.User.permissionType.NotNull}", groups = {login.class, Sys.RetrievePasswordCaptcha.class})
     protected PermissionType permissionType;
 
     public User() {

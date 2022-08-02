@@ -12,6 +12,7 @@ import cn.qkmango.tms.domain.orm.Building;
 import cn.qkmango.tms.domain.orm.Elective;
 import cn.qkmango.tms.domain.orm.Room;
 import cn.qkmango.tms.domain.orm.User;
+import cn.qkmango.tms.domain.vo.RetrievePasswordVO;
 import cn.qkmango.tms.domain.vo.UpdatePasswordVO;
 import cn.qkmango.tms.query.updateQuery.service.UpdateService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -180,6 +181,31 @@ public class UpdateController {
         return map;
 
     }
+
+    /**
+     * 找回密码更新
+     * @param session
+     * @param vo
+     * @param locale
+     * @return
+     * @throws UpdateException
+     */
+    @PostMapping("updateRetrievePassword.do")
+    public Map<String, Object> updateRetrievePassword(HttpSession session,
+                                                   @Validated RetrievePasswordVO vo,
+                                                   BindingResult result,
+                                                   Locale locale) throws UpdateException {
+
+        updateService.updateRetrievePassword(vo,locale);
+
+        ResponseMap map = new ResponseMap();
+        map.setSuccess(true);
+        map.setMessage(messageSource.getMessage("db.updatePassword.success",null,locale));
+
+        return map;
+
+    }
+
 
 
 

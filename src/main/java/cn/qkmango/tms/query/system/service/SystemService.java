@@ -11,4 +11,8 @@ public interface SystemService {
     User login(User user, Locale locale) throws LoginException, PermissionException;
 
     User getUserAllInfo(User user);
+
+    void sendRetrievePasswordCaptcha(User user, Locale locale) throws Exception;
+
+    boolean hasUser(User user);
 }

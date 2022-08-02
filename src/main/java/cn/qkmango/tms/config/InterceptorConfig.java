@@ -31,7 +31,11 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**/*.do")
                 .excludePathPatterns("/system/login.do")
                 .excludePathPatterns("/system/setLocale.do")
-                .excludePathPatterns("/query/list/test.do");
+                .excludePathPatterns("/query/list/test.do")
+                .excludePathPatterns("/system/sendRetrievePasswordCaptcha.do")
+                .excludePathPatterns("/system/sendRetrievePasswordCaptcha.do")
+                .excludePathPatterns("/update/updateRetrievePassword.do")
+                .excludePathPatterns("/test/**/*.do");
 
 
         PermissionsInterceptor permissionsInterceptor = new PermissionsInterceptor();
@@ -43,7 +47,10 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 // .addPathPatterns("/system/**/*.do")
                 // .excludePathPatterns("/system/setLocale.do")
                 // .excludePathPatterns("/system/setLocale.do")
-                .excludePathPatterns("/query/list/test.do");
+                .excludePathPatterns("/query/list/test.do")
+                .excludePathPatterns("/system/sendRetrievePasswordCaptcha.do")
+                .excludePathPatterns("/update/updateRetrievePassword.do")
+                .excludePathPatterns("/test/**/*.do");
 
     }
 
