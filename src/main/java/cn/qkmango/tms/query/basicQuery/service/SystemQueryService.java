@@ -3,6 +3,7 @@ package cn.qkmango.tms.query.basicQuery.service;
 import cn.qkmango.tms.domain.orm.SystemKeyValue;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @className: SystemQueryService
@@ -12,7 +13,13 @@ import java.util.List;
  * @version: 1.0
  */
 public interface SystemQueryService {
-    List<SystemKeyValue> getSystemCurrYearAndTerm();
+    Map<String, String> getSystemCurrYearAndTerm();
 
-    List<SystemKeyValue> getSystemKeyValueList();
+    List<Map<String, String>> getSystemKeyValueList();
+
+    String getSystemCurrYear();
+
+    String getSystemCurrTerm();
+
+
 }

@@ -1,4 +1,4 @@
-package cn.qkmango.tms.web.utils;
+package cn.qkmango.tms.common.utils;
 
 /**
  * @author qkmango

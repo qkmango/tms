@@ -151,13 +151,16 @@ public class InsertController {
                                               Locale locale) throws InsertException {
 
         User user = (User) session.getAttribute("user");
-        Integer id = user.getId();
+        // Integer id = user.getId();
 
-        HashMap<String, Object> param = new HashMap<>(2);
-        param.put("studentId",id);
-        param.put("courseIds",electiveVO.getCourseIds());
+        // HashMap<String, Object> param = new HashMap<>(2);
+        // param.put("studentId",id);
+        // param.put("courseIds",electiveVO.getCourseIds());
 
-        service.insertElective(param,locale);
+        electiveVO.setStudentId(user.getId());
+
+
+        service.insertElective(electiveVO,locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);

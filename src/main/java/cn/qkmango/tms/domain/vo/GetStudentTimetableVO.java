@@ -14,13 +14,13 @@ public class GetStudentTimetableVO {
     @NotNull
     Integer year;
     @NotNull
-    Boolean term;
+    String term;
     Integer id;
 
     public GetStudentTimetableVO() {
     }
 
-    public GetStudentTimetableVO(@NotNull Integer year, @NotNull Boolean term, Integer id) {
+    public GetStudentTimetableVO(@NotNull Integer year, @NotNull String term, Integer id) {
         this.year = year;
         this.term = term;
         this.id = id;
@@ -34,11 +34,11 @@ public class GetStudentTimetableVO {
         this.year = year;
     }
 
-    public Boolean getTerm() {
+    public String getTerm() {
         return term;
     }
 
-    public void setTerm(Boolean term) {
+    public void setTerm(String term) {
         this.term = term;
     }
 

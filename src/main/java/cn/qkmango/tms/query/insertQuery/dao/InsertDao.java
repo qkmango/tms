@@ -1,6 +1,7 @@
 package cn.qkmango.tms.query.insertQuery.dao;
 
 import cn.qkmango.tms.domain.orm.*;
+import cn.qkmango.tms.domain.vo.InsertElectiveVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
@@ -21,7 +22,7 @@ public interface InsertDao {
 
     int insertYear(Year id);
 
-    int insertElective(HashMap<String, Object> param);
+    int insertElective(InsertElectiveVO electiveVO);
 
     int insertTeachEvaluate(TeachEvaluate teachEvaluate);
 }

@@ -4,6 +4,7 @@ import cn.qkmango.tms.domain.orm.SystemKeyValue;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @className: SystemQueryDao
@@ -15,7 +16,11 @@ import java.util.List;
 
 @Mapper
 public interface SystemQueryDao {
-    List<SystemKeyValue> getSystemCurrYearAndTerm();
+    List<Map<String, String>> getSystemCurrYearAndTerm();
 
-    List<SystemKeyValue> getSystemKeyValueList();
+    List<Map<String, String>> getSystemKeyValueList();
+
+    String getSystemCurrYear();
+
+    String getSystemCurrTerm();
 }

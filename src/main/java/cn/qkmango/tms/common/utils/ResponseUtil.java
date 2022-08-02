@@ -1,4 +1,4 @@
-package cn.qkmango.tms.common.util;
+package cn.qkmango.tms.common.utils;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;

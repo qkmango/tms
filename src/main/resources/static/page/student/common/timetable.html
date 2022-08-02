@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>layui</title>
+<title>课程表</title>
 <meta name="renderer" content="webkit">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -18,7 +18,7 @@
 		/*为了让字母和数字也换行*/
 		word-break: break-word;
 	}
-	
+
 	.courseName {
 		font-weight: bold;
 		/* layui经典蓝 */
@@ -51,7 +51,7 @@
             <div style="margin: 10px 10px 10px 10px">
                 <form class="layui-form layui-form-pane" lay-filter='queryParams' id="queryParams">
                     <div class="layui-form-item">
-						
+
                         <div class="layui-inline">
                         	<label class="layui-form-label">年度</label>
                         	<div class="layui-input-inline">
@@ -62,11 +62,11 @@
 							<label class="layui-form-label">学期</label>
 							<div class="layui-input-inline">
 							  <select name="term" id="term" lay-filter="term">
-								  <option value="false">第1学期</option>
-								  <option value="true">第2学期</option>
+								  <option value="1">第1学期</option>
+								  <option value="2">第2学期</option>
 							  </select>
 							</div>
-						</div>                        
+						</div>
                         <div class="layui-inline">
                             <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
                         </div>
@@ -92,13 +92,31 @@
 	layui.use(['form', 'table'], function () {
         form = layui.form;
         table = layui.table;
-		let date = new Date();
-		let year = date.getFullYear();
-		let term = (date.getMonth()+1)>2 && (date.getMonth()+1)<9 ? 'true':'false';
-		form.val("queryParams", {
-			"year": year,
-			"term": term
-		});
+		// let date = new Date();
+		// let year = date.getFullYear();
+		// let term = (date.getMonth()+1)>2 && (date.getMonth()+1)<9 ? 'true':'false';
+
+		$.ajax({
+			url:'query/system/getSystemCurrYearAndTerm.do',
+			type:'get',
+			dataType:'json',
+			async:false,
+			success:function(data) {
+				if(data.success) {
+					form.val("queryParams", {
+						"year": data.data.currYear,
+						"term": data.data.currTerm
+					});
+				} else {
+					cocoMessage.error(2000,data.message);
+				}
+			},
+			error: function (jqXHR, textStatus, errorThrown) {
+				cocoMessage.error(2000,jqXHR.status+'');
+			}
+		})
+
+
 
 		form.render('select','queryParams');
 
@@ -143,7 +161,7 @@
             return false;
         });
 
-	
+
 		/**
          * toolbar监听事件
          */
@@ -161,7 +179,7 @@
 			}
 		});
 	});
-	
+
 </script>
 
 <script>
@@ -201,7 +219,7 @@
 			let html = `<span class="courseName"><i class="layui-icon">&#xe705;</i>${item.name}</span><br/>
 					<span class="courseInfo"><i class="layui-icon">&#xe68e;</i>${item.buildingNumber} - ${item.roomNumber}<br/></span>
 					<span class="courseInfo"><i class="layui-icon">&#xe66f;</i>${item.teacher}<br/></span>
-					<span class="courseInfo"><i class="layui-icon">&#xe637;</i>${item.beginWeek}-${item.beginWeek+item.lengthWeek-1}周(${weekType(item.weekType)})<br/></span>`;			
+					<span class="courseInfo"><i class="layui-icon">&#xe637;</i>${item.beginWeek}-${item.beginWeek+item.lengthWeek-1}周(${weekType(item.weekType)})<br/></span>`;
 			let no = list[item.begin];
 			no[item.weekDay] += html;
 		});

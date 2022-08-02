@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layui</title>
+    <title>课程教学评价页面</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -206,8 +206,8 @@
         </div>
     </div>
 
-    
-    
+
+
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn layui-btn-normal layui-layout-right" lay-submit lay-filter="saveBtn">确认保存</button>
@@ -217,7 +217,7 @@
 
 <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
-	
+
 	var cocoMessage = window.top.cocoMessage;
 
     let obj = window.top.GLOBAL.map.get('page/student/evaluate/teach-evaluate-add.html');
@@ -232,7 +232,7 @@
                 return;
             }
 
-            form.val("info", { 
+            form.val("info", {
                 "course": obj.course,
                 "courseYear": obj.courseYear,
                 "elective": obj.elective,
@@ -244,7 +244,7 @@
         form.on('submit(saveBtn)', function (data) {
 			console.log(data.field);
             data.field.elective=obj.elective;
-			
+
 			$.ajax({
 				url:'insert/insertTeachEvaluate.do',
 				data:data.field,

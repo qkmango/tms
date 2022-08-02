@@ -13,7 +13,7 @@ public class TimeTable {
 
     List<OnceCourseInfo> list;
     Integer year;
-    Boolean term;
+    String term;
     String studentName;
     Integer studentId;
     String clazzName;
@@ -21,7 +21,7 @@ public class TimeTable {
     public TimeTable() {
     }
 
-    public TimeTable(List<OnceCourseInfo> list, Integer year, Boolean term, String studentName, Integer studentId, String clazzName) {
+    public TimeTable(List<OnceCourseInfo> list, Integer year, String term, String studentName, Integer studentId, String clazzName) {
         this.list = list;
         this.year = year;
         this.term = term;
@@ -46,11 +46,11 @@ public class TimeTable {
         this.year = year;
     }
 
-    public Boolean getTerm() {
+    public String getTerm() {
         return term;
     }
 
-    public void setTerm(Boolean term) {
+    public void setTerm(String term) {
         this.term = term;
     }
 

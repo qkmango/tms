@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,23 +37,21 @@ public class QuerySystemController {
      * 获取系统基本信息
      * @return
      */
-    @Permission(PermissionType.admin)
+    // @Permission(PermissionType.admin)
     @RequestMapping("/getSystemCurrYearAndTerm.do")
     public Map getSystemCurrYearAndTerm() {
-
-        List<SystemKeyValue> systemKeyValueList = service.getSystemCurrYearAndTerm();
+        Map<String, String> systemCurrYearAndTerm = service.getSystemCurrYearAndTerm();
 
         ResponseMap res = new ResponseMap();
         res.setSuccess(true);
-        res.setData(systemKeyValueList);
+        res.setData(systemCurrYearAndTerm);
 
         return res;
     }
 
     @RequestMapping("/getSystemKeyValueList.do")
     public Map getSystemKeyValueList() {
-
-        List<SystemKeyValue> resMap = service.getSystemKeyValueList();
+        List<Map<String, String>> resMap = service.getSystemKeyValueList();
 
         ResponseMap res = new ResponseMap();
         res.setSuccess(true);

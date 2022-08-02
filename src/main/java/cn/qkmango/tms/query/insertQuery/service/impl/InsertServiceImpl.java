@@ -3,6 +3,7 @@ package cn.qkmango.tms.query.insertQuery.service.impl;
 import cn.qkmango.tms.common.exception.InsertException;
 import cn.qkmango.tms.domain.model.CourseInfoModel;
 import cn.qkmango.tms.domain.orm.*;
+import cn.qkmango.tms.domain.vo.InsertElectiveVO;
 import cn.qkmango.tms.query.insertQuery.dao.InsertDao;
 import cn.qkmango.tms.query.insertQuery.service.InsertService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -95,8 +96,8 @@ public class InsertServiceImpl implements InsertService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void insertElective(HashMap<String, Object> param, Locale locale) throws InsertException {
-        int affectedRows = insertDao.insertElective(param);
+    public void insertElective(InsertElectiveVO electiveVO, Locale locale) throws InsertException {
+        int affectedRows = insertDao.insertElective(electiveVO);
         // Integer[] ids = (Integer[]) param.get("ids");
         // if (affectedRows != ids.length) {
         //     throw new InsertException(messageSource.getMessage("db.insertElective.failure",null,locale));

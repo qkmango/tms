@@ -2,23 +2,27 @@ package cn.qkmango.tms.domain.vo;
 
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
+import java.util.StringJoiner;
 
 /**
  * @className: InsertElectiveVO
- * @Description:TODO
+ * @Description: 插入选课的VO，参数接收实体类
  * @author: qkmango
  * @date: 2021-07-20 19:55
  * @version: 1.0
  */
 public class InsertElectiveVO {
     @NotNull(message = "{valid.InsertElectiveVO.courseIds.NotNull}")
-    Integer[] courseIds;
+    private Integer[] courseIds;
+
+    private Integer studentId;
 
     public InsertElectiveVO() {
     }
 
-    public InsertElectiveVO(Integer[] courseIds) {
+    public InsertElectiveVO(Integer[] courseIds, Integer studentId) {
         this.courseIds = courseIds;
+        this.studentId = studentId;
     }
 
     public Integer[] getCourseIds() {
@@ -29,10 +33,19 @@ public class InsertElectiveVO {
         this.courseIds = courseIds;
     }
 
+    public Integer getStudentId() {
+        return studentId;
+    }
+
+    public void setStudentId(Integer studentId) {
+        this.studentId = studentId;
+    }
+
     @Override
     public String toString() {
-        return "InsertElectiveVO{" +
-                "courseIds=" + Arrays.toString(courseIds) +
-                '}';
+        return new StringJoiner(", ", InsertElectiveVO.class.getSimpleName() + "[", "]")
+                .add("courseIds=" + Arrays.toString(courseIds))
+                .add("studentId='" + studentId + "'")
+                .toString();
     }
 }

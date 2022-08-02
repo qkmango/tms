@@ -37,7 +37,7 @@
         values (#{year},CONCAT_WS('-',#{year},#{year}+1))
     </insert>
 
-    <insert id="insertElective">
+    <insert id="insertElective" parameterType="cn.qkmango.tms.domain.vo.InsertElectiveVO">
         insert into t_elective(student,course)
         values
         <foreach collection="courseIds" item="id" separator=",">

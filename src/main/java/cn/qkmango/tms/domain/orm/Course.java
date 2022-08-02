@@ -25,12 +25,12 @@ public class Course {
     private Integer courseYear;
     //false 0：表示第一学期；true 1：表示第二学期
     @NotNull(message = "{valid.Course.term.NotNull}")
-    private Boolean term;
+    private String term;
 
     public Course() {
     }
 
-    public Course(Integer id, String name, Integer credit, Integer clazz, Integer teacher, Integer courseYear, Boolean term) {
+    public Course(Integer id, String name, Integer credit, Integer clazz, Integer teacher, Integer courseYear, String term) {
         this.id = id;
         this.name = name;
         this.credit = credit;
@@ -88,11 +88,11 @@ public class Course {
         this.courseYear = courseYear;
     }
 
-    public Boolean getTerm() {
+    public String getTerm() {
         return term;
     }
 
-    public void setTerm(Boolean term) {
+    public void setTerm(String term) {
         this.term = term;
     }
 
