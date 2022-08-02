@@ -20,3 +20,6 @@ src/main/resources/static/api/test.json
 src/main/resources/static/page/teacher/data.json
 src/main/resources/static/data/*
 target
+
+#敏感信息配置到这里，git取消追踪此文件（properties文件优先级高于yml）
+/src/main/resources/application.properties
