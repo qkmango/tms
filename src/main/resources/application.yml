@@ -16,6 +16,8 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     url: jdbc:mysql://localhost:3306/tms?useUnicode=true&characterEncoding=utf8
     username: root
+  jackson:
+    default-property-inclusion: non_null
   mail:
     host: smtp.qiye.aliyun.com
     port: 25

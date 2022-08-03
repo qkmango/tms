@@ -160,23 +160,26 @@
             // var cocoMessage = layui.cocoMessage;
 
             //兼容开发模式直接运行网页
-            let url = 'query/list/test.do';
-            let method = 'post';
-            if(location.port == '5500') {
-                url = 'http://localhost:5500/api/test.json';
-                method = 'get';
-            }
+            // let url = 'query/list/test.do';
+            // let method = 'post';
+            // if(location.port == '5500') {
+            //     url = 'http://localhost:5500/api/test.json';
+            //     method = 'get';
+            // }
 
 			$.ajax({
 				// url:"system/getUserInfo.do",
-				url:url,
-				type:method,
+				url:"query/list/test.do",
+				type:'get',
+                // async:false,
 				dataType:"json",
 				success:function (data) {
 					if (!data.success) {
 						window.location.href = 'page/login/';
 						return;
 					}
+
+                    // data.user = {"success":true,"user":{"id":1,"name":"芒果小洛","permissionType":"admin"}}
 
 					GLOBAL.user = data.user;
 					$('#name').text(data.user.name);

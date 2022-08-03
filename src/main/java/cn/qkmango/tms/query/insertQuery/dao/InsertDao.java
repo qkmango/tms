@@ -4,13 +4,13 @@ import cn.qkmango.tms.domain.orm.*;
 import cn.qkmango.tms.domain.vo.InsertElectiveVO;
 import org.apache.ibatis.annotations.Mapper;
 
-import java.util.HashMap;
 import java.util.List;
 
 @Mapper
 public interface InsertDao {
 
     int insertCourse(Course course);
+    int insertCourse2(Course2 course);
 
     int lastInsertId();
 
@@ -25,4 +25,6 @@ public interface InsertDao {
     int insertElective(InsertElectiveVO electiveVO);
 
     int insertTeachEvaluate(TeachEvaluate teachEvaluate);
+
+    int insertCourseClazz(int courseId, List<Integer> clazzList);
 }

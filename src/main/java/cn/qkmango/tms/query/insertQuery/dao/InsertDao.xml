@@ -9,6 +9,11 @@
         values (#{name}, #{credit}, #{clazz}, #{teacher}, #{courseYear}, #{term})
     </insert>
 
+    <insert id="insertCourse2">
+        insert into t_course(name, credit, clazz, teacher,courseYear,term)
+        values (#{name}, #{credit}, #{clazz}, #{teacher}, #{courseYear}, #{term})
+    </insert>
+
     <insert id="insertCourseInfo" parameterType="list">
         insert into t_course_info(course, courseType, weekType, beginWeek, lengthWeek, weekDay, begin, length, address)
         values
@@ -74,6 +79,15 @@
             #{composite},
             #{remark}
         )
+    </insert>
+
+    <insert id="insertCourseClazz">
+        insert into t_course_clazz(course, clazz)
+        VALUES
+        <foreach collection="clazzList" item="clazzId" separator=",">
+            (#{courseId},#{clazzId})
+        </foreach>
+
     </insert>
 
 

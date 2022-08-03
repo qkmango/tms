@@ -2,6 +2,7 @@ package cn.qkmango.tms.query.insertQuery.service.impl;
 
 import cn.qkmango.tms.common.exception.InsertException;
 import cn.qkmango.tms.domain.model.CourseInfoModel;
+import cn.qkmango.tms.domain.model.CourseInfoModel2;
 import cn.qkmango.tms.domain.orm.*;
 import cn.qkmango.tms.domain.vo.InsertElectiveVO;
 import cn.qkmango.tms.query.insertQuery.dao.InsertDao;
@@ -12,7 +13,6 @@ import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -54,7 +54,7 @@ public class InsertServiceImpl implements InsertService {
      * @throws InsertException
      */
     @Transactional(
-            propagation = Propagation.REQUIRES_NEW,
+            propagation = Propagation.REQUIRED,
             rollbackFor = Exception.class
     )
     protected void insertCourseInfo(List<CourseInfo> courseInfoList,Locale locale) throws InsertException {
@@ -110,5 +110,31 @@ public class InsertServiceImpl implements InsertService {
         if (affectedRows != 1) {
             throw new InsertException(messageSource.getMessage("db.insertTeachEvaluate.failure",null,locale));
         }
+    }
+
+    @Override
+    @Transactional(
+            propagation = Propagation.REQUIRED,
+            rollbackFor = Exception.class
+    )
+    public void insertCourse2(Course2 course, CourseInfoModel2 courseInfoModel, List<Integer> clazzList, Locale locale) throws InsertException {
+        int affectedRows = insertDao.insertCourse2(course);
+        if (affectedRows != 1) {
+            throw new InsertException(messageSource.getMessage("db.insertCourse.failure",null,locale));
+        }
+        int courseId = insertDao.lastInsertId();
+
+        List<CourseInfo> courseInfoList = courseInfoModel.getCourseInfos();
+        for (CourseInfo courseInfo : courseInfoList) {
+            courseInfo.setCourse(courseId);
+        }
+        insertCourseInfo(courseInfoList,locale);
+
+
+        affectedRows = insertDao.insertCourseClazz(courseId,clazzList);
+        if (affectedRows != clazzList.size()) {
+            throw new InsertException(messageSource.getMessage("db.insertCourse.failure",null,locale));
+        }
+
     }
 }
