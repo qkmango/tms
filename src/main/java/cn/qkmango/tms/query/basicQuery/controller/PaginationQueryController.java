@@ -40,7 +40,9 @@ public class PaginationQueryController {
         //判断当前用户，如果是学生的话，传入ID，仅可以查询自己的成绩
         User user = (User) session.getAttribute("user");
         if (PermissionType.student == user.getPermissionType()) {
-            pagination.setId(user.getId());
+            pagination.setStudent(user.getId());
+        } else if(PermissionType.teacher == user.getPermissionType()) {
+            pagination.setTeacher(user.getId());
         }
 
         HashMap<String,Object> map = paginationQueryService.getStudentScorePagination(pagination);

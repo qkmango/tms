@@ -10,10 +10,7 @@ import cn.qkmango.tms.domain.bind.course.WeekType;
  * @date: 2021-07-25 15:50
  * @version: 1.0
  */
-public /**
- * 一次课程的信息
- */
-class OnceCourseInfo {
+public class OnceCourseInfo {
     String name;
     Integer id;
 

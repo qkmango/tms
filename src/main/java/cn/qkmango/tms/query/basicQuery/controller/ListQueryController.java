@@ -202,11 +202,7 @@ public class ListQueryController {
         User user = (User) session.getAttribute("user");
         Integer id = user.getId();
 
-        HashMap<String, Object> params = new HashMap<>(2);
-        params.put("id",id);
-        params.put("alreadyElective",alreadyElective);
-
-        List<Map> data = listQueryService.getStudentElectiveCourseList(params);
+        List<Map> data = listQueryService.getStudentElectiveCourseList(id,alreadyElective);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);

@@ -81,9 +81,7 @@
                 {field: 'courseYear',title: '学年',templet: function (data){
                 	return data.courseYear + ' - ' + (data.courseYear+1);
                 }},
-                {field: 'term',title: '学期',width: 60,templet:function(data){
-                	return data.term?2:1;
-                }},
+                {field: 'term',title: '学期',width: 60},
                 {field: 'teacher',title: '老师'},
                 {field: 'alreadyElective',title: '选择状态',width: 100,templet:function(data){
                 	return data.alreadyElective==1?'<i class="layui-icon" style="color:#1E9FFF">&#xe67a;</i>':'<i class="layui-icon">&#xe67b;</i>';

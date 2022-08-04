@@ -120,9 +120,9 @@
                         <li class="layui-nav-item">
                             <a href="javascript:;"><span class="layui-nav-more"></span></a>
                             <dl class="layui-nav-child">
-                                <dd><a href="javascript:;" layuimini-tab-close="current">关 闭 当 前</a></dd>
-                                <dd><a href="javascript:;" layuimini-tab-close="other">关 闭 其 他</a></dd>
-                                <dd><a href="javascript:;" layuimini-tab-close="all">关 闭 全 部</a></dd>
+                                <dd><a href="javascript:;" layuimini-tab-close="current">关闭当前</a></dd>
+                                <dd><a href="javascript:;" layuimini-tab-close="other">关闭其他</a></dd>
+                                <dd><a href="javascript:;" layuimini-tab-close="all">关闭全部</a></dd>
                             </dl>
                         </li>
                     </ul>
@@ -166,6 +166,25 @@
             //     url = 'http://localhost:5500/api/test.json';
             //     method = 'get';
             // }
+
+        //获取当前学年学期
+        $.ajax({
+            url:'query/system/getSystemCurrYearAndTerm.do',
+            type:'get',
+            dataType:'json',
+            async:false,
+            success:function(data) {
+                if(data.success) {
+                    GLOBAL.currYear = data.data.currYear;
+                    GLOBAL.currTerm = data.data.currTerm;
+                } else {
+                    cocoMessage.error(2000,data.message);
+                }
+            },
+            error: function (jqXHR, textStatus, errorThrown) {
+                cocoMessage.error(2000,jqXHR.status+'');
+            }
+        })
 
 			$.ajax({
 				// url:"system/getUserInfo.do",

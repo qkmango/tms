@@ -23,7 +23,7 @@
                         <div class="layui-inline">
                         	<label class="layui-form-label">课程年度</label>
                         	<div class="layui-input-inline">
-                        	    <input type="text" name="courseYear" autocomplete="off" class="layui-input">
+                        	    <input type="text" lay-filter="courseYear" name="courseYear" autocomplete="off" class="layui-input">
                         	</div>
                         </div>
 
@@ -32,8 +32,8 @@
 							<div class="layui-input-inline">
 							  <select name="term" id="term" lay-filter="term">
 								  <option value="">全部</option>
-								  <option value="false">第1学期</option>
-								  <option value="true">第2学期</option>
+								  <option value="1">第1学期</option>
+								  <option value="2">第2学期</option>
 							  </select>
 							</div>
 						</div>
@@ -79,8 +79,13 @@
         $ = layui.jquery;
         form = layui.form;
         table = layui.table;
+        // form.val('courseYear',window.top.GLOBAL.currYear)
+        // form.val('term',window.top.GLOBAL.term)
 
-		$('input[name=courseYear]').val(new Date().getFullYear());
+        form.val('queryParams',{
+            courseYear:window.top.GLOBAL.currYear,
+            term:window.top.GLOBAL.term
+        })
 
         table.render({
             elem: '#currentTableId',
@@ -94,9 +99,7 @@
                 {field: 'courseYear',title: '学年',templet: function (data){
                 	return data.courseYear + ' - ' + (data.courseYear+1);
                 }},
-                {field: 'term',title: '学期',templet:function(data){
-                	return data.term?2:1;
-                }},
+                {field: 'term',title: '学期'},
                 {field: 'score', title: '分数'},
 				{title: '操作',toolbar: '#currentTableBar', align: "center"}
             ]],
@@ -111,12 +114,13 @@
 			      "count": res.count,
 			      "data": res.data
 			    };
-			}
+			},
+            where: form.val('queryParams')
         });
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
+            // var result = JSON.stringify(data.field);
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {

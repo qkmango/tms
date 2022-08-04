@@ -1,9 +1,11 @@
 package cn.qkmango.tms.domain.pagination;
 
+import java.util.StringJoiner;
+
 public class StudentScorePagination extends Pagination {
 
     //学生ID
-    private Integer id;
+    private Integer student;
     //学生姓名
     private String name;
     //授课老师ID
@@ -18,21 +20,19 @@ public class StudentScorePagination extends Pagination {
     private Integer course;
     //学科 开设年份
     private Integer courseYear;
-    //学期，false 上学期，true 下学期
-    private Boolean term;
+    //学期
+    private Integer term;
     //班级 年级（如 2020级）
     private Integer clazzYear;
     //课程 名称
     private String courseName;
 
-
-
     public StudentScorePagination() {
     }
 
-    public StudentScorePagination(Integer page, Integer limit, Boolean pagination, Integer id, String name, Integer teacher, Integer faculty, Integer specialized, Integer clazz, Integer course, Integer courseYear, Integer clazzYear, Boolean term, String courseName) {
+    public StudentScorePagination(Integer page, Integer limit, Boolean pagination, Integer student, String name, Integer teacher, Integer faculty, Integer specialized, Integer clazz, Integer course, Integer courseYear, Integer term, Integer clazzYear, String courseName) {
         super(page, limit, pagination);
-        this.id = id;
+        this.student = student;
         this.name = name;
         this.teacher = teacher;
         this.faculty = faculty;
@@ -40,17 +40,17 @@ public class StudentScorePagination extends Pagination {
         this.clazz = clazz;
         this.course = course;
         this.courseYear = courseYear;
-        this.clazzYear = clazzYear;
         this.term = term;
+        this.clazzYear = clazzYear;
         this.courseName = courseName;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getStudent() {
+        return student;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setStudent(Integer student) {
+        this.student = student;
     }
 
     public String getName() {
@@ -109,20 +109,20 @@ public class StudentScorePagination extends Pagination {
         this.courseYear = courseYear;
     }
 
+    public Integer getTerm() {
+        return term;
+    }
+
+    public void setTerm(Integer term) {
+        this.term = term;
+    }
+
     public Integer getClazzYear() {
         return clazzYear;
     }
 
     public void setClazzYear(Integer clazzYear) {
         this.clazzYear = clazzYear;
-    }
-
-    public Boolean getTerm() {
-        return term;
-    }
-
-    public void setTerm(Boolean term) {
-        this.term = term;
     }
 
     public String getCourseName() {
@@ -135,22 +135,22 @@ public class StudentScorePagination extends Pagination {
 
     @Override
     public String toString() {
-        return "StudentScorePagination{" +
-                "page=" + page +
-                ", limit=" + limit +
-                ", skipCount=" + skipCount +
-                ", pagination=" + pagination +
-                ", id=" + id +
-                ", name='" + name + '\'' +
-                ", teacher=" + teacher +
-                ", faculty=" + faculty +
-                ", specialized=" + specialized +
-                ", clazz=" + clazz +
-                ", course=" + course +
-                ", courseYear=" + courseYear +
-                ", term=" + term +
-                ", clazzYear=" + clazzYear +
-                ", courseName='" + courseName + '\'' +
-                '}';
+        return new StringJoiner(", ", StudentScorePagination.class.getSimpleName() + "[", "]")
+                .add("student=" + student)
+                .add("name='" + name + "'")
+                .add("teacher=" + teacher)
+                .add("faculty=" + faculty)
+                .add("specialized=" + specialized)
+                .add("clazz=" + clazz)
+                .add("course=" + course)
+                .add("courseYear=" + courseYear)
+                .add("term=" + term)
+                .add("clazzYear=" + clazzYear)
+                .add("courseName='" + courseName + "'")
+                .add("page=" + page)
+                .add("limit=" + limit)
+                .add("skipCount=" + skipCount)
+                .add("pagination=" + pagination)
+                .toString();
     }
 }

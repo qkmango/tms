@@ -124,14 +124,14 @@
         order by year asc
     </select>
 
-    <select id="getStudentElectiveCourseList" resultType="hashmap">
+    <select id="getStudentElectiveCourseList" resultType="java.util.Map">
         SELECT
-        course.id,
-        course.name,
-        course.credit,
-        course.courseYear,
-        course.term,
-        teacher.name as teacher,
+        c.id,
+        c.name,
+        c.credit,
+        c.courseYear,
+        c.term,
+        t.name as teacher,
         <choose>
             <when test="alreadyElective == true">
                 true as alreadyElective
@@ -140,20 +140,22 @@
                 false as alreadyElective
             </when>
             <otherwise>
-                if(course.id in (SELECT course FROM t_elective WHERE student=#{id}),true,false) as alreadyElective
+                if(c.id in (SELECT course FROM t_elective WHERE student=#{id}),true,false) as alreadyElective
             </otherwise>
         </choose>
         FROM
-        t_course course,
-        t_teacher teacher
-        WHERE course.clazz=(SELECT clazz FROM t_student WHERE id=#{id})
-        AND course.teacher=teacher.id
+        t_course c,
+        t_course_clazz cc,
+        t_teacher t
+        WHERE cc.course=c.id
+        AND c.teacher=t.id
+        AND cc.clazz=(SELECT clazz FROM t_student WHERE id=#{id})
         <choose>
             <when test="alreadyElective == true">
-                and course.id in (SELECT course FROM t_elective WHERE student=#{id})
+                and c.id in(SELECT course FROM t_elective WHERE student=#{id})
             </when>
             <when test="alreadyElective == false">
-                and course.id not in (SELECT course FROM t_elective WHERE student=#{id})
+                and c.id not in(SELECT course FROM t_elective WHERE student=#{id})
             </when>
         </choose>
     </select>
@@ -232,6 +234,5 @@
           AND course.teacher = teacher.id
           AND elective.course = course.id
     </select>
-
 
 </mapper>

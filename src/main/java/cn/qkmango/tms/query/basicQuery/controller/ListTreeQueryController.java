@@ -1,5 +1,6 @@
 package cn.qkmango.tms.query.basicQuery.controller;
 
+import cn.qkmango.tms.common.map.ResponseMap;
 import cn.qkmango.tms.domain.orm.Faculty;
 import cn.qkmango.tms.query.basicQuery.service.ListQueryService;
 import cn.qkmango.tms.query.basicQuery.service.ListTreeQueryService;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author qkmango
@@ -36,15 +38,21 @@ public class ListTreeQueryController {
 
     //获取学院，专业，班级树型列表
     @RequestMapping("getClazzTreeList.do")
-    public List<Faculty> getClazzTreeList() {
-        List<Faculty> facultyList = listTreeQueryService.getClazzTreeList();
-        return facultyList;
+    public Map<String, Object> getClazzTreeList() {
+        List<Faculty> clazzTreeList = listTreeQueryService.getClazzTreeList();
+        ResponseMap map = new ResponseMap(2);
+        map.setSuccess(true);
+        map.setData(clazzTreeList);
+        return map;
     }
 
     @RequestMapping("getTeacherTreeList.do")
-    public List<Faculty> getTeacherTreeList() {
-        List<Faculty> facultyList = listTreeQueryService.getTeacherTreeList();
-        return facultyList;
+    public Map<String, Object> getTeacherTreeList() {
+        List<Faculty> teacherTreeList = listTreeQueryService.getTeacherTreeList();
+        ResponseMap map = new ResponseMap(2);
+        map.setSuccess(true);
+        map.setData(teacherTreeList);
+        return map;
     }
 
 }

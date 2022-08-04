@@ -34,7 +34,7 @@ public interface ListQueryDao {
 
     List<Year> getYearList(Year year);
 
-    List<Map> getStudentElectiveCourseList(HashMap<String, Object> params);
+    List<Map> getStudentElectiveCourseList(Integer id, Boolean alreadyElective);
 
     List<OnceCourseInfo> getStudentTimetable(GetStudentTimetableQuery query);
 
@@ -50,4 +50,6 @@ public interface ListQueryDao {
     List<Map<String, Object>> getTeachEvaluateList(@Param("currYear") String currYear,
                                                    @Param("currTerm") String currTerm,
                                                    @Param("id") Integer id);
+
+
 }

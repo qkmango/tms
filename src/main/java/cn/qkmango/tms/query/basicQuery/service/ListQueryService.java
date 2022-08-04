@@ -24,11 +24,13 @@ public interface ListQueryService {
 
     List<Year> getYearList(Year year);
 
-    List<Map> getStudentElectiveCourseList(HashMap<String, Object> params);
+    List<Map> getStudentElectiveCourseList(Integer id, Boolean alreadyElective);
 
     TimeTable getStudentTimetable(GetStudentTimetableQuery query);
 
     HashMap<String, Object> getStudentBasicInfo(Integer id);
 
     List<Map<String, Object>> getTeachEvaluateList(Integer id);
+
+
 }

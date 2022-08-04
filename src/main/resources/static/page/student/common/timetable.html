@@ -68,7 +68,7 @@
 							</div>
 						</div>
                         <div class="layui-inline">
-                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i>搜索</button>
                         </div>
                     </div>
                 </form>
@@ -220,7 +220,7 @@
 					<span class="courseInfo"><i class="layui-icon">&#xe68e;</i>${item.buildingNumber} - ${item.roomNumber}<br/></span>
 					<span class="courseInfo"><i class="layui-icon">&#xe66f;</i>${item.teacher}<br/></span>
 					<span class="courseInfo"><i class="layui-icon">&#xe637;</i>${item.beginWeek}-${item.beginWeek+item.lengthWeek-1}周(${weekType(item.weekType)})<br/></span>`;
-			let no = list[item.begin];
+			let no = list[item.begin-1];
 			no[item.weekDay] += html;
 		});
 		return list;

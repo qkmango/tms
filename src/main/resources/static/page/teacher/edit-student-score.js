@@ -4,14 +4,30 @@ var form;
 var table;
 
 
-$('input[name=teacher]').val(window.parent.GLOBAL.user.id);
-$('input[name=courseYear]').val(new Date().getFullYear());
+// $('input[name=teacher]').val(window.parent.GLOBAL.user.id);
+// $('input[name=courseYear]').val(window.parent.GLOBAL.currYear);
+// $('input[name=courseYear]').val(new Date().getFullYear());
 
 layui.use(['form', 'table'], function () {
 
 	form = layui.form;
 	table = layui.table;
+
+	// form.val("teacher",window.top.GLOBAL.user.id);
+	// form.val("courseYear",window.top.GLOBAL.currYear);
+	// form.val("term",window.top.GLOBAL.currTerm);
+
+	queryParams
+
+	form.val('queryParams',{
+		teacher:window.top.GLOBAL.user.id,
+		courseYear:window.top.GLOBAL.currYear,
+		term:window.top.GLOBAL.currTerm
+	})
+
 	getFacultyList();
+
+
 
 	table.render({
 		elem: '#dataGrid',
@@ -42,17 +58,15 @@ layui.use(['form', 'table'], function () {
 			{field: 'courseYear',title: '学年',width:120,templet: function (data){
 				return data.courseYear + ' - ' + (data.courseYear+1);
 			}},
-			{field: 'term',title: '学期',width:80,templet:function(data){
-				return data.term?2:1;
-			}},
+			{field: 'term',title: '学期',width:80},
 			{field: 'elective',title: '选课表记录ID',hide:true},
 			{field: 'score', width: 80, title: '分数',edit:true,
 				style:'text-align:right;',
 				templet:function (data) {
 					if (data.score >= 60) {
-						return `<div style="color: var(--green_3)">${data.score}</div>`
+						return `<div style="color: var(--green_3)">${data.score===undefined?'':data.score}</div>`
 					} else {
-						return `<div style="color: var(--danger)">${data.score}</div>`
+						return `<div style="color: var(--danger)">${data.score===undefined?'':data.score}</div>`
 					}
 				}
 			}
@@ -62,10 +76,7 @@ layui.use(['form', 'table'], function () {
 		limit: 20,
 		page: true,
 		skin: 'line',
-		where:{
-			teacher:window.parent.GLOBAL.user.id,
-			courseYear:$("input[name='courseYear']").val()
-		}
+		where:form.val('queryParams')
 	});
 
 
@@ -108,7 +119,7 @@ layui.use(['form', 'table'], function () {
 
 	// 监听搜索操作
 	form.on('submit(data-search-btn)', function (data) {
-		var queryParamsStr = JSON.stringify(data.field);
+		// var queryParamsStr = JSON.stringify(data.field);
 		//执行搜索重载
 		table.reload('dataGrid', {
 			page: {
@@ -121,26 +132,26 @@ layui.use(['form', 'table'], function () {
 	});
 
 	// 监听重置表单操作
-	form.on('submit(data-reset-btn)', function (data) {
-		//reset表单
-		$("#queryParams")[0].reset();
-
-		//给基础数据赋值
-		form.val("queryParams", {
-		  "teacher": window.parent.GLOBAL.user.id,
-		  "courseYear": new Date().getFullYear()
-		});
-
-		//将下来列表内容重置
-		$('#specialized').html('<option value="">全部</option>');
-		$('#clazz').html('<option value="">全部</option>');
-		$('#course').html('<option value="">全部</option>');
-
-		//渲染表单
-		form.render(null, 'queryParams');
-
-		return false;
-	});
+	// form.on('submit(data-reset-btn)', function (data) {
+	// 	//reset表单
+	// 	$("#queryParams")[0].reset();
+	//
+	// 	//给基础数据赋值
+	// 	form.val("queryParams", {
+	// 	  "teacher": window.parent.GLOBAL.user.id,
+	// 	  "courseYear": new Date().getFullYear()
+	// 	});
+	//
+	// 	//将下来列表内容重置
+	// 	$('#specialized').html('<option value="">全部</option>');
+	// 	$('#clazz').html('<option value="">全部</option>');
+	// 	$('#course').html('<option value="">全部</option>');
+	//
+	// 	//渲染表单
+	// 	form.render(null, 'queryParams');
+	//
+	// 	return false;
+	// });
 
 
 

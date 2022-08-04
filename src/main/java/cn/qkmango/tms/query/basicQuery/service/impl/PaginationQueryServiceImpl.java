@@ -33,7 +33,7 @@ public class PaginationQueryServiceImpl implements PaginationQueryService {
 
         HashMap<String, Object> map = new HashMap<>(3);
 
-        if (pagination.getPagination() != false) {
+        if (pagination.getPagination()) {
             int count = paginationQueryDao.getCount();
             map.put("count",count);
         }

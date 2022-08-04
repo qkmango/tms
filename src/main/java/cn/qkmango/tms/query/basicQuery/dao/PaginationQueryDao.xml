@@ -7,7 +7,7 @@
     <select id="getStudentScorePagination" resultType="hashmap">
 
         SELECT SQL_CALC_FOUND_ROWS
-        student.id,
+        student.id as student,
         student.name,
         elective.id as elective,
         course.name as course,
@@ -33,8 +33,8 @@
             <if test="name!=null and name!=''">
                 student.name like '%' #{name} '%'
             </if>
-            <if test="id!=null and id!=''">
-                and student.id = #{id}
+            <if test="student!=null and student!=''">
+                and student.id = #{student}
             </if>
             <if test="teacher!=null and teacher!=''">
                 and teacher.id = #{teacher}

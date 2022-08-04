@@ -25,11 +25,19 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
         dataType: 'json',
         async: false,
         success: function (res) {
-            clazzTreeData = copyTransFunc(res, [
+            clazzTreeData = copyTransFunc(res.data, [
                 {key: 'name', value: 'title'},
                 {key: 'specializedList', value: 'children'},
                 {key: 'clazzList', value: 'children'},
             ])
+            //将学院和专业的id前加上前缀，防止与clazz的id重复
+            for(let i=0;i<clazzTreeData.length;i++) {
+                clazzTreeData[i].id='f'+clazzTreeData[i].id;
+                for (let j=0;j<clazzTreeData[i].children.length;j++) {
+                    clazzTreeData[i].children[j].id='s'+clazzTreeData[i].children[j].id;
+                }
+            }
+            console.log(clazzTreeData)
         }
     })
     //获取老师列表
@@ -40,10 +48,16 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
         dataType: 'json',
         async: false,
         success: function (res) {
-            teacherTreeData = copyTransFunc(res, [
+            //将对象的属性名name换成title，teacherList换成children
+            teacherTreeData = copyTransFunc(res.data, [
                 {key: 'name', value: 'title'},
                 {key: 'teacherList', value: 'children'}
             ])
+            //将学院的id前加上前缀，防止与teacher的id重复
+            for(let i=0;i<teacherTreeData.length;i++) {
+                teacherTreeData[i].id='f'+teacherTreeData[i].id;
+            }
+            console.log(teacherTreeData)
         }
     })
 
