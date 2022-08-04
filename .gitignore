@@ -13,7 +13,6 @@ target/
 src/test
 src/main/java/cn/qkmango/tms/test
 
-src/main/resources/static/page/*.html
 src/main/resources/static/test
 src/main/resources/static/**/*.bak.*
 src/main/resources/static/api/test.json
@@ -23,3 +22,25 @@ target
 
 #敏感信息配置到这里，git取消追踪此文件（properties文件优先级高于yml）
 /src/main/resources/application.properties
+
+
+src/main/resources/static/page/404.html
+src/main/resources/static/page/area.html
+src/main/resources/static/page/button.html
+src/main/resources/static/page/color-select.html
+src/main/resources/static/page/editor.html
+src/main/resources/static/page/form.html
+src/main/resources/static/page/form-step.html
+src/main/resources/static/page/icon.html
+src/main/resources/static/page/icon-picker.html
+src/main/resources/static/page/layer.html
+src/main/resources/static/page/menu.html
+src/main/resources/static/page/setting.html
+src/main/resources/static/page/table.html
+src/main/resources/static/page/table-select.html
+src/main/resources/static/page/test.html
+src/main/resources/static/page/upload.html
+src/main/resources/static/page/user-setting.html
+src/main/resources/static/page/welcome-1.html
+src/main/resources/static/page/welcome-2.html
+src/main/resources/static/page/welcome-3.html
