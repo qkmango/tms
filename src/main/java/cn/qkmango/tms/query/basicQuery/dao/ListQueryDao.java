@@ -3,7 +3,7 @@ package cn.qkmango.tms.query.basicQuery.dao;
 import cn.qkmango.tms.domain.model.OnceCourseInfo;
 import cn.qkmango.tms.domain.model.TimeTable;
 import cn.qkmango.tms.domain.orm.*;
-import cn.qkmango.tms.domain.vo.GetStudentTimetableVO;
+import cn.qkmango.tms.domain.query.GetStudentTimetableQuery;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -36,7 +36,7 @@ public interface ListQueryDao {
 
     List<Map> getStudentElectiveCourseList(HashMap<String, Object> params);
 
-    List<OnceCourseInfo> getStudentTimetable(GetStudentTimetableVO vo);
+    List<OnceCourseInfo> getStudentTimetable(GetStudentTimetableQuery query);
 
     /**
      * 获取信息，仅供课程表查询功能使用

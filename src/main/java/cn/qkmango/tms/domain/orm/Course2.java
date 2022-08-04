@@ -23,8 +23,9 @@ public class Course2 {
     @NotNull(message = "{valid.Course.courseYear.NotNull}")
     @Range(min = 2000,max = 2100,message = "{valid.Year.year.Range}")
     private Integer courseYear;
-    //false 0：表示第一学期；true 1：表示第二学期
+    //1：表示第一学期；2：表示第二学期
     @NotNull(message = "{valid.Course.term.NotNull}")
+    @Range(min = 1,max = 2,message = "{valid.Course.term.Range}")
     private String term;
 
     public Course2() {

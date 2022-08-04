@@ -6,14 +6,14 @@ import cn.qkmango.tms.domain.orm.Building;
 import cn.qkmango.tms.domain.orm.Elective;
 import cn.qkmango.tms.domain.orm.Room;
 import cn.qkmango.tms.domain.orm.User;
-import cn.qkmango.tms.domain.vo.RetrievePasswordVO;
-import cn.qkmango.tms.domain.vo.UpdatePasswordVO;
+import cn.qkmango.tms.domain.query.RetrievePasswordQuery;
+import cn.qkmango.tms.domain.query.UpdatePasswordQuery;
 
 import java.util.Locale;
 
 public interface UpdateService {
 
-    void updatePassword(UpdatePasswordVO updatePasswordVO, Locale locale) throws PermissionException, UpdateException;
+    void updatePassword(UpdatePasswordQuery updatePasswordQuery, Locale locale) throws PermissionException, UpdateException;
 
     void updateStudentScore(Elective elective, Locale locale) throws UpdateException;
 
@@ -25,5 +25,5 @@ public interface UpdateService {
 
     void updateUserBasicInfo(User updateUser,Locale locale) throws UpdateException;
 
-    void updateRetrievePassword(RetrievePasswordVO vo, Locale locale) throws UpdateException;
+    void updateRetrievePassword(RetrievePasswordQuery vo, Locale locale) throws UpdateException;
 }

@@ -1,8 +1,9 @@
 package cn.qkmango.tms.query.insertQuery.dao;
 
 import cn.qkmango.tms.domain.orm.*;
-import cn.qkmango.tms.domain.vo.InsertElectiveVO;
+import cn.qkmango.tms.domain.query.InsertElectiveQuery;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ public interface InsertDao {
 
     int lastInsertId();
 
-    int insertCourseInfo(List<CourseInfo> courseInfoList);
+    int insertCourseInfo(@Param("courseId") int courseId, @Param("list") List<CourseInfo> courseInfoList);
 
     int insertBuilding(Building building);
 
@@ -22,7 +23,7 @@ public interface InsertDao {
 
     int insertYear(Year id);
 
-    int insertElective(InsertElectiveVO electiveVO);
+    int insertElective(InsertElectiveQuery electiveVO);
 
     int insertTeachEvaluate(TeachEvaluate teachEvaluate);
 

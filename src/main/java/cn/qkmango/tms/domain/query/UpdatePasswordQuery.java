@@ -1,24 +1,24 @@
-package cn.qkmango.tms.domain.vo;
+package cn.qkmango.tms.domain.query;
 
 import cn.qkmango.tms.domain.bind.PermissionType;
 
 /**
- * @className: UpdatePasswordVO
+ * @className: UpdatePasswordQuery
  * @Description:TODO
  * @author: qkmango
  * @date: 2021-07-23 17:20
  * @version: 1.0
  */
-public class UpdatePasswordVO {
+public class UpdatePasswordQuery {
     private String oldPassword;
     private String newPassword;
     private Integer id;
     private PermissionType permissionType;
 
-    public UpdatePasswordVO() {
+    public UpdatePasswordQuery() {
     }
 
-    public UpdatePasswordVO(String oldPassword, String newPassword, Integer id, PermissionType permissionType) {
+    public UpdatePasswordQuery(String oldPassword, String newPassword, Integer id, PermissionType permissionType) {
         this.oldPassword = oldPassword;
         this.newPassword = newPassword;
         this.id = id;
@@ -59,7 +59,7 @@ public class UpdatePasswordVO {
 
     @Override
     public String toString() {
-        return "UpdatePasswordVO{" +
+        return "UpdatePasswordQuery{" +
                 "oldPassword='" + oldPassword + '\'' +
                 ", newPassword='" + newPassword + '\'' +
                 ", id=" + id +

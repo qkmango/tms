@@ -1,7 +1,6 @@
-package cn.qkmango.tms.domain.vo;
+package cn.qkmango.tms.domain.query;
 
 import cn.qkmango.tms.domain.orm.User;
-import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
@@ -10,11 +9,11 @@ import java.util.StringJoiner;
 /**
  * @author qkmango
  * @version 1.0
- * @className RetrievePasswordVO
+ * @className RetrievePasswordQuery
  * @Description 找回密码VO
  * @date 2022-08-02 20:54
  */
-public class RetrievePasswordVO {
+public class RetrievePasswordQuery {
 
     @Valid
     private User user;
@@ -41,7 +40,7 @@ public class RetrievePasswordVO {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", RetrievePasswordVO.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", RetrievePasswordQuery.class.getSimpleName() + "[", "]")
                 .add("user=" + user)
                 .add("code='" + code + "'")
                 .toString();

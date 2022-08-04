@@ -4,7 +4,8 @@ import cn.qkmango.tms.common.exception.InsertException;
 import cn.qkmango.tms.domain.model.CourseInfoModel;
 import cn.qkmango.tms.domain.model.CourseInfoModel2;
 import cn.qkmango.tms.domain.orm.*;
-import cn.qkmango.tms.domain.vo.InsertElectiveVO;
+import cn.qkmango.tms.domain.query.InsertCourseQuery;
+import cn.qkmango.tms.domain.query.InsertElectiveQuery;
 
 import java.util.List;
 import java.util.Locale;
@@ -18,9 +19,9 @@ public interface InsertService {
 
     void insertYear(Year Year,Locale locale) throws InsertException;
 
-    void insertElective(InsertElectiveVO electiveVO, Locale locale) throws InsertException;
+    void insertElective(InsertElectiveQuery electiveVO, Locale locale) throws InsertException;
 
     void insertTeachEvaluate(TeachEvaluate teachEvaluate, Locale locale) throws InsertException;
 
-    void insertCourse2(Course2 course, CourseInfoModel2 courseInfoModel, List<Integer> clazzList, Locale locale) throws InsertException;
+    void insertCourse2(InsertCourseQuery query, Locale locale) throws InsertException;
 }

@@ -1,15 +1,15 @@
-package cn.qkmango.tms.domain.vo;
+package cn.qkmango.tms.domain.query;
 
 import javax.validation.constraints.NotNull;
 
 /**
- * @className: GetStudentTimetableVO
+ * @className: GetStudentTimetableQuery
  * @Description:TODO
  * @author: qkmango
  * @date: 2021-07-25 16:08
  * @version: 1.0
  */
-public class GetStudentTimetableVO {
+public class GetStudentTimetableQuery {
 
     @NotNull
     Integer year;
@@ -17,10 +17,10 @@ public class GetStudentTimetableVO {
     String term;
     Integer id;
 
-    public GetStudentTimetableVO() {
+    public GetStudentTimetableQuery() {
     }
 
-    public GetStudentTimetableVO(@NotNull Integer year, @NotNull String term, Integer id) {
+    public GetStudentTimetableQuery(@NotNull Integer year, @NotNull String term, Integer id) {
         this.year = year;
         this.term = term;
         this.id = id;
@@ -52,7 +52,7 @@ public class GetStudentTimetableVO {
 
     @Override
     public String toString() {
-        return "GetStudentTimetableVO{" +
+        return "GetStudentTimetableQuery{" +
                 "year=" + year +
                 ", term=" + term +
                 ", id=" + id +

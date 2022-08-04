@@ -4,7 +4,8 @@ import cn.qkmango.tms.common.exception.InsertException;
 import cn.qkmango.tms.domain.model.CourseInfoModel;
 import cn.qkmango.tms.domain.model.CourseInfoModel2;
 import cn.qkmango.tms.domain.orm.*;
-import cn.qkmango.tms.domain.vo.InsertElectiveVO;
+import cn.qkmango.tms.domain.query.InsertCourseQuery;
+import cn.qkmango.tms.domain.query.InsertElectiveQuery;
 import cn.qkmango.tms.query.insertQuery.dao.InsertDao;
 import cn.qkmango.tms.query.insertQuery.service.InsertService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -41,11 +42,8 @@ public class InsertServiceImpl implements InsertService {
         int courseId = insertDao.lastInsertId();
 
         List<CourseInfo> courseInfoList = courseInfoModel.getCourseInfos();
-        for (CourseInfo courseInfo : courseInfoList) {
-            courseInfo.setCourse(courseId);
-        }
 
-        insertCourseInfo(courseInfoList,locale);
+        insertCourseInfo(courseId,courseInfoList,locale);
     }
 
     /**
@@ -57,8 +55,8 @@ public class InsertServiceImpl implements InsertService {
             propagation = Propagation.REQUIRED,
             rollbackFor = Exception.class
     )
-    protected void insertCourseInfo(List<CourseInfo> courseInfoList,Locale locale) throws InsertException {
-        int affectedRows = insertDao.insertCourseInfo(courseInfoList);
+    protected void insertCourseInfo(int courseId, List<CourseInfo> courseInfoList,Locale locale) throws InsertException {
+        int affectedRows = insertDao.insertCourseInfo(courseId,courseInfoList);
         if (affectedRows != courseInfoList.size()) {
             throw new InsertException(messageSource.getMessage("db.insertCourse.failure",null,locale));
         }
@@ -96,7 +94,7 @@ public class InsertServiceImpl implements InsertService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void insertElective(InsertElectiveVO electiveVO, Locale locale) throws InsertException {
+    public void insertElective(InsertElectiveQuery electiveVO, Locale locale) throws InsertException {
         int affectedRows = insertDao.insertElective(electiveVO);
         // Integer[] ids = (Integer[]) param.get("ids");
         // if (affectedRows != ids.length) {
@@ -117,20 +115,25 @@ public class InsertServiceImpl implements InsertService {
             propagation = Propagation.REQUIRED,
             rollbackFor = Exception.class
     )
-    public void insertCourse2(Course2 course, CourseInfoModel2 courseInfoModel, List<Integer> clazzList, Locale locale) throws InsertException {
+    public void insertCourse2(InsertCourseQuery query, Locale locale) throws InsertException {
+
+        //获取 InsertCourseQuery 中的属性
+        Course2 course = query.getCourse();
+        List<Integer> clazzList = query.getClazzList();
+        List<CourseInfo> courseInfoList = query.getCourseInfoList();
+
+        //插入课程
         int affectedRows = insertDao.insertCourse2(course);
         if (affectedRows != 1) {
             throw new InsertException(messageSource.getMessage("db.insertCourse.failure",null,locale));
         }
+
+        //获取插入课程的ID（课程ID）
         int courseId = insertDao.lastInsertId();
+        //插入课程信息
+        insertCourseInfo(courseId, courseInfoList,locale);
 
-        List<CourseInfo> courseInfoList = courseInfoModel.getCourseInfos();
-        for (CourseInfo courseInfo : courseInfoList) {
-            courseInfo.setCourse(courseId);
-        }
-        insertCourseInfo(courseInfoList,locale);
-
-
+        //插入 课程-班级 关系
         affectedRows = insertDao.insertCourseClazz(courseId,clazzList);
         if (affectedRows != clazzList.size()) {
             throw new InsertException(messageSource.getMessage("db.insertCourse.failure",null,locale));

@@ -9,19 +9,16 @@ import cn.qkmango.tms.domain.bind.PermissionType;
 import cn.qkmango.tms.domain.model.CourseInfoModel;
 import cn.qkmango.tms.domain.model.CourseInfoModel2;
 import cn.qkmango.tms.domain.orm.*;
-import cn.qkmango.tms.domain.vo.InsertElectiveVO;
+import cn.qkmango.tms.domain.query.InsertCourseQuery;
+import cn.qkmango.tms.domain.query.InsertElectiveQuery;
 import cn.qkmango.tms.query.insertQuery.service.InsertService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -150,7 +147,7 @@ public class InsertController {
      */
     @Permission(PermissionType.student)
     @RequestMapping("/insertElective.do")
-    public Map<String, Object> insertElective(@Validated InsertElectiveVO electiveVO,
+    public Map<String, Object> insertElective(@Validated InsertElectiveQuery electiveVO,
                                               BindingResult result,
                                               HttpSession session,
                                               Locale locale) throws InsertException {
@@ -197,14 +194,11 @@ public class InsertController {
 
     @Permission(PermissionType.admin)
     @RequestMapping("/insertCourse2.do")
-    public Map<String, Object> insertCourse2(@Validated Course2 course,
-                                             BindingResult courseResult,
-                                             @Validated CourseInfoModel2 courseInfoModel,
-                                             BindingResult courseInfoModelResult,
-                                             @RequestParam("clazzList[]") List<Integer> clazzList,
+    public Map<String, Object> insertCourse2(@RequestBody @Validated InsertCourseQuery query,
+                                             BindingResult result,
                                              Locale locale) throws InsertException {
 
-        service.insertCourse2(course,courseInfoModel,clazzList,locale);
+        service.insertCourse2(query,locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
@@ -212,5 +206,6 @@ public class InsertController {
 
         return map;
     }
+
 
 }

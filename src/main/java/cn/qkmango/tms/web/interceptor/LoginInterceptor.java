@@ -15,8 +15,6 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         //如果session存在，说明已经登陆过了，则放行
         HttpSession session = request.getSession(false);
-        System.out.println(request.getRequestedSessionId());
-        System.out.println(session);
         if (session != null) {
             return true;
         }

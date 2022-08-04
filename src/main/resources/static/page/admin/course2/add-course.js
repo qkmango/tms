@@ -167,33 +167,75 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
     form.on('submit(data-submit-btn)', function (data) {
         let selectClazzList = tree.getChecked('selectClazz')
         let selectTeacherList = tree.getChecked('selectTeacher')
-        let clazzList =[];
-        let teacherList=[];
+
+        // console.log(data.field)
+        // console.log(selectClazzList)
+        // console.log(selectTeacherList)
+        // console.log(Object.keys(data.field))
+        // return false;
+
+        let clazzList = [];
+        let teacherList = [];
+        let courseInfoList = [];
+
+        //处理clazzList
         for (let i = 0; i < selectClazzList.length; i++) {
-			for (let j=0;j<selectClazzList[i].children.length;j++) {
-                for (let k=0;k<selectClazzList[i].children[j].children.length;k++) {
+            for (let j = 0; j < selectClazzList[i].children.length; j++) {
+                for (let k = 0; k < selectClazzList[i].children[j].children.length; k++) {
                     clazzList.push(selectClazzList[i].children[j].children[k].id);
                 }
             }
         }
-
-        if (clazzList.length===0) {
+        if (clazzList.length === 0) {
             layer.msg("请选择班级", {icon: 5});
             return false;
         }
 
+        //处理teacherList
         for (let i = 0; i < selectTeacherList.length; i++) {
-            for (let j=0;j<selectTeacherList[i].children.length;j++) {
+            for (let j = 0; j < selectTeacherList[i].children.length; j++) {
                 teacherList.push(selectTeacherList[i].children[j].id);
             }
         }
-
-        if (teacherList.length!==1) {
+        if (teacherList.length !== 1) {
             layer.msg("请选择授课老师", {icon: 5});
             return false;
         }
-        data.field.clazzList = clazzList
-        data.field.teacher = teacherList[0]
+
+        //处理courseInfoList
+        for (let i = 0; true; i++) {
+            if (data.field[`courseInfo_${i}.courseType`] !== undefined) {
+                courseInfoList.push({
+                    courseType:data.field[`courseInfo_${i}.courseType`],
+                    weekType:data.field[`courseInfo_${i}.weekType`],
+                    beginWeek:data.field[`courseInfo_${i}.beginWeek`],
+                    lengthWeek:data.field[`courseInfo_${i}.lengthWeek`],
+                    weekDay:data.field[`courseInfo_${i}.weekDay`],
+                    begin:data.field[`courseInfo_${i}.begin`],
+                    length:data.field[`courseInfo_${i}.length`],
+                    address:data.field[`courseInfo_${i}.address`]
+                })
+            } else {
+                break
+            }
+        }
+
+
+        //传入后台的参数
+        let queryData = {
+            course:{
+                name:data.field.name,
+                credit:data.field.credit,
+                teacher:teacherList[0],
+                courseYear:data.field.courseYear,
+                term:data.field.term
+            },
+            clazzList,
+            courseInfoList
+        }
+
+        console.log(queryData)
+        // return false
 
         layer.msg('确认提交吗？', {
             icon: 3,
@@ -206,10 +248,12 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
                 layer.close(index);
                 $.ajax({
                     url: 'insert/insertCourse2.do',
-                    data: data.field,
+                    contentType: 'application/json; charset=utf-8',
+                    data: JSON.stringify(queryData),
                     type: 'post',
                     dataType: 'json',
                     success: function (data) {
+                        console.log(data)
                         if (data.success) {
                             layer.msg(data.message, {icon: 1});
                             // cocoMessage.success(2000,data.message);
@@ -236,6 +280,83 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
 
 //获取节次的HTML
 function getHTML(index) {
-    return '<fieldset class="table-search-fieldset courseInfoItem"><legend>节次' + index + '</legend><div class="layui-form-item"><div  class="layui-inline"><label class="layui-form-label">类型</label><div class="layui-input-inline"><select name="courseInfos[' + index + '].courseType" lay-verify="required"><option value="">全部</option><option value="theory">理论课</option><option value="practice">实践课</option></select></div></div><div  class="layui-inline"><label class="layui-form-label">单双周</label><div class="layui-input-inline"><select name="courseInfos[' + index + '].weekType" lay-verify="required"><option value="all">不限</option><option value="sgl">单周</option><option value="dbl">双周</option></select></div></div><div class="layui-inline"><label class="layui-form-label">起始周</label><div class="layui-input-inline"><input type="number" name="courseInfos[' + index + '].beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week"></div></div><div class="layui-inline"><label class="layui-form-label">持续周</label><div class="layui-input-inline"><input type="number" name="courseInfos[' + index + '].lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week"></div></div><div class="layui-inline"><label class="layui-form-label">星期</label><div class="layui-input-inline"><select name="courseInfos[' + index + '].weekDay" lay-verify="required"><option value="">全部</option><option value="Monday">周一</option><option value="Tuesday">周二</option><option value="Wednesday">周三</option><option value="Thursday">周四</option><option value="Friday">周五</option><option value="Saturday">周六</option><option value="Sunday">周日</option></select></div></div><div class="layui-inline"><label class="layui-form-label">起始节</label><div class="layui-input-inline"><input type="number" name="courseInfos[' + index + '].begin" autocomplete="off" class="layui-input" lay-verify="required|int|begin"></div></div><div class="layui-inline"><label class="layui-form-label">持续节</label><div class="layui-input-inline"><input type="number" name="courseInfos[' + index + '].length" autocomplete="off" class="layui-input" lay-verify="required|int|length" placeholder="1-4"></div></div><div class="layui-inline"><label class="layui-form-label">教室ID</label><div class="layui-input-inline"><input type="number" name="courseInfos[' + index + '].address" autocomplete="off" class="layui-input" lay-verify="required"></div></div></div></fieldset>';
+    // return '<fieldset class="table-search-fieldset courseInfoItem"><legend>节次${index}</legend><div class="layui-form-item"><div  class="layui-inline"><label class="layui-form-label">类型</label><div class="layui-input-inline"><select name="courseInfo_${index}.courseType" lay-verify="required"><option value="">全部</option><option value="theory">理论课</option><option value="practice">实践课</option></select></div></div><div  class="layui-inline"><label class="layui-form-label">单双周</label><div class="layui-input-inline"><select name="courseInfo_${index}.weekType" lay-verify="required"><option value="all">不限</option><option value="sgl">单周</option><option value="dbl">双周</option></select></div></div><div class="layui-inline"><label class="layui-form-label">起始周</label><div class="layui-input-inline"><input type="number" name="courseInfo_${index}.beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week"></div></div><div class="layui-inline"><label class="layui-form-label">持续周</label><div class="layui-input-inline"><input type="number" name="courseInfo_${index}.lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week"></div></div><div class="layui-inline"><label class="layui-form-label">星期</label><div class="layui-input-inline"><select name="courseInfo_${index}.weekDay" lay-verify="required"><option value="">全部</option><option value="Monday">周一</option><option value="Tuesday">周二</option><option value="Wednesday">周三</option><option value="Thursday">周四</option><option value="Friday">周五</option><option value="Saturday">周六</option><option value="Sunday">周日</option></select></div></div><div class="layui-inline"><label class="layui-form-label">起始节</label><div class="layui-input-inline"><input type="number" name="courseInfo_${index}.begin" autocomplete="off" class="layui-input" lay-verify="required|int|begin"></div></div><div class="layui-inline"><label class="layui-form-label">持续节</label><div class="layui-input-inline"><input type="number" name="courseInfo_${index}.length" autocomplete="off" class="layui-input" lay-verify="required|int|length" placeholder="1-4"></div></div><div class="layui-inline"><label class="layui-form-label">教室ID</label><div class="layui-input-inline"><input type="number" name="courseInfo_${index}.address" autocomplete="off" class="layui-input" lay-verify="required"></div></div></div></fieldset>';
+    return`
+<fieldset class="table-search-fieldset courseInfoItem">
+    <legend>节次${index}</legend>
+    <div class="layui-form-item">
+        <div  class="layui-inline">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-inline">
+                <select name="courseInfo_${index}.courseType" lay-verify="required">
+                    <option value="">全部</option>
+                    <option value="theory">理论课</option>
+                    <option value="practice">实践课</option>
+                </select>
+            </div>
+        </div>
+        
+        <div  class="layui-inline">
+            <label class="layui-form-label">单双周</label>
+            <div class="layui-input-inline">
+                <select name="courseInfo_${index}.weekType" lay-verify="required">
+                    <option value="all">不限</option>
+                    <option value="sgl">单周</option>
+                    <option value="dbl">双周</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="layui-inline">
+            <label class="layui-form-label">起始周</label>
+            <div class="layui-input-inline">
+                <input type="number" name="courseInfo_${index}.beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week"></div>
+            </div>
+            
+        <div class="layui-inline">
+            <label class="layui-form-label">持续周</label>
+            <div class="layui-input-inline">
+                <input type="number" name="courseInfo_${index}.lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week">
+            </div>
+        </div>
+        
+        <div class="layui-inline">
+            <label class="layui-form-label">星期</label>
+            <div class="layui-input-inline">
+                <select name="courseInfo_${index}.weekDay" lay-verify="required">
+                    <option value="">全部</option>
+                    <option value="Monday">周一</option>
+                    <option value="Tuesday">周二</option>
+                    <option value="Wednesday">周三</option>
+                    <option value="Thursday">周四</option>
+                    <option value="Friday">周五</option>
+                    <option value="Saturday">周六</option>
+                    <option value="Sunday">周日</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="layui-inline">
+            <label class="layui-form-label">起始节</label>
+            <div class="layui-input-inline">
+                <input type="number" name="courseInfo_${index}.begin" autocomplete="off" class="layui-input" lay-verify="required|int|begin">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">持续节</label>
+            <div class="layui-input-inline">
+                <input type="number" name="courseInfo_${index}.length" autocomplete="off" class="layui-input" lay-verify="required|int|length" placeholder="1-4">
+            </div>
+        </div>
+
+        <div class="layui-inline">
+            <label class="layui-form-label">教室ID</label>
+            <div class="layui-input-inline">
+                <input type="number" name="courseInfo_${index}.address" autocomplete="off" class="layui-input" lay-verify="required">
+            </div>
+        </div>
+    </div>
+</fieldset>`;
 }
 

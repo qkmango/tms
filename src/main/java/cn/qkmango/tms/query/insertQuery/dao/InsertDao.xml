@@ -14,11 +14,11 @@
         values (#{name}, #{credit}, #{clazz}, #{teacher}, #{courseYear}, #{term})
     </insert>
 
-    <insert id="insertCourseInfo" parameterType="list">
+    <insert id="insertCourseInfo">
         insert into t_course_info(course, courseType, weekType, beginWeek, lengthWeek, weekDay, begin, length, address)
         values
         <foreach collection="list" item="item" index="index" separator=",">
-            (#{item.course},#{item.courseType},#{item.weekType},#{item.beginWeek},#{item.lengthWeek},#{item.weekDay},#{item.begin},#{item.length},#{item.address})
+            (#{courseId},#{item.courseType},#{item.weekType},#{item.beginWeek},#{item.lengthWeek},#{item.weekDay},#{item.begin},#{item.length},#{item.address})
         </foreach>
     </insert>
 
@@ -42,7 +42,7 @@
         values (#{year},CONCAT_WS('-',#{year},#{year}+1))
     </insert>
 
-    <insert id="insertElective" parameterType="cn.qkmango.tms.domain.vo.InsertElectiveVO">
+    <insert id="insertElective" parameterType="cn.qkmango.tms.domain.query.InsertElectiveQuery">
         insert into t_elective(student,course)
         values
         <foreach collection="courseIds" item="id" separator=",">

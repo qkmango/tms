@@ -12,8 +12,8 @@ import cn.qkmango.tms.domain.orm.Building;
 import cn.qkmango.tms.domain.orm.Elective;
 import cn.qkmango.tms.domain.orm.Room;
 import cn.qkmango.tms.domain.orm.User;
-import cn.qkmango.tms.domain.vo.RetrievePasswordVO;
-import cn.qkmango.tms.domain.vo.UpdatePasswordVO;
+import cn.qkmango.tms.domain.query.RetrievePasswordQuery;
+import cn.qkmango.tms.domain.query.UpdatePasswordQuery;
 import cn.qkmango.tms.query.updateQuery.service.UpdateService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.BindingResult;
@@ -45,7 +45,7 @@ public class UpdateController {
     /**
      * 更改用户密码
      * @param session
-     * @param updatePasswordVO
+     * @param updatePasswordQuery
      * @param locale
      * @return
      * @throws PermissionException
@@ -54,7 +54,7 @@ public class UpdateController {
     // @Permission
     @RequestMapping("/updatePassword.do")
     public Map<String, Object> updatePassword(HttpSession session,
-                                              UpdatePasswordVO updatePasswordVO,
+                                              UpdatePasswordQuery updatePasswordQuery,
                                               Locale locale) throws PermissionException, UpdateException {
 
         //获取用户ID
@@ -64,10 +64,10 @@ public class UpdateController {
         //获取用户权限类型
         PermissionType thisUserPermissionType = user.getPermissionType();
 
-        updatePasswordVO.setId(id);
-        updatePasswordVO.setPermissionType(thisUserPermissionType);
+        updatePasswordQuery.setId(id);
+        updatePasswordQuery.setPermissionType(thisUserPermissionType);
 
-        updateService.updatePassword(updatePasswordVO,locale);
+        updateService.updatePassword(updatePasswordQuery,locale);
 
         ResponseMap map = new ResponseMap();
 
@@ -192,7 +192,7 @@ public class UpdateController {
      */
     @PostMapping("updateRetrievePassword.do")
     public Map<String, Object> updateRetrievePassword(HttpSession session,
-                                                   @Validated RetrievePasswordVO vo,
+                                                   @Validated RetrievePasswordQuery vo,
                                                    BindingResult result,
                                                    Locale locale) throws UpdateException {
 

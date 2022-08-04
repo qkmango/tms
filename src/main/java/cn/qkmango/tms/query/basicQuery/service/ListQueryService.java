@@ -2,7 +2,7 @@ package cn.qkmango.tms.query.basicQuery.service;
 
 import cn.qkmango.tms.domain.model.TimeTable;
 import cn.qkmango.tms.domain.orm.*;
-import cn.qkmango.tms.domain.vo.GetStudentTimetableVO;
+import cn.qkmango.tms.domain.query.GetStudentTimetableQuery;
 
 import java.util.HashMap;
 import java.util.List;
@@ -26,7 +26,7 @@ public interface ListQueryService {
 
     List<Map> getStudentElectiveCourseList(HashMap<String, Object> params);
 
-    TimeTable getStudentTimetable(GetStudentTimetableVO vo);
+    TimeTable getStudentTimetable(GetStudentTimetableQuery query);
 
     HashMap<String, Object> getStudentBasicInfo(Integer id);
 

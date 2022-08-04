@@ -6,8 +6,8 @@ import cn.qkmango.tms.domain.orm.Building;
 import cn.qkmango.tms.domain.orm.Elective;
 import cn.qkmango.tms.domain.orm.Room;
 import cn.qkmango.tms.domain.orm.User;
-import cn.qkmango.tms.domain.vo.RetrievePasswordVO;
-import cn.qkmango.tms.domain.vo.UpdatePasswordVO;
+import cn.qkmango.tms.domain.query.RetrievePasswordQuery;
+import cn.qkmango.tms.domain.query.UpdatePasswordQuery;
 import cn.qkmango.tms.query.updateQuery.dao.UpdateDao;
 import cn.qkmango.tms.query.updateQuery.service.UpdateService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -33,10 +33,10 @@ public class UpdateServiceImpl implements UpdateService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updatePassword(UpdatePasswordVO updatePasswordVO, Locale locale) throws PermissionException, UpdateException {
+    public void updatePassword(UpdatePasswordQuery updatePasswordQuery, Locale locale) throws PermissionException, UpdateException {
         int affectedRows = 0;
 
-        affectedRows = updateDao.updatePassword(updatePasswordVO);
+        affectedRows = updateDao.updatePassword(updatePasswordQuery);
 
         //判断影行数
         if (affectedRows != 1) {
@@ -91,7 +91,7 @@ public class UpdateServiceImpl implements UpdateService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateRetrievePassword(RetrievePasswordVO vo, Locale locale) throws UpdateException {
+    public void updateRetrievePassword(RetrievePasswordQuery vo, Locale locale) throws UpdateException {
         User user = vo.getUser();
         String code = stringRedisTemplate.opsForValue().get(user.getEmail());
         if (vo.getCode().equals(code)) {

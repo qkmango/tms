@@ -3,6 +3,7 @@ package cn.qkmango.tms.common.exception.handler;
 import cn.qkmango.tms.common.exception.*;
 import cn.qkmango.tms.common.map.ResponseMap;
 import org.apache.log4j.Logger;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.mail.MailException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -132,15 +133,16 @@ public class GlobalExceptionHandler {
         return map;
     }
 
-    // //处理所有 Exception
-    // @ResponseBody
-    // @ExceptionHandler
-    // public Map<String, Object> Exception(Exception e) {
-    //     logger.warn(e.getMessage());
-    //     ResponseMap map = new ResponseMap(2);
-    //     map.setSuccess(false);
-    //     map.setMessage(e.getMessage());
-    //     return map;
-    // }
+    @ResponseBody
+    @ExceptionHandler({HttpMessageNotReadableException.class})
+    public Map<String, Object> httpMessageNotReadableExceptionHandler(HttpMessageNotReadableException e) {
+        System.out.println(e);
+        System.out.println(e.getLocalizedMessage());
+        logger.warn(e.getMessage());
+        ResponseMap map = new ResponseMap(2);
+        map.setSuccess(false);
+        map.setMessage(e.getMessage());
+        return map;
+    }
 
 }

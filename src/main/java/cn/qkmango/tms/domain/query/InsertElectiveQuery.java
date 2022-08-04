@@ -1,26 +1,26 @@
-package cn.qkmango.tms.domain.vo;
+package cn.qkmango.tms.domain.query;
 
 import javax.validation.constraints.NotNull;
 import java.util.Arrays;
 import java.util.StringJoiner;
 
 /**
- * @className: InsertElectiveVO
+ * @className: InsertElectiveQuery
  * @Description: 插入选课的VO，参数接收实体类
  * @author: qkmango
  * @date: 2021-07-20 19:55
  * @version: 1.0
  */
-public class InsertElectiveVO {
-    @NotNull(message = "{valid.InsertElectiveVO.courseIds.NotNull}")
+public class InsertElectiveQuery {
+    @NotNull(message = "{valid.InsertElectiveQuery.courseIds.NotNull}")
     private Integer[] courseIds;
 
     private Integer studentId;
 
-    public InsertElectiveVO() {
+    public InsertElectiveQuery() {
     }
 
-    public InsertElectiveVO(Integer[] courseIds, Integer studentId) {
+    public InsertElectiveQuery(Integer[] courseIds, Integer studentId) {
         this.courseIds = courseIds;
         this.studentId = studentId;
     }
@@ -43,7 +43,7 @@ public class InsertElectiveVO {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", InsertElectiveVO.class.getSimpleName() + "[", "]")
+        return new StringJoiner(", ", InsertElectiveQuery.class.getSimpleName() + "[", "]")
                 .add("courseIds=" + Arrays.toString(courseIds))
                 .add("studentId='" + studentId + "'")
                 .toString();

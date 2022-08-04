@@ -4,7 +4,7 @@ import cn.qkmango.tms.domain.orm.Building;
 import cn.qkmango.tms.domain.orm.Elective;
 import cn.qkmango.tms.domain.orm.Room;
 import cn.qkmango.tms.domain.orm.User;
-import cn.qkmango.tms.domain.vo.UpdatePasswordVO;
+import cn.qkmango.tms.domain.query.UpdatePasswordQuery;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -19,7 +19,7 @@ public interface UpdateDao {
 
     int updateYear(@Param("year") Integer year, @Param("newYear") Integer newYear);
 
-    int updatePassword(UpdatePasswordVO updatePasswordVO);
+    int updatePassword(UpdatePasswordQuery updatePasswordQuery);
 
     int updateUserBasicInfo(User updateUser);
 
