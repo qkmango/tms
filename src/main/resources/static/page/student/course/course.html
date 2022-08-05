@@ -61,7 +61,6 @@
 
         <script type="text/html" id="currentTableBar">
             <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">详情</a>
-            <!-- <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">删除</a> -->
         </script>
 
     </div>
@@ -69,18 +68,12 @@
 <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
 
-
-	var $;
-	var form;
-	var table;
-	var cocoMessage = window.top.cocoMessage;
+	const cocoMessage = window.top.cocoMessage;
 
     layui.use(['form', 'table'], function () {
-        $ = layui.jquery;
-        form = layui.form;
-        table = layui.table;
-        // form.val('courseYear',window.top.GLOBAL.currYear)
-        // form.val('term',window.top.GLOBAL.term)
+        const $ = layui.jquery;
+        const form = layui.form;
+        const table = layui.table;
 
         form.val('queryParams',{
             courseYear:window.top.GLOBAL.currYear,
@@ -93,7 +86,6 @@
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print'],
             cols: [[
-                // {type: "checkbox", width: 50},
                 {field: 'id',title: 'ID'},
                 {field: 'course',title: '课程名'},
                 {field: 'courseYear',title: '学年',templet: function (data){
@@ -120,7 +112,6 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            // var result = JSON.stringify(data.field);
             //执行搜索重载
             table.reload('currentTableId', {
                 page: {
@@ -133,32 +124,6 @@
         });
 
 
-   //      table.on('tool(currentTableFilter)', function (obj) {
-   //          var data = obj.data;
-			// if (obj.event === 'delete') {
-   //              layer.confirm('真的删除行么', function (index) {
-   //              	$.ajax({
-   //              		url:'delete/deleteRoom.do',
-   //              		data:{id:obj.data.id},
-   //              		type:'post',
-   //              		dataType:'json',
-   //              		success:function(data) {
-   //              			if(data.success) {
-   //              				obj.del();
-   //              				cocoMessage.success(2000,data.message);
-   //              			} else {
-   //              				cocoMessage.error(2000,data.message);
-   //              			}
-   //              			layer.close(index);
-   //              		},
-   //              		error: function (jqXHR, textStatus, errorThrown) {
-   //              			layer.close(index);
-   //              			cocoMessage.error(2000,jqXHR.status+'');
-   //              		}
-   //              	})
-   //              });
-   //          }
-   //      });
 
     });
 </script>

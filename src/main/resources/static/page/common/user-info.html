@@ -20,7 +20,7 @@
 <div class="layuimini-container">
     <div class="layuimini-main">
 
-        <div class="layui-form layuimini-form">
+        <div class="layui-form layuimini-form" lay-filter="editUserInfoForm">
             <div class="layui-form-item">
                 <label class="layui-form-label">账号ID</label>
                 <div class="layui-input-block">
@@ -55,24 +55,25 @@
 <script>
 
     let $;
-    let cocoMessage = window.top.cocoMessage;
+    const cocoMessage = window.top.cocoMessage;
 
     layui.use(['form', 'miniTab'], function () {
-        var form = layui.form,
-            layer = layui.layer,
-            miniTab = layui.miniTab;
+        const form = layui.form;
+        const layer = layui.layer;
+        const miniTab = layui.miniTab;
         $ = layui.$;
 
         let userAllInfo = getUserAllInfo();
 
-        $("input[name='id']").val(userAllInfo.user.id);
-        $("input[name='name']").val(userAllInfo.user.name);
-        $("input[name='email']").val(userAllInfo.user.email);
+        //回写值
+        form.val('editUserInfoForm',{
+            id:userAllInfo.user.id,
+            name:userAllInfo.user.name,
+            email:userAllInfo.user.email
+        })
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
-
-            data.field
             $.ajax({
                 url: '/update/updateUserBasicInfo.do',
                 data:data.field,
@@ -82,13 +83,13 @@
                     if(data.success) {
                         let iframeIndex = parent.layer.getFrameIndex(window.name);
                         parent.layer.close(iframeIndex);
-                        cocoMessage.success(2000,data.message);
+                        cocoMessage.success(data.message);
                     } else {
-                        cocoMessage.error(2000,data.message);
+                        cocoMessage.error(data.message);
                     }
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    cocoMessage.error(2000,jqXHR.status+'');
+                    cocoMessage.error(jqXHR.status+'');
                 }
             })
 

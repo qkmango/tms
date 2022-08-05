@@ -1,20 +1,20 @@
 //是否正在执行ajax，防止过次点击执行
-var isAjax = false;
+let isAjax = false;
 
 $(function() {
-	var $inputs = $("input");
-	var id = $('#id')[0];
-	var password = $('#password')[0];
-	var button = $('#login_btn')[0];
-	var $error_tips = $(".tip");
-	var id_errorTip = $error_tips[0];
-	var password_errorTip = $error_tips[1];
-	
+	let $inputs = $("input");
+	let id = $('#id')[0];
+	let password = $('#password')[0];
+	let button = $('#login_btn')[0];
+	let $error_tips = $(".tip");
+	let id_errorTip = $error_tips[0];
+	let password_errorTip = $error_tips[1];
+
 
 	id.onblur = chechid;
-	
+
 	password.onblur = checkPassword;
-	
+
 	function chechid() {
 		if(check(id.value)) {
 			id_errorTip.innerText='';
@@ -24,7 +24,7 @@ $(function() {
 			return false;
 		}
 	}
-	
+
 	function checkPassword() {
 		if(check(password.value)) {
 			password_errorTip.innerText='';
@@ -47,8 +47,8 @@ $(function() {
 			login();
 		}
 	}
-	
-	
+
+
 	let locale = getLocale();
 	if(locale == 'en-US') {
 		document.querySelector('#en_US').className = 'this_locale_btn';
@@ -63,7 +63,7 @@ function check(str) {
 	// 	return true;
 	// }
 	// return false;
-	
+
 	return true;
 }
 
@@ -84,14 +84,14 @@ function login() {
 				console.log("登陆成功");
 				window.location.href = "index.html";
 			} else{
-				cocoMessage.error(2000,data.message,function() {
+				cocoMessage.error(500,data.message,function() {
 					isAjax = false;
 				})
 			}
 		},
 		error: function (jqXHR, textStatus, errorThrown) {
 			console.log(jqXHR.status);
-			cocoMessage.error(2000,jqXHR.status+'',function() {
+			cocoMessage.error(500,jqXHR.status+'',function() {
 				isAjax = false;
 			});
 		}

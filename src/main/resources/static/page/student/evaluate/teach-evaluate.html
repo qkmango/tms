@@ -16,7 +16,7 @@
 
         <script type="text/html" id="toolbarDemo"></script>
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
-            <legend><span id="table_title">测试</span></legend>
+            <legend><span id="table_title"></span></legend>
         </fieldset>
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
@@ -28,15 +28,12 @@
 </div>
 <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
-	var $;
-	var form;
-	var table;
-	var cocoMessage = window.top.cocoMessage;
+	const cocoMessage = window.top.cocoMessage;
 
     layui.use(['form', 'table'], function () {
-        $ = layui.jquery;
-        form = layui.form;
-        table = layui.table;
+        const $ = layui.jquery;
+        const form = layui.form;
+        const table = layui.table;
 
         $.ajax({
             url:'query/system/getSystemCurrYearAndTerm.do',
@@ -47,17 +44,14 @@
                     console.log(data)
                     document.querySelector("#table_title").innerHTML = `${data.data.currYear}年第${data.data.currTerm==='false'?'1':'2'}学期`;
                 } else {
-                    cocoMessage.error(2000,data.message);
+                    cocoMessage.error(data.message);
                 }
             },
             error: function (jqXHR, textStatus, errorThrown) {
-                cocoMessage.error(2000,jqXHR.status+'');
+                cocoMessage.error(jqXHR.status+'');
             }
         })
 
-
-
-		// $('input[name=courseYear]').val(new Date().getFullYear());
 
         table.render({
             elem: '#currentTableId',
@@ -76,11 +70,8 @@
 				{field: 'haveDone',title: '状态',width: 100,templet:function(data){
                 	return data.haveDone?'<span class="layui-badge layui-bg-blue">已评价</span>':'<span class="layui-badge-rim">未评价</span>';
                 }},
-				// {title: '评价',toolbar: '#currentTableBar', align: "center"}
-				// {title: '评价',toolbar: '#currentTableBar', align: "center"}
                 {title: '操作',width: 100,
                     templet:function(data){
-                        // return data.haveDone==1?'<a class="layui-btn layui-btn-xs layui-badge-rim">已评</a>':'<a class="layui-btn layui-btn-xs layui-badge layui-bg-blue data-count-add" lay-event="add">评价</a>';
                         return data.haveDone==1?'<span class="layui-badge-rim">已评</span>':'<a class="layui-btn layui-btn-xs layui-badge layui-bg-blue data-count-add" lay-event="add">评价</a>';
                     }
                 }
@@ -96,18 +87,23 @@
         });
 
 		table.on('tool(currentTableFilter)', function (obj) {
-			let link = 'page/student/evaluate/teach-evaluate-add.html';
-			window.top.GLOBAL.map.set(link,obj.data);
+			// let link = 'page/student/evaluate/teach-evaluate-add.html';
+			// window.top.GLOBAL.map.set(link,obj.data);
+            const course = obj.data.course
+            const courseYear = obj.data.courseYear
+            const elective = obj.data.elective
+            const teacher = obj.data.teacher
+            const term = obj.data.term
 
             if (obj.event === 'add') {
-                var index = layer.open({
+                let index = layer.open({
 					title: '评价',
                     type: 2,
                     shade: 0.2,
                     maxmin:true,
                     shadeClose: true,
                     area: ['100%', '100%'],
-                    content: link,
+                    content: `page/student/evaluate/teach-evaluate-add.html?course=${course}&courseYear=${courseYear}&elective=${elective}&teacher=${teacher}&term=${term}`,
 					end:function() {
 						table.reload("currentTableId");
 					}

@@ -87,14 +87,12 @@
 <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 
 <script>
-	var $ = layui.$;
+	const $ = layui.$;
+	const cocoMessage = window.top.cocoMessage;
 
 	layui.use(['form', 'table'], function () {
-        form = layui.form;
-        table = layui.table;
-		// let date = new Date();
-		// let year = date.getFullYear();
-		// let term = (date.getMonth()+1)>2 && (date.getMonth()+1)<9 ? 'true':'false';
+		const form = layui.form;
+		const table = layui.table;
 
 		$.ajax({
 			url:'query/system/getSystemCurrYearAndTerm.do',
@@ -108,11 +106,11 @@
 						"term": data.data.currTerm
 					});
 				} else {
-					cocoMessage.error(2000,data.message);
+					cocoMessage.error(data.message);
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				cocoMessage.error(2000,jqXHR.status+'');
+				cocoMessage.error(jqXHR.status+'');
 			}
 		})
 
@@ -165,7 +163,7 @@
 		/**
          * toolbar监听事件
          */
-		var isShow = true;
+		let isShow = true;
 		table.on('toolbar(currentTableFilter)', function(obj) {
 			if (obj.event == 'showCourseInfoBtn') {
 				if(isShow) {
@@ -227,11 +225,11 @@
 	}
 
 	function weekType(type) {
-		if(type=='all'){
+		if(type==='all'){
 			return '每周';
-		}else if(type=='sgl') {
+		}else if(type==='sgl') {
 			return '单周';
-		}else if(type=='dbl') {
+		}else if(type==='dbl') {
 			return '双周';
 		}
 	}

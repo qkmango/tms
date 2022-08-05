@@ -19,21 +19,21 @@
             <div style="margin: 10px 10px 10px 10px">
                 <form class="layui-form layui-form-pane" lay-filter='queryParams' id="queryParams">
                     <div class="layui-form-item">
-						
+
                         <div class="layui-inline">
                             <label class="layui-form-label">教室号</label>
                             <div class="layui-input-inline">
                                 <input type="number" name="number" autocomplete="off" class="layui-input">
                             </div>
                         </div>
-						
+
 						<div class="layui-inline">
 						    <label class="layui-form-label">教室名称</label>
 						    <div class="layui-input-inline">
 						        <input type="text" name="name" autocomplete="off" class="layui-input">
 						    </div>
 						</div>
-						
+
 						<div class="layui-inline">
 						    <label class="layui-form-label">教室类型</label>
 						    <div class="layui-input-inline">
@@ -48,7 +48,7 @@
 						        </select>
 						    </div>
 						</div>
-						
+
                         <div class="layui-inline">
                             <label class="layui-form-label">所属楼宇</label>
 							<div class="layui-input-inline">
@@ -57,9 +57,9 @@
 							  </select>
 							</div>
                         </div>
-						
-						
-                        
+
+
+
                         <div class="layui-inline">
                             <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
                         </div>
@@ -85,17 +85,17 @@
 </div>
 <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
-	
-	var $;
-	var form;
-	var table;
-	var cocoMessage = window.top.cocoMessage;
-	
+
+	let $;
+    let form;
+    let table;
+    const cocoMessage = window.top.cocoMessage;
+
     layui.use(['form', 'table'], function () {
         $ = layui.jquery;
         form = layui.form;
         table = layui.table;
-		
+
 		//获取并渲染楼下来列表信息
 		getBuildingList();
 
@@ -108,7 +108,7 @@
                 // {type: "checkbox", width: 50},
                 {field: 'number', width: 120, title: '教室号', sort: true},
                 {field: 'name',title: '教室名'},
-				
+
 				{field: 'roomType', width: 150, title: '教室类型',templet: function (data){
 					switch(data.roomType) {
 						case 'bz': return '标准教室';
@@ -120,7 +120,7 @@
 					}
 				}},
                 {field: 'capacity', title: '容纳人数', sort: true},
-				
+
                 {field: 'buildingNumber', title: '所属教学楼号', sort: true},
                 {field: 'buildingName', title: '所属教学楼名'},
                 {field: 'buildingType', width: 150, title: '所属教学楼类型',templet: function (data){
@@ -148,7 +148,7 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            var result = JSON.stringify(data.field);
+            // var result = JSON.stringify(data.field);
 
             //执行搜索重载
             table.reload('currentTableId', {
@@ -166,7 +166,7 @@
          */
         table.on('toolbar(currentTableFilter)', function (obj) {
             if (obj.event === 'add') {  // 监听添加操作
-                var index = layer.open({
+                const index = layer.open({
                     title: '添加教室',
                     type: 2,
                     shade: 0.2,
@@ -209,15 +209,15 @@
                 		success:function(data) {
                 			if(data.success) {
                 				obj.del();
-                				cocoMessage.success(2000,data.message);
+                				cocoMessage.success(data.message);
                 			} else {
-                				cocoMessage.error(2000,data.message);
+                				cocoMessage.error(data.message);
                 			}
                 			layer.close(index);
                 		},
                 		error: function (jqXHR, textStatus, errorThrown) {
                 			layer.close(index);
-                			cocoMessage.error(2000,jqXHR.status+'');
+                			cocoMessage.error(jqXHR.status+'');
                 		}
                 	})
                 });
@@ -227,7 +227,7 @@
     });
 </script>
 <script type="text/javascript">
-	
+
 	/**
 	 * 获取楼列表并渲染
 	 */
@@ -242,21 +242,21 @@
 					$.each(res.data,function(index,item){
 						html += '<option value='+item.id+'>'+item.number+'号楼 '+item.name+'</option>';
 					})
-					
+
 					$('#building').html(html);
 					form.render('select','queryParams');
-					
-					
+
+
 				} else {
-					cocoMessage.error(2000,res.message);
+					cocoMessage.error(res.message);
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				cocoMessage.error(2000,jqXHR.status+'');
+				cocoMessage.error(jqXHR.status+'');
 			}
 		})
 	}
-	
+
 </script>
 
 </body>

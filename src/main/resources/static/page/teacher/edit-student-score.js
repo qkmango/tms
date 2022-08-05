@@ -1,23 +1,12 @@
-var $ = layui.jquery;
-var cocoMessage = window.parent.cocoMessage;
-var form;
-var table;
-
-
-// $('input[name=teacher]').val(window.parent.GLOBAL.user.id);
-// $('input[name=courseYear]').val(window.parent.GLOBAL.currYear);
-// $('input[name=courseYear]').val(new Date().getFullYear());
+const $ = layui.jquery;
+const cocoMessage = window.parent.cocoMessage;
+let form;
+let table;
 
 layui.use(['form', 'table'], function () {
 
 	form = layui.form;
 	table = layui.table;
-
-	// form.val("teacher",window.top.GLOBAL.user.id);
-	// form.val("courseYear",window.top.GLOBAL.currYear);
-	// form.val("term",window.top.GLOBAL.currTerm);
-
-	queryParams
 
 	form.val('queryParams',{
 		teacher:window.top.GLOBAL.user.id,
@@ -47,7 +36,6 @@ layui.use(['form', 'table'], function () {
 			icon: 'layui-icon-tips'
 		}],
 		cols: [[
-			// {type: "checkbox", width: 50},
 			{field: 'id', width: 100, title: '学生ID', sort: true},
 			{field: 'name', width: 120, title: '姓名'},
 			{field: 'course', width: 140, title: '课程'},
@@ -70,7 +58,6 @@ layui.use(['form', 'table'], function () {
 					}
 				}
 			}
-			// ,{title: '操作', minWidth: 100, toolbar: '#currentTableBar', align: "center"}
 		]],
 		limits: [20, 40, 60, 80, 100, 120],
 		limit: 20,
@@ -82,11 +69,9 @@ layui.use(['form', 'table'], function () {
 
 	//监听单元格编辑
 	  table.on('edit(currentTableFilter)', function(obj){
-		var value = obj.value //得到修改后的值
-		,data = obj.data //得到所在行所有键值
-		,field = obj.field; //得到字段
-		console.log("得到修改后的值:"+value)
-		console.log(data);
+		let value = obj.value //得到修改后的值
+		let data = obj.data //得到所在行所有键值
+		let field = obj.field; //得到字段
 
 		if(value>100 || value<0) {
 			cocoMessage.warning('分数取值在0-100');
@@ -104,22 +89,21 @@ layui.use(['form', 'table'], function () {
 			dataType:'json',
 			success:function(data) {
 				if(data.success) {
-					cocoMessage.success(2000,data.message);
+					cocoMessage.success(data.message);
 				} else {
 					table.reload("dataGrid");
-					cocoMessage.error(2000,data.message);
+					cocoMessage.error(data.message);
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
 				table.reload("dataGrid");
-				cocoMessage.error(2000,jqXHR.status+'');
+				cocoMessage.error(jqXHR.status+'');
 			}
 		})
 	  });
 
 	// 监听搜索操作
 	form.on('submit(data-search-btn)', function (data) {
-		// var queryParamsStr = JSON.stringify(data.field);
 		//执行搜索重载
 		table.reload('dataGrid', {
 			page: {
@@ -131,27 +115,6 @@ layui.use(['form', 'table'], function () {
 		return false;
 	});
 
-	// 监听重置表单操作
-	// form.on('submit(data-reset-btn)', function (data) {
-	// 	//reset表单
-	// 	$("#queryParams")[0].reset();
-	//
-	// 	//给基础数据赋值
-	// 	form.val("queryParams", {
-	// 	  "teacher": window.parent.GLOBAL.user.id,
-	// 	  "courseYear": new Date().getFullYear()
-	// 	});
-	//
-	// 	//将下来列表内容重置
-	// 	$('#specialized').html('<option value="">全部</option>');
-	// 	$('#clazz').html('<option value="">全部</option>');
-	// 	$('#course').html('<option value="">全部</option>');
-	//
-	// 	//渲染表单
-	// 	form.render(null, 'queryParams');
-	//
-	// 	return false;
-	// });
 
 
 

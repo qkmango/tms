@@ -1,13 +1,14 @@
 // var $ = layui.jquery;
 // var cocoMessage = window.parent.cocoMessage;
-var form;
-var table;
-var layer;
+let form;
+let table;
+let layer;
 let tree;
 let util;
 let $;
 let clazzTreeData;
 let teacherTreeData;
+const cocoMessage = window.top.cocoMessage;
 layui.use(['form', 'table', 'tree', 'util'], function () {
 
     form = layui.form;
@@ -31,10 +32,10 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
                 {key: 'clazzList', value: 'children'},
             ])
             //将学院和专业的id前加上前缀，防止与clazz的id重复
-            for(let i=0;i<clazzTreeData.length;i++) {
-                clazzTreeData[i].id='f'+clazzTreeData[i].id;
-                for (let j=0;j<clazzTreeData[i].children.length;j++) {
-                    clazzTreeData[i].children[j].id='s'+clazzTreeData[i].children[j].id;
+            for (let i = 0; i < clazzTreeData.length; i++) {
+                clazzTreeData[i].id = 'f' + clazzTreeData[i].id;
+                for (let j = 0; j < clazzTreeData[i].children.length; j++) {
+                    clazzTreeData[i].children[j].id = 's' + clazzTreeData[i].children[j].id;
                 }
             }
             console.log(clazzTreeData)
@@ -54,8 +55,8 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
                 {key: 'teacherList', value: 'children'}
             ])
             //将学院的id前加上前缀，防止与teacher的id重复
-            for(let i=0;i<teacherTreeData.length;i++) {
-                teacherTreeData[i].id='f'+teacherTreeData[i].id;
+            for (let i = 0; i < teacherTreeData.length; i++) {
+                teacherTreeData[i].id = 'f' + teacherTreeData[i].id;
             }
             console.log(teacherTreeData)
         }
@@ -76,13 +77,28 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
         }
     });
 
-    //按钮事件
-    util.event('lay-demo', {
+    //获取选中数据 按钮事件
+    util.event('lay-select-tree-data', {
+        //将选中的数据 拼接 院系名_专业名_班级名，并弹窗显示
         getClazzChecked: function (othis) {
-            var checkedData = tree.getChecked('selectClazz'); //获取选中节点的数据
+            let checkedData = tree.getChecked('selectClazz'); //获取选中节点的数据
+            let selectClazzNameListStr = '';
+            for (let i = 0; i < checkedData.length; i++) {
+                let faculty_prefix = checkedData[i].title;
+                for (let j = 0; j < checkedData[i].children.length; j++) {
+                    let specialized_prefix = checkedData[i].children[j].title;
+                    for (let k = 0; k < checkedData[i].children[j].children.length; k++) {
+                        selectClazzNameListStr+=`${faculty_prefix}_${specialized_prefix}_${checkedData[i].children[j].children[k].title}<br/>`
+                    }
+                }
+            }
 
-            layer.alert(JSON.stringify(checkedData), {shade: 0});
-
+            layer.alert(selectClazzNameListStr, {
+                title:'选中的班级',
+                shadeClose: true,
+                closeBtn: 0,
+                btn:false
+            });
             console.log(checkedData);
         }
     });
@@ -103,48 +119,32 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
     });
 
     //按钮事件
-    util.event('lay-demo', {
+    util.event('lay-select-tree-data', {
+        //将选中的数据 拼接 院系名_老师名，并弹窗显示
         getTeacherChecked: function (othis) {
-            var checkedData = tree.getChecked('selectTeacher'); //获取选中节点的数据
-            layer.alert(JSON.stringify(checkedData), {shade: 0});
+            let checkedData = tree.getChecked('selectTeacher'); //获取选中节点的数据
+            let selectTeacherNameListStr = '';
+            for (let i = 0; i < checkedData.length; i++) {
+                let faculty_prefix = checkedData[i].title;
+                for (let j = 0; j < checkedData[i].children.length; j++) {
+                    selectTeacherNameListStr+=`${faculty_prefix}_${checkedData[i].children[j].title}<br/>`
+                }
+            }
+
+            layer.alert(selectTeacherNameListStr,{
+                title:'选中的老师',
+                shadeClose: true,
+                closeBtn: 0,
+                btn:false
+            });
+
         }
     });
 
 
-    //
+    form.verify(layui_verify_config);
 
-    form.verify({
-        //年份验证
-        int: function (value, item) {
-            return value % 1 === 0 ? false : "取值为整数"
-        },
-        year: function (value, item) {
-            return value >= 2000 && value <= 2100 ? false : '年份取值范围为2000-2100';
-        },
-        //持续节验证
-        length: function (value, item) {
-            if (value >= 1 && value <= 4) {
-                return false;
-            }
-            return "取值范围在1-4";
-        },
-        //验证起始节
-        begin: function (value, item) {
-            if (value >= 1 && value <= 11) {
-                return false;
-            }
-            return "取值范围在1-11";
-        },
-        //周验证
-        week: function (value, item) {
-            if (value >= 1) {
-                return false;
-            }
-            return "取值为>0";
-        },
-    });
-
-    //添加节次按钮事件
+    //获取选中数据 按钮事件
     $('#add').click(function () {
         let len = $(".courseInfoItem").length;
         $("#btnArea").before(getHTML(len));
@@ -177,16 +177,10 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
 
     })
 
-    // 监听搜索操作
+    // 监听提交操作
     form.on('submit(data-submit-btn)', function (data) {
         let selectClazzList = tree.getChecked('selectClazz')
         let selectTeacherList = tree.getChecked('selectTeacher')
-
-        // console.log(data.field)
-        // console.log(selectClazzList)
-        // console.log(selectTeacherList)
-        // console.log(Object.keys(data.field))
-        // return false;
 
         let clazzList = [];
         let teacherList = [];
@@ -220,14 +214,14 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
         for (let i = 0; true; i++) {
             if (data.field[`courseInfo_${i}.courseType`] !== undefined) {
                 courseInfoList.push({
-                    courseType:data.field[`courseInfo_${i}.courseType`],
-                    weekType:data.field[`courseInfo_${i}.weekType`],
-                    beginWeek:data.field[`courseInfo_${i}.beginWeek`],
-                    lengthWeek:data.field[`courseInfo_${i}.lengthWeek`],
-                    weekDay:data.field[`courseInfo_${i}.weekDay`],
-                    begin:data.field[`courseInfo_${i}.begin`],
-                    length:data.field[`courseInfo_${i}.length`],
-                    address:data.field[`courseInfo_${i}.address`]
+                    courseType: data.field[`courseInfo_${i}.courseType`],
+                    weekType: data.field[`courseInfo_${i}.weekType`],
+                    beginWeek: data.field[`courseInfo_${i}.beginWeek`],
+                    lengthWeek: data.field[`courseInfo_${i}.lengthWeek`],
+                    weekDay: data.field[`courseInfo_${i}.weekDay`],
+                    begin: data.field[`courseInfo_${i}.begin`],
+                    length: data.field[`courseInfo_${i}.length`],
+                    address: data.field[`courseInfo_${i}.address`]
                 })
             } else {
                 break
@@ -236,49 +230,45 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
 
 
         //传入后台的参数
-        let queryData = {
-            course:{
-                name:data.field.name,
-                credit:data.field.credit,
-                teacher:teacherList[0],
-                courseYear:data.field.courseYear,
-                term:data.field.term
+        let requestData = {
+            course: {
+                name: data.field.name,
+                credit: data.field.credit,
+                teacher: teacherList[0],
+                courseYear: data.field.courseYear,
+                term: data.field.term
             },
             clazzList,
             courseInfoList
         }
 
-        console.log(queryData)
-        // return false
+        console.log(requestData)
 
         layer.msg('确认提交吗？', {
             icon: 3,
             time: 0,
-            btn: ['取消', '确定'],
-            yes: function (index) {
+            btn: ['确定', '取消'],
+            btn2: function (index) {
                 layer.close(index);
             },
-            btn2: function (index) {
+            yes: function (index) {
                 layer.close(index);
                 $.ajax({
                     url: 'insert/insertCourse2.do',
                     contentType: 'application/json; charset=utf-8',
-                    data: JSON.stringify(queryData),
+                    data: JSON.stringify(requestData),
                     type: 'post',
                     dataType: 'json',
                     success: function (data) {
                         console.log(data)
                         if (data.success) {
-                            layer.msg(data.message, {icon: 1});
-                            // cocoMessage.success(2000,data.message);
+                            cocoMessage.success(data.message)
                         } else {
-                            // cocoMessage.error(2000,data.message);
-                            layer.msg(data.message, {icon: 5});
+                            cocoMessage.error(data.message)
                         }
                     },
                     error: function (jqXHR, textStatus, errorThrown) {
-                        // cocoMessage.error(2000,jqXHR.status+'');
-                        layer.msg(data.message, {icon: 5});
+                        cocoMessage.error(jqXHR.status + '');
                     }
                 })
             }
@@ -294,8 +284,7 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
 
 //获取节次的HTML
 function getHTML(index) {
-    // return '<fieldset class="table-search-fieldset courseInfoItem"><legend>节次${index}</legend><div class="layui-form-item"><div  class="layui-inline"><label class="layui-form-label">类型</label><div class="layui-input-inline"><select name="courseInfo_${index}.courseType" lay-verify="required"><option value="">全部</option><option value="theory">理论课</option><option value="practice">实践课</option></select></div></div><div  class="layui-inline"><label class="layui-form-label">单双周</label><div class="layui-input-inline"><select name="courseInfo_${index}.weekType" lay-verify="required"><option value="all">不限</option><option value="sgl">单周</option><option value="dbl">双周</option></select></div></div><div class="layui-inline"><label class="layui-form-label">起始周</label><div class="layui-input-inline"><input type="number" name="courseInfo_${index}.beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week"></div></div><div class="layui-inline"><label class="layui-form-label">持续周</label><div class="layui-input-inline"><input type="number" name="courseInfo_${index}.lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week"></div></div><div class="layui-inline"><label class="layui-form-label">星期</label><div class="layui-input-inline"><select name="courseInfo_${index}.weekDay" lay-verify="required"><option value="">全部</option><option value="Monday">周一</option><option value="Tuesday">周二</option><option value="Wednesday">周三</option><option value="Thursday">周四</option><option value="Friday">周五</option><option value="Saturday">周六</option><option value="Sunday">周日</option></select></div></div><div class="layui-inline"><label class="layui-form-label">起始节</label><div class="layui-input-inline"><input type="number" name="courseInfo_${index}.begin" autocomplete="off" class="layui-input" lay-verify="required|int|begin"></div></div><div class="layui-inline"><label class="layui-form-label">持续节</label><div class="layui-input-inline"><input type="number" name="courseInfo_${index}.length" autocomplete="off" class="layui-input" lay-verify="required|int|length" placeholder="1-4"></div></div><div class="layui-inline"><label class="layui-form-label">教室ID</label><div class="layui-input-inline"><input type="number" name="courseInfo_${index}.address" autocomplete="off" class="layui-input" lay-verify="required"></div></div></div></fieldset>';
-    return`
+    return `
 <fieldset class="table-search-fieldset courseInfoItem">
     <legend>节次${index}</legend>
     <div class="layui-form-item">
@@ -324,13 +313,13 @@ function getHTML(index) {
         <div class="layui-inline">
             <label class="layui-form-label">起始周</label>
             <div class="layui-input-inline">
-                <input type="number" name="courseInfo_${index}.beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week"></div>
+                <input type="number" name="courseInfo_${index}.beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoWeek"></div>
             </div>
             
         <div class="layui-inline">
             <label class="layui-form-label">持续周</label>
             <div class="layui-input-inline">
-                <input type="number" name="courseInfo_${index}.lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week">
+                <input type="number" name="courseInfo_${index}.lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoWeek">
             </div>
         </div>
         
@@ -353,14 +342,14 @@ function getHTML(index) {
         <div class="layui-inline">
             <label class="layui-form-label">起始节</label>
             <div class="layui-input-inline">
-                <input type="number" name="courseInfo_${index}.begin" autocomplete="off" class="layui-input" lay-verify="required|int|begin">
+                <input type="number" name="courseInfo_${index}.begin" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoBegin">
             </div>
         </div>
 
         <div class="layui-inline">
             <label class="layui-form-label">持续节</label>
             <div class="layui-input-inline">
-                <input type="number" name="courseInfo_${index}.length" autocomplete="off" class="layui-input" lay-verify="required|int|length" placeholder="1-4">
+                <input type="number" name="courseInfo_${index}.length" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoLength" placeholder="1-4">
             </div>
         </div>
 

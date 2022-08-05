@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="layui-form layui-form-pane" lay-filter="editBuildingForm">
-	
+
 	<div class="layui-form-item">
 	    <label class="layui-form-label">楼类型</label>
 	    <div class="layui-input-block">
@@ -26,54 +26,47 @@
 	        <input type="radio" name="buildingType" value="q" title="其他">
 	    </div>
 	</div>
-	
+
     <div class="layui-form-item">
         <label class="layui-form-label">楼号</label>
         <div class="layui-input-block">
             <input type="text" name="number" lay-verify="required|buildingNumber" class="layui-input">
         </div>
     </div>
-    
+
     <div class="layui-form-item">
         <label class="layui-form-label">楼名称</label>
         <div class="layui-input-block">
             <input type="text" name="name" class="layui-input" lay-verify="required">
         </div>
     </div>
-    
+
     <div class="layui-form-item">
         <div class="layui-input-block">
             <button class="layui-btn layui-btn-normal layui-layout-right" lay-submit lay-filter="saveBtn">确认保存</button>
         </div>
     </div>
 </div>
-<script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
-<script src="lib/util/utils.js" charset="utf-8"></script>
+<script src="lib/layui-v2.6.3/layui.js"></script>
+<script src="lib/util/utils.js"></script>
+<script src="lib/util/layui_verify_config.js"></script>
 <script>
-	
-	var cocoMessage = window.top.cocoMessage;
-	
+
+	const cocoMessage = window.top.cocoMessage;
+
     layui.use(['form'], function () {
-        var form = layui.form;
-        var layer = layui.layer;
-        var $ = layui.$;
-		
-		form.verify({
-			//楼栋号验证
-			buildingNumber:function(value,item){
-				if(/^\d{1,3}[A-Z]?$/.test(value)) {
-					return false;
-				}
-				return '楼号长度在4以内,只能有一个大写字母';
-			}
-		})
-			
+        const form = layui.form;
+        const layer = layui.layer;
+        const $ = layui.$;
+
+		form.verify(layui_verify_config)
+
 		const id = getUrlParam('id');
 		if(id==null) {
 			cocoMessage.error('获取楼ID失败');
 			return;
 		}
-		
+
 		//获取楼宇 by id
 		$.ajax({
 			url:'query/list/getBuildingList.do',
@@ -85,23 +78,23 @@
 			dataType:'json',
 			success:function(res) {
 				if(res.success) {
-					var building = res.data[0];
+					let building = res.data[0];
 					form.val("editBuildingForm", {
 					  "buildingType": building.buildingType,
 					  "number": building.number,
 					  "name": building.name
 					});
 				} else {
-					cocoMessage.error(2000,res.message);
+					cocoMessage.error(res.message);
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				cocoMessage.error(2000,jqXHR.status+'');
+				cocoMessage.error(jqXHR.status+'');
 			}
 		})
-		
-		
-		
+
+
+
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
@@ -114,16 +107,16 @@
 				dataType:'json',
 				success:function(data) {
 					if(data.success) {
-						var iframeIndex = parent.layer.getFrameIndex(window.name);
+						const iframeIndex = parent.layer.getFrameIndex(window.name);
 						parent.layer.close(iframeIndex);
-						cocoMessage.success(2000,data.message,function() {
+						cocoMessage.success(data.message,function() {
 						});
 					} else {
-						cocoMessage.error(2000,data.message);
+						cocoMessage.error(data.message);
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
-					cocoMessage.error(2000,jqXHR.status+'');
+					cocoMessage.error(jqXHR.status+'');
 				}
 			})
         });

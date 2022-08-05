@@ -215,52 +215,68 @@
     </div>
 </div>
 
-<script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="lib/layui-v2.6.3/layui.js"></script>
+<script src="lib/util/utils.js"></script>
 <script>
 
-	var cocoMessage = window.top.cocoMessage;
+	const cocoMessage = window.top.cocoMessage;
 
-    let obj = window.top.GLOBAL.map.get('page/student/evaluate/teach-evaluate-add.html');
+    // let obj = window.top.GLOBAL.map.get('page/student/evaluate/teach-evaluate-add.html');
 
     layui.use(['form'], function () {
-        var form = layui.form,
-            layer = layui.layer,
-            $ = layui.$;
+        const form = layui.form;
+        const layer = layui.layer;
+        const $ = layui.$;
 
-            if(obj == null) {
-                cocoMessage.error('获取对象失败');
-                return;
-            }
+
+        const course = getUrlParam('course');
+        const courseYear = getUrlParam('courseYear');
+        const elective = getUrlParam('elective');
+        const teacher = getUrlParam('teacher');
+        const term = getUrlParam('term');
+
+
+        if(elective == null) {
+            cocoMessage.error('获取选课ID失败',function () {
+                const iframeIndex = parent.layer.getFrameIndex(window.name);
+                parent.layer.close(iframeIndex);
+            });
+
+            return;
+        }
 
             form.val("info", {
-                "course": obj.course,
-                "courseYear": obj.courseYear,
-                "elective": obj.elective,
-                "teacher": obj.teacher,
-                "term": obj.term?'第二学期':'第一学期'
+                course,
+                courseYear,
+                elective,
+                teacher,
+                term
             });
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
 			console.log(data.field);
-            data.field.elective=obj.elective;
+            // data.field.elective=obj.elective;
+
+            let requestData = data.field;
+            requestData.elective = elective;
 
 			$.ajax({
 				url:'insert/insertTeachEvaluate.do',
-				data:data.field,
+				data:requestData,
 				type:'post',
 				dataType:'json',
 				success:function(data) {
 					if(data.success) {
-						var iframeIndex = parent.layer.getFrameIndex(window.name);
+						const iframeIndex = parent.layer.getFrameIndex(window.name);
 						parent.layer.close(iframeIndex);
-						cocoMessage.success(2000,data.message);
+						cocoMessage.success(data.message);
 					} else {
-						cocoMessage.error(2000,data.message);
+						cocoMessage.error(data.message);
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
-					cocoMessage.error(2000,jqXHR.status+'');
+					cocoMessage.error(jqXHR.status+'');
 				}
 			})
         });

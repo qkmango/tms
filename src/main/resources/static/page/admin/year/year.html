@@ -32,17 +32,17 @@
 </div>
 <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
-	
-	var $;
-	var form;
-	var table;
-	var cocoMessage = window.top.cocoMessage;
-	
+
+	let $;
+    let form;
+    let table;
+    const cocoMessage = window.top.cocoMessage;
+
     layui.use(['form', 'table'], function () {
         $ = layui.jquery;
         form = layui.form;
         table = layui.table;
-		
+
 		//获取并渲染楼下来列表信息
 		// getBuildingList();
 
@@ -135,15 +135,15 @@
                 		success:function(data) {
                 			if(data.success) {
                 				obj.del();
-                				cocoMessage.success(2000,data.message);
+                				cocoMessage.success(data.message);
                 			} else {
-                				cocoMessage.error(2000,data.message);
+                				cocoMessage.error(data.message);
                 			}
                 			layer.close(index);
                 		},
                 		error: function (jqXHR, textStatus, errorThrown) {
                 			layer.close(index);
-                			cocoMessage.error(2000,jqXHR.status+'');
+                			cocoMessage.error(jqXHR.status+'');
                 		}
                 	})
                 });
@@ -153,7 +153,7 @@
     });
 </script>
 <script type="text/javascript">
-	
+
 	/**
 	 * 获取楼列表并渲染
 	 */
@@ -168,21 +168,21 @@
 					$.each(res.data,function(index,item){
 						html += '<option value='+item.id+'>'+item.number+'号楼 '+item.name+'</option>';
 					})
-					
+
 					$('#building').html(html);
 					form.render('select','queryParams');
-					
-					
+
+
 				} else {
-					cocoMessage.error(2000,res.message);
+					cocoMessage.error(res.message);
 				}
 			},
 			error: function (jqXHR, textStatus, errorThrown) {
-				cocoMessage.error(2000,jqXHR.status+'');
+				cocoMessage.error(jqXHR.status+'');
 			}
 		})
 	}
-	
+
 </script>
 
 </body>

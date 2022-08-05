@@ -46,12 +46,12 @@
 <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script>
 
-	var cocoMessage = window.top.cocoMessage;
+	const cocoMessage = window.top.cocoMessage;
 
     layui.use(['form'], function () {
-        var form = layui.form,
-            layer = layui.layer,
-            $ = layui.$;
+        const form = layui.form;
+        const layer = layui.layer;
+        const $ = layui.$;
 
 
         //监听提交
@@ -65,15 +65,15 @@
 				dataType:'json',
 				success:function(data) {
 					if(data.success) {
-						var iframeIndex = parent.layer.getFrameIndex(window.name);
+						const iframeIndex = parent.layer.getFrameIndex(window.name);
 						parent.layer.close(iframeIndex);
-						cocoMessage.success(2000,data.message);
+						cocoMessage.success(data.message);
 					} else {
-						cocoMessage.error(2000,data.message);
+						cocoMessage.error(data.message);
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
-					cocoMessage.error(2000,jqXHR.status+'');
+					cocoMessage.error(jqXHR.status+'');
 				}
 			})
         });

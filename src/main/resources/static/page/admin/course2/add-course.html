@@ -61,7 +61,7 @@
 
 
 					<fieldset class="table-search-fieldset">
-						<button type="button" class="layui-btn layui-btn-sm" lay-demo="getClazzChecked">获取选中节点数据</button>
+						<button type="button" class="layui-btn layui-btn-sm" lay-select-tree-data="getClazzChecked">获取选中节点数据</button>
 						<legend>所属班级</legend>
 						<div class="layui-form-item">
 							<div id="selectClazz" class="demo-tree-more"></div>
@@ -70,7 +70,7 @@
 
 
 					<fieldset class="table-search-fieldset">
-						<button type="button" class="layui-btn layui-btn-sm" lay-demo="getTeacherChecked">获取选中节点数据</button>
+						<button type="button" class="layui-btn layui-btn-sm" lay-select-tree-data="getTeacherChecked">获取选中节点数据</button>
 						<legend>授课老师</legend>
 						<div class="layui-form-item">
 							<div id="selectTeacher" class="demo-tree-more"></div>
@@ -103,13 +103,13 @@
 							<div class="layui-inline">
 								<label class="layui-form-label">起始周</label>
 								<div class="layui-input-inline">
-									<input type="number" value="1" name="courseInfo_0.beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week">
+									<input type="number" value="1" name="courseInfo_0.beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoWeek">
 								</div>
 							</div>
 							<div class="layui-inline">
 								<label class="layui-form-label">持续周</label>
 								<div class="layui-input-inline">
-									<input type="number" value="10" name="courseInfo_0.lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week">
+									<input type="number" value="10" name="courseInfo_0.lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoWeek">
 								</div>
 							</div>
 							<div class="layui-inline">
@@ -130,13 +130,13 @@
 							<div class="layui-inline">
 								<label class="layui-form-label">起始节</label>
 								<div class="layui-input-inline">
-									<input type="number" value="1" name="courseInfo_0.begin" autocomplete="off" class="layui-input" lay-verify="required|int|begin">
+									<input type="number" value="1" name="courseInfo_0.begin" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoBegin">
 								</div>
 							</div>
 							<div class="layui-inline">
 								<label class="layui-form-label">持续节</label>
 								<div class="layui-input-inline">
-									<input type="number" value="2" name="courseInfo_0.length" autocomplete="off" class="layui-input" lay-verify="required|int|length" placeholder="1-4">
+									<input type="number" value="2" name="courseInfo_0.length" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoLength" placeholder="1-4">
 								</div>
 							</div>
 							<div class="layui-inline">
@@ -162,7 +162,8 @@
 	</div>
 	<script type="text/javascript" src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script type="text/javascript" src="lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
-	<script type="text/javascript" src="page/admin/course2/add-course.js" charset="utf-8"></script>
 	<script type="text/javascript" src="lib/util/utils.js"></script>
+	<script type="text/javascript" src="page/admin/course2/add-course.js" charset="utf-8"></script>
+	<script type="text/javascript" src="lib/util/layui_verify_config.js"></script>
 </body>
 </html>

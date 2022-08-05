@@ -46,30 +46,23 @@
 		</div>
 	</div>
 </div>
-<script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="lib/layui-v2.6.3/layui.js"></script>
+<script src="lib/util/layui_verify_config.js"></script>
 <script>
-	
-	var cocoMessage = window.top.cocoMessage;
-	
+
+	const cocoMessage = window.top.cocoMessage;
+
     layui.use(['form'], function () {
-        var form = layui.form,
-            layer = layui.layer,
-            $ = layui.$;
-			
-		form.verify({
-			//楼栋号验证
-			buildingNumber:function(value,item){
-				if(/^\d{1,3}[A-Z]?$/.test(value)) {
-					return false;
-				}
-				return '楼号长度在4以内,只能有一个大写字母';
-			}
-		})
+		const form = layui.form;
+		const layer = layui.layer;
+		const $ = layui.$;
+
+		form.verify(layui_verify_config)
 
         //监听提交
         form.on('submit(saveBtn)', function (data) {
 			console.log(data.field);
-			
+
 			$.ajax({
 				url:'insert/insertBuilding.do',
 				data:data.field,
@@ -77,15 +70,15 @@
 				dataType:'json',
 				success:function(res) {
 					if(res.success) {
-						var iframeIndex = parent.layer.getFrameIndex(window.name);
+						const iframeIndex = parent.layer.getFrameIndex(window.name);
 						parent.layer.close(iframeIndex);
-						cocoMessage.success(2000,res.message);
+						cocoMessage.success(res.message);
 					} else {
-						cocoMessage.error(2000,res.message);
+						cocoMessage.error(res.message);
 					}
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
-					cocoMessage.error(2000,jqXHR.status+'');
+					cocoMessage.error(jqXHR.status+'');
 				}
 			})
         });
