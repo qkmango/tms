@@ -1,7 +1,7 @@
 {
 	"homeInfo": {
 		"title": "首页",
-		"href": "page/welcome.html"
+		"href": "page/admin/welcome.html"
 	},
 	"logoInfo": {
 		"title": "管理员",
