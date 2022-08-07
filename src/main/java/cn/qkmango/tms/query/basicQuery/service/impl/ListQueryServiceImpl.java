@@ -87,14 +87,14 @@ public class ListQueryServiceImpl implements ListQueryService {
     public TimeTable getStudentTimetable(GetStudentTimetableQuery query) {
 
         List<OnceCourseInfo> list = listQueryDao.getStudentTimetable(query);
-        // TimeTable timeTable = listQueryDao.getInfoOfTimeTable(query.getId());
+        TimeTable timeTable = listQueryDao.getInfoOfTimeTable(query.getId());
 
-        TimeTable timeTable = new TimeTable();
+        // TimeTable timeTable = new TimeTable();
 
         timeTable.setList(list);
-        // timeTable.setStudentId(query.getId());
-        // timeTable.setYear(query.getYear());
-        // timeTable.setTerm(query.getTerm());
+        timeTable.setStudentId(query.getId());
+        timeTable.setYear(query.getYear());
+        timeTable.setTerm(query.getTerm());
         return timeTable;
     }
 

@@ -23,7 +23,8 @@ public class CourseInfo {
     @Range(min = 1, message = "{valid.CourseInfo.lengthWeek.Range}")
     private Integer lengthWeek;
     @NotNull(message = "{valid.CourseInfo.weekDay.NotNull}")
-    private WeekDay weekDay;
+    @Range(min = 1,max = 7,message = "{valid.CourseInfo.weekDay.Range}")
+    private Integer weekDay;
     @NotNull(message = "{valid.CourseInfo.begin.NotNull}")
     @Range(min = 1, max = 11, message = "{valid.CourseInfo.begin.Range}")
     private Integer begin;
@@ -36,7 +37,7 @@ public class CourseInfo {
     public CourseInfo() {
     }
 
-    public CourseInfo(Integer id, Integer course, CourseType courseType, WeekType weekType, Integer beginWeek, Integer lengthWeek, WeekDay weekDay, Integer begin, Integer length, Integer address) {
+    public CourseInfo(Integer id, Integer course, CourseType courseType, WeekType weekType, Integer beginWeek, Integer lengthWeek, Integer weekDay, Integer begin, Integer length, Integer address) {
         this.id = id;
         this.course = course;
         this.courseType = courseType;
@@ -97,11 +98,11 @@ public class CourseInfo {
         this.lengthWeek = lengthWeek;
     }
 
-    public WeekDay getWeekDay() {
+    public Integer getWeekDay() {
         return weekDay;
     }
 
-    public void setWeekDay(WeekDay weekDay) {
+    public void setWeekDay(Integer weekDay) {
         this.weekDay = weekDay;
     }
 

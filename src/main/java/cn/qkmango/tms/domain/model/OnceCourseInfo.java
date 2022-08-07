@@ -23,7 +23,7 @@ public class OnceCourseInfo {
     String buildingNumber;
     int roomNumber;
 
-    WeekDay weekDay;
+    int weekDay;
 
     byte length;
     byte begin;
@@ -31,7 +31,7 @@ public class OnceCourseInfo {
     public OnceCourseInfo() {
     }
 
-    public OnceCourseInfo(String name, Integer id, byte beginWeek, byte lengthWeek, WeekType weekType, String teacher, String buildingNumber, int roomNumber, WeekDay weekDay, byte length, byte begin) {
+    public OnceCourseInfo(String name, Integer id, byte beginWeek, byte lengthWeek, WeekType weekType, String teacher, String buildingNumber, int roomNumber, int weekDay, byte length, byte begin) {
         this.name = name;
         this.id = id;
         this.beginWeek = beginWeek;
@@ -109,11 +109,11 @@ public class OnceCourseInfo {
         this.roomNumber = roomNumber;
     }
 
-    public WeekDay getWeekDay() {
+    public int getWeekDay() {
         return weekDay;
     }
 
-    public void setWeekDay(WeekDay weekDay) {
+    public void setWeekDay(int weekDay) {
         this.weekDay = weekDay;
     }
 

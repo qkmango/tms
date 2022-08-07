@@ -1,0 +1,59 @@
+{
+  "data": {
+    "list": [
+      {
+        "name": "高等数学(工程类)(1)",
+        "id": 27,
+        "beginWeek": 1,
+        "lengthWeek": 10,
+        "weekType": "all",
+        "teacher": "ls1",
+        "buildingNumber": "13",
+        "roomNumber": 402,
+        "weekDay": 3,
+        "length": 2,
+        "begin": 1
+      },
+      {
+        "name": " C/C++语言程序设计",
+        "id": 28,
+        "beginWeek": 1,
+        "lengthWeek": 10,
+        "weekType": "all",
+        "teacher": "ls1",
+        "buildingNumber": "13",
+        "roomNumber": 402,
+        "weekDay": 1,
+        "length": 2,
+        "begin": 1
+      },
+      {
+        "name": "数字逻辑电路",
+        "id": 29,
+        "beginWeek": 1,
+        "lengthWeek": 10,
+        "weekType": "all",
+        "teacher": "ls1",
+        "buildingNumber": "13",
+        "roomNumber": 402,
+        "weekDay": 2,
+        "length": 2,
+        "begin": 2
+      },
+      {
+        "name": "photoshop C",
+        "id": 31,
+        "beginWeek": 1,
+        "lengthWeek": 10,
+        "weekType": "all",
+        "teacher": "ls1",
+        "buildingNumber": "13",
+        "roomNumber": 402,
+        "weekDay": 5,
+        "length": 4,
+        "begin": 5
+      }
+    ]
+  },
+  "success": true
+}

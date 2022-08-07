@@ -328,13 +328,13 @@ function getHTML(index) {
             <div class="layui-input-inline">
                 <select name="courseInfo_${index}.weekDay" lay-verify="required">
                     <option value="">全部</option>
-                    <option value="Monday">周一</option>
-                    <option value="Tuesday">周二</option>
-                    <option value="Wednesday">周三</option>
-                    <option value="Thursday">周四</option>
-                    <option value="Friday">周五</option>
-                    <option value="Saturday">周六</option>
-                    <option value="Sunday">周日</option>
+                    <option value="1">周一</option>
+                    <option value="2">周二</option>
+                    <option value="3">周三</option>
+                    <option value="4">周四</option>
+                    <option value="5">周五</option>
+                    <option value="6">周六</option>
+                    <option value="7">周日</option>
                 </select>
             </div>
         </div>

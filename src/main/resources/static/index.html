@@ -71,7 +71,7 @@
                     <a href="javascript:;" id="name">未登录</a>
                     <dl class="layui-nav-child">
                         <dd>
-                            <a href="javascript:;" layuimini-content-href="page/common/user-info.html" data-title="基本资料" data-icon="fa fa-gears">基本资料</a>
+                            <a href="javascript:;" layuimini-content-href="page/common/user-info.html" data-title="账户资料" data-icon="fa fa-gears">基本资料</a>
                         </dd>
                         <dd>
                             <a href="javascript:;" layuimini-content-href="page/common/update-password.html" data-title="修改密码" data-icon="fa fa-gears">修改密码</a>
@@ -243,17 +243,19 @@
 				type:"post",
 				dataType:"json",
 				success:function(data) {
-					if(data.success) {
-						cocoMessage.success(2000,data.message,function() {
-							window.location.href = 'page/login/';
-						});
-					} else {
-						cocoMessage.error(2000,data.message);
-					}
+                    if (data.success) {
+                        cocoMessage.success(data.message,function () {
+                            window.top.location.href = 'page/login/';
+                        })
+                    } else {
+                        cocoMessage.error(data.message,function () {
+                            window.top.location.href = 'page/login/';
+                        })
+                    }
 				},
 				error: function (jqXHR, textStatus, errorThrown) {
 					cocoMessage.error(2000,jqXHR.status+'');
-					window.location.href = 'page/login/';
+                    window.top.location.href = 'page/login/';
 				}
 			})
         });
