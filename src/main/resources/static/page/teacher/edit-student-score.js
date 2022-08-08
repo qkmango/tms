@@ -36,9 +36,9 @@ layui.use(['form', 'table'], function () {
 			icon: 'layui-icon-tips'
 		}],
 		cols: [[
-			{field: 'id', width: 100, title: '学生ID', sort: true},
+			{field: 'student', width: 100, title: '学生ID', sort: true},
 			{field: 'name', width: 120, title: '姓名'},
-			{field: 'course', width: 140, title: '课程'},
+			{field: 'courseName', width: 140, title: '课程'},
 			{field: 'teacher', width: 100, title: '任课老师'},
 			{field: 'clazz', title: '班级'},
 			{field: 'specialized', title: '专业'},

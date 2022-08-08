@@ -22,7 +22,7 @@
 							<div class="layui-inline">
 								<label class="layui-form-label">课程名</label>
 								<div class="layui-input-inline">
-									<input type="text" name="name" autocomplete="off" class="layui-input" lay-verify="required">
+									<input type="text" value="测试课程" name="name" autocomplete="off" class="layui-input" lay-verify="required">
 								</div>
 							</div>
 
@@ -31,7 +31,7 @@
 								<div class="layui-input-inline">
 									<select name="credit" id="credit" lay-filter="credit" lay-verify="required">
 										<option value="">全部</option>
-										<option value="1">1</option>
+										<option value="1" selected>1</option>
 										<option value="2">2</option>
 										<option value="3">3</option>
 										<option value="4">4</option>
@@ -40,16 +40,9 @@
 							</div>
 
 							<div class="layui-inline">
-							    <label class="layui-form-label">班级年级</label>
-								<div class="layui-input-inline">
-								  <input type="text" name="clazzYear" autocomplete="off" class="layui-input">
-								</div>
-							</div>
-
-							<div class="layui-inline">
 								<label class="layui-form-label">课程年度</label>
 								<div class="layui-input-inline">
-								    <input type="text" name="courseYear" autocomplete="off" class="layui-input" lay-verify="required|year">
+								    <input type="text" value="2021" name="courseYear" autocomplete="off" class="layui-input" lay-verify="required|year">
 								</div>
 							</div>
 
@@ -58,73 +51,30 @@
 								<div class="layui-input-inline">
 								  <select name="term" id="term" lay-filter="term" lay-verify="required">
 									  <option value="">全部</option>
-									  <option value="1">第1学期</option>
+									  <option value="1" selected>第1学期</option>
 									  <option value="2">第2学期</option>
 								  </select>
 								</div>
 							</div>
-
-							<div class="layui-inline">
-								<label class="layui-form-label">院系</label>
-								<div class="layui-input-inline">
-									<select name="faculty" id="faculty" lay-filter="faculty">
-										<option value="">全部</option>
-									</select>
-								</div>
-							</div>
-							<div class="layui-inline">
-								<label class="layui-form-label">专业</label>
-								<div class="layui-input-inline">
-									<select name="specialized" id="specialized" lay-filter="specialized">
-										<option value="">全部</option>
-									</select>
-								</div>
-							</div>
-
-							<div class="layui-inline">
-								<label class="layui-form-label">班级</label>
-								<div class="layui-input-inline">
-									<div class="layui-input-inline">
-										<select name="clazz" id="clazz" lay-filter="clazz" lay-verify="required">
-											<option value="">全部</option>
-										</select>
-									</div>
-								</div>
-							</div>
-
 						</div>
 					</fieldset>
+
+
 					<fieldset class="table-search-fieldset">
+						<button type="button" class="layui-btn layui-btn-sm" lay-select-tree-data="getClazzChecked">获取选中节点数据</button>
+						<legend>所属班级</legend>
+						<div class="layui-form-item">
+							<div id="selectClazz" class="demo-tree-more"></div>
+						</div>
+					</fieldset>
+
+
+					<fieldset class="table-search-fieldset">
+						<button type="button" class="layui-btn layui-btn-sm" lay-select-tree-data="getTeacherChecked">获取选中节点数据</button>
 						<legend>授课老师</legend>
 						<div class="layui-form-item">
-							<div class="layui-inline">
-								<label class="layui-form-label">院系</label>
-								<div class="layui-input-inline">
-									<select id="teacher_faculty" lay-filter="teacher_faculty">
-										<option value="">全部</option>
-									</select>
-								</div>
-							</div>
-							<div class="layui-inline">
-								<label class="layui-form-label">性别</label>
-								<div class="layui-input-inline">
-									<select id="teacher_sex" lay-filter="teacher_sex">
-										<option value="">全部</option>
-										<option value="1">男</option>
-										<option value="0">女</option>
-									</select>
-								</div>
-							</div>
-							<div class="layui-inline">
-								<label class="layui-form-label">授课老师</label>
-								<div class="layui-input-inline">
-									<select name="teacher" id="teacher" lay-filter="teacher" lay-verify="required">
-										<option value="">全部</option>
-									</select>
-								</div>
-							</div>
+							<div id="selectTeacher" class="demo-tree-more"></div>
 						</div>
-
 					</fieldset>
 
 					<fieldset class="table-search-fieldset courseInfoItem">
@@ -133,9 +83,9 @@
 							<div  class="layui-inline">
 							    <label class="layui-form-label">类型</label>
 							    <div class="layui-input-inline">
-							    	<select name="courseInfos[0].courseType" lay-verify="required">
+							    	<select name="courseInfo_0.courseType" lay-verify="required">
 							    		<option value="">全部</option>
-							    		<option value="theory">理论课</option>
+							    		<option value="theory" selected>理论课</option>
 							    		<option value="practice">实践课</option>
 							    	</select>
 							    </div>
@@ -143,8 +93,8 @@
 							<div  class="layui-inline">
 							    <label class="layui-form-label">单双周</label>
 							    <div class="layui-input-inline">
-							    	<select name="courseInfos[0].weekType" lay-verify="required">
-							    		<option value="all">不限</option>
+							    	<select name="courseInfo_0.weekType" lay-verify="required">
+							    		<option value="all" selected>不限</option>
 							    		<option value="sgl">单周</option>
 							    		<option value="dbl">双周</option>
 							    	</select>
@@ -153,46 +103,46 @@
 							<div class="layui-inline">
 								<label class="layui-form-label">起始周</label>
 								<div class="layui-input-inline">
-									<input type="number" name="courseInfos[0].beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week">
+									<input type="number" value="1" name="courseInfo_0.beginWeek" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoWeek">
 								</div>
 							</div>
 							<div class="layui-inline">
 								<label class="layui-form-label">持续周</label>
 								<div class="layui-input-inline">
-									<input type="number" name="courseInfos[0].lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|week">
+									<input type="number" value="10" name="courseInfo_0.lengthWeek" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoWeek">
 								</div>
 							</div>
 							<div class="layui-inline">
 								<label class="layui-form-label">星期</label>
 								<div class="layui-input-inline">
-									<select name="courseInfos[0].weekDay" lay-verify="required">
+									<select name="courseInfo_0.weekDay" lay-verify="required">
 										<option value="">全部</option>
-										<option value="Monday">周一</option>
-										<option value="Tuesday">周二</option>
-										<option value="Wednesday">周三</option>
-										<option value="Thursday">周四</option>
-										<option value="Friday">周五</option>
-										<option value="Saturday">周六</option>
-										<option value="Sunday">周日</option>
+										<option value="1">周一</option>
+										<option value="2">周二</option>
+										<option value="3" selected>周三</option>
+										<option value="4">周四</option>
+										<option value="5">周五</option>
+										<option value="6">周六</option>
+										<option value="7">周日</option>
 									</select>
 								</div>
 							</div>
 							<div class="layui-inline">
 								<label class="layui-form-label">起始节</label>
 								<div class="layui-input-inline">
-									<input type="number" name="courseInfos[0].begin" autocomplete="off" class="layui-input" lay-verify="required|int|begin">
+									<input type="number" value="1" name="courseInfo_0.begin" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoBegin">
 								</div>
 							</div>
 							<div class="layui-inline">
 								<label class="layui-form-label">持续节</label>
 								<div class="layui-input-inline">
-									<input type="number" name="courseInfos[0].length" autocomplete="off" class="layui-input" lay-verify="required|int|length" placeholder="1-4">
+									<input type="number" value="2" name="courseInfo_0.length" autocomplete="off" class="layui-input" lay-verify="required|int|courseInfoLength" placeholder="1-4">
 								</div>
 							</div>
 							<div class="layui-inline">
 								<label class="layui-form-label">教室ID</label>
 								<div class="layui-input-inline">
-									<input type="number" name="courseInfos[0].address" autocomplete="off" class="layui-input" lay-verify="required">
+									<input type="number" value="1" name="courseInfo_0.address" autocomplete="off" class="layui-input" lay-verify="required">
 								</div>
 							</div>
 						</div>
@@ -212,6 +162,8 @@
 	</div>
 	<script type="text/javascript" src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script type="text/javascript" src="lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+	<script type="text/javascript" src="lib/util/utils.js"></script>
 	<script type="text/javascript" src="page/admin/course/add-course.js" charset="utf-8"></script>
+	<script type="text/javascript" src="lib/util/layui_verify_config.js"></script>
 </body>
 </html>
