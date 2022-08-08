@@ -10,7 +10,7 @@
 	},
 	"menuInfo": [{
 			"title": "课程发布",
-			"href": "page/admin/course2/add-course.html",
+			"href": "page/admin/course/add-course.html",
 			"icon": "fa fa-tachometer",
 			"target": "_self"
 		},
