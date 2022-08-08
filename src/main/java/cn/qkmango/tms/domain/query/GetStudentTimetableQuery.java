@@ -4,7 +4,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * @className: GetStudentTimetableQuery
- * @Description:TODO
+ * @Description: 获取学生课程表查询参数类
  * @author: qkmango
  * @date: 2021-07-25 16:08
  * @version: 1.0

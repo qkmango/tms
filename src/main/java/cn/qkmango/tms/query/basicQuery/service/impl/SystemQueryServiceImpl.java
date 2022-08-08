@@ -12,7 +12,7 @@ import java.util.Map;
 
 /**
  * @className: SystemQueryServiceImpl
- * @Description:TODO
+ * @Description: 系统查询
  * @author: qkmango
  * @date: 2021-08-17 21:48
  * @version: 1.0

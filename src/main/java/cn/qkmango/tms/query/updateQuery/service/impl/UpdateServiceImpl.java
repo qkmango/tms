@@ -18,6 +18,13 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.util.Locale;
 
+/**
+ * @author qkmango
+ * @version 1.0
+ * @className UpdateServiceImpl
+ * @Description 更新修改服务
+ * @date 2021-06-15
+ */
 @Service
 public class UpdateServiceImpl implements UpdateService {
 
@@ -93,13 +100,16 @@ public class UpdateServiceImpl implements UpdateService {
     @Transactional(rollbackFor = Exception.class)
     public void updateRetrievePassword(RetrievePasswordQuery vo, Locale locale) throws UpdateException {
         User user = vo.getUser();
-        String code = stringRedisTemplate.opsForValue().get(user.getEmail());
+
+        String redisKey = "RetrievePasswordCaptcha:"+user.getEmail();
+
+        String code = stringRedisTemplate.opsForValue().get(redisKey);
         if (vo.getCode().equals(code)) {
             int affectedRows = updateDao.updateRetrievePassword(user);
             if (affectedRows != 1) {
                 throw new UpdateException(messageSource.getMessage("db.updatePassword.success",null,locale));
             }
-            stringRedisTemplate.delete(user.getEmail());
+            stringRedisTemplate.delete(redisKey);
         } else {
             throw new UpdateException(messageSource.getMessage("db.updatePassword.success",null,locale));
         }

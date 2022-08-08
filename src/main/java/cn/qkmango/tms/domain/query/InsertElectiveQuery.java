@@ -6,7 +6,7 @@ import java.util.StringJoiner;
 
 /**
  * @className: InsertElectiveQuery
- * @Description: 插入选课的VO，参数接收实体类
+ * @Description: 插入选课信息 插叙参数类
  * @author: qkmango
  * @date: 2021-07-20 19:55
  * @version: 1.0

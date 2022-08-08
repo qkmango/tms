@@ -1,8 +1,6 @@
 package cn.qkmango.tms.query.insertQuery.service.impl;
 
 import cn.qkmango.tms.common.exception.InsertException;
-import cn.qkmango.tms.domain.model.CourseInfoModel;
-import cn.qkmango.tms.domain.model.CourseInfoModel2;
 import cn.qkmango.tms.domain.orm.*;
 import cn.qkmango.tms.domain.query.InsertCourseQuery;
 import cn.qkmango.tms.domain.query.InsertElectiveQuery;
@@ -32,18 +30,30 @@ public class InsertServiceImpl implements InsertService {
             propagation = Propagation.REQUIRED,
             rollbackFor = Exception.class
     )
-    public void insertCourse(Course course, CourseInfoModel courseInfoModel, Locale locale) throws InsertException {
+    public void insertCourse(InsertCourseQuery query, Locale locale) throws InsertException {
 
+        //获取 InsertCourseQuery 中的属性
+        Course course = query.getCourse();
+        List<Integer> clazzList = query.getClazzList();
+        List<CourseInfo> courseInfoList = query.getCourseInfoList();
+
+        //插入课程
         int affectedRows = insertDao.insertCourse(course);
         if (affectedRows != 1) {
             throw new InsertException(messageSource.getMessage("db.insertCourse.failure",null,locale));
         }
 
+        //获取插入课程的ID（课程ID）
         int courseId = insertDao.lastInsertId();
+        //插入课程信息
+        insertCourseInfo(courseId, courseInfoList,locale);
 
-        List<CourseInfo> courseInfoList = courseInfoModel.getCourseInfos();
+        //插入 课程-班级 关系
+        affectedRows = insertDao.insertCourseClazz(courseId,clazzList);
+        if (affectedRows != clazzList.size()) {
+            throw new InsertException(messageSource.getMessage("db.insertCourse.failure",null,locale));
+        }
 
-        insertCourseInfo(courseId,courseInfoList,locale);
     }
 
     /**
@@ -110,34 +120,4 @@ public class InsertServiceImpl implements InsertService {
         }
     }
 
-    @Override
-    @Transactional(
-            propagation = Propagation.REQUIRED,
-            rollbackFor = Exception.class
-    )
-    public void insertCourse2(InsertCourseQuery query, Locale locale) throws InsertException {
-
-        //获取 InsertCourseQuery 中的属性
-        Course2 course = query.getCourse();
-        List<Integer> clazzList = query.getClazzList();
-        List<CourseInfo> courseInfoList = query.getCourseInfoList();
-
-        //插入课程
-        int affectedRows = insertDao.insertCourse2(course);
-        if (affectedRows != 1) {
-            throw new InsertException(messageSource.getMessage("db.insertCourse.failure",null,locale));
-        }
-
-        //获取插入课程的ID（课程ID）
-        int courseId = insertDao.lastInsertId();
-        //插入课程信息
-        insertCourseInfo(courseId, courseInfoList,locale);
-
-        //插入 课程-班级 关系
-        affectedRows = insertDao.insertCourseClazz(courseId,clazzList);
-        if (affectedRows != clazzList.size()) {
-            throw new InsertException(messageSource.getMessage("db.insertCourse.failure",null,locale));
-        }
-
-    }
 }

@@ -4,7 +4,9 @@ import java.util.List;
 
 /**
  * @className: TimeTable
- * @Description: 课程表对象
+ * @Description: 课程表类
+ * 包含课表的基本信息和课程信息列表
+ * @see cn.qkmango.tms.domain.model.OnceCourseInfo
  * @author: qkmango
  * @date: 2021-07-25 15:31
  * @version: 1.0

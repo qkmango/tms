@@ -28,12 +28,15 @@ import javax.servlet.http.HttpSession;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * @author qkmango
+ * @version 1.0
+ * @className UpdateController
+ * @Description 更新修改控制器
+ * @date 2021-06-15
+ */
 @RestController
 @RequestMapping(value="/update",method = RequestMethod.POST)
-
-/**
- * 用户基本信息修改的控制器
- */
 public class UpdateController {
 
     @Resource

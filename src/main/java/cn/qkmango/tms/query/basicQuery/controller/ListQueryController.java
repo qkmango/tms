@@ -1,6 +1,5 @@
 package cn.qkmango.tms.query.basicQuery.controller;
 
-
 import cn.qkmango.tms.domain.query.GetStudentTimetableQuery;
 import cn.qkmango.tms.query.basicQuery.service.ListQueryService;
 import cn.qkmango.tms.query.basicQuery.service.SystemQueryService;
@@ -22,10 +21,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * @author qkmango
- * 仅提供列表查询，不提供分页
+ * @version 1.0
+ * @className ListQueryController
+ * @Description 仅提供列表查询，不提供分页
+ * @date 2022-07-31 19:26
  */
 @RestController
 @RequestMapping("/query/list")

@@ -14,7 +14,17 @@ import java.util.Map;
 
 
 /**
- * 全局异常处理类
+ *
+ *
+ */
+
+/**
+ * @className: GlobalExceptionHandler
+ * @Description: 全局异常处理类
+ * 捕获到异常后会将异常信息返回给前端
+ * @author: qkmango
+ * @date: 2021-07-20 21:04
+ * @version: 1.0
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {

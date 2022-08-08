@@ -19,6 +19,13 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+/**
+ * @author qkmango
+ * @version 1.0
+ * @className DeleteController
+ * @Description 删除控制器
+ * @date 2021-06-19
+ */
 @RestController
 @RequestMapping(value = "/delete",method = RequestMethod.POST)
 public class DeleteController {

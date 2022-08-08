@@ -16,25 +16,23 @@ public class Course {
     @NotNull(message = "{valid.Course.credit.NotNull}")
     @Range(min = 1,max = 4,message = "{valid.Course.credit.Range}")
     private Integer credit;
-    @NotNull(message = "{valid.Course.clazz.NotNull}")
-    private Integer clazz;
     @NotNull(message = "{valid.Course.teacher.NotNull}")
     private Integer teacher;
     @NotNull(message = "{valid.Course.courseYear.NotNull}")
     @Range(min = 2000,max = 2100,message = "{valid.Year.year.Range}")
     private Integer courseYear;
-    //false 0：表示第一学期；true 1：表示第二学期
+    //1：表示第一学期；2：表示第二学期
     @NotNull(message = "{valid.Course.term.NotNull}")
+    @Range(min = 1,max = 2,message = "{valid.Course.term.Range}")
     private String term;
 
     public Course() {
     }
 
-    public Course(Integer id, String name, Integer credit, Integer clazz, Integer teacher, Integer courseYear, String term) {
+    public Course(Integer id, String name, Integer credit, Integer teacher, Integer courseYear, String term) {
         this.id = id;
         this.name = name;
         this.credit = credit;
-        this.clazz = clazz;
         this.teacher = teacher;
         this.courseYear = courseYear;
         this.term = term;
@@ -62,14 +60,6 @@ public class Course {
 
     public void setCredit(Integer credit) {
         this.credit = credit;
-    }
-
-    public Integer getClazz() {
-        return clazz;
-    }
-
-    public void setClazz(Integer clazz) {
-        this.clazz = clazz;
     }
 
     public Integer getTeacher() {
@@ -102,7 +92,6 @@ public class Course {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", credit=" + credit +
-                ", clazz=" + clazz +
                 ", teacher=" + teacher +
                 ", year=" + courseYear +
                 ", term=" + term +

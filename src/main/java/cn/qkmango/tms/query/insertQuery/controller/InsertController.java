@@ -6,8 +6,6 @@ import cn.qkmango.tms.common.exception.InsertException;
 import cn.qkmango.tms.common.map.ResponseMap;
 import cn.qkmango.tms.common.validate.group.Insert.InsertRoom;
 import cn.qkmango.tms.domain.bind.PermissionType;
-import cn.qkmango.tms.domain.model.CourseInfoModel;
-import cn.qkmango.tms.domain.model.CourseInfoModel2;
 import cn.qkmango.tms.domain.orm.*;
 import cn.qkmango.tms.domain.query.InsertCourseQuery;
 import cn.qkmango.tms.domain.query.InsertElectiveQuery;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
-import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -43,23 +40,22 @@ public class InsertController {
     @Resource
     private ReloadableResourceBundleMessageSource messageSource;
 
+
     /**
      * 插入课程
-     *
-     * @param course                课程
-     * @param courseResult
-     * @param courseInfoModel       课程信息（每次上课的信息）
-     * @param courseInfoModelResult
+     * @param query
+     * @param result
+     * @param locale
      * @return
      * @throws InsertException
-     * @validated true
      */
     @Permission(PermissionType.admin)
     @RequestMapping("/insertCourse.do")
-    public Map<String, Object> insertCourse(@Validated Course course, BindingResult courseResult,
-                                            @Validated CourseInfoModel courseInfoModel, BindingResult courseInfoModelResult,
+    public Map<String, Object> insertCourse(@RequestBody @Validated InsertCourseQuery query,
+                                            BindingResult result,
                                             Locale locale) throws InsertException {
-        service.insertCourse(course, courseInfoModel, locale);
+
+        service.insertCourse(query,locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
@@ -67,7 +63,6 @@ public class InsertController {
 
         return map;
     }
-
 
     /**
      * 添加楼宇
@@ -188,22 +183,6 @@ public class InsertController {
         map.setSuccess(true);
 
         map.setMessage(messageSource.getMessage("db.insertTeachEvaluate.success", null, locale));
-        return map;
-    }
-
-
-    @Permission(PermissionType.admin)
-    @RequestMapping("/insertCourse2.do")
-    public Map<String, Object> insertCourse2(@RequestBody @Validated InsertCourseQuery query,
-                                             BindingResult result,
-                                             Locale locale) throws InsertException {
-
-        service.insertCourse2(query,locale);
-
-        ResponseMap map = new ResponseMap();
-        map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.insertCourse.success", null, locale));
-
         return map;
     }
 

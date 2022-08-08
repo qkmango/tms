@@ -4,10 +4,10 @@ import java.io.IOException;
 
 /**
  * @version 1.0
- * <p>编码过滤器</p>
+ * @Description 编码过滤器
  * <p>可以将请求和响应的乱码问题解决</p>
  * @className EncodingFilter
- * @author: Mango
+ * @author: qkmango
  * @date: 2021-01-28 10:10
  */
 public class EncodingFilter implements Filter {

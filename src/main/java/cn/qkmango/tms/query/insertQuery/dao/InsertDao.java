@@ -11,7 +11,6 @@ import java.util.List;
 public interface InsertDao {
 
     int insertCourse(Course course);
-    int insertCourse2(Course2 course);
 
     int lastInsertId();
 

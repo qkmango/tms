@@ -2,6 +2,15 @@ package cn.qkmango.tms.domain.pagination;
 
 import java.util.StringJoiner;
 
+
+/**
+ * @author qkmango
+ * @version 1.0
+ * @className StudentScorePagination
+ * @Description 学生分数分页类
+ * @see cn.qkmango.tms.domain.pagination.Pagination
+ * @date 2022-07-31 19:26
+ */
 public class StudentScorePagination extends Pagination {
 
     //学生ID

@@ -2,6 +2,14 @@ package cn.qkmango.tms.domain.pagination;
 
 import cn.qkmango.tms.domain.orm.Course;
 
+
+/**
+ * @author qkmango
+ * @version 1.0
+ * @className CoursePagination
+ * @Description
+ * @date 2022-07-31 19:26
+ */
 public class CoursePagination extends Pagination {
 
     private Course course;
@@ -29,14 +37,6 @@ public class CoursePagination extends Pagination {
 
     public void setCredit(Integer credit) {
         this.course.setCredit(credit);
-    }
-
-    public Integer getClazz() {
-        return course.getClazz();
-    }
-
-    public void setClazz(Integer clazz) {
-        this.course.setClazz(clazz);
     }
 
     public Integer getTeacher() {

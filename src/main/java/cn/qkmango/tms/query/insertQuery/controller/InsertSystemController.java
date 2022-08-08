@@ -22,8 +22,8 @@ import java.util.Map;
 /**
  * @author qkmango
  * @version 1.0
- * @className SystemInsterController
- * @Description TODO
+ * @className InsertSystemController
+ * @Description 插入系统信息
  * @date 2022-07-28 19:18
  */
 

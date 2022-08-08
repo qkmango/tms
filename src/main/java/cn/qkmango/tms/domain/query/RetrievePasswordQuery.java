@@ -10,7 +10,7 @@ import java.util.StringJoiner;
  * @author qkmango
  * @version 1.0
  * @className RetrievePasswordQuery
- * @Description 找回密码VO
+ * @Description 找回密码 查询参数类
  * @date 2022-08-02 20:54
  */
 public class RetrievePasswordQuery {

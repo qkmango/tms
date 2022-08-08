@@ -22,7 +22,7 @@ import java.util.Map;
  * @author qkmango
  * @version 1.0
  * @className UpdateSystemController
- * @Description TODO
+ * @Description 更新系统信息控制器
  * @date 2022-07-28 19:56
  */
 

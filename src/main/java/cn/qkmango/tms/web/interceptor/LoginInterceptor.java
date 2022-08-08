@@ -7,6 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+/**
+ * @author qkmango
+ * @version 1.0
+ * @className LoginInterceptor
+ * @Description 登陆拦截器
+ * 验证用户是否登陆
+ * @date 2021-06-14
+ */
 public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request,

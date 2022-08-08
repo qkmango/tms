@@ -22,7 +22,7 @@ import java.util.Map;
  * @author qkmango
  * @version 1.0
  * @className DeleteSystemController
- * @Description TODO
+ * @Description 删除系统信息控制器
  * @date 2022-07-28 17:55
  */
 @RestController

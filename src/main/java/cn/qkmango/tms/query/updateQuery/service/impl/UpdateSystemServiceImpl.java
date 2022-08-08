@@ -15,7 +15,7 @@ import java.util.Locale;
  * @author qkmango
  * @version 1.0
  * @className UpdateSystemServiceImpl
- * @Description TODO
+ * @Description 更新系统信息
  * @date 2022-07-28 19:57
  */
 

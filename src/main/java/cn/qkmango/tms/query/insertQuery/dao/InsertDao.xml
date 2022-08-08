@@ -3,15 +3,9 @@
 
 <mapper namespace="cn.qkmango.tms.query.insertQuery.dao.InsertDao">
 
-
     <insert id="insertCourse">
-        insert into t_course(name, credit, clazz, teacher,courseYear,term)
-        values (#{name}, #{credit}, #{clazz}, #{teacher}, #{courseYear}, #{term})
-    </insert>
-
-    <insert id="insertCourse2">
-        insert into t_course(name, credit, clazz, teacher,courseYear,term)
-        values (#{name}, #{credit}, #{clazz}, #{teacher}, #{courseYear}, #{term})
+        insert into t_course(name, credit, teacher,courseYear,term)
+        values (#{name}, #{credit}, #{teacher}, #{courseYear}, #{term})
     </insert>
 
     <insert id="insertCourseInfo">

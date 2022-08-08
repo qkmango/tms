@@ -2,6 +2,7 @@ package cn.qkmango.tms.domain.bind;
 
 /**
  * @className: RoomType
+ * @Description 教室类型 枚举类
  * @author: qkmango
  * @date: 2021-07-07 16:04
  * @version: 1.0

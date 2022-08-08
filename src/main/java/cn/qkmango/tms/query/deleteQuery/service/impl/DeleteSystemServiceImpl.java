@@ -15,7 +15,7 @@ import java.util.Locale;
  * @author qkmango
  * @version 1.0
  * @className DeleteSystemServiceImpl
- * @Description TODO
+ * @Description 删除系统信息服务
  * @date 2022-07-28 17:55
  */
 

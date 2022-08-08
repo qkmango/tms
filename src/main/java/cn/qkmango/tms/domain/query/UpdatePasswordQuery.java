@@ -4,7 +4,7 @@ import cn.qkmango.tms.domain.bind.PermissionType;
 
 /**
  * @className: UpdatePasswordQuery
- * @Description:TODO
+ * @Description: 更新密码查询参数类
  * @author: qkmango
  * @date: 2021-07-23 17:20
  * @version: 1.0

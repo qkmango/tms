@@ -18,7 +18,7 @@ import java.util.List;
  * @author qkmango
  * @version 1.0
  * @className ListTreeQueryServiceImpl
- * @Description TODO
+ * @Description 树型列表查询
  * @date 2022-08-03 14:45
  */
 

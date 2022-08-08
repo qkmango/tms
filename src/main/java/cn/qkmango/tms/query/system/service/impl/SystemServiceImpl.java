@@ -18,7 +18,13 @@ import javax.annotation.Resource;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
-
+/**
+ * @author qkmango
+ * @version 1.0
+ * @className SystemServiceImpl
+ * @Description 系统信息服务
+ * @date
+ */
 @Service
 public class SystemServiceImpl implements SystemService {
 
@@ -67,12 +73,15 @@ public class SystemServiceImpl implements SystemService {
         }
 
         String captchaCode = CaptchaUtil.getCode();
-
+        //发送邮件验证码
         emailService.sendMessage(user.getEmail(),"教务系统找回密码","验证码为【"+captchaCode+"】, 有效期为5分钟");
 
-        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+        //验证码写入 redis
         //邮箱地址-验证码写入redis，有效期为 300 秒(5分钟)
-        ops.set(user.getEmail(), captchaCode,300, TimeUnit.SECONDS);
+        //redisKey示例 "RetrievePasswordCaptcha:123@qq.com"
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+        String redisKey = "RetrievePasswordCaptcha:"+user.getEmail();
+        ops.set(redisKey, captchaCode,300, TimeUnit.SECONDS);
     }
 
     @Override

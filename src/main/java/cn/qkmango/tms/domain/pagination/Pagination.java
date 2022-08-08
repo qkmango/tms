@@ -2,7 +2,15 @@ package cn.qkmango.tms.domain.pagination;
 
 
 /**
- * 分页实体类，包含当前页码page、每页条数limit、略过的记录条数
+ * ，
+ */
+/**
+ * @author qkmango
+ * @version 1.0
+ * @className Pagination
+ * @Description 分页实体类
+ * 包含当前页码page、每页条数limit、略过的记录条数
+ * @date 2021-06-21
  */
 public class Pagination {
 

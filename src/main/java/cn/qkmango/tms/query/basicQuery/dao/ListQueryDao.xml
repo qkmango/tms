@@ -48,17 +48,23 @@
     </select>
 
     <select id="getCourseListByTeacherAndClazz" resultType="cn.qkmango.tms.domain.orm.Course">
-        SELECT course.id, course.name
-        FROM t_teacher teacher,
-             t_course course,
-             t_specialized specialized,
-             t_clazz clazz
-
-        WHERE teacher.id = #{teacher}
-          and clazz.id = #{clazz}
-          and course.teacher = teacher.id
-          and course.clazz = clazz.id
-          and clazz.specialized = specialized.id
+        SELECT
+            course.id,
+            course.NAME
+        FROM
+            t_teacher teacher,
+            t_course course,
+            t_specialized specialized,
+            t_clazz clazz,
+            t_course_clazz cs
+        WHERE
+            teacher.id = #{teacher}
+          AND clazz.id = #{clazz}
+          AND clazz.id = cs.clazz
+          AND course.id = cs.course
+          AND course.teacher = teacher.id
+          AND cs.clazz = clazz.id
+          AND clazz.specialized = specialized.id
     </select>
 
     <!-- 获取未分页的总记录条数 -->

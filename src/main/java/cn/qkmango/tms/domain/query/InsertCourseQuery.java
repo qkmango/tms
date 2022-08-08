@@ -1,11 +1,10 @@
 package cn.qkmango.tms.domain.query;
 
-import cn.qkmango.tms.domain.orm.Course2;
+import cn.qkmango.tms.domain.orm.Course;
 import cn.qkmango.tms.domain.orm.CourseInfo;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -13,13 +12,13 @@ import java.util.StringJoiner;
  * @author qkmango
  * @version 1.0
  * @className InsertCourseQuery
- * @Description TODO
+ * @Description 插入课程 查询参数类
  * @date 2022-08-04 10:03
  */
 public class InsertCourseQuery {
 
     @Valid
-    private Course2 course;
+    private Course course;
     @NotEmpty
     private List<Integer> clazzList;
     @Valid
@@ -27,11 +26,11 @@ public class InsertCourseQuery {
     private List<CourseInfo> courseInfoList;
 
 
-    public Course2 getCourse() {
+    public Course getCourse() {
         return course;
     }
 
-    public void setCourse(Course2 course) {
+    public void setCourse(Course course) {
         this.course = course;
     }
 
