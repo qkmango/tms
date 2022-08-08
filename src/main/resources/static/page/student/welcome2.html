@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="css/public.css" media="all">
     <style>
         .layui-card {border:1px solid #f2f2f2;border-radius:5px;}
-        .icon {margin-right:10px;color:#1aa094;}
-        .icon-cray {color:#ffb800!important;}
-        .icon-blue {color:#1e9fff!important;}
-        .icon-tip {color:#ff5722!important;}
-        .layuimini-qiuck-module {text-align:center;margin-top: 10px}
+        .icon {margin-right:10px;color:var(--blue_1);}
+        /*.icon-cray {color:#ffb800!important;}*/
+        /*.icon-blue {color:#1e9fff!important;}*/
+        /*.icon-tip {color:#ff5722!important;}*/
+        .layuimini-qiuck-module {text-align:center}
         .layuimini-qiuck-module a i {display:inline-block;width:100%;height:60px;line-height:60px;text-align:center;border-radius:2px;font-size:30px;background-color:#F8F8F8;color:#333;transition:all .3s;-webkit-transition:all .3s;}
         .layuimini-qiuck-module a cite {position:relative;top:2px;display:block;color:#666;text-overflow:ellipsis;overflow:hidden;white-space:nowrap;font-size:14px;}
-        .welcome-module {width:100%;height:210px;}
+        .welcome-module {width:100%;height:180px;}
         .panel {background-color:#fff;border:1px solid transparent;border-radius:3px;-webkit-box-shadow:0 1px 1px rgba(0,0,0,.05);box-shadow:0 1px 1px rgba(0,0,0,.05)}
         .panel-body {padding:10px}
         .panel-title {margin-top:0;margin-bottom:0;font-size:12px;color:inherit}
@@ -33,6 +33,16 @@
             padding-right: 70px !important;text-overflow:ellipsis!important;overflow:hidden!important;white-space:nowrap!important;}
         .layuimini-notice-title {line-height:28px;font-size:14px;}
         .layuimini-notice-extra {position:absolute;top:50%;margin-top:-8px;right:16px;display:inline-block;height:16px;color:#999;}
+        .layui-table-cell, .layui-table-tool-panel li {
+            white-space: initial;
+            /*为了让字母和数字也换行*/
+            word-break: break-word;
+        }
+        .layui-table-cell {
+            height: auto;
+            line-height: normal;
+            padding: 0 5px;
+        }
     </style>
 </head>
 <body>
@@ -51,12 +61,11 @@
                                             <div class="panel layui-bg-number">
                                                 <div class="panel-body">
                                                     <div class="panel-title">
-                                                        <span class="label pull-right layui-bg-blue">实时</span>
                                                         <h5>在线人数</h5>
                                                     </div>
                                                     <div class="panel-content">
                                                         <h1 class="no-margins"  id="ActiveSessionCount">--</h1>
-                                                        <small>实时在线人数</small>
+                                                        <!--<small>实时在线人数</small>-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -65,12 +74,11 @@
                                             <div class="panel layui-bg-number">
                                                 <div class="panel-body">
                                                     <div class="panel-title">
-                                                        <span class="label pull-right layui-bg-cyan">实时</span>
                                                         <h5>商品统计</h5>
                                                     </div>
                                                     <div class="panel-content">
                                                         <h1 class="no-margins">1234</h1>
-                                                        <small>当前分类总记录数</small>
+                                                        <!--<small>当前分类总记录数</small>-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -79,12 +87,11 @@
                                             <div class="panel layui-bg-number">
                                                 <div class="panel-body">
                                                     <div class="panel-title">
-                                                        <span class="label pull-right layui-bg-orange">实时</span>
                                                         <h5>浏览统计</h5>
                                                     </div>
                                                     <div class="panel-content">
                                                         <h1 class="no-margins">1234</h1>
-                                                        <small>当前分类总记录数</small>
+                                                        <!--<small>当前分类总记录数</small>-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -93,12 +100,11 @@
                                             <div class="panel layui-bg-number">
                                                 <div class="panel-body">
                                                     <div class="panel-title">
-                                                        <span class="label pull-right layui-bg-green">实时</span>
                                                         <h5>订单统计</h5>
                                                     </div>
                                                     <div class="panel-content">
                                                         <h1 class="no-margins">1234</h1>
-                                                        <small>当前分类总记录数</small>
+                                                        <!--<small>当前分类总记录数</small>-->
                                                     </div>
                                                 </div>
                                             </div>
@@ -110,56 +116,38 @@
                     </div>
                     <div class="layui-col-md6">
                         <div class="layui-card">
-                            <div class="layui-card-header"><i class="fa fa-credit-card icon icon-blue"></i>快捷入口</div>
+                            <div class="layui-card-header"><i class="fa fa-credit-card icon"></i>快捷入口</div>
                             <div class="layui-card-body">
                                 <div class="welcome-module">
                                     <div class="layui-row layui-col-space10 layuimini-qiuck">
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/menu.html" data-title="菜单管理" data-icon="fa fa-window-maximize">
-                                                <i class="fa fa-window-maximize"></i>
-                                                <cite>菜单管理</cite>
+                                            <a href="javascript:;" layuimini-content-href="page/student/course/course.html" data-title="成绩查询" data-icon="fa fa-bar-chart">
+                                                <i class="fa fa-bar-chart"></i><cite>成绩查询</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/setting.html" data-title="系统设置" data-icon="fa fa-gears">
-                                                <i class="fa fa-gears"></i>
-                                                <cite>系统设置</cite>
+                                            <a href="javascript:;" layuimini-content-href="page/student/elective/elective.html" data-title="选课" data-icon="fa fa-check-square">
+                                                <i class="fa fa-check-square"></i><cite>选课</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/table.html" data-title="表格示例" data-icon="fa fa-file-text">
-                                                <i class="fa fa-file-text"></i>
-                                                <cite>表格示例</cite>
+                                            <a href="javascript:;" layuimini-content-href="page/student/timetable/timetable.html" data-title="课表" data-icon="fa fa-calendar">
+                                                <i class="fa fa-calendar"></i><cite>课表</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
                                             <a href="javascript:;" layuimini-content-href="page/icon.html" data-title="图标列表" data-icon="fa fa-dot-circle-o">
-                                                <i class="fa fa-dot-circle-o"></i>
-                                                <cite>图标列表</cite>
+                                                <i class="fa fa-dot-circle-o"></i><cite>图标列表</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/form.html" data-title="表单示例" data-icon="fa fa-calendar">
-                                                <i class="fa fa-calendar"></i>
-                                                <cite>表单示例</cite>
-                                            </a>
-                                        </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="page/404.html" data-title="404页面" data-icon="fa fa-hourglass-end">
-                                                <i class="fa fa-hourglass-end"></i>
-                                                <cite>404页面</cite>
+                                            <a href="javascript:;" layuimini-content-href="page/student/evaluate/teach-evaluate.html" data-title="教学评价" data-icon="fa fa-users">
+                                                <i class="fa fa-users"></i><cite>教学评价</cite>
                                             </a>
                                         </div>
                                         <div class="layui-col-xs3 layuimini-qiuck-module">
                                             <a href="javascript:;" layuimini-content-href="page/button.html" data-title="按钮示例" data-icon="fa fa-snowflake-o">
-                                                <i class="fa fa-snowflake-o"></i>
-                                                <cite>按钮示例</cite>
-                                            </a>
-                                        </div>
-                                        <div class="layui-col-xs3 layuimini-qiuck-module">
-                                            <a href="javascript:;" layuimini-content-href="https://www.baidu.com" data-title="百度搜索" data-icon="fa fa-search">
-                                                <i class="fa fa-search"></i>
-                                                <cite>百度搜索</cite>
+                                                <i class="fa fa-snowflake-o"></i><cite>按钮示例</cite>
                                             </a>
                                         </div>
                                     </div>
@@ -170,9 +158,17 @@
                     </div>
                     <div class="layui-col-md12">
                         <div class="layui-card">
-                            <div class="layui-card-header"><i class="fa fa-line-chart icon"></i>报表统计</div>
+                            <div class="layui-card-header"><i class="fa fa-calendar-o icon"></i>校历</div>
                             <div class="layui-card-body">
                                 <div id="echarts-records" style="min-height:150px"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-col-md12">
+                        <div class="layui-card">
+                            <div class="layui-card-header"><i class="fa fa-calendar icon"></i>课表</div>
+                            <div class="layui-card-body">
+                                <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
                             </div>
                         </div>
                     </div>
@@ -182,7 +178,7 @@
             <div class="layui-col-md4">
 
                 <div class="layui-card">
-                    <div class="layui-card-header"><i class="fa fa-bullhorn icon icon-tip"></i>系统公告</div>
+                    <div class="layui-card-header"><i class="fa fa-bullhorn icon"></i>系统公告</div>
                     <div class="layui-card-body layui-text">
                         <div class="layuimini-notice">
                             <div class="layuimini-notice-title">修改选项卡样式</div>
@@ -230,7 +226,7 @@
                 </div>
 
                 <div class="layui-card">
-                    <div class="layui-card-header"><i class="fa fa-fire icon"></i>基本信息</div>
+                    <div class="layui-card-header"><i class="fa fa-user icon"></i>基本信息</div>
                     <div class="layui-card-body layui-text">
                         <table class="layui-table" lay-skin="nob"	>
                             <colgroup><col width="100"><col></colgroup>
@@ -242,9 +238,7 @@
                 <div class="layui-card">
                     <div class="layui-card-header"><i class="fa fa-paper-plane-o icon"></i>作者心语</div>
                     <div class="layui-card-body layui-text layadmin-text">
-                        <p>本模板基于layui2.5.4以及font-awesome-4.7.0进行实现。layui开发文档地址：<a class="layui-btn layui-btn-xs layui-btn-danger" target="_blank" href="http://www.layui.com/doc">layui文档</a></p>
-                        <p>技术交流QQ群（1165301500）：<a target="_blank" href="https://jq.qq.com/?_wv=1027&k=eUm5xKG1"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="layuimini" title="layuimini"></a>（加群请备注来源：如gitee、github、官网等）</p>
-                        <p>喜欢此后台模板的可以给我的GitHub和Gitee加个Star支持一下</p>
+
                     </div>
                 </div>
 
@@ -256,12 +250,12 @@
 <script src="js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <script src="js/lay-module/echarts/echarts.min.js"></script>
 <script>
-    layui.use(['layer', 'miniTab'], function () {
+    layui.use(['layer', 'miniTab','tableMerge','form','table'], function () {
         const $ = layui.jquery
         const layer = layui.layer
         const form = layui.form
         const miniTab = layui.miniTab
-        // const echarts = layui.echarts
+        const tableMerge = layui.tableMerge
         const table = layui.table
 
         //获取学生基本信息
@@ -292,9 +286,7 @@
 
         miniTab.listen();
 
-        /**
-         * 报表功能
-         */
+        //校历
         const echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
         function getVirtulData() {
             var date = +echarts.number.parseDate('2022-9-1');
@@ -352,15 +344,199 @@
             }
 
         };
-
-
         echartsRecords.setOption(option);
 
         // echarts 窗口缩放自适应
         window.onresize = function(){
             echartsRecords.resize();
         }
+
+        //课表
+        table.render({
+            elem: '#currentTableId',
+            url: 'query/list/getStudentTimetable.do',
+            defaultToolbar: false,
+            cols: [[
+                {field: 'no', merge: true, title: '节次', width: 80},
+                {field: 'week_1', merge: true, title: '周一',style:'font-size:13px'},
+                {field: 'week_2', merge: true, title: '周二',style:'font-size:13px'},
+                {field: 'week_3', merge: true, title: '周三',style:'font-size:13px'},
+                {field: 'week_4', merge: true, title: '周四',style:'font-size:13px'},
+                {field: 'week_5', merge: true, title: '周五',style:'font-size:13px'},
+                {field: 'week_6', merge: true, title: '周六',style:'font-size:13px'},
+                {field: 'week_7', merge: true, title: '周日',style:'font-size:13px'}
+            ]],
+            page: false,
+            parseData: function (res) {
+                return {
+                    "code": res.success ? 0 : -1,
+                    "msg": res.message,
+                    "count": res.count,
+                    "data": format(res.data.list)
+                };
+            },
+            where: {
+                year:window.top.GLOBAL.currYear,
+                term:window.top.GLOBAL.currTerm
+            },
+            done: function (data) {
+                tableMerge.render(this)
+                //给有课的单元格上色
+                document.querySelectorAll('.hasCourse').forEach((item, index) => {
+                    item.parentNode.parentNode.style.backgroundColor = '#e1f3d8';
+                })
+            }
+        });
     });
 </script>
+<script>
+
+</script>
+<script>
+    /**
+     * 格式化数据，并将数据转为需要的格式
+     */
+    function format(dataList) {
+
+        let resultData = [
+            {
+                no: '第1节',
+                week_1: '',
+                week_2: '',
+                week_3: '',
+                week_4: '',
+                week_5: '',
+                week_6: '',
+                week_7: '',
+            },
+            {
+                no: '第2节',
+                week_1: '',
+                week_2: '',
+                week_3: '',
+                week_4: '',
+                week_5: '',
+                week_6: '',
+                week_7: '',
+            },
+            {
+                no: '第3节',
+                week_1: '',
+                week_2: '',
+                week_3: '',
+                week_4: '',
+                week_5: '',
+                week_6: '',
+                week_7: '',
+            },
+            {
+                no: '第4节',
+                week_1: '',
+                week_2: '',
+                week_3: '',
+                week_4: '',
+                week_5: '',
+                week_6: '',
+                week_7: '',
+            },
+            {
+                no: '第5节',
+                week_1: '',
+                week_2: '',
+                week_3: '',
+                week_4: '',
+                week_5: '',
+                week_6: '',
+                week_7: '',
+            },
+            {
+                no: '第6节',
+                week_1: '',
+                week_2: '',
+                week_3: '',
+                week_4: '',
+                week_5: '',
+                week_6: '',
+                week_7: '',
+            },
+            {
+                no: '第7节',
+                week_1: '',
+                week_2: '',
+                week_3: '',
+                week_4: '',
+                week_5: '',
+                week_6: '',
+                week_7: '',
+            },
+            {
+                no: '第8节',
+                week_1: '',
+                week_2: '',
+                week_3: '',
+                week_4: '',
+                week_5: '',
+                week_6: '',
+                week_7: '',
+            },
+            {
+                no: '第9节',
+                week_1: '',
+                week_2: '',
+                week_3: '',
+                week_4: '',
+                week_5: '',
+                week_6: '',
+                week_7: '',
+            },
+            {
+                no: '第10节',
+                week_1: '',
+                week_2: '',
+                week_3: '',
+                week_4: '',
+                week_5: '',
+                week_6: '',
+                week_7: '',
+            }
+        ]
+
+        //防止空数据判断为一致被合并，填充隐藏数据
+        resultData.forEach((item, index) => {
+            //自定义隐藏标签，占位用的
+            item.week_1 = `<hd 1_${index}></hd>`
+            item.week_2 = `<hd 2_${index}></hd>`
+            item.week_3 = `<hd 3_${index}></hd>`
+            item.week_4 = `<hd 4_${index}></hd>`
+            item.week_5 = `<hd 5_${index}></hd>`
+            item.week_6 = `<hd 6_${index}></hd>`
+            item.week_7 = `<hd 7_${index}></hd>`
+        });
+
+        //填入数据
+        dataList.forEach((item, index) => {
+            for (let i = item.begin; i < item.begin + item.length; i++) {
+                resultData[i - 1][`week_${item.weekDay}`] =
+                   `<span class="hasCourse">${item.name}<br/>
+                    ${item.buildingNumber} - ${item.roomNumber}<br/>
+                    ${item.beginWeek}-${item.beginWeek + item.lengthWeek - 1}周(${weekType(item.weekType)})</span>`;
+            }
+        });
+        return resultData;
+    }
+
+    function weekType(type) {
+        if (type === 'all') {
+            return '每周';
+        } else if (type === 'sgl') {
+            return '单周';
+        } else if (type === 'dbl') {
+            return '双周';
+        }
+    }
+
+</script>
+
+
 </body>
 </html>

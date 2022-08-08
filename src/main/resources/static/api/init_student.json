@@ -11,27 +11,27 @@
 	"menuInfo": [
 		{
 			"title": "成绩查询",
-			"icon": "fa fa-address-book",
+			"icon": "fa fa-bar-chart",
 			"href": "page/student/course/course.html",
 			"target": "_self"
 		},{
 			"title": "选课",
-			"icon": "fa fa-address-book",
+			"icon": "fa fa-check-square",
 			"href": "page/student/elective/elective.html",
 			"target": "_self"
 		}, {
 			"title": "课表",
-			"icon": "fa fa-address-book",
+			"icon": "fa fa-calendar",
 			"href": "page/student/timetable/timetable.html",
 			"target": "_self"
 		}, {
 			"title": "评价",
-			"icon": "fa fa-address-book",
+			"icon": "fa fa-thumbs-up",
 			"target": "_self",
 			"child": [{
 				"title": "教学评价",
 				"href": "page/student/evaluate/teach-evaluate.html",
-				"icon": "fa fa-tachometer",
+				"icon": "fa fa-users",
 				"target": "_self"
 			}]
 		}

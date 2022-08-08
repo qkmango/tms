@@ -26,11 +26,15 @@
 		if (window.top!=window) {
 			window.top.location=window.location;
 		}
-		var $ = layui.$;
 		var GLOBAL = {
             map:new Map()
         };
 	</script>
+    <style>
+        li.layui-nav-item.layuimini-setting {
+            margin-right: 20px;
+        }
+    </style>
 </head>
 <body class="layui-layout-body layuimini-all">
 <div class="layui-layout layui-layout-admin">
@@ -84,9 +88,9 @@
                         </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layuimini-select-bgcolor" lay-unselect>
-                    <a href="javascript:;" data-bgcolor="主题"><i class="fa fa-ellipsis-v"></i></a>
-                </li>
+                <!--<li class="layui-nav-item layuimini-select-bgcolor" lay-unselect>-->
+                <!--    <a href="javascript:;" data-bgcolor="主题"><i class="fa fa-ellipsis-v"></i></a>-->
+                <!--</li>-->
             </ul>
         </div>
     </div>
@@ -140,9 +144,6 @@
 </html>
 
 <script src="js/lay-config.js?v=2.0.0" charset="utf-8"></script>
-<script type="text/javascript">
-
-</script>
 <script>
 
 
@@ -157,15 +158,6 @@
             layer = layui.layer,
             miniAdmin = layui.miniAdmin,
             miniTongji = layui.miniTongji;
-            // var cocoMessage = layui.cocoMessage;
-
-            //兼容开发模式直接运行网页
-            // let url = 'query/list/test.do';
-            // let method = 'post';
-            // if(location.port == '5500') {
-            //     url = 'http://localhost:5500/api/test.json';
-            //     method = 'get';
-            // }
 
         //获取当前学年学期
         $.ajax({
@@ -186,57 +178,46 @@
             }
         })
 
-			$.ajax({
-				// url:"system/getUserInfo.do",
-				url:"query/list/test.do",
-				type:'get',
-                // async:false,
-				dataType:"json",
-				success:function (data) {
-					if (!data.success) {
-						window.location.href = 'page/login/';
-						return;
-					}
+        $.ajax({
+            // url:"system/getUserInfo.do",
+            url:"query/list/test.do",
+            type:'get',
+            // async:false,
+            dataType:"json",
+            success:function (data) {
+                if (!data.success) {
+                    window.location.href = 'page/login/';
+                    return;
+                }
 
-                    // data.user = {"success":true,"user":{"id":1,"name":"芒果小洛","permissionType":"admin"}}
+                // data.user = {"success":true,"user":{"id":1,"name":"芒果小洛","permissionType":"admin"}}
 
-					GLOBAL.user = data.user;
-					$('#name').text(data.user.name);
-					let iniUrl = '';
-					switch(GLOBAL.user.permissionType) {
-						case "student":iniUrl = 'api/init_student.json';break;
-						case "teacher":iniUrl = 'api/init_teacher.json';break;
-						case "admin":iniUrl = 'api/init_admin.json';break;
-						default:iniUrl = 'api/init_student.json';break;
-					}
+                GLOBAL.user = data.user;
+                $('#name').text(data.user.name);
+                let iniUrl = '';
+                switch(GLOBAL.user.permissionType) {
+                    case "student":iniUrl = 'api/init_student.json';break;
+                    case "teacher":iniUrl = 'api/init_teacher.json';break;
+                    case "admin":iniUrl = 'api/init_admin.json';break;
+                    default:iniUrl = 'api/init_student.json';break;
+                }
 
-					miniAdmin.render({
-						iniUrl: iniUrl,    // 初始化接口
-						clearUrl: "api/clear.json", // 缓存清理接口
-						urlHashLocation: true,      // 是否打开hash定位
-						bgColorDefault: false,      // 主题默认配置
-						// multiModule: true,          // 是否开启多模块
-						menuChildOpen: false,       // 是否默认展开菜单
-						loadingTime: 0,             // 初始化加载时间
-						pageAnim: true,             // iframe窗口动画
-						maxTabNum: 20,              // 最大的tab打开数量
-					});
-				}
-			})
-
-
+                miniAdmin.render({
+                    iniUrl: iniUrl,    // 初始化接口
+                    clearUrl: "api/clear.json", // 缓存清理接口
+                    urlHashLocation: true,      // 是否打开hash定位
+                    bgColorDefault: false,      // 主题默认配置
+                    // multiModule: true,          // 是否开启多模块
+                    menuChildOpen: false,       // 是否默认展开菜单
+                    loadingTime: 0,             // 初始化加载时间
+                    pageAnim: true,             // iframe窗口动画
+                    maxTabNum: 20,              // 最大的tab打开数量
+                });
+            }
+        })
 
 
-        // 百度统计代码，只统计指定域名
-        miniTongji.render({
-            specific: true,
-            domains: [
-                '99php.cn',
-                'layuimini.99php.cn',
-                'layuimini-onepage.99php.cn',
-            ],
-        });
-
+        //退出登陆
         $('.login-out').on("click", function () {
 			$.ajax({
 				url:"system/logout.do",
