@@ -24,7 +24,7 @@ spring:
     username: youEmailAddress
     password: youEmailPassword
     default-encoding: UTF-8
-    from: youEmailAddress
+    from: nickname<youEmailAddress>
     properties:
       mail:
         smtp:
