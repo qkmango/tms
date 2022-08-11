@@ -23,7 +23,7 @@
         .courseName {
             font-weight: bold;
             /* layui经典蓝 */
-            color: #1E9FFF;
+            color: var(--blue_default);
         }
 
         .tableTitle {
@@ -147,7 +147,7 @@
                 document.querySelector('.tableTitle').innerHTML = data.title;
                 //给有课的单元格上色
                 document.querySelectorAll('.courseName').forEach((item, index) => {
-                    item.parentNode.parentNode.style.backgroundColor = '#e1f3d8';
+                    item.parentNode.parentNode.style.backgroundColor = 'var(--green_thin)';
                 })
             }
         });

@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="css/public.css" media="all">
     <style>
         .layui-card {border:1px solid #f2f2f2;border-radius:5px;}
-        .icon {margin-right:10px;color:var(--blue_1);}
+        .icon {margin-right:10px;color:var(--blue_default);}
         /*.icon-cray {color:#ffb800!important;}*/
         /*.icon-blue {color:#1e9fff!important;}*/
         /*.icon-tip {color:#ff5722!important;}*/
@@ -248,15 +248,16 @@
 </div>
 <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script src="js/lay-config.js?v=1.0.4" charset="utf-8"></script>
-<script src="js/lay-module/echarts/echarts.min.js"></script>
+<!--<script src="js/lay-module/echarts/echarts.min.js"></script>-->
 <script>
-    layui.use(['layer', 'miniTab','tableMerge','form','table'], function () {
+    layui.use(['layer', 'miniTab','tableMerge','form','table','echarts'], function () {
         const $ = layui.jquery
         const layer = layui.layer
         const form = layui.form
         const miniTab = layui.miniTab
         const tableMerge = layui.tableMerge
         const table = layui.table
+        const echarts = layui.echarts
 
         //获取学生基本信息
         $.ajax({
@@ -312,7 +313,7 @@
                 min: 0,
                 max: 1,
                 inRange: {
-                    color: ['#31BDEC', '#5FB878']
+                    color: ['#1E9FFF', '#e1f3d8']
                 }
             },
             legend: {
@@ -388,9 +389,6 @@
             }
         });
     });
-</script>
-<script>
-
 </script>
 <script>
     /**

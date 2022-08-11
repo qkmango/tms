@@ -76,8 +76,11 @@ body {
     --green_4:#42b983;
     --green_5:#2ea44f;
     --green_6:#2b9148;
+    --green_thin:#e1f3d8;
+    --green_default:#5FB878;
 	--blue_1:rgb(41, 151, 255);
 	--blue_2:#0779E4;
+	--blue_default:#1E9FFF;
 	--orange:#ff5500;
 	--bgcolor_moon:#090724;
 	--bgcolor_sun:#f6f8fa;
