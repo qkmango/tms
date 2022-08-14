@@ -1,6 +1,5 @@
 package cn.qkmango.tms.domain.model;
 
-import cn.qkmango.tms.domain.bind.course.WeekDay;
 import cn.qkmango.tms.domain.bind.course.WeekType;
 
 /**
@@ -11,27 +10,27 @@ import cn.qkmango.tms.domain.bind.course.WeekType;
  * @version: 1.0
  */
 public class OnceCourseInfo {
-    String name;
-    Integer id;
+    private String name;
+    private Integer id;
 
-    byte beginWeek;
-    byte lengthWeek;
-    WeekType weekType;
+    private byte beginWeek;
+    private byte lengthWeek;
+    private WeekType weekType;
 
-    String teacher;
+    private String teacher;
 
-    String buildingNumber;
-    int roomNumber;
+    private String buildingNumber;
+    private int roomNumber;
 
-    int weekDay;
+    private byte weekDay;
 
-    byte length;
-    byte begin;
+    private byte length;
+    private byte begin;
 
     public OnceCourseInfo() {
     }
 
-    public OnceCourseInfo(String name, Integer id, byte beginWeek, byte lengthWeek, WeekType weekType, String teacher, String buildingNumber, int roomNumber, int weekDay, byte length, byte begin) {
+    public OnceCourseInfo(String name, Integer id, byte beginWeek, byte lengthWeek, WeekType weekType, String teacher, String buildingNumber, int roomNumber, byte weekDay, byte length, byte begin) {
         this.name = name;
         this.id = id;
         this.beginWeek = beginWeek;
@@ -109,11 +108,11 @@ public class OnceCourseInfo {
         this.roomNumber = roomNumber;
     }
 
-    public int getWeekDay() {
+    public byte getWeekDay() {
         return weekDay;
     }
 
-    public void setWeekDay(int weekDay) {
+    public void setWeekDay(byte weekDay) {
         this.weekDay = weekDay;
     }
 
