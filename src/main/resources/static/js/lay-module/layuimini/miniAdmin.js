@@ -252,7 +252,7 @@ layui.define(["jquery", "miniMenu", "element","miniTab", "miniTheme"], function 
              * 清理
              */
             $('body').on('click', '[data-clear]', function () {
-                var loading = layer.load(0, {shade: false, time: 2 * 1000});
+                var loading = layer.load(1, {shade: false, time: 2 * 1000});
                 sessionStorage.clear();
 
                 // 判断是否清理服务端
