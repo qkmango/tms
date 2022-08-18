@@ -34,6 +34,17 @@
         li.layui-nav-item.layuimini-setting {
             margin-right: 20px;
         }
+        .my-loader-inner{
+            width: 37px;
+            height: 37px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            background-image: url("lib/layui-v2.6.3/css/modules/layer/default/loading-1.gif");
+        }
     </style>
 </head>
 <body class="layui-layout-body layuimini-all">
@@ -100,8 +111,11 @@
     </div>
 
     <!--初始化加载层-->
+    <!--<div class="layuimini-loader">-->
+    <!--    <div class="layuimini-loader-inner"></div>-->
+    <!--</div>-->
     <div class="layuimini-loader">
-        <div class="layuimini-loader-inner"></div>
+        <div class="my-loader-inner"></div>
     </div>
 
     <!--手机端遮罩层-->
