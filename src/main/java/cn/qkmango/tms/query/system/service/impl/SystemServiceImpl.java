@@ -1,5 +1,6 @@
 package cn.qkmango.tms.query.system.service.impl;
 
+import cn.qkmango.tms.common.enumerate.RedisKey;
 import cn.qkmango.tms.common.exception.DatabaseOperateException;
 import cn.qkmango.tms.common.exception.LoginException;
 import cn.qkmango.tms.common.exception.PermissionException;
@@ -80,7 +81,7 @@ public class SystemServiceImpl implements SystemService {
         //邮箱地址-验证码写入redis，有效期为 300 秒(5分钟)
         //redisKey示例 "RetrievePasswordCaptcha:123@qq.com"
         ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
-        String redisKey = "RetrievePasswordCaptcha:"+user.getEmail();
+        String redisKey = RedisKey.RETRIEVE_PASSWORD_CAPTCHA_PREFIX.key+":"+user.getEmail();
         ops.set(redisKey, captchaCode,300, TimeUnit.SECONDS);
     }
 
