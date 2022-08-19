@@ -83,7 +83,7 @@ public class GlobalExceptionHandler {
         logger.warn(e.getMessage());
         ResponseMap map = new ResponseMap(2);
         map.setSuccess(false);
-        map.setMessage("更新数据失败");
+        map.setMessage(e.getMessage());
         return map;
     }
 
@@ -94,7 +94,7 @@ public class GlobalExceptionHandler {
         logger.warn(e.getMessage());
         ResponseMap map = new ResponseMap(2);
         map.setSuccess(false);
-        map.setMessage("插入数据失败");
+        map.setMessage(e.getMessage());
         return map;
     }
 
@@ -106,7 +106,7 @@ public class GlobalExceptionHandler {
         e.printStackTrace();
         ResponseMap map = new ResponseMap(2);
         map.setSuccess(false);
-        map.setMessage("删除数据失败");
+        map.setMessage(e.getMessage());
         return map;
     }
 
