@@ -24,12 +24,12 @@ public class Course {
     //1：表示第一学期；2：表示第二学期
     @NotNull(message = "{valid.Course.term.NotNull}")
     @Range(min = 1,max = 2,message = "{valid.Course.term.Range}")
-    private String term;
+    private Byte term;
 
     public Course() {
     }
 
-    public Course(Integer id, String name, Integer credit, Integer teacher, Integer courseYear, String term) {
+    public Course(Integer id, String name, Integer credit, Integer teacher, Integer courseYear, Byte term) {
         this.id = id;
         this.name = name;
         this.credit = credit;
@@ -78,11 +78,11 @@ public class Course {
         this.courseYear = courseYear;
     }
 
-    public String getTerm() {
+    public Byte getTerm() {
         return term;
     }
 
-    public void setTerm(String term) {
+    public void setTerm(Byte term) {
         this.term = term;
     }
 

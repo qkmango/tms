@@ -6,6 +6,7 @@ import cn.qkmango.tms.domain.bind.PermissionType;
 import cn.qkmango.tms.domain.orm.User;
 import cn.qkmango.tms.domain.pagination.RoomPagination;
 import cn.qkmango.tms.domain.pagination.StudentScorePagination;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +36,7 @@ public class PaginationQueryController {
      */
     // @Permission({PermissionType.admin,PermissionType.teacher})
     @RequestMapping("/getStudentScorePagination.do")
-    public Map<String, Object> getStudentScorePagination(StudentScorePagination pagination, HttpSession session) {
+    public Map<String, Object> getStudentScorePagination(@RequestBody StudentScorePagination pagination, HttpSession session) {
 
         //判断当前用户，如果是学生的话，传入ID，仅可以查询自己的成绩
         User user = (User) session.getAttribute("user");

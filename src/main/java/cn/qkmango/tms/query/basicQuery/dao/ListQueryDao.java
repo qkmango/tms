@@ -3,6 +3,7 @@ package cn.qkmango.tms.query.basicQuery.dao;
 import cn.qkmango.tms.domain.model.OnceCourseInfo;
 import cn.qkmango.tms.domain.model.TimeTable;
 import cn.qkmango.tms.domain.orm.*;
+import cn.qkmango.tms.domain.query.GetCourseListQuery;
 import cn.qkmango.tms.domain.query.GetStudentTimetableQuery;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -26,7 +27,7 @@ public interface ListQueryDao {
 
     List<Clazz> getClazzList(Clazz clazz);
 
-    List<Course> getCourseListByTeacherAndClazz(HashMap<String, Integer> paramsMap);
+    List<Course> getCourseList(GetCourseListQuery query);
 
     List<Teacher> getTeacherList(Teacher teacher);
 

@@ -2,21 +2,66 @@ const $ = layui.jquery;
 const cocoMessage = window.parent.cocoMessage;
 let form;
 let table;
+let tree;
+let clazzTreeData;
 
-layui.use(['form', 'table'], function () {
+layui.use(['form', 'table','tree'], function () {
 
 	form = layui.form;
 	table = layui.table;
+	tree = layui.tree;
 
 	form.val('queryParams',{
-		teacher:window.top.GLOBAL.user.id,
-		courseYear:window.top.GLOBAL.currYear,
-		term:window.top.GLOBAL.currTerm
+		teacher:JSON.parse(sessionStorage.user).id,
+		courseYear:sessionStorage.currYear,
+		term:sessionStorage.currTerm
 	})
 
-	getFacultyList();
+	//获取班级tree列表
+	$.ajax({
+		url: '/query/list/tree/getClazzTreeList.do',
+		type: 'get',
+		dataType: 'json',
+		async: false,
+		success: function (res) {
+			clazzTreeData = copyTransFunc(res.data, [
+				{key: 'name', value: 'title'},
+				{key: 'specializedList', value: 'children'},
+				{key: 'clazzList', value: 'children'},
+			])
+			//将学院和专业的id前加上前缀，防止与clazz的id重复
+			for (let i = 0; i < clazzTreeData.length; i++) {
+				clazzTreeData[i].id = 'f' + clazzTreeData[i].id;
+				for (let j = 0; j < clazzTreeData[i].children.length; j++) {
+					clazzTreeData[i].children[j].id = 's' + clazzTreeData[i].children[j].id;
+				}
+			}
+		}
+	})
 
-
+	tree.render({
+		elem: '#selectClazz'
+		, data: clazzTreeData
+		, showCheckbox: true  //是否显示复选框
+		, id: 'selectClazz'
+		, isJump: false //是否允许点击节点时弹出新窗口跳转
+		, click: function (obj) {
+			// var data = obj.data;  //获取当前点击的节点数据
+			// layer.msg('状态：' + obj.state + '<br>节点数据：' + JSON.stringify(data));
+		}
+		,oncheck: function(obj){
+			let checkedData = tree.getChecked('selectClazz')
+			let arr = getTreeCheckedDataIDListDeep3(checkedData)
+			let formQueryParams = form.val('queryParams')
+			let queryParam = {
+				clazz: arr.toString(),
+				teacher: formQueryParams.teacher,
+				courseYear: formQueryParams.courseYear,
+				term: formQueryParams.term
+			}
+			getCourseList(queryParam)
+		}
+	});
 
 	table.render({
 		elem: '#dataGrid',
@@ -63,12 +108,20 @@ layui.use(['form', 'table'], function () {
 		limit: 20,
 		page: true,
 		skin: 'line',
-		where:form.val('queryParams')
+		method:'post',
+		contentType:'application/json;charset=utf-8',
+		where:(function () {
+			const queryParams = form.val('queryParams')
+			return {
+				courseYear: queryParams.courseYear,
+				term: queryParams.term
+			}
+		})()
 	});
 
 
 	//监听单元格编辑
-	  table.on('edit(currentTableFilter)', function(obj){
+  	table.on('edit(currentTableFilter)', function(obj){
 		let value = obj.value //得到修改后的值
 		let data = obj.data //得到所在行所有键值
 		let field = obj.field; //得到字段
@@ -105,110 +158,37 @@ layui.use(['form', 'table'], function () {
 	// 监听搜索操作
 	form.on('submit(data-search-btn)', function (data) {
 		//执行搜索重载
+		let checkedData = tree.getChecked('selectClazz');
+		let arr = getTreeCheckedDataIDListDeep3(checkedData)
+		let queryParam = {
+			student: data.field.id,
+			name: data.field.name,
+			courseYear: data.field.courseYear,
+			term: data.field.term,
+			course:data.field.course,
+			clazz: arr
+		}
+
 		table.reload('dataGrid', {
 			page: {
 				curr: 1
 			},
-			where:data.field
+			method:'post',
+			contentType:'application/json;charset=utf-8',
+			where:queryParam
 		}, 'data');
 
 		return false;
 	});
 
 
-
-
-
-	//下拉框 院系 值改变时事件监听
-	form.on('select(faculty)', function(data){
-		if(data.value=='') {
-			$('#specialized').html('<option value="">全部</option>');
-			form.render('select','queryParams');
-		} else{
-			console.log(data.value); //得到被选中的值
-			getSpecializedList(data.value)
-		}
-		$('#clazz').html('<option value="">全部</option>');
-		$('#course').html('<option value="">全部</option>');
-		form.render('select','queryParams');
-	});
-
-	//下拉框 专业 值改变时事件监听
-	form.on('select(specialized)', function(data){
-		if(data.value=='') {
-			$('#clazz').html('<option value="">全部</option>');
-			form.render('select','queryParams');
-		} else{
-			console.log(data.value); //得到被选中的值
-			let clazzYear =  $("input[name='clazzYear']").val();
-			getClazzList(data.value,clazzYear);
-		}
-		$('#course').html('<option value="">全部</option>');
-		form.render('select','queryParams');
-	});
-
-	form.on('select(clazz)', function(data){
-		if(data.value=='') {
-			$('#course').html('<option value="">全部</option>');
-			form.render('select','queryParams');
-		} else{
-			console.log(data.value); //得到被选中的值
-			let teacher = window.parent.GLOBAL.user.id;
-			getCourseListByTeacherAndClazz(teacher,data.value)
-		}
-	});
 });
 
-//获取院系列表并渲染
-function getFacultyList() {
-	$.ajax({
-		url:'query/list/getFacultyList.do',
-		type:'get',
-		dataType:'json',
-		success:function(data) {
-			let html = '<option value="">全部</option>';
-			$.each(data.data,function(index, value) {
-				html += '<option value='+value.id+'>'+value.name+'</option>';
-			});
-
-			$('#faculty').html(html);
-			form.render('select','queryParams');
-		}
-	})
-}
-
-// 获取某个院系的专业列表并渲染
-function getSpecializedList(faculty) {
-	$.ajax({
-		// url:'data/specialized.json',
-		url:'query/list/getSpecializedList.do',
-		data:{
-			'faculty':faculty
-		},
-		type:'get',
-		dataType:'json',
-		success:function(data) {
-			let html = '<option value="">全部</option>';
-			$.each(data.data,function(index, value) {
-				html += '<option value='+value.id+'>'+value.name+'</option>';
-			});
-
-			$('#specialized').html(html);
-			form.render('select','queryParams');
-		}
-	})
-}
-
 // 获取指定专业的所有班级列表并渲染
-function getClazzList(specialized,clazzYear) {
+function getCourseList(queryParam) {
 	$.ajax({
-		// url:'data/specialized.json',
-		url:'query/list/getClazzList.do',
-		data:{
-			'specialized':specialized,
-			'clazzYear':clazzYear
-		},
-		type:'get',
+		url:'query/list/getCourseList.do',
+		data:queryParam,
 		dataType:'json',
 		success:function(data) {
 			let html = '<option value="">全部</option>';
@@ -216,29 +196,7 @@ function getClazzList(specialized,clazzYear) {
 				html += '<option value='+value.id+'>'+value.name+'</option>';
 			});
 
-			$('#clazz').html(html);
-			form.render('select','queryParams');
-		}
-	})
-}
-
-// 获取指定专业的所有班级列表并渲染
-function getCourseListByTeacherAndClazz(teacher,clazz) {
-	$.ajax({
-		url:'query/list/getCourseListByTeacherAndClazz.do',
-		data:{
-			'teacher':teacher,
-			'clazz':clazz
-		},
-		type:'get',
-		dataType:'json',
-		success:function(data) {
-			let html = '<option value="">全部</option>';
-			$.each(data.data,function(index, value) {
-				html += '<option value='+value.id+'>'+value.name+'</option>';
-			});
-
-			$('#course').html(html);
+			document.querySelector('#course').innerHTML = html;
 			form.render('select','queryParams');
 		}
 	})

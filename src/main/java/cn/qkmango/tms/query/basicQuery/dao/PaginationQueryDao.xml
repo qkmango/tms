@@ -40,14 +40,9 @@
             <if test="teacher!=null and teacher!=''">
                 and teacher.id = #{teacher}
             </if>
-            <if test="faculty!=null and faculty!=''">
-                and faculty.id = #{faculty}
-            </if>
-            <if test="specialized!=null and specialized!=''">
-                and specialized.id = #{specialized}
-            </if>
-            <if test="clazz!=null and clazz!=''">
-                and clazz.id = #{clazz}
+            <if test="clazz!=null and clazz.size>0">
+                and clazz.id in
+                <foreach collection="clazz" item="item" open="(" separator="," close=")">${item}</foreach>
             </if>
             <if test="course!=null and course!=''">
                 and course.id = #{course}
@@ -57,9 +52,6 @@
             </if>
             <if test="term!=null">
                 and course.term = #{term}
-            </if>
-            <if test="clazzYear!=null">
-                and clazz.clazzYear = #{clazzYear}
             </if>
             <if test="courseName != null and courseName != ''">
                 and course.name like '%' #{courseName} '%'

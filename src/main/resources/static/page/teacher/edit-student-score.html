@@ -14,107 +14,90 @@
 <div class="layuimini-container">
     <div class="layuimini-main">
 
-        <fieldset class="table-search-fieldset">
-            <legend>搜索信息</legend>
+
 
             <div style="margin: 10px 10px 10px 10px">
                 <form class="layui-form layui-form-pane" action="" lay-filter='queryParams' id="queryParams">
-                    <div class="layui-form-item">
-                        <div class="layui-inline">
-                            <label class="layui-form-label">学生姓名</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="name" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">学号</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="id" autocomplete="off" class="layui-input">
-                            </div>
-                        </div>
-                        <div class="layui-inline">
-                            <label class="layui-form-label">任课老师ID</label>
-                            <div class="layui-input-inline">
-                                <input type="text" name="teacher" lay-filter="teacher" autocomplete="off" class="layui-input" readonly>
-                            </div>
-                        </div>
 
-						<div class="layui-inline">
-						    <label class="layui-form-label">班级年级</label>
-							<div class="layui-input-inline">
-							  <input type="text" name="clazzYear" autocomplete="off" class="layui-input">
-							</div>
-						</div>
-
-						<div class="layui-inline">
-							<label class="layui-form-label">课程年度</label>
-							<div class="layui-input-inline">
-							    <input type="text" name="courseYear" lay-filter="courseYear" autocomplete="off" class="layui-input">
-							</div>
-						</div>
-
-						<div class="layui-inline">
-							<label class="layui-form-label">学期</label>
-							<div class="layui-input-inline">
-							  <select name="term" id="term" lay-filter="term">
-								  <option value="">全部</option>
-								  <option value="1">第1学期</option>
-								  <option value="2">第2学期</option>
-							  </select>
-							</div>
-						</div>
-
-						<div class="layui-inline">
-							<label class="layui-form-label">院系</label>
-							<div class="layui-input-inline">
-							  <select name="faculty" id="faculty" lay-filter="faculty">
-								  <option value="">全部</option>
-							  </select>
-							</div>
-						</div>
-
-						<div class="layui-inline">
-						    <label class="layui-form-label">专业</label>
-							<div class="layui-input-inline">
-							  <select name="specialized" id="specialized" lay-filter="specialized">
-								  <option value="">全部</option>
-							  </select>
-							</div>
-						</div>
-
-						<div class="layui-inline">
-						    <label class="layui-form-label">班级</label>
-						    <div class="layui-input-inline">
+					<fieldset class="table-search-fieldset">
+						<legend>基本信息</legend>
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label">学生姓名</label>
 								<div class="layui-input-inline">
-								  <select name="clazz" id="clazz" lay-filter="clazz">
-									  <option value="">全部</option>
-								  </select>
+									<input type="text" name="name" autocomplete="off" class="layui-input">
 								</div>
-						    </div>
-						</div>
-						<div class="layui-inline">
-						    <label class="layui-form-label">课程</label>
-						    <div class="layui-input-inline">
-								<select name="course" id="course" lay-filter="course">
-									<option value="">全部</option>
-								</select>
-						    </div>
-						</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">学号</label>
+								<div class="layui-input-inline">
+									<input type="text" name="id" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+							<div class="layui-inline">
+								<label class="layui-form-label">任课老师ID</label>
+								<div class="layui-input-inline">
+									<input type="text" name="teacher" lay-filter="teacher" autocomplete="off" class="layui-input" readonly>
+								</div>
+							</div>
 
-                        <div class="layui-inline">
-                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-reset-btn"><i class="layui-icon layui-icon-close"> </i> 清 空</button>
-                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
-                        </div>
-                    </div>
+							<div class="layui-inline">
+								<label class="layui-form-label">课程年度</label>
+								<div class="layui-input-inline">
+									<input type="text" name="courseYear" lay-filter="courseYear" autocomplete="off" class="layui-input">
+								</div>
+							</div>
+
+							<div class="layui-inline">
+								<label class="layui-form-label">学期</label>
+								<div class="layui-input-inline">
+									<select name="term" id="term" lay-filter="term">
+										<option value="">全部</option>
+										<option value="1">第1学期</option>
+										<option value="2">第2学期</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</fieldset>
+
+					<fieldset class="table-search-fieldset">
+						<legend>所属班级</legend>
+						<div class="layui-form-item">
+							<div id="selectClazz" class="demo-tree-more"></div>
+						</div>
+					</fieldset>
+
+					<fieldset class="table-search-fieldset">
+						<legend>课程</legend>
+						<div class="layui-form-item">
+							<div class="layui-inline">
+								<label class="layui-form-label">课程</label>
+								<div class="layui-input-inline">
+									<select name="course" id="course" lay-filter="course">
+										<option value="">全部</option>
+									</select>
+								</div>
+							</div>
+
+							<div class="layui-inline">
+								<button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-reset-btn"><i class="layui-icon layui-icon-close"> </i> 清 空</button>
+								<button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+							</div>
+						</div>
+					</fieldset>
+
+
                 </form>
             </div>
-        </fieldset>
 
         <table class="layui-hide" id="dataGrid" lay-filter="currentTableFilter"></table>
 
     </div>
 </div>
 <script type="text/javascript" src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<!--<script type="text/javascript" src="lib/util/utils.js" charset="utf-8"></script>-->
+<script type="text/javascript" src="lib/util/tree.js" charset="utf-8"></script>
 <script type="text/javascript" src="page/teacher/edit-student-score.js" charset="utf-8"></script>
 </body>
 </html>

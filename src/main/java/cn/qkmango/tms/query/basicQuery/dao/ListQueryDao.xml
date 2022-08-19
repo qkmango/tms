@@ -47,24 +47,49 @@
         </where>
     </select>
 
-    <select id="getCourseListByTeacherAndClazz" resultType="cn.qkmango.tms.domain.orm.Course">
-        SELECT
-            course.id,
-            course.NAME
-        FROM
-            t_teacher teacher,
-            t_course course,
-            t_specialized specialized,
-            t_clazz clazz,
-            t_course_clazz cs
-        WHERE
-            teacher.id = #{teacher}
-          AND clazz.id = #{clazz}
-          AND clazz.id = cs.clazz
-          AND course.id = cs.course
-          AND course.teacher = teacher.id
-          AND cs.clazz = clazz.id
-          AND clazz.specialized = specialized.id
+    <!--<select id="getCourseList" resultType="cn.qkmango.tms.domain.orm.Course">-->
+    <!--    SELECT-->
+    <!--        course.id,-->
+    <!--        course.NAME-->
+    <!--    FROM-->
+    <!--        t_teacher teacher,-->
+    <!--        t_course course,-->
+    <!--        t_specialized specialized,-->
+    <!--        t_clazz clazz,-->
+    <!--        t_course_clazz cs-->
+    <!--    WHERE-->
+    <!--        teacher.id = #{teacher}-->
+    <!--      AND clazz.id = #{clazz}-->
+    <!--      AND clazz.id = cs.clazz-->
+    <!--      AND course.id = cs.course-->
+    <!--      AND course.teacher = teacher.id-->
+    <!--      AND cs.clazz = clazz.id-->
+    <!--      AND clazz.specialized = specialized.id-->
+    <!--</select>-->
+
+    <select id="getCourseList" resultType="cn.qkmango.tms.domain.orm.Course">
+        SELECT DISTINCT c.id,c.name
+        from t_course c,
+             t_course_clazz cc
+        <where>
+            cc.course = c.id
+            <if test="course != null">
+                and c.id = #{course}
+            </if>
+            <if test="clazz!=null and clazz.size>0">
+                and cc.clazz in
+                <foreach collection="clazz" item="item" open="(" separator="," close=")">${item}</foreach>
+            </if>
+            <if test="teacher != null">
+                and c.teacher = #{teacher}
+            </if>
+            <if test="courseYear != null">
+                and c.courseYear = #{courseYear}
+            </if>
+            <if test="term != null">
+                and c.term = #{term}
+            </if>
+        </where>
     </select>
 
     <!-- 获取未分页的总记录条数 -->

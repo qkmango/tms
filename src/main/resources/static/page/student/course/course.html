@@ -46,16 +46,12 @@
 						</div>
 
                         <div class="layui-inline">
-                            <button type="submit" class="layui-btn layui-btn-primary"  lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索</button>
+                            <button type="submit" class="layui-btn layui-btn-primary" lay-submit lay-filter="data-search-btn"><i class="layui-icon"></i>搜索</button>
                         </div>
                     </div>
                 </form>
             </div>
         </fieldset>
-
-        <script type="text/html" id="toolbarDemo">
-
-        </script>
 
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
 
@@ -78,11 +74,8 @@
         const table = layui.table;
 
         form.val('queryParams',{
-            // courseYear:window.top.GLOBAL.currYear,
-            // term:window.top.GLOBAL.term
-
-            courseYear:window.top.getCookieForObject('currYear'),
-            term:window.top.getCookieForObject('currTerm')
+            courseYear:sessionStorage.currYear,
+            term:sessionStorage.currTerm
         })
 
         table.render({
@@ -97,7 +90,15 @@
                 	return data.courseYear + ' - ' + (data.courseYear+1);
                 }},
                 {field: 'term',title: '学期',width:80},
-                {field: 'score', title: '分数',width:80},
+                {field: 'score', width: 80, title: '分数',
+                    templet:function (data) {
+                        if (data.score >= 60) {
+                            return `<div style="color: var(--green_3)">${data.score===undefined?'':data.score}</div>`
+                        } else {
+                            return `<div style="color: var(--danger)">${data.score===undefined?'':data.score}</div>`
+                        }
+                    }
+                },
 				{title: '操作',toolbar: '#currentTableBar',width:80, align: "center"}
             ]],
             limits: [20, 40, 40, 60, 80, 100],
@@ -112,6 +113,8 @@
 			      "data": res.data
 			    };
 			},
+            method:'post',
+            contentType:'application/json;charset=utf-8',
             where: form.val('queryParams')
         });
 
@@ -121,8 +124,10 @@
             table.reload('currentTableId', {
                 page: {
                     curr: 1
-                }
-                , where: data.field
+                },
+                method:'post',
+                contentType:'application/json;charset=utf-8',
+                where: data.field
             }, 'data');
 
             return false;

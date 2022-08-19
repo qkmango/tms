@@ -3,6 +3,7 @@ package cn.qkmango.tms.query.basicQuery.service.impl;
 import cn.qkmango.tms.query.basicQuery.dao.SystemQueryDao;
 import cn.qkmango.tms.query.basicQuery.service.SystemQueryService;
 import cn.qkmango.tms.domain.orm.SystemKeyValue;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,22 +25,34 @@ public class SystemQueryServiceImpl implements SystemQueryService {
     @Resource
     private SystemQueryDao dao;
 
+    @Resource
+    private StringRedisTemplate stringRedisTemplate;
+
     @Override
     public Map<String, String> getSystemCurrYearAndTerm() {
 
-        String systemCurrYear = dao.getSystemCurrYear();
-        String systemCurrTerm = dao.getSystemCurrTerm();
+        String currYear = stringRedisTemplate.opsForValue().get("currYear");
+        String currTerm = stringRedisTemplate.opsForValue().get("currTerm");
+
+        if (currYear == null) {
+            currYear = dao.getSystemCurrYear();
+            stringRedisTemplate.opsForValue().set("currYear",currYear);
+        }
+        if(currTerm == null) {
+            currTerm = dao.getSystemCurrTerm();
+            stringRedisTemplate.opsForValue().set("currTerm",currTerm);
+        }
 
         HashMap<String, String> map = new HashMap<>(2);
-        map.put("currYear",systemCurrYear);
-        map.put("currTerm",systemCurrTerm);
+        map.put("currYear", currYear);
+        map.put("currTerm", currTerm);
 
         return map;
     }
 
     @Override
     public List<Map<String, String>> getSystemKeyValueList() {
-        List<Map<String, String>> infoList  = dao.getSystemKeyValueList();
+        List<Map<String, String>> infoList = dao.getSystemKeyValueList();
         return infoList;
     }
 

@@ -30,7 +30,7 @@
                         </div>
                         <div class="layui-inline">
                             <button type="submit" class="layui-btn layui-btn-primary" lay-submit
-                                    lay-filter="data-search-btn"><i class="layui-icon"></i> 搜 索
+                                    lay-filter="data-search-btn"><i class="layui-icon"></i>搜索
                             </button>
                         </div>
                     </div>
@@ -41,18 +41,12 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="addAll"> 选择</button>
+                <button class="layui-btn layui-btn-normal layui-btn-sm data-add-btn" lay-event="addAll"><i class="layui-icon">&#xe61f;</i>选择</button>
                 <!-- <button class="layui-btn layui-btn-sm layui-btn-danger data-delete-btn" lay-event="delete"> 删除 </button> -->
             </div>
         </script>
 
         <table class="layui-hide" id="currentTableId" lay-filter="currentTableFilter"></table>
-
-        <script type="text/html" id="currentTableBar">
-            <!-- <a class="layui-btn layui-btn-normal layui-btn-xs data-count-edit" lay-event="edit">编辑</a> -->
-            <a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">退选</a>
-        </script>
-
     </div>
 </div>
 <script src="lib/layui-v2.6.3/layui_update.js" charset="utf-8"></script>
@@ -92,10 +86,9 @@
                         return data.alreadyElective == 1 ? '<i class="layui-icon" style="color:#1E9FFF">&#xe67a;</i>' : '<i class="layui-icon">&#xe67b;</i>';
                     }
                 },
-                // {title: '操作', minWidth: 150, toolbar: '#currentTableBar', align: "center"},
                 {
                     title: '操作', width: 100, templet: function (data) {
-                        return data.alreadyElective == 1 ? '<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete">退选</a>' : '<a class="layui-btn layui-btn-xs layui-badge layui-bg-blue data-count-addOne" lay-event="addOne">选择</a>';
+                        return data.alreadyElective == 1 ? '<a class="layui-btn layui-btn-xs layui-btn-danger data-count-delete" lay-event="delete"><i class="layui-icon">&#xe640;</i></a>' : '<a class="layui-btn layui-btn-xs layui-bg-blue data-count-addOne" lay-event="addOne"><i class="layui-icon">&#xe654;</i></a>';
                     }
                 }
             ]],

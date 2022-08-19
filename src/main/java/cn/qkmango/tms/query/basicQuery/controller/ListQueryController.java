@@ -1,5 +1,6 @@
 package cn.qkmango.tms.query.basicQuery.controller;
 
+import cn.qkmango.tms.domain.query.GetCourseListQuery;
 import cn.qkmango.tms.domain.query.GetStudentTimetableQuery;
 import cn.qkmango.tms.query.basicQuery.service.ListQueryService;
 import cn.qkmango.tms.query.basicQuery.service.SystemQueryService;
@@ -11,6 +12,7 @@ import cn.qkmango.tms.domain.orm.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -123,18 +125,16 @@ public class ListQueryController {
 
     /**
      * 获取指定的老师和班级的 科目列表
-     * @param clazz 前端传入的 班级id
-     * @param teacher 前端传入的 老师id
+     * @param query 查询条件
      * @return
      */
     @Permission(PermissionType.teacher)
-    @RequestMapping("/getCourseListByTeacherAndClazz.do")
-    public Map<String, Object> getCourseListByTeacherAndClazz(Integer clazz, Integer teacher) {
+    @RequestMapping("/getCourseList.do")
+    public Map<String, Object> getCourseList(GetCourseListQuery query, HttpSession session) {
 
-        HashMap<String, Integer> params = new HashMap<>(2);
-        params.put("clazz", clazz);
-        params.put("teacher",teacher);
-        List<Course> courseList = listQueryService.getCourseListByTeacherAndClazz(params);
+        // User user = (User)session.getAttribute("user");
+
+        List<Course> courseList = listQueryService.getCourseList(query);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);

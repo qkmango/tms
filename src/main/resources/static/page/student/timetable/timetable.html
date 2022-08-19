@@ -109,8 +109,8 @@
         // form.render('select', 'queryParams');
 
         form.val('queryParams',{
-            year:window.top.GLOBAL.currYear,
-            term:window.top.GLOBAL.currTerm
+            year:sessionStorage.currYear,
+            term:sessionStorage.currTerm
         })
 
         table.render({

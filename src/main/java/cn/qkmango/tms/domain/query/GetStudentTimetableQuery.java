@@ -13,14 +13,13 @@ public class GetStudentTimetableQuery {
 
     @NotNull
     Integer year;
-    @NotNull
-    String term;
+    Byte term;
     Integer id;
 
     public GetStudentTimetableQuery() {
     }
 
-    public GetStudentTimetableQuery(@NotNull Integer year, @NotNull String term, Integer id) {
+    public GetStudentTimetableQuery(@NotNull Integer year, Byte term, Integer id) {
         this.year = year;
         this.term = term;
         this.id = id;
@@ -34,11 +33,11 @@ public class GetStudentTimetableQuery {
         this.year = year;
     }
 
-    public String getTerm() {
+    public Byte getTerm() {
         return term;
     }
 
-    public void setTerm(String term) {
+    public void setTerm(Byte term) {
         this.term = term;
     }
 

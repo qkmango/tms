@@ -382,8 +382,8 @@
                 };
             },
             where: {
-                year:window.top.getCookieForObject('currYear'),
-                term:window.top.getCookieForObject('currTerm')
+                year:sessionStorage.currYear,
+                term:sessionStorage.currTerm
             },
             done: function (data) {
                 tableMerge.render(this)

@@ -2,6 +2,7 @@ package cn.qkmango.tms.query.basicQuery.service;
 
 import cn.qkmango.tms.domain.model.TimeTable;
 import cn.qkmango.tms.domain.orm.*;
+import cn.qkmango.tms.domain.query.GetCourseListQuery;
 import cn.qkmango.tms.domain.query.GetStudentTimetableQuery;
 
 import java.util.HashMap;
@@ -16,7 +17,7 @@ public interface ListQueryService {
 
     List<Clazz> getClazzList(Clazz clazz);
 
-    List<Course> getCourseListByTeacherAndClazz(HashMap<String, Integer> paramsMap);
+    List<Course> getCourseList(GetCourseListQuery query);
 
     List<Teacher> getTeacherList(Teacher teacher);
 

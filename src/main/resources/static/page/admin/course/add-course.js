@@ -79,18 +79,14 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
 
     //获取选中数据 按钮事件
     util.event('lay-select-tree-data', {
-        //将选中的数据 拼接 院系名_专业名_班级名，并弹窗显示
+        //将选中的数据 拼接 ID_班级名，并弹窗显示
         getClazzChecked: function (othis) {
             let checkedData = tree.getChecked('selectClazz'); //获取选中节点的数据
             let selectClazzNameListStr = '';
-            for (let i = 0; i < checkedData.length; i++) {
-                let faculty_prefix = checkedData[i].title;
-                for (let j = 0; j < checkedData[i].children.length; j++) {
-                    let specialized_prefix = checkedData[i].children[j].title;
-                    for (let k = 0; k < checkedData[i].children[j].children.length; k++) {
-                        selectClazzNameListStr+=`${faculty_prefix}_${specialized_prefix}_${checkedData[i].children[j].children[k].title}<br/>`
-                    }
-                }
+
+            let arr = getTreeCheckedDataListDeep3(checkedData);
+            for (let arrElement of arr) {
+                selectClazzNameListStr += `${arrElement.id}_${arrElement.title}<br/>`
             }
 
             layer.alert(selectClazzNameListStr, {
@@ -120,17 +116,14 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
 
     //按钮事件
     util.event('lay-select-tree-data', {
-        //将选中的数据 拼接 院系名_老师名，并弹窗显示
+        //将选中的数据 拼接 ID_老师名，并弹窗显示
         getTeacherChecked: function (othis) {
             let checkedData = tree.getChecked('selectTeacher'); //获取选中节点的数据
             let selectTeacherNameListStr = '';
-            for (let i = 0; i < checkedData.length; i++) {
-                let faculty_prefix = checkedData[i].title;
-                for (let j = 0; j < checkedData[i].children.length; j++) {
-                    selectTeacherNameListStr+=`${faculty_prefix}_${checkedData[i].children[j].title}<br/>`
-                }
+            let arr = getTreeCheckedDataListDeep2(checkedData);
+            for (let arrElement of arr) {
+                selectTeacherNameListStr += `${arrElement.id}_${arrElement.title}<br/>`
             }
-
             layer.alert(selectTeacherNameListStr,{
                 title:'选中的老师',
                 shadeClose: true,

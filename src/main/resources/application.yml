@@ -30,7 +30,16 @@ spring:
         smtp:
           socketFactoryClass: javax.net.ssl.SSLSocketFactory
         debug: true
-
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+    jedis:
+      pool:
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+    timeout: 5000
 
 mybatis:
   configuration:

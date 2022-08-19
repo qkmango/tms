@@ -1,5 +1,6 @@
 package cn.qkmango.tms.query.basicQuery.service.impl;
 
+import cn.qkmango.tms.domain.query.GetCourseListQuery;
 import cn.qkmango.tms.domain.query.GetStudentTimetableQuery;
 import cn.qkmango.tms.query.basicQuery.dao.ListQueryDao;
 import cn.qkmango.tms.query.basicQuery.service.ListQueryService;
@@ -49,9 +50,9 @@ public class ListQueryServiceImpl implements ListQueryService {
     }
 
     @Override
-    public List<Course> getCourseListByTeacherAndClazz(HashMap<String, Integer> paramsMap) {
+    public List<Course> getCourseList(GetCourseListQuery query) {
 
-        List<Course> courseList = listQueryDao.getCourseListByTeacherAndClazz(paramsMap);
+        List<Course> courseList = listQueryDao.getCourseList(query);
 
         return courseList;
     }
