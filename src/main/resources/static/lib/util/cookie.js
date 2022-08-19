@@ -1,10 +1,11 @@
 /**
  * 获取cookie
- * @param ckey cookie名
+ * @param key cookie名
  * @returns {string|null} 存在则返回值，不存在则返回 null
  */
-function getCookie(ckey) {
-    let key = ckey + "=";
+function getCookie(key) {
+    if (key === undefined) return null;
+    key += '=';
     let ca = document.cookie.split(';');
     for (let i = 0; i < ca.length; i++) {
         let c = ca[i].trim();
@@ -13,6 +14,19 @@ function getCookie(ckey) {
         }
     }
     return null;
+}
+
+/**
+ * 获取cookie，并转为对象
+ * @param key cookie 名
+ * @returns {null|any}
+ */
+function getCookieForObject(key) {
+    let value = getCookie(key);
+    if (value === null) {
+        return null;
+    }
+    return JSON.parse(value);
 }
 
 /**
@@ -26,6 +40,19 @@ function setCookie(key, value, maxAge) {
         document.cookie = key + '=' + value + '; Max-Age=-1';
     }
     document.cookie = key + '=' + value + '; Max-Age=' + maxAge;
+}
+
+/**
+ * 添加cookie
+ * @param key cookie名
+ * @param obj cookie值（对象）
+ * @param maxAge 有效时长（秒），默认为 -1，即浏览器关闭失效
+ */
+function setCookieForObject(key, obj, maxAge) {
+    if (maxAge === undefined) {
+        document.cookie = key + '=' + JSON.stringify(obj) + '; Max-Age=-1';
+    }
+    document.cookie = key + '=' + JSON.stringify(obj) + '; Max-Age=' + maxAge;
 }
 
 /**

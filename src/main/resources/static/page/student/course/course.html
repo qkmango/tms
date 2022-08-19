@@ -66,6 +66,8 @@
     </div>
 </div>
 <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
+<script src="lib/util/cookie.js"></script>
+
 <script>
 
 	const cocoMessage = window.top.cocoMessage;
@@ -76,8 +78,11 @@
         const table = layui.table;
 
         form.val('queryParams',{
-            courseYear:window.top.GLOBAL.currYear,
-            term:window.top.GLOBAL.term
+            // courseYear:window.top.GLOBAL.currYear,
+            // term:window.top.GLOBAL.term
+
+            courseYear:window.top.getCookieForObject('currYear'),
+            term:window.top.getCookieForObject('currTerm')
         })
 
         table.render({

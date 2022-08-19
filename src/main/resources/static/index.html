@@ -22,13 +22,14 @@
     <style id="layuimini-bg-color"></style>
 	<script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 	<script src="lib/coco-message/coco-message.js" charset="utf-8"></script>
+    <script src="lib/util/cookie.js"></script>
 	<script type="text/javascript">
 		if (window.top!=window) {
 			window.top.location=window.location;
 		}
-		var GLOBAL = {
-            map:new Map()
-        };
+		// var GLOBAL = {
+        //     map:new Map()
+        // };
 	</script>
     <style>
         li.layui-nav-item.layuimini-setting {
@@ -188,8 +189,8 @@
             async:false,
             success:function(data) {
                 if(data.success) {
-                    GLOBAL.currYear = data.data.currYear;
-                    GLOBAL.currTerm = data.data.currTerm;
+                    setCookieForObject('currYear',data.data.currYear);
+                    setCookieForObject('currTerm',data.data.currTerm);
                 } else {
                     cocoMessage.error(2000,data.message);
                 }
@@ -213,10 +214,10 @@
 
                 // data.user = {"success":true,"user":{"id":1,"name":"芒果小洛","permissionType":"admin"}}
 
-                GLOBAL.user = data.user;
+                setCookieForObject('user',data.user);
                 $('#name').text(data.user.name);
                 let iniUrl = '';
-                switch(GLOBAL.user.permissionType) {
+                switch(data.user.permissionType) {
                     case "student":iniUrl = 'api/init_student.json';break;
                     case "teacher":iniUrl = 'api/init_teacher.json';break;
                     case "admin":iniUrl = 'api/init_admin.json';break;

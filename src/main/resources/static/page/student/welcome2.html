@@ -43,6 +43,11 @@
             line-height: normal;
             padding: 0 5px;
         }
+
+        /*课表的有课的单元格*/
+        .hasCourseBox {
+            background-color: var(--green_thin);
+        }
     </style>
 </head>
 <body>
@@ -289,12 +294,12 @@
 
         //校历
         const echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
-        function getVirtulData() {
-            var date = +echarts.number.parseDate('2022-9-1');
-            var end = +echarts.number.parseDate('2023-1-20');
-            var dayTime = 3600 * 24 * 1000;
-            var data = [];
-            for (var time = date; time <= end; time += dayTime) {
+        function getVirtualData() {
+            const date = +echarts.number.parseDate('2022-9-1');
+            const end = +echarts.number.parseDate('2023-1-20');
+            const dayTime = 3600 * 24 * 1000;
+            let data = [];
+            for (let time = date; time <= end; time += dayTime) {
                 const day = new Date(time).getDay();
                 let hot = 0;
                 if (day == 6 || day == 0) {
@@ -335,7 +340,7 @@
             series: {
                 type: 'heatmap',
                 coordinateSystem: 'calendar',
-                data: getVirtulData(),
+                data: getVirtualData(),
                 label: {
                     show: true,
                     formatter: function (params) {
@@ -377,14 +382,15 @@
                 };
             },
             where: {
-                year:window.top.GLOBAL.currYear,
-                term:window.top.GLOBAL.currTerm
+                year:window.top.getCookieForObject('currYear'),
+                term:window.top.getCookieForObject('currTerm')
             },
             done: function (data) {
                 tableMerge.render(this)
                 //给有课的单元格上色
                 document.querySelectorAll('.hasCourse').forEach((item, index) => {
-                    item.parentNode.parentNode.style.backgroundColor = '#e1f3d8';
+                    item.parentNode.parentNode.classList.add('hasCourseBox');
+
                 })
             }
         });
