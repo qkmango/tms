@@ -1,5 +1,6 @@
 package cn.qkmango.tms.query.updateQuery.service.impl;
 
+import cn.qkmango.tms.common.enumerate.RedisKey;
 import cn.qkmango.tms.common.exception.PermissionException;
 import cn.qkmango.tms.common.exception.UpdateException;
 import cn.qkmango.tms.domain.orm.Building;
@@ -101,17 +102,17 @@ public class UpdateServiceImpl implements UpdateService {
     public void updateRetrievePassword(RetrievePasswordQuery vo, Locale locale) throws UpdateException {
         User user = vo.getUser();
 
-        String redisKey = "RetrievePasswordCaptcha:"+user.getEmail();
+        String redisKey = RedisKey.RETRIEVE_PASSWORD_CAPTCHA_PREFIX.key+":"+user.getEmail();
 
         String code = stringRedisTemplate.opsForValue().get(redisKey);
         if (vo.getCode().equals(code)) {
             int affectedRows = updateDao.updateRetrievePassword(user);
             if (affectedRows != 1) {
-                throw new UpdateException(messageSource.getMessage("db.updatePassword.success",null,locale));
+                throw new UpdateException(messageSource.getMessage("db.updatePassword.failure",null,locale));
             }
             stringRedisTemplate.delete(redisKey);
         } else {
-            throw new UpdateException(messageSource.getMessage("db.updatePassword.success",null,locale));
+            throw new UpdateException(messageSource.getMessage("captcha.error",null,locale));
         }
     }
 }
