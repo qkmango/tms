@@ -199,7 +199,7 @@
 
         $.ajax({
             // url:"system/getUserInfo.do",
-            url:"query/list/test.do",
+            url:"common/test.do",
             type:'get',
             // async:false,
             dataType:"json",
@@ -238,7 +238,7 @@
         //退出登陆
         $('.login-out').on("click", function () {
 			$.ajax({
-				url:"system/logout.do",
+				url:"common/logout.do",
 				type:"post",
 				dataType:"json",
 				success:function(data) {

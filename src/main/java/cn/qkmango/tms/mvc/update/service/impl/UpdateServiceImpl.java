@@ -1,14 +1,10 @@
 package cn.qkmango.tms.mvc.update.service.impl;
 
-import cn.qkmango.tms.common.enumerate.RedisKey;
-import cn.qkmango.tms.common.exception.PermissionException;
 import cn.qkmango.tms.common.exception.UpdateException;
 import cn.qkmango.tms.domain.entity.Building;
 import cn.qkmango.tms.domain.entity.Elective;
 import cn.qkmango.tms.domain.entity.Room;
 import cn.qkmango.tms.domain.entity.User;
-import cn.qkmango.tms.domain.param.RetrievePasswordParam;
-import cn.qkmango.tms.domain.param.UpdatePasswordParam;
 import cn.qkmango.tms.mvc.update.dao.UpdateDao;
 import cn.qkmango.tms.mvc.update.service.UpdateService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -38,19 +34,6 @@ public class UpdateServiceImpl implements UpdateService {
     @Resource
     private StringRedisTemplate stringRedisTemplate;
 
-
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void updatePassword(UpdatePasswordParam updatePasswordParam, Locale locale) throws PermissionException, UpdateException {
-        int affectedRows = 0;
-
-        affectedRows = updateDao.updatePassword(updatePasswordParam);
-
-        //判断影行数
-        if (affectedRows != 1) {
-            throw new UpdateException(messageSource.getMessage("db.updatePassword.failure",null,locale));
-        }
-    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -88,31 +71,6 @@ public class UpdateServiceImpl implements UpdateService {
         }
     }
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void updateUserBasicInfo(User updateUser,Locale locale) throws UpdateException {
-        int affectedRows = updateDao.updateUserBasicInfo(updateUser);
-        if (affectedRows != 1) {
-            throw new UpdateException(messageSource.getMessage("db.updateUserBasicInfo.failure",null,locale));
-        }
-    }
 
-    @Override
-    @Transactional(rollbackFor = Exception.class)
-    public void updateRetrievePassword(RetrievePasswordParam vo, Locale locale) throws UpdateException {
-        User user = vo.getUser();
 
-        String redisKey = RedisKey.RETRIEVE_PASSWORD_CAPTCHA_PREFIX.key+":"+user.getEmail();
-
-        String code = stringRedisTemplate.opsForValue().get(redisKey);
-        if (vo.getCode().equals(code)) {
-            int affectedRows = updateDao.updateRetrievePassword(user);
-            if (affectedRows != 1) {
-                throw new UpdateException(messageSource.getMessage("db.updatePassword.failure",null,locale));
-            }
-            stringRedisTemplate.delete(redisKey);
-        } else {
-            throw new UpdateException(messageSource.getMessage("captcha.error",null,locale));
-        }
-    }
 }

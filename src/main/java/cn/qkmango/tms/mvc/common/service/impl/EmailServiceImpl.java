@@ -1,6 +1,6 @@
-package cn.qkmango.tms.email.service.impl;
+package cn.qkmango.tms.mvc.common.service.impl;
 
-import cn.qkmango.tms.email.service.EmailService;
+import cn.qkmango.tms.mvc.common.service.EmailService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
@@ -23,8 +23,11 @@ import java.io.File;
 @Service
 public class EmailServiceImpl implements EmailService {
 
+    /**
+     * 发送发邮箱地址
+     */
     @Value("${spring.mail.from}")
-    private String from; //发送发邮箱地址
+    private String from;
 
     @Resource
     private JavaMailSender mailSender;

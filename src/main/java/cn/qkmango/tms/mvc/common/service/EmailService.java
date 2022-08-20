@@ -1,4 +1,4 @@
-package cn.qkmango.tms.email.service;
+package cn.qkmango.tms.mvc.common.service;
 
 import org.springframework.mail.MailException;
 

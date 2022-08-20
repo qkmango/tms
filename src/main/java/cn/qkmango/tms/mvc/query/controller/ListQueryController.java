@@ -44,29 +44,6 @@ public class ListQueryController {
     private ReloadableResourceBundleMessageSource messageSource;
 
 
-    @RequestMapping("/test.do")
-    public Map test(HttpServletRequest request) {
-
-        HttpSession session = request.getSession(false);
-        User user;
-        if (session == null) {
-            user = new User(1,null,"芒果小洛",null,PermissionType.student);
-            request.getSession(true).setAttribute("user",user);
-        } else {
-            user = (User)request.getSession().getAttribute("user");
-            if (user == null) {
-                user = new User(1,null,"芒果小洛",null,PermissionType.student);
-                request.getSession(true).setAttribute("user",user);
-            }
-        }
-
-        ResponseMap map = new ResponseMap();
-        map.setSuccess(true);
-        map.put("user",user);
-
-        return map;
-    }
-
     /**
      * 查询院系列表
      * @return

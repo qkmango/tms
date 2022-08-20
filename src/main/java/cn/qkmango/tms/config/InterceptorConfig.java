@@ -29,12 +29,12 @@ public class InterceptorConfig implements WebMvcConfigurer {
         LoginInterceptor loginInterceptor = new LoginInterceptor();
         registry.addInterceptor(loginInterceptor)
                 .addPathPatterns("/**/*.do")
-                .excludePathPatterns("/system/login.do")
+                .excludePathPatterns("/common/login.do")
+                .excludePathPatterns("/common/logout.do")
                 .excludePathPatterns("/system/setLocale.do")
-                .excludePathPatterns("/query/list/test.do")
-                .excludePathPatterns("/system/sendRetrievePasswordCaptcha.do")
-                .excludePathPatterns("/system/sendRetrievePasswordCaptcha.do")
-                .excludePathPatterns("/update/updateRetrievePassword.do")
+                .excludePathPatterns("/common/test.do")
+                .excludePathPatterns("/common/sendRetrievePasswordCaptcha.do")
+                .excludePathPatterns("/common/updateRetrievePassword.do")
                 .excludePathPatterns("/test/**/*.do");
 
 
@@ -44,12 +44,13 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/insert/**/*.do")
                 .addPathPatterns("/delete/**/*.do")
                 .addPathPatterns("/update/**/*.do")
+                .addPathPatterns("/common/**/*.do")
                 // .addPathPatterns("/system/**/*.do")
                 // .excludePathPatterns("/system/setLocale.do")
                 // .excludePathPatterns("/system/setLocale.do")
-                .excludePathPatterns("/query/list/test.do")
-                .excludePathPatterns("/system/sendRetrievePasswordCaptcha.do")
-                .excludePathPatterns("/update/updateRetrievePassword.do")
+                .excludePathPatterns("/common/test.do")
+                .excludePathPatterns("/common/sendRetrievePasswordCaptcha.do")
+                .excludePathPatterns("/common/updateRetrievePassword.do")
                 .excludePathPatterns("/test/**/*.do");
 
     }

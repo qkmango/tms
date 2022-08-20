@@ -2,6 +2,31 @@
 
 > 教务管理系统
 
+## 功能分包
+
+### cn.qkmango.tms.mvc
+存放 Controller Service Dao
+
+### cn.qkmango.tms.mvc.common
+所有用户的公共模块，如 登陆 退出，找回密码，发送找回密码验证码 等功能基本功能
+
+### cn.qkmango.tms.mvc.delete
+所有用户的删除操作
+
+### cn.qkmango.tms.mvc.insert
+所有用户的插入数据操作
+
+### cn.qkmango.tms.mvc.query
+所有用户的查询操作
+
+### cn.qkmango.tms.mvc.update
+所有用户的更新数据操作
+
+### cn.qkmango.tms.mvc.system
+系统相关的操作，如 更改语言环境，获取当前在线用户数量 等
+
+
+
 ## 功能完成进度
 
 ### 系统整体

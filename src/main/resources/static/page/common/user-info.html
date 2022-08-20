@@ -76,7 +76,7 @@
         //监听提交
         form.on('submit(saveBtn)', function (data) {
             $.ajax({
-                url: '/update/updateUserBasicInfo.do',
+                url: '/common/updateUserBasicInfo.do',
                 data:data.field,
                 type: 'post',
                 dataType: 'json',
@@ -103,7 +103,7 @@
     function getUserAllInfo() {
         let userAllInfo;
         $.ajax({
-            url: '/system/getUserAllInfo.do',
+            url: '/common/getUseDetailInfo.do',
             type: 'get',
             dataType: 'json',
             async:false,

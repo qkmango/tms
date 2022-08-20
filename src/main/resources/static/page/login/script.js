@@ -70,7 +70,7 @@ function check(str) {
 function login() {
 	console.log('ajax'+new Date())
 	$.ajax({
-		url:"system/login.do",
+		url:"common/login.do",
 		async:false,
 		data:{
 			id:$.trim($("#id").val()),

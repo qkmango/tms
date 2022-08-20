@@ -36,7 +36,6 @@ import java.util.Map;
 @RequestMapping(value = "/system")
 public class SystemController {
 
-
     @Resource
     private SystemService systemService;
 
@@ -45,60 +44,6 @@ public class SystemController {
 
     private Manager sessionManager;
 
-    /**
-     * @param request
-     * @param user 户信息，前端传来参数：id，password
-     * @return
-     * @throws LoginException
-     */
-    @RequestMapping(value = "/login.do",method = RequestMethod.POST)
-    public Map<String, Object> login(@Validated(login.class) User user, BindingResult result, HttpServletRequest request, Locale locale) throws LoginException, PermissionException {
-
-        User loginUser = systemService.login(user,locale);
-
-        request.getSession(true).setAttribute("user", loginUser);
-
-        ResponseMap map = new ResponseMap();
-        map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("response.login.success",null,locale));
-
-        return map;
-    }
-
-
-    @RequestMapping(value = "/logout.do",method = RequestMethod.POST)
-    public Map<String, Object> logout(HttpServletRequest request) {
-        request.getSession().invalidate();
-
-        HashMap<String, Object> map = new HashMap<>(2);
-        map.put("success", true);
-        map.put("message", "退出成功！");
-        return map;
-    }
-
-    @RequestMapping("/getUserInfo.do")
-    public Map<String, Object> getUserInfo(HttpServletRequest request) {
-
-        User user = (User) request.getSession().getAttribute("user");
-
-        HashMap<String, Object> map = new HashMap<>(2);
-        map.put("success", true);
-        map.put("user", user);
-        return map;
-    }
-
-    @RequestMapping("/getUserAllInfo.do")
-    public Map<String, Object> getUserAllInfo(HttpServletRequest request) {
-
-        User user = (User) request.getSession().getAttribute("user");
-
-        User userAllInfo = systemService.getUserAllInfo(user);
-
-        HashMap<String, Object> map = new HashMap<>(2);
-        map.put("success", true);
-        map.put("user", userAllInfo);
-        return map;
-    }
 
     /**
      * 更改语言环境
@@ -139,21 +84,5 @@ public class SystemController {
 
         return res;
     }
-
-    @RequestMapping("/sendRetrievePasswordCaptcha.do")
-    public Map<String, Object> sendRetrievePasswordCaptcha(@Validated(Sys.RetrievePasswordCaptcha.class) User user,
-                                                          BindingResult result,
-                                                          Locale locale) throws Exception {
-
-        systemService.sendRetrievePasswordCaptcha(user, locale);
-
-        ResponseMap map = new ResponseMap(2);
-        map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("response.sendRetrievePasswordCaptcha.success",null,locale));
-
-        return map;
-    }
-
-
 
 }

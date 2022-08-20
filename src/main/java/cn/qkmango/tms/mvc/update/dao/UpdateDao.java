@@ -19,9 +19,4 @@ public interface UpdateDao {
 
     int updateYear(@Param("year") Integer year, @Param("newYear") Integer newYear);
 
-    int updatePassword(UpdatePasswordParam updatePasswordParam);
-
-    int updateUserBasicInfo(User updateUser);
-
-    int updateRetrievePassword(User user);
 }

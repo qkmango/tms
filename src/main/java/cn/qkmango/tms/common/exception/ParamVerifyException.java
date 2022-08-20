@@ -40,22 +40,22 @@ public class ParamVerifyException extends VerifyError {
 
     /**
      * 使用 BindingResult 变长参数构造，并且附带详细信息
-     * @param s
+     * @param message
      * @param bindingResultList
      */
-    public ParamVerifyException(String s, BindingResult... bindingResultList) {
-        super(s);
+    public ParamVerifyException(String message, BindingResult... bindingResultList) {
+        super(message);
         List<BindingResult> bindingResults = Arrays.asList(bindingResultList);
         this.bindingResultList = bindingResults;
     }
 
     /**
      * 使用 BindingResult 列表对象构造，并且附带详细信息
-     * @param s
+     * @param message
      * @param bindingResultList
      */
-    public ParamVerifyException(String s, ArrayList<BindingResult> bindingResultList) {
-        super(s);
+    public ParamVerifyException(String message, ArrayList<BindingResult> bindingResultList) {
+        super(message);
         this.bindingResultList = bindingResultList;
     }
 

@@ -45,40 +45,6 @@ public class UpdateController {
     @Resource
     private ReloadableResourceBundleMessageSource messageSource;
 
-    /**
-     * 更改用户密码
-     * @param session
-     * @param updatePasswordParam
-     * @param locale
-     * @return
-     * @throws PermissionException
-     * @throws UpdateException
-     */
-    // @Permission
-    @RequestMapping("/updatePassword.do")
-    public Map<String, Object> updatePassword(HttpSession session,
-                                              UpdatePasswordParam updatePasswordParam,
-                                              Locale locale) throws PermissionException, UpdateException {
-
-        //获取用户ID
-        User user = (User) session.getAttribute("user");
-        Integer id = user.getId();
-
-        //获取用户权限类型
-        PermissionType thisUserPermissionType = user.getPermissionType();
-
-        updatePasswordParam.setId(id);
-        updatePasswordParam.setPermissionType(thisUserPermissionType);
-
-        updateService.updatePassword(updatePasswordParam,locale);
-
-        ResponseMap map = new ResponseMap();
-
-        map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updatePassword.success",null,locale));
-
-        return map;
-    }
 
     /**
      * 更新学生成绩
@@ -103,6 +69,7 @@ public class UpdateController {
         return map;
     }
 
+
     /**
      * 更新楼宇信息
      * @Validated false
@@ -122,6 +89,7 @@ public class UpdateController {
 
         return map;
     }
+
 
     /**
      * 修改 教室信息
@@ -163,52 +131,6 @@ public class UpdateController {
 
         return map;
     }
-
-    @PostMapping("updateUserBasicInfo.do")
-    public Map<String, Object> updateUserBasicInfo(HttpSession session,
-                                                   @Validated(Update.UpdateUserBasicInfo.class)
-                                                   User updateUser,
-                                                   BindingResult result,
-                                                   Locale locale) throws UpdateException {
-
-        User user = (User) session.getAttribute("user");
-        updateUser.setId(user.getId());
-        updateUser.setPermissionType(user.getPermissionType());
-
-        updateService.updateUserBasicInfo(updateUser,locale);
-
-        ResponseMap map = new ResponseMap();
-        map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updateUserBasicInfo.success",null,locale));
-
-        return map;
-
-    }
-
-    /**
-     * 找回密码更新
-     * @param session
-     * @param vo
-     * @param locale
-     * @return
-     * @throws UpdateException
-     */
-    @PostMapping("updateRetrievePassword.do")
-    public Map<String, Object> updateRetrievePassword(HttpSession session,
-                                                   @Validated RetrievePasswordParam vo,
-                                                   BindingResult result,
-                                                   Locale locale) throws UpdateException {
-
-        updateService.updateRetrievePassword(vo,locale);
-
-        ResponseMap map = new ResponseMap();
-        map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updatePassword.success",null,locale));
-
-        return map;
-
-    }
-
 
 
 
