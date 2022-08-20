@@ -3,7 +3,7 @@ package cn.qkmango.tms.web.interceptor;
 import cn.qkmango.tms.common.annotation.Permission;
 import cn.qkmango.tms.common.utils.ResponseUtil;
 import cn.qkmango.tms.domain.bind.PermissionType;
-import cn.qkmango.tms.domain.orm.User;
+import cn.qkmango.tms.domain.entity.User;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 

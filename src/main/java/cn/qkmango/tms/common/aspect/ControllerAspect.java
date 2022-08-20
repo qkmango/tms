@@ -21,8 +21,8 @@ import java.util.ArrayList;
 @Aspect
 @Component
 public class ControllerAspect {
-   // @Around("execution(* cn.qkmango.tms.query.*.controller.*Controller.*(..) || cn.qkmango.tms.email.controller )")
-    @Around("execution(* cn.qkmango.tms.query.*.controller.*Controller.*(..) )")
+   // @Around("execution(* cn.qkmango.tms.mvc.*.controller.*Controller.*(..) || cn.qkmango.tms.email.controller )")
+    @Around("execution(* cn.qkmango.tms.mvc.*.controller.*Controller.*(..) )")
     public Object controllerParamValidAspect(ProceedingJoinPoint jp) throws Throwable {
         Object[] args = jp.getArgs();
         ArrayList<BindingResult> bindingResultList = null;

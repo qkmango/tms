@@ -1,6 +1,6 @@
 package cn.qkmango.tms.domain.pagination;
 
-import cn.qkmango.tms.domain.orm.Course;
+import cn.qkmango.tms.domain.entity.Course;
 
 
 /**

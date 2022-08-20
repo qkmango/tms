@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.qkmango.tms.mvc.query.dao.ListTreeQueryDao">
+
+
+    <select id="getSpecializedListByFacultyId" resultType="cn.qkmango.tms.domain.entity.Specialized">
+        select id,name from t_specialized where faculty=#{faculty}
+    </select>
+    <select id="getClazzListBySpecializedId" resultType="cn.qkmango.tms.domain.entity.Clazz">
+        select id,name from t_clazz where specialized=#{specialized}
+    </select>
+    <select id="getTeacherListByFacultyId" resultType="cn.qkmango.tms.domain.entity.Teacher">
+        select id,name from t_teacher where faculty=#{faculty}
+    </select>
+
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.qkmango.tms.mvc.system.dao.SystemDao">
+
+    <select id="login" resultType="cn.qkmango.tms.domain.entity.User">
+        select id,name
+        from
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@student">
+            t_student
+        </if>
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@teacher">
+            t_teacher
+        </if>
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@admin">
+            t_admin
+        </if>
+        where id=#{id} and password=#{password};
+    </select>
+
+    <select id="getUserAllInfo" resultType="cn.qkmango.tms.domain.entity.User">
+        select id,name,email
+        from
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@student">
+            t_student
+        </if>
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@teacher">
+            t_teacher
+        </if>
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@admin">
+            t_admin
+        </if>
+        where id=#{id}
+    </select>
+    <select id="hasUser" resultType="java.lang.Integer">
+        select count(*)
+        from
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@student">
+            t_student
+        </if>
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@teacher">
+            t_teacher
+        </if>
+        <if test="permissionType == @cn.qkmango.tms.domain.bind.PermissionType@admin">
+            t_admin
+        </if>
+        where id = #{id} and email = #{email}
+    </select>
+
+</mapper>

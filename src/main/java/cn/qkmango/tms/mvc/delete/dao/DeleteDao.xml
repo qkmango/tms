@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.qkmango.tms.mvc.delete.dao.DeleteDao">
+
+
+    <delete id="deleteBuilding">
+        delete from t_building where id = #{id}
+    </delete>
+
+    <delete id="deleteRoom">
+        delete from t_room where id = #{id}
+    </delete>
+
+    <delete id="deleteYear">
+        delete from t_year where year = #{year}
+    </delete>
+
+    <delete id="deleteElective">
+        delete from t_elective where student=#{studentId} and course=#{courseId}
+    </delete>
+
+<!--    <delete id="deleteSystemKeyValue">-->
+<!--        delete-->
+<!--        from t_system-->
+<!--        where `key` = #{key}-->
+<!--    </delete>-->
+
+</mapper>

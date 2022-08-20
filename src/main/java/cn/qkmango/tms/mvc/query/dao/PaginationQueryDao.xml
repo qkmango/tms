@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.qkmango.tms.mvc.query.dao.PaginationQueryDao">
+
+
+    <select id="getStudentScorePagination" resultType="hashmap">
+
+        SELECT SQL_CALC_FOUND_ROWS
+        student.id as student,
+        student.name,
+        elective.id as elective,
+        course.name as courseName,
+        course.id as courseId,
+        teacher.name as teacher,
+        clazz.name as clazz,
+        specialized.name as specialized,
+        faculty.name as faculty,
+        elective.score as score,
+        clazz.clazzYear as clazzYear,
+        course.courseYear as courseYear,
+        course.term
+
+        FROM t_teacher teacher,
+        t_course course,
+        t_elective elective,
+        t_student student,
+        t_clazz clazz,
+        t_specialized specialized,
+        t_faculty faculty
+
+        <where>
+
+            <if test="name!=null and name!=''">
+                student.name like '%' #{name} '%'
+            </if>
+            <if test="student!=null and student!=''">
+                and student.id = #{student}
+            </if>
+            <if test="teacher!=null and teacher!=''">
+                and teacher.id = #{teacher}
+            </if>
+            <if test="clazz!=null and clazz.size>0">
+                and clazz.id in
+                <foreach collection="clazz" item="item" open="(" separator="," close=")">${item}</foreach>
+            </if>
+            <if test="course!=null and course!=''">
+                and course.id = #{course}
+            </if>
+            <if test="courseYear!=null and courseYear!=''">
+                and course.courseYear = #{courseYear}
+            </if>
+            <if test="term!=null">
+                and course.term = #{term}
+            </if>
+            <if test="courseName != null and courseName != ''">
+                and course.name like '%' #{courseName} '%'
+            </if>
+
+
+            AND course.teacher = teacher.id
+            AND elective.course = course.id
+            AND elective.student = student.id
+            AND student.clazz = clazz.id
+            AND clazz.specialized = specialized.id
+            AND specialized.faculty = faculty.id
+        </where>
+        order by student.id asc
+        <if test="pagination != false">
+            LIMIT #{skipCount},#{limit}
+        </if>
+    </select>
+
+    <select id="getRoomPagination" resultType="hashmap">
+        SELECT SQL_CALC_FOUND_ROWS
+        room.id,
+        room.number,
+        room.name,
+        room.capacity,
+        room.roomType,
+        building.id building,
+        building.number buildingNumber,
+        building.name buildingName,
+        building.buildingType
+        FROM
+        t_room room,
+        t_building building
+        <where>
+            room.building=building.id
+            <if test="id != null">
+                and room.id = #{id}
+            </if>
+            <if test="number != null">
+                and room.number = #{number}
+            </if>
+            <if test="name != null and name != ''">
+                and room.name like '%' #{name} '%'
+            </if>
+            <if test="building != null">
+                and room.building = #{building}
+            </if>
+            <if test="roomType != null">
+                and room.roomType = #{roomType}
+            </if>
+        </where>
+        order by room.number asc
+        <if test="pagination != false">
+            LIMIT #{skipCount},#{limit}
+        </if>
+    </select>
+
+
+    <!-- 获取未分页的总记录条数 -->
+    <select id="getCount" resultType="int">
+        SELECT FOUND_ROWS()
+    </select>
+
+
+
+</mapper>
