@@ -11,8 +11,11 @@ import javax.validation.constraints.Pattern;
 public class Building {
 
     private Integer id;
-    //楼号，但是可以加入英文，如12A栋
-    @Pattern(regexp = "^[A-Z]?\\d{1,3}$",message = "{valid.Building.number.Pattern}")
+    /**
+     * 楼号
+     * 如 12 12A S4 S4A
+     */
+    @Pattern(regexp = "^[A-Z]?\\d{1,3}[A-Z]?$",message = "{valid.Building.number.Pattern}")
     private String number;
     @NotNull(message = "{valid.Building.name.NotNull}")
     private String name;

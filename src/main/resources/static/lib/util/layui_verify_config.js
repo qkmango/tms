@@ -11,7 +11,7 @@ const layui_verify_config = {
     },
     //楼栋号验证
     buildingNumber:function(value,item){
-        if(/^[A-Z]?\d{1,3}$/.test(value)) {
+        if(/^[A-Z]?\d{1,3}[A-Z]?$/.test(value)) {
             return false;
         }
         return '楼号长度在4以内,只能有一个大写字母';
