@@ -11,7 +11,6 @@ import cn.qkmango.tms.domain.param.InsertCourseParam;
 import cn.qkmango.tms.domain.param.InsertElectiveParam;
 import cn.qkmango.tms.mvc.insert.service.InsertService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -52,7 +51,6 @@ public class InsertController {
     @Permission(PermissionType.admin)
     @RequestMapping("/insertCourse.do")
     public Map<String, Object> insertCourse(@RequestBody @Validated InsertCourseParam query,
-                                            BindingResult result,
                                             Locale locale) throws InsertException {
 
         service.insertCourse(query,locale);
@@ -75,7 +73,7 @@ public class InsertController {
      */
     @Permission(PermissionType.admin)
     @RequestMapping("/insertBuilding.do")
-    public Map<String, Object> insertBuilding(@Validated Building building, BindingResult result, Locale locale) throws InsertException {
+    public Map<String, Object> insertBuilding(@Validated Building building, Locale locale) throws InsertException {
 
         service.insertBuilding(building, locale);
 
@@ -96,7 +94,7 @@ public class InsertController {
      */
     @Permission(PermissionType.admin)
     @RequestMapping("/insertRoom.do")
-    public Map<String, Object> insertRoom(@Validated(InsertRoom.class) Room room, BindingResult result, Locale locale) throws InsertException {
+    public Map<String, Object> insertRoom(@Validated(InsertRoom.class) Room room, Locale locale) throws InsertException {
 
         service.insertRoom(room, locale);
 
@@ -119,7 +117,7 @@ public class InsertController {
      */
     @Permission(PermissionType.admin)
     @RequestMapping("/insertYear.do")
-    public Map<String, Object> insertYear(@Validated Year year, BindingResult result, Locale locale) throws InsertException {
+    public Map<String, Object> insertYear(@Validated Year year, Locale locale) throws InsertException {
         service.insertYear(year, locale);
 
         ResponseMap map = new ResponseMap();
@@ -143,7 +141,6 @@ public class InsertController {
     @Permission(PermissionType.student)
     @RequestMapping("/insertElective.do")
     public Map<String, Object> insertElective(@Validated InsertElectiveParam electiveVO,
-                                              BindingResult result,
                                               HttpSession session,
                                               Locale locale) throws InsertException {
 
@@ -172,7 +169,7 @@ public class InsertController {
      */
     @Permission(PermissionType.student)
     @RequestMapping("/insertTeachEvaluate.do")
-    public Map insertTeachEvaluate(@Validated TeachEvaluate teachEvaluate, BindingResult result, HttpSession session, Locale locale) throws InsertException {
+    public Map insertTeachEvaluate(@Validated TeachEvaluate teachEvaluate, HttpSession session, Locale locale) throws InsertException {
 
         User user = (User) session.getAttribute("user");
         Integer id = user.getId();

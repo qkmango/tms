@@ -8,7 +8,6 @@ import cn.qkmango.tms.mvc.delete.service.DeleteSystemService;
 import cn.qkmango.tms.domain.bind.PermissionType;
 import cn.qkmango.tms.domain.entity.SystemKeyValue;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,7 +37,6 @@ public class DeleteSystemController {
     @Permission(PermissionType.admin)
     @RequestMapping("/deleteSystemKeyValue.do")
     public Map deleteSystemKeyValue(@Validated(Delete.DeleteSystemKeyValue.class) SystemKeyValue systemKeyValue,
-                                    BindingResult result,
                                     Locale locale) throws DeleteException {
 
         service.deleteSystemKeyValue(systemKeyValue, locale);

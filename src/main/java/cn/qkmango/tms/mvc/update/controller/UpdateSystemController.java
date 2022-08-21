@@ -8,7 +8,6 @@ import cn.qkmango.tms.domain.bind.PermissionType;
 import cn.qkmango.tms.domain.entity.SystemKeyValue;
 import cn.qkmango.tms.mvc.update.service.UpdateSystemService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +38,6 @@ public class UpdateSystemController {
     @Permission(PermissionType.admin)
     @RequestMapping("updateSystemKeyValue.do")
     public Map<String, Object> updateSystemKeyValue(@Validated(Update.UpdateSystemKeyValue.class) SystemKeyValue systemKeyValue,
-                                                  BindingResult result,
                                                   Locale locale) throws UpdateException {
 
         service.updateSystemKeyValue(systemKeyValue,locale);

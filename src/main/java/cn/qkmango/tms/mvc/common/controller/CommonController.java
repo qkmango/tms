@@ -54,10 +54,9 @@ public class CommonController {
      * @throws LoginException
      */
     @RequestMapping(value = "/login.do",method = RequestMethod.POST)
-    public Map<String, Object> login(@Validated(Query.login.class) User user, BindingResult result, HttpServletRequest request, Locale locale) throws LoginException, PermissionException {
+    public Map<String, Object> login(@Validated(Query.login.class) User user, HttpServletRequest request, Locale locale) throws LoginException, PermissionException {
 
         User loginUser = service.login(user,locale);
-
         request.getSession(true).setAttribute("user", loginUser);
 
         ResponseMap map = new ResponseMap();
@@ -187,7 +186,6 @@ public class CommonController {
     @PostMapping("updateRetrievePassword.do")
     public Map<String, Object> updateRetrievePassword(HttpSession session,
                                                       @Validated RetrievePasswordParam vo,
-                                                      BindingResult result,
                                                       Locale locale) throws UpdateException {
 
         service.updateRetrievePassword(vo,locale);
@@ -211,7 +209,6 @@ public class CommonController {
      */
     @RequestMapping("/sendRetrievePasswordCaptcha.do")
     public Map<String, Object> sendRetrievePasswordCaptcha(@Validated(Sys.RetrievePasswordCaptcha.class) User user,
-                                                           BindingResult result,
                                                            Locale locale) throws Exception {
 
         service.sendRetrievePasswordCaptcha(user, locale);
@@ -229,7 +226,6 @@ public class CommonController {
      * 更新用户基本信息
      * @param session
      * @param updateUser
-     * @param result
      * @param locale
      * @return
      * @throws UpdateException
@@ -238,7 +234,6 @@ public class CommonController {
     public Map<String, Object> updateUserBasicInfo(HttpSession session,
                                                    @Validated(Update.UpdateUserBasicInfo.class)
                                                    User updateUser,
-                                                   BindingResult result,
                                                    Locale locale) throws UpdateException {
 
         User user = (User) session.getAttribute("user");

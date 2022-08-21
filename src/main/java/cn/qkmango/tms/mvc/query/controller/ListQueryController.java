@@ -10,7 +10,6 @@ import cn.qkmango.tms.domain.bind.PermissionType;
 import cn.qkmango.tms.domain.model.TimeTable;
 import cn.qkmango.tms.domain.entity.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -195,7 +194,7 @@ public class ListQueryController {
      * @return
      */
     @RequestMapping("/getStudentTimetable.do")
-    public Map<String,Object> getStudentTimetable(@Validated GetStudentTimetableParam query, BindingResult result, HttpSession session) {
+    public Map<String,Object> getStudentTimetable(@Validated GetStudentTimetableParam query, HttpSession session) {
         User user = (User) session.getAttribute("user");
         Integer studentId = user.getId();
 

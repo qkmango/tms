@@ -1,20 +1,11 @@
 package cn.qkmango.tms.mvc.system.controller;
 
-import cn.qkmango.tms.common.exception.LoginException;
-import cn.qkmango.tms.common.exception.PermissionException;
-import cn.qkmango.tms.common.map.ResponseMap;
-import cn.qkmango.tms.common.validate.group.Query.login;
-import cn.qkmango.tms.common.validate.group.Sys;
-import cn.qkmango.tms.domain.entity.User;
 import cn.qkmango.tms.mvc.system.service.SystemService;
 import org.apache.catalina.Manager;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.RequestFacade;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;

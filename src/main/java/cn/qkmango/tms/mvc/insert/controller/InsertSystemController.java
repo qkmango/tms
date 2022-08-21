@@ -8,7 +8,6 @@ import cn.qkmango.tms.domain.bind.PermissionType;
 import cn.qkmango.tms.domain.entity.SystemKeyValue;
 import cn.qkmango.tms.mvc.insert.service.InsertSystemService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,7 +38,7 @@ public class InsertSystemController {
 
     @Permission(PermissionType.admin)
     @RequestMapping("/insertSystemKeyValue.do")
-    public Map insertSystemKeyValue(@Validated(Insert.InsertSystemKeyValue.class) SystemKeyValue systemKeyValue, BindingResult result, HttpSession session, Locale locale) throws InsertException {
+    public Map insertSystemKeyValue(@Validated(Insert.InsertSystemKeyValue.class) SystemKeyValue systemKeyValue, HttpSession session, Locale locale) throws InsertException {
 
         service.insertSystemKeyValue(systemKeyValue,locale);
 
