@@ -3,14 +3,24 @@ package cn.qkmango.tms.common.exception.handler;
 import cn.qkmango.tms.common.exception.*;
 import cn.qkmango.tms.common.map.ResponseMap;
 import org.apache.log4j.Logger;
+import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.mail.MailException;
+import org.springframework.validation.BindException;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.validation.ConstraintViolation;
+import javax.validation.ConstraintViolationException;
+import javax.validation.ValidationException;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.StringJoiner;
 
 /**
  * @className: GlobalExceptionHandler
@@ -150,15 +160,15 @@ public class GlobalExceptionHandler {
     // }
 
     //处理 请求参数 的异常
-    @ResponseBody
-    @ExceptionHandler({ParamVerifyException.class})
-    public Map<String, Object> paramVerifyErrorHandler(ParamVerifyException e) {
-        logger.warn(e.getMessage());
-        ResponseMap map = new ResponseMap(2);
-        map.setSuccess(false);
-        map.setMessage(e.getMessage());
-        return map;
-    }
+    // @ResponseBody
+    // @ExceptionHandler({ParamVerifyException.class})
+    // public Map<String, Object> paramVerifyErrorHandler(ParamVerifyException e) {
+    //     logger.warn(e.getMessage());
+    //     ResponseMap map = new ResponseMap(2);
+    //     map.setSuccess(false);
+    //     map.setMessage(e.getMessage());
+    //     return map;
+    // }
 
 
     @ResponseBody
@@ -179,6 +189,28 @@ public class GlobalExceptionHandler {
         ResponseMap map = new ResponseMap(2);
         map.setSuccess(false);
         map.setMessage(e.getMessage());
+        return map;
+    }
+
+    /**
+     * 控制器入参校验异常处理
+     * @param e
+     * @return
+     */
+    @ResponseBody
+    @ExceptionHandler(BindException.class)
+    public Map<String, Object> BindExceptionHandle(BindException e){
+        List<ObjectError> errors = e.getAllErrors();
+        StringJoiner joiner = new StringJoiner(",", "[", "]");
+        errors.forEach(er -> {
+            joiner.add(er.getDefaultMessage());
+        });
+        String message = joiner.toString();
+        logger.warn(message);
+
+        ResponseMap map = new ResponseMap(2);
+        map.setSuccess(false);
+        map.setMessage(message);
         return map;
     }
 

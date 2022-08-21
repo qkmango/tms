@@ -18,11 +18,11 @@ import java.util.ArrayList;
  * @date: 2021-07-20 21:04
  * @version: 1.0
  */
-@Aspect
-@Component
+// @Aspect
+// @Component
 public class ControllerAspect {
    // @Around("execution(* cn.qkmango.tms.mvc.*.controller.*Controller.*(..) || cn.qkmango.tms.email.controller )")
-    @Around("execution(* cn.qkmango.tms.mvc.*.controller.*Controller.*(..) )")
+   //  @Around("execution(* cn.qkmango.tms.mvc.*.controller.*Controller.*(..) )")
     public Object controllerParamValidAspect(ProceedingJoinPoint jp) throws Throwable {
         Object[] args = jp.getArgs();
         ArrayList<BindingResult> bindingResultList = null;
