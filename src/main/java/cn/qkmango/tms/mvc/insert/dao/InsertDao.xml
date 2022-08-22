@@ -4,7 +4,7 @@
 <mapper namespace="cn.qkmango.tms.mvc.insert.dao.InsertDao">
 
     <insert id="insertCourse">
-        insert into t_course(name, credit, teacher,courseYear,term)
+        insert into t_course(name, credit, teacher, courseYear, term)
         values (#{name}, #{credit}, #{teacher}, #{courseYear}, #{term})
     </insert>
 
@@ -18,12 +18,12 @@
 
     <insert id="insertBuilding">
         insert into t_building (number, name, buildingType)
-        values (#{number},#{name},#{buildingType});
+        values (#{number}, #{name}, #{buildingType});
     </insert>
 
     <insert id="insertRoom">
         insert into t_room (number, name, building, capacity, roomType)
-        values (#{number},#{name},#{building},#{capacity},#{roomType});
+        values (#{number}, #{name}, #{building}, #{capacity}, #{roomType});
     </insert>
 
 
@@ -32,8 +32,8 @@
     </select>
 
     <insert id="insertYear">
-        insert into t_year(year,name)
-        values (#{year},CONCAT_WS('-',#{year},#{year}+1))
+        insert into t_year(year, name)
+        values (#{year}, CONCAT_WS('-', #{year}, #{year} + 1))
     </insert>
 
     <insert id="insertElective" parameterType="cn.qkmango.tms.domain.param.InsertElectiveParam">
@@ -45,34 +45,30 @@
     </insert>
 
     <insert id="insertTeachEvaluate">
-        insert into t_teach_evaluate(
-            elective,
-            student,
-            attitude,
-            prepare,
-            content,
-            method,
-            thinking,
-            talk,
-            tool,
-            coaching,
-            composite,
-            remark
-        )
-        values (
-            #{elective},
-            #{student},
-            #{attitude},
-            #{prepare},
-            #{content},
-            #{method},
-            #{thinking},
-            #{talk},
-            #{tool},
-            #{coaching},
-            #{composite},
-            #{remark}
-        )
+        insert into t_teach_evaluate(elective,
+                                     student,
+                                     attitude,
+                                     prepare,
+                                     content,
+                                     method,
+                                     thinking,
+                                     talk,
+                                     tool,
+                                     coaching,
+                                     composite,
+                                     remark)
+        values (#{elective},
+                #{student},
+                #{attitude},
+                #{prepare},
+                #{content},
+                #{method},
+                #{thinking},
+                #{talk},
+                #{tool},
+                #{coaching},
+                #{composite},
+                #{remark})
     </insert>
 
     <insert id="insertCourseClazz">
@@ -82,6 +78,11 @@
             (#{courseId},#{clazzId})
         </foreach>
 
+    </insert>
+
+    <insert id="insertCalendar">
+        insert into t_calendar(year, term, start, end, holiday)
+        VALUES (#{year}, #{term}, #{start}, #{end}, #{holiday})
     </insert>
 
 

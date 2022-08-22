@@ -106,13 +106,13 @@ public class InsertServiceImpl implements InsertService {
     @Transactional(rollbackFor = Exception.class)
     public void insertElective(InsertElectiveParam electiveVO, Locale locale) throws InsertException {
         int affectedRows = insertDao.insertElective(electiveVO);
-        // Integer[] ids = (Integer[]) param.get("ids");
-        // if (affectedRows != ids.length) {
-        //     throw new InsertException(messageSource.getMessage("db.insertElective.failure",null,locale));
-        // }
+        if (affectedRows != electiveVO.getCourseIds().length) {
+            throw new InsertException(messageSource.getMessage("db.insertElective.failure",null,locale));
+        }
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public void insertTeachEvaluate(TeachEvaluate teachEvaluate, Locale locale) throws InsertException {
         int affectedRows = insertDao.insertTeachEvaluate(teachEvaluate);
         if (affectedRows != 1) {
@@ -120,4 +120,12 @@ public class InsertServiceImpl implements InsertService {
         }
     }
 
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void insertCalendar(Calendar calendar, Locale locale) throws InsertException {
+        int affectedRows = insertDao.insertCalendar(calendar);
+        if (affectedRows != 1) {
+            throw new InsertException(messageSource.getMessage("db.insertCalendar.failure",null,locale));
+        }
+    }
 }

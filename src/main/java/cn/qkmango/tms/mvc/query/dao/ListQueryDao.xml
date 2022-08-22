@@ -266,4 +266,8 @@
           AND elective.course = course.id
     </select>
 
+    <select id="getSchoolCalendarList" resultType="cn.qkmango.tms.domain.entity.Calendar">
+        select year, term, start, end, holiday from t_calendar
+    </select>
+
 </mapper>

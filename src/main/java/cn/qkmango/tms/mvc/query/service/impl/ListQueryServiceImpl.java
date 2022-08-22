@@ -102,9 +102,7 @@ public class ListQueryServiceImpl implements ListQueryService {
 
     @Override
     public HashMap<String, Object> getStudentBasicInfo(Integer id) {
-
         HashMap<String, Object> basicInfo = listQueryDao.getStudentBasicInfo(id);
-
         return basicInfo;
     }
 
@@ -120,5 +118,9 @@ public class ListQueryServiceImpl implements ListQueryService {
         return resList;
     }
 
-
+    @Override
+    public List<Calendar> getSchoolCalendarList() {
+        List<Calendar> list = listQueryDao.getSchoolCalendarList();
+        return list;
+    }
 }

@@ -240,19 +240,34 @@ public class ListQueryController {
      */
     @RequestMapping("/getTeachEvaluateList.do")
     public Map<String, Object> getTeachEvaluateList(HttpSession session) {
-
         User user = (User) session.getAttribute("user");
         Integer id = user.getId();
 
         List<Map<String, Object>> list = listQueryService.getTeachEvaluateList(id);
 
         ResponseMap map = new ResponseMap();
-
         map.setSuccess(true);
         map.setData(list);
 
         return map;
+    }
 
+
+    /**
+     * 查询校历列表
+     * @return
+     */
+    @Permission(PermissionType.admin)
+    @RequestMapping("/getSchoolCalendarList.do")
+    public Map<String, Object> getSchoolCalendarList() {
+
+        List<Calendar> list = listQueryService.getSchoolCalendarList();
+
+        ResponseMap map = new ResponseMap();
+        map.setSuccess(true);
+        map.setData(list);
+
+        return map;
     }
 
 

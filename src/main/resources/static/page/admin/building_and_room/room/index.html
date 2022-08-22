@@ -6,7 +6,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<base href="../../../" />
+    <base href="../../../../" />
     <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="css/public.css" media="all">
 </head>
@@ -70,7 +70,7 @@
 
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal data-add-btn" lay-event="add"><i class="layui-icon">&#xe61f;</i>添加</button>
+                <button class="layui-btn layui-btn-normal data-add-btn layui-btn-sm" lay-event="add"><i class="layui-icon">&#xe61f;</i>添加</button>
             </div>
         </script>
 
@@ -148,14 +148,10 @@
 
         // 监听搜索操作
         form.on('submit(data-search-btn)', function (data) {
-            // var result = JSON.stringify(data.field);
-
             //执行搜索重载
             table.reload('currentTableId', {
-                page: {
-                    curr: 1
-                }
-                , where: data.field
+                page: {curr: 1},
+                where: data.field
             }, 'data');
 
             return false;
@@ -168,13 +164,18 @@
             if (obj.event === 'add') {  // 监听添加操作
                 const index = layer.open({
                     title: '添加教室',
+                    // type: 2,
+                    // shade: 0.2,
+                    // maxmin:true,
+                    // shadeClose: true,
+                    // area: ['620px', '383px'],
+					// offset: '0px',
                     type: 2,
+                    offset: 'rb',
+                    anim: 2,
+                    area: ['50%', '100%'],
                     shade: 0.2,
-                    maxmin:true,
-                    shadeClose: true,
-                    area: ['620px', '383px'],
-					offset: '0px',
-                    content: 'page/admin/building/room-add.html',
+                    content: 'page/admin/building_and_room/room/add.html',
 					end:function() {
 						table.reload("currentTableId");
 					}
@@ -189,12 +190,11 @@
                 var index = layer.open({
                     title: '编辑教室',
                     type: 2,
+                    offset: 'rb',
+                    anim: 2,
+                    area: ['50%', '100%'],
                     shade: 0.2,
-                    maxmin:true,
-                    shadeClose: true,
-                    area: ['620px', '383px'],
-					offset: '0px',
-                    content: 'page/admin/building/room-edit.html?id='+data.id,end:function() {
+                    content: 'page/admin/building_and_room/room/edit.html?id='+data.id,end:function() {
 						table.reload("currentTableId");
 					}
                 });

@@ -178,10 +178,25 @@ public class InsertController {
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
-
         map.setMessage(messageSource.getMessage("db.insertTeachEvaluate.success", null, locale));
+
         return map;
     }
+
+
+    @Permission(PermissionType.admin)
+    @RequestMapping("/insertCalendar.do")
+    public Map insertCalendar(@Validated Calendar calendar, Locale locale) throws InsertException {
+        service.insertCalendar(calendar,locale);
+
+        ResponseMap map = new ResponseMap();
+        map.setSuccess(true);
+        map.setMessage(messageSource.getMessage("db.insertCalendar.success", null, locale));
+
+        return map;
+    }
+
+
 
 
 }

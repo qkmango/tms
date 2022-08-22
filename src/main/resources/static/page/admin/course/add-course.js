@@ -241,6 +241,7 @@ layui.use(['form', 'table', 'tree', 'util'], function () {
             icon: 3,
             time: 0,
             btn: ['确定', '取消'],
+            offset: '100px',
             btn2: function (index) {
                 layer.close(index);
             },

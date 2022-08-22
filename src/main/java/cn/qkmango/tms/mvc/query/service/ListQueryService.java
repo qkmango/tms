@@ -33,5 +33,5 @@ public interface ListQueryService {
 
     List<Map<String, Object>> getTeachEvaluateList(Integer id);
 
-
+    List<Calendar> getSchoolCalendarList();
 }

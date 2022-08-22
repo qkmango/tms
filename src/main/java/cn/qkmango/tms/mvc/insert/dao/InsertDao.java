@@ -27,4 +27,6 @@ public interface InsertDao {
     int insertTeachEvaluate(TeachEvaluate teachEvaluate);
 
     int insertCourseClazz(int courseId, List<Integer> clazzList);
+
+    int insertCalendar(Calendar calendar);
 }

@@ -14,7 +14,7 @@ import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
  * @Description 拦截器配置类
  * @date 2022-07-31 20:57
  */
-@Configuration
+// @Configuration
 public class InterceptorConfig implements WebMvcConfigurer {
 
     public void addInterceptors(InterceptorRegistry registry) {

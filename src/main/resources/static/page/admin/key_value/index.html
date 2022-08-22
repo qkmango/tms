@@ -83,7 +83,7 @@
                     shadeClose: true,
                     area: ['620px', '300px'],
 					offset: '0px',
-                    content: 'page/admin/system/system-add.html',
+                    content: 'page/admin/key_value/add.html',
 					end:function() {
 						table.reload("currentTableId");
 					}
@@ -103,7 +103,7 @@
                     shadeClose: true,
                     area: ['620px', '450px'],
 					offset: '0px',
-                    content: 'page/admin/system/system-edit.html?key='+data.key+"&value="+data.value+"&description="+data.description,
+                    content: 'page/admin/key_value/edit.html?key='+data.key+"&value="+data.value+"&description="+data.description,
 					end:function() {
 						table.reload("currentTableId");
 					}

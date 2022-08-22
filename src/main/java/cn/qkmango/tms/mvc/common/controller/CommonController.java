@@ -89,12 +89,12 @@ public class CommonController {
         HttpSession session = request.getSession(false);
         User user;
         if (session == null) {
-            user = new User(1,null,"芒果小洛",null, PermissionType.student);
+            user = new User(1,null,"芒果小洛",null, PermissionType.admin);
             request.getSession(true).setAttribute("user",user);
         } else {
             user = (User)request.getSession().getAttribute("user");
             if (user == null) {
-                user = new User(1,null,"芒果小洛",null,PermissionType.student);
+                user = new User(1,null,"芒果小洛",null,PermissionType.admin);
                 request.getSession(true).setAttribute("user",user);
             }
         }
@@ -202,7 +202,6 @@ public class CommonController {
     /**
      * 发送找回密码验证码
      * @param user
-     * @param result
      * @param locale
      * @return
      * @throws Exception
@@ -249,7 +248,6 @@ public class CommonController {
         return map;
 
     }
-
 
 
 }

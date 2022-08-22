@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * 课程实体类
@@ -22,14 +23,14 @@ public class Course {
     @Range(min = 2000,max = 2100,message = "{valid.Year.year.Range}")
     private Integer courseYear;
     //1：表示第一学期；2：表示第二学期
-    @NotNull(message = "{valid.Course.term.NotNull}")
-    @Range(min = 1,max = 2,message = "{valid.Course.term.Range}")
-    private Byte term;
+    @Size(min = 1,max = 2)
+    @NotEmpty
+    private String term;
 
     public Course() {
     }
 
-    public Course(Integer id, String name, Integer credit, Integer teacher, Integer courseYear, Byte term) {
+    public Course(Integer id, String name, Integer credit, Integer teacher, Integer courseYear, String term) {
         this.id = id;
         this.name = name;
         this.credit = credit;
@@ -78,11 +79,11 @@ public class Course {
         this.courseYear = courseYear;
     }
 
-    public Byte getTerm() {
+    public String getTerm() {
         return term;
     }
 
-    public void setTerm(Byte term) {
+    public void setTerm(String term) {
         this.term = term;
     }
 

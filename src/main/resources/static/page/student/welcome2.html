@@ -162,10 +162,10 @@
 
                     </div>
                     <div class="layui-col-md12">
-                        <div class="layui-card">
+                        <div class="layui-card" style="overflow: scroll">
                             <div class="layui-card-header"><i class="fa fa-calendar-o icon"></i>校历</div>
                             <div class="layui-card-body">
-                                <div id="echarts-records" style="min-height:150px"></div>
+                                <div id="echarts-records" style="min-height:200px;min-width:400px;"></div>
                             </div>
                         </div>
                     </div>
@@ -188,44 +188,14 @@
                         <div class="layuimini-notice">
                             <div class="layuimini-notice-title">修改选项卡样式</div>
                             <div class="layuimini-notice-extra">2019-07-11 23:06</div>
-                            <div class="layuimini-notice-content layui-hide">
-                                界面足够简洁清爽。<br>
-                                一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
-                                支持多tab，可以打开多窗口。<br>
-                                支持无限级菜单和对font-awesome图标库的完美支持。<br>
-                                失效以及报错菜单无法直接打开，并给出弹出层提示完美的线上用户体验。<br>
-                                url地址hash定位，可以清楚看到当前tab的地址信息。<br>
-                                刷新页面会保留当前的窗口，并且会定位当前窗口对应左侧菜单栏。<br>
-                                移动端的友好支持。<br>
-                            </div>
                         </div>
                         <div class="layuimini-notice">
                             <div class="layuimini-notice-title">新增系统404模板</div>
                             <div class="layuimini-notice-extra">2019-07-11 12:57</div>
-                            <div class="layuimini-notice-content layui-hide">
-                                界面足够简洁清爽。<br>
-                                一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
-                                支持多tab，可以打开多窗口。<br>
-                                支持无限级菜单和对font-awesome图标库的完美支持。<br>
-                                失效以及报错菜单无法直接打开，并给出弹出层提示完美的线上用户体验。<br>
-                                url地址hash定位，可以清楚看到当前tab的地址信息。<br>
-                                刷新页面会保留当前的窗口，并且会定位当前窗口对应左侧菜单栏。<br>
-                                移动端的友好支持。<br>
-                            </div>
                         </div>
                         <div class="layuimini-notice">
                             <div class="layuimini-notice-title">新增treetable插件和菜单管理样式</div>
                             <div class="layuimini-notice-extra">2019-07-05 14:28</div>
-                            <div class="layuimini-notice-content layui-hide">
-                                界面足够简洁清爽。<br>
-                                一个接口几行代码而已直接初始化整个框架，无需复杂操作。<br>
-                                支持多tab，可以打开多窗口。<br>
-                                支持无限级菜单和对font-awesome图标库的完美支持。<br>
-                                失效以及报错菜单无法直接打开，并给出弹出层提示完美的线上用户体验。<br>
-                                url地址hash定位，可以清楚看到当前tab的地址信息。<br>
-                                刷新页面会保留当前的窗口，并且会定位当前窗口对应左侧菜单栏。<br>
-                                移动端的友好支持。<br>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -254,6 +224,7 @@
 <script src="lib/layui-v2.6.3/layui.js" charset="utf-8"></script>
 <script src="js/lay-config.js?v=1.0.4" charset="utf-8"></script>
 <!--<script src="js/lay-module/echarts/echarts.min.js"></script>-->
+<script src="lib/util/echarts_hotmap_school_calendar_option.js"></script>
 <script>
     layui.use(['layer', 'miniTab','tableMerge','form','table','echarts'], function () {
         const $ = layui.jquery
@@ -294,63 +265,8 @@
 
         //校历
         const echartsRecords = echarts.init(document.getElementById('echarts-records'), 'walden');
-        function getVirtualData() {
-            const date = +echarts.number.parseDate('2022-9-1');
-            const end = +echarts.number.parseDate('2023-1-20');
-            const dayTime = 3600 * 24 * 1000;
-            let data = [];
-            for (let time = date; time <= end; time += dayTime) {
-                const day = new Date(time).getDay();
-                let hot = 0;
-                if (day == 6 || day == 0) {
-                    hot = 1
-                }
-                data.push([
-                    echarts.format.formatTime('yyyy-MM-dd', time),
-                    hot
-                ]);
-            }
-            return data;
-        }
-        const option = {
-            visualMap: {
-                show: false,
-                min: 0,
-                max: 1,
-                inRange: {
-                    color: ['#1E9FFF', '#e1f3d8']
-                }
-            },
-            legend: {
-                y: 'bottom',
-                x: 'center'
-            },
-            calendar: {
-                range: ['2022-9', '2023-2'],
-                height:'auto',
-                width:'auto',
-                dayLabel: {
-                    show: true,
-                    firstDay: 1
-                },
-                yearLabel:{
-                    show:false
-                }
-            },
-            series: {
-                type: 'heatmap',
-                coordinateSystem: 'calendar',
-                data: getVirtualData(),
-                label: {
-                    show: true,
-                    formatter: function (params) {
-                        return params.value[0].split('-')[2];
-                    }
-                }
-            }
 
-        };
-        echartsRecords.setOption(option);
+        echartsRecords.setOption(echarts_hotmap_school_calendar_option);
 
         // echarts 窗口缩放自适应
         window.onresize = function(){

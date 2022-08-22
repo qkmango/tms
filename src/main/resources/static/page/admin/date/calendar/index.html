@@ -2,22 +2,20 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>layui</title>
+    <title>校历管理</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<base href="../../../" />
+	<base href="../../../../" />
     <link rel="stylesheet" href="lib/layui-v2.6.3/css/layui.css" media="all">
     <link rel="stylesheet" href="css/public.css" media="all">
 </head>
 <body>
 <div class="layuimini-container">
     <div class="layuimini-main">
-
-
         <script type="text/html" id="toolbarDemo">
             <div class="layui-btn-container">
-                <button class="layui-btn layui-btn-normal data-add-btn" lay-event="add"><i class="layui-icon">&#xe61f;</i>添加</button>
+                <button class="layui-btn layui-btn-normal data-add-btn layui-btn-sm" lay-event="add"><i class="layui-icon">&#xe61f;</i>添加</button>
             </div>
         </script>
 
@@ -43,17 +41,17 @@
         form = layui.form;
         table = layui.table;
 
-		//获取并渲染楼下来列表信息
-		// getBuildingList();
-
         table.render({
             elem: '#currentTableId',
-            url: 'query/list/getYearList.do',
+            url: 'query/list/getSchoolCalendarList.do',
             toolbar: '#toolbarDemo',
             defaultToolbar: ['filter', 'exports', 'print'],
             cols: [[
                 {field: 'year', width: 120, title: '年份', sort: true},
-                {field: 'name',title: '年度'},
+                {field: 'term', width: 120, title: '学期', sort: true},
+                {field: 'start', width: 120, title: '起始日', sort: true},
+                {field: 'end', width: 120, title: '结束日', sort: true},
+                {field: 'holiday', title: '假期', sort: true},
 				{title: '操作',  width: 150, toolbar: '#currentTableBar', align: "center"}
             ]],
             page: false,
@@ -90,16 +88,15 @@
          * toolbar监听事件
          */
         table.on('toolbar(currentTableFilter)', function (obj) {
-            if (obj.event === 'add') {  // 监听添加操作
-                var index = layer.open({
-                    title: '添加年份',
+            if (obj.event === 'add') {
+                const index = layer.open({
+                    title: '添加校历',
                     type: 2,
+                    offset: 'rb',
+                    anim: 2,
+                    area: ['50%', '100%'],
                     shade: 0.2,
-                    maxmin:true,
-                    shadeClose: true,
-                    area: ['620px', '300px'],
-					offset: '0px',
-                    content: 'page/admin/year/year-add.html',
+                    content: 'page/admin/date/calendar/add.html?index='+layer.index,
 					end:function() {
 						table.reload("currentTableId");
 					}
@@ -108,27 +105,27 @@
         });
 
         table.on('tool(currentTableFilter)', function (obj) {
-            var data = obj.data;
+            let data = JSON.stringify(obj.data)
+            data = encodeURI(data)
+            console.log()
             if (obj.event === 'edit') {
-
-                var index = layer.open({
-                    title: '编辑年份',
+                const index = layer.open({
+                    title: '编辑校历',
                     type: 2,
+                    offset: 'rb',
+                    anim: 2,
+                    area: ['50%', '100%'],
                     shade: 0.2,
-                    maxmin:true,
-                    shadeClose: true,
-                    area: ['620px', '300px'],
-					offset: '0px',
-                    content: 'page/admin/year/year-edit.html?year='+data.year,
+                    content: "page/admin/date/calendar/edit.html?data="+data,
 					end:function() {
 						table.reload("currentTableId");
 					}
                 });
                 return false;
             } else if (obj.event === 'delete') {
-                layer.confirm('真的删除行么', function (index) {
+                layer.confirm('真的删除么',{icon: 3, title:'删除',offset: 't'}, function (index) {
                 	$.ajax({
-                		url:'delete/deleteYear.do',
+                		// url:'delete/deleteYear.do',
                 		data:{year:obj.data.year},
                 		type:'post',
                 		dataType:'json',

@@ -53,4 +53,5 @@ public interface ListQueryDao {
                                                    @Param("id") Integer id);
 
 
+    List<Calendar> getSchoolCalendarList();
 }

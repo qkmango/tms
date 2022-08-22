@@ -21,21 +21,15 @@
 			"target": "_self",
 			"child": [{
 				"title": "楼宇管理",
-				"href": "page/admin/building/building.html",
+				"href": "page/admin/building_and_room/building/index.html",
 				"icon": "fa fa-tachometer",
 				"target": "_self"
 			}, {
 				"title": "教室管理",
-				"href": "page/admin/building/room.html",
+				"href": "page/admin/building_and_room/room/index.html",
 				"icon": "fa fa-tachometer",
 				"target": "_self"
 			}]
-		},
-		{
-			"title": "年份管理",
-			"href": "page/admin/year/year.html",
-			"icon": "fa fa-tachometer",
-			"target": "_self"
 		},
 		{
 			"title": "菜单管理",
@@ -44,10 +38,27 @@
 			"target": "_self"
 		},
 		{
-			"title": "系统管理",
-			"href": "page/admin/system/system.html",
+			"title": "键值对管理",
+			"href": "page/admin/key_value/index.html",
 			"icon": "fa fa-tachometer",
 			"target": "_self"
+		},
+		{
+			"title": "日期管理",
+			"href": "",
+			"icon": "fa fa-tachometer",
+			"target": "_self",
+			"child": [{
+				"title": "年份管理",
+				"href": "page/admin/date/year/index.html",
+				"icon": "fa fa-tachometer",
+				"target": "_self"
+			}, {
+				"title": "校历管理",
+				"href": "page/admin/date/calendar/index.html",
+				"icon": "fa fa-tachometer",
+				"target": "_self"
+			}]
 		}
 	]
 }

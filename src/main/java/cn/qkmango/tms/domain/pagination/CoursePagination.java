@@ -55,11 +55,11 @@ public class CoursePagination extends Pagination {
         this.course.setCourseYear(year);
     }
 
-    public Byte getTerm() {
+    public String getTerm() {
         return course.getTerm();
     }
 
-    public void setTerm(Byte term) {
+    public void setTerm(String term) {
         this.course.setTerm(term);
     }
 
