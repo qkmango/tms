@@ -3,12 +3,11 @@ import javax.servlet.*;
 import java.io.IOException;
 
 /**
- * @version 1.0
- * @Description 编码过滤器
+ * 编码过滤器
  * <p>可以将请求和响应的乱码问题解决</p>
- * @className EncodingFilter
- * @author: qkmango
- * @date: 2021-01-28 10:10
+ * @author qkmango
+ * @version 1.0
+ * @date 2021-01-28 10:10
  */
 public class EncodingFilter implements Filter {
 

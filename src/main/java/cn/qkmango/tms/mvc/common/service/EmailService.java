@@ -5,10 +5,9 @@ import org.springframework.mail.MailException;
 import java.io.File;
 
 /**
+ * Email服务接口
  * @author qkmango
  * @version 1.0
- * @className EmailService
- * @Description Email服务接口
  * @date 2022-08-02 14:52
  */
 public interface EmailService {

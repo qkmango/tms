@@ -8,12 +8,12 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * @className: ParamVerifyException 参数验证错误
- * 此类存放由控制器存入的 所有参数绑定（验证）错误的异常类 BindingResult 对象，
+ * 参数验证错误
+ * <p>此类存放由控制器存入的 所有参数绑定（验证）错误的异常类 BindingResult 对象，
  * 所以此类包含了所有的验证错误消息，通过getMessage()即可获取这些参数绑定（验证）错误的消息
- * @author: qkmango
- * @date: 2021/6/30 17:35
- * @version: 1.0
+ * @author qkmango
+ * @date 2021-06-30 17:35
+ * @version 1.0
  */
 public class ParamVerifyException extends VerifyError {
     private List<BindingResult> bindingResultList = null;

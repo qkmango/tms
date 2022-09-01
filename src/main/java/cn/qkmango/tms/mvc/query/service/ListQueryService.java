@@ -9,6 +9,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 列表查询服务接口
+ * @author qkmango
+ */
 public interface ListQueryService {
 
     List<Faculty> getFacultyList();

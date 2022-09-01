@@ -1,10 +1,9 @@
 package cn.qkmango.tms.common.exception;
 
 /**
+ * 数据库操作异常
  * @author qkmango
  * @version 1.0
- * @className DatabaseOperateException
- * @Description 数据库操作异常
  * @date 2022-08-02 17:52
  */
 public class DatabaseOperateException extends Exception {

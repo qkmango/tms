@@ -6,10 +6,9 @@ import cn.qkmango.tms.domain.entity.SystemKeyValue;
 import java.util.Locale;
 
 /**
+ * 插入系统信息服务接口
  * @author qkmango
  * @version 1.0
- * @className InsertSystemService
- * @Description TODO
  * @date 2022-07-28 19:25
  */
 public interface InsertSystemService {

@@ -13,10 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 树型列表查询
  * @author qkmango
  * @version 1.0
- * @className ListTreeQueryController
- * @Description 树型列表查询
  * @date 2022-08-03 14:43
  */
 

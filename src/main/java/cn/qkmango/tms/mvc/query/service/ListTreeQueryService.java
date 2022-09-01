@@ -5,10 +5,9 @@ import cn.qkmango.tms.domain.entity.Faculty;
 import java.util.List;
 
 /**
+ * 树型列表查询服务接口
  * @author qkmango
  * @version 1.0
- * @className ListTreeQueryService
- * @Description TODO
  * @date 2022-08-03 14:44
  */
 public interface ListTreeQueryService {

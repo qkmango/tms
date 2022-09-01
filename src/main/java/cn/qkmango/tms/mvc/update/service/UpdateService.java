@@ -8,6 +8,10 @@ import cn.qkmango.tms.domain.entity.User;
 
 import java.util.Locale;
 
+/**
+ * 更细服务接口
+ * @author qkmango
+ */
 public interface UpdateService {
 
     void updateStudentScore(Elective elective, Locale locale) throws UpdateException;

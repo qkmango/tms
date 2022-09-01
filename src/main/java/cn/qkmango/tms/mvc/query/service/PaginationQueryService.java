@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 /**
  * 分页查询服务接口
+ * @author qkmango
  */
 public interface PaginationQueryService {
 

@@ -1,19 +1,16 @@
 package cn.qkmango.tms.common.utils;
 
-/**
- * @author qkmango
- * @version 1.0
- * @className SpringUtil
- * @Description TODO
- * @date 2022-08-01 11:31
- */
-
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
-
+/**
+ * SpringUtil
+ * @author qkmango
+ * @version 1.0
+ * @date 2022-08-01 11:31
+ */
 @Component
 public class SpringUtil implements ApplicationContextAware {
 

@@ -18,10 +18,9 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
+ * 更新系统信息控制器
  * @author qkmango
  * @version 1.0
- * @className UpdateSystemController
- * @Description 更新系统信息控制器
  * @date 2022-07-28 19:56
  */
 

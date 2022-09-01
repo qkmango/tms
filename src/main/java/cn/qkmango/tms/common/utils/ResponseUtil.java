@@ -7,6 +7,7 @@ import java.io.PrintWriter;
 
 /**
  * 响应的工具类工具类
+ * @author qkmango
  */
 public class ResponseUtil {
 

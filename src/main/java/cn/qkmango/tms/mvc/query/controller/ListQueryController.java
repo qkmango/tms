@@ -22,10 +22,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 仅提供列表查询，不提供分页
  * @author qkmango
  * @version 1.0
- * @className ListQueryController
- * @Description 仅提供列表查询，不提供分页
  * @date 2022-07-31 19:26
  */
 @RestController

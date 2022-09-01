@@ -12,10 +12,9 @@ import javax.annotation.Resource;
 import java.util.Locale;
 
 /**
+ * 更新系统信息服务
  * @author qkmango
  * @version 1.0
- * @className UpdateSystemServiceImpl
- * @Description 更新系统信息
  * @date 2022-07-28 19:57
  */
 

@@ -15,7 +15,12 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Locale;
 
-
+/**
+ * 插入服务
+ * @author qkmango
+ * @version 1.0
+ * @date 2022-07-28 19:25
+ */
 @Service
 public class InsertServiceImpl implements InsertService {
 

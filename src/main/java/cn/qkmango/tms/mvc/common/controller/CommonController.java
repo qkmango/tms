@@ -13,7 +13,6 @@ import cn.qkmango.tms.domain.param.RetrievePasswordParam;
 import cn.qkmango.tms.domain.param.UpdatePasswordParam;
 import cn.qkmango.tms.mvc.common.service.CommonService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,11 +27,10 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
+ * 所有用户公共的接口
+ * <p>如登陆更新密码，找回密码，发送验证码 等</p>
  * @author qkmango
  * @version 1.0
- * @className CommonController
- * @Description 所有用户公共的接口
- * 如登陆更新密码，找回密码，发送验证码 等
  * @date 2022-08-20 11:01
  */
 

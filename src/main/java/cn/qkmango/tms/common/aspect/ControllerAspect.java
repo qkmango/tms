@@ -10,13 +10,12 @@ import org.springframework.validation.BindingResult;
 import java.util.ArrayList;
 
 /**
- * @className: ControllerAspect
- * @Description: 控制器方法参数校验切面
- * 校验器校验后，参数如果不符合规定，则抛出异常，全局异常拦截器会捕获异常返回给前端信息
+ * 控制器方法参数校验切面
+ * <p>校验器校验后，参数如果不符合规定，则抛出异常，全局异常拦截器会捕获异常返回给前端信息</p>
  * @see cn.qkmango.tms.common.exception.handler.GlobalExceptionHandler
- * @author: qkmango
- * @date: 2021-07-20 21:04
- * @version: 1.0
+ * @author qkmango
+ * @date 2021-07-20 21:04
+ * @version 1.0
  */
 // @Aspect
 // @Component

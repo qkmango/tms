@@ -11,12 +11,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @className: QuerySystemController
- * @Description: 查询一些系统信息
- * 如当前学期，当前学年
- * @author: qkmango
- * @date: 2021-08-17 21:31
- * @version: 1.0
+ * 查询系统信息
+ * <p>如当前学期，当前学年</p>
+ * @author qkmango
+ * @date 2021-08-17 21:31
+ * @version 1.0
  */
 
 @RestController

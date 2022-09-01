@@ -3,10 +3,9 @@ package cn.qkmango.tms.common.utils;
 import java.util.Random;
 
 /**
+ * 验证码工具类
  * @author qkmango
  * @version 1.0
- * @className CaptchaUtil
- * @Description 验证码工具类
  * @date 2022-08-02 15:50
  */
 public class CaptchaUtil {

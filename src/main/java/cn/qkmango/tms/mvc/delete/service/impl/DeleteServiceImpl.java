@@ -11,6 +11,12 @@ import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Locale;
 
+/**
+ * 删除服务
+ * @author qkmango
+ * @version 1.0
+ * @date 2022-07-28 17:55
+ */
 @Service
 public class DeleteServiceImpl implements DeleteService {
 

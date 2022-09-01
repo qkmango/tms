@@ -17,10 +17,9 @@ import java.util.Map;
 
 
 /**
+ * 系统信息控制器
  * @author qkmango
  * @version 1.0
- * @className SystemController
- * @Description 系统信息控制器
  * @date 2021-06-13
  */
 @RestController

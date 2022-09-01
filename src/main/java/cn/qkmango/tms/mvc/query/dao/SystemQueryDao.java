@@ -6,11 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @className: SystemQueryDao
- * @Description:TODO
- * @author: qkmango
- * @date: 2021-08-17 21:41
- * @version: 1.0
+ * 系统信息查询DAO层
+ * @author qkmango
+ * @date 2021-08-17 21:41
+ * @version 1.0
  */
 
 @Mapper

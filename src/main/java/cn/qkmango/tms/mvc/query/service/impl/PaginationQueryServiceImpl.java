@@ -13,8 +13,8 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * 系统分页查询服务
  * @author qkmango
- * 系统分页查询服务实现
  */
 @Service
 public class PaginationQueryServiceImpl implements PaginationQueryService {

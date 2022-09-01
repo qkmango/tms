@@ -19,15 +19,11 @@ import javax.servlet.http.HttpSession;
 import java.util.Locale;
 import java.util.Map;
 
-
 /**
  * 插入数据控制器
- * <p>
- * 所有需要校验的字段都需要在字段后面跟 BindingResult result，
- * 类切面会自动拦截方法，
- * ControllerAspect 判断 result 对象中是否保存的有字段校验错误信息，如果有则直接响应给前端
- *
- * @see cn.qkmango.tms.common.aspect.ControllerAspect
+ * @author qkmango
+ * @version 1.0
+ * @date 2022-07-28 19:18
  */
 @RestController
 @RequestMapping(value = "/insert", method = RequestMethod.POST)
@@ -43,7 +39,6 @@ public class InsertController {
     /**
      * 插入课程
      * @param query
-     * @param result
      * @param locale
      * @return
      * @throws InsertException
@@ -66,7 +61,6 @@ public class InsertController {
      * 添加楼宇
      *
      * @param building 楼宇对象（楼号，楼名称）
-     * @param result
      * @return
      * @throws InsertException
      * @validated true
@@ -109,7 +103,6 @@ public class InsertController {
      * 添加年度
      *
      * @param year   年度
-     * @param result
      * @param locale
      * @return
      * @throws InsertException

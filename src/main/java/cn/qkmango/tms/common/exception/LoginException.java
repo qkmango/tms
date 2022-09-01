@@ -1,5 +1,9 @@
 package cn.qkmango.tms.common.exception;
 
+/**
+ * 登陆异常
+ * @author qkmango
+ */
 public class LoginException extends SystemException{
     public LoginException() {
         super("系统登陆失败！");

@@ -13,10 +13,9 @@ import javax.annotation.Resource;
 import java.util.Locale;
 
 /**
+ * 插入系统信息服务
  * @author qkmango
  * @version 1.0
- * @className InsertSystemServiceImpl
- * @Description 插入系统信息
  * @date 2022-07-28 19:25
  */
 

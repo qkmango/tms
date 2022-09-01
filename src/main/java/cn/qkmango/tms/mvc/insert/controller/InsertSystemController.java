@@ -19,10 +19,9 @@ import java.util.Locale;
 import java.util.Map;
 
 /**
+ * 插入系统信息
  * @author qkmango
  * @version 1.0
- * @className InsertSystemController
- * @Description 插入系统信息
  * @date 2022-07-28 19:18
  */
 

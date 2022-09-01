@@ -15,11 +15,10 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 /**
+ * 分页查询
+ * <p>提供分页的查询和不分页的查询</p>
  * @author qkmango
  * @version 1.0
- * @className PaginationQueryController
- * @Description 分页查询
- * 提供分页的查询和不分页的查询
  * @date 2022-07-31 19:26
  */
 @RestController

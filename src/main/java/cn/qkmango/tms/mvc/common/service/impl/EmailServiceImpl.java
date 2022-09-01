@@ -14,10 +14,9 @@ import javax.mail.internet.MimeMessage;
 import java.io.File;
 
 /**
+ * Email服务实现类
  * @author qkmango
  * @version 1.0
- * @className EmailServiceImpl
- * @Description Email服务实现类
  * @date 2022-08-02 14:53
  */
 @Service

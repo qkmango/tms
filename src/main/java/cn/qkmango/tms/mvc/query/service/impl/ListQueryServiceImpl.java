@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
+ * 列表查询服务
  * @author qkmango
  */
 @Service

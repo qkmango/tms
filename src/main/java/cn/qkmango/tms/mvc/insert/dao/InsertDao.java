@@ -7,6 +7,12 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+/**
+ * 插入信息DAO层
+ * @author qkmango
+ * @version 1.0
+ * @date 2022-07-28 19:24
+ */
 @Mapper
 public interface InsertDao {
 

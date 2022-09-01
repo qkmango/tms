@@ -8,10 +8,9 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 
 /**
+ * 树型列表查询DAO层
  * @author qkmango
  * @version 1.0
- * @className ListTreeQueryDao
- * @Description TODO
  * @date 2022-08-03 14:45
  */
 

@@ -11,11 +11,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @className: SystemQueryServiceImpl
- * @Description: 系统查询
- * @author: qkmango
- * @date: 2021-08-17 21:48
- * @version: 1.0
+ * 系统信息查询服务
+ * @author qkmango
+ * @date 2021-08-17 21:48
+ * @version 1.0
  */
 
 @Service

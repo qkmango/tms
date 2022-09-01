@@ -12,11 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
 
 /**
+ * 用户权限验证
+ * <p>验证请求用户的权限是否满足请求的接口权限</p>
  * @author qkmango
  * @version 1.0
- * @className PermissionsInterceptor
- * @Description 用户权限验证
- * 验证请求用户的权限是否满足请求的接口权限
  * @date 2021-06-14
  */
 public class PermissionsInterceptor extends HandlerInterceptorAdapter {

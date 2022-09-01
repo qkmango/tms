@@ -1,5 +1,9 @@
 package cn.qkmango.tms.common.exception;
 
+/**
+ * 删除异常
+ * @author qkmango
+ */
 public class DeleteException extends Exception{
     public DeleteException() {
     }

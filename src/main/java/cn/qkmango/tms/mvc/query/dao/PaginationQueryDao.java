@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
+ * 分页查询DAO层
  * @author qkmango
  */
 

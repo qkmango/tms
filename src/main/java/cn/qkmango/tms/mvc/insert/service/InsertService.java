@@ -7,6 +7,12 @@ import cn.qkmango.tms.domain.param.InsertElectiveParam;
 
 import java.util.Locale;
 
+/**
+ * 插入服务接口
+ * @author qkmango
+ * @version 1.0
+ * @date 2022-07-28 19:25
+ */
 public interface InsertService {
 
     void insertCourse(InsertCourseParam query, Locale locale) throws InsertException;

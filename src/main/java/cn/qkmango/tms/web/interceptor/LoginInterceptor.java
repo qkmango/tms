@@ -8,11 +8,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
+ * 登陆拦截器
+ * <P>验证用户是否登陆</P>
  * @author qkmango
  * @version 1.0
- * @className LoginInterceptor
- * @Description 登陆拦截器
- * 验证用户是否登陆
  * @date 2021-06-14
  */
 public class LoginInterceptor implements HandlerInterceptor {

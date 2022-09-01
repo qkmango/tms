@@ -10,10 +10,9 @@ import cn.qkmango.tms.domain.param.UpdatePasswordParam;
 import java.util.Locale;
 
 /**
+ * 公共服务
  * @author qkmango
  * @version 1.0
- * @className CommonService
- * @Description 公共服务
  * @date 2022-08-20 20:13
  */
 public interface CommonService {

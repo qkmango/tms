@@ -1,17 +1,36 @@
 package cn.qkmango.tms.domain.bind;
 
 /**
- * @className: RoomType
- * @Description 教室类型 枚举类
- * @author: qkmango
- * @date: 2021-07-07 16:04
- * @version: 1.0
+ * 教室类型 枚举类
+ *
+ * @author qkmango
+ * @version 1.0
+ * @date 2021 -07-07 16:04
  */
 public enum RoomType {
-    bz,//标准教室
-    jt,//阶梯教室
-    sy,//实验室
-    sx,//实训教室
-    wj,//微机教室
-    q//其他
+
+    /**
+     * 标准教室
+     */
+    bz,
+    /**
+     * 阶梯教室
+     */
+    jt,
+    /**
+     * 实验室
+     */
+    sy,
+    /**
+     * 实训教室
+     */
+    sx,
+    /**
+     * 微机教室
+     */
+    wj,
+    /**
+     * 其他
+     */
+    q
 }

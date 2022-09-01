@@ -8,6 +8,10 @@ import cn.qkmango.tms.domain.param.UpdatePasswordParam;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+/**
+ * 更新DAO层
+ * @author qkmango
+ */
 @Mapper
 public interface UpdateDao {
 

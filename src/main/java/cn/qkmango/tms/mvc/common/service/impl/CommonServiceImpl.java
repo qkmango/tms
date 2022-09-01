@@ -24,10 +24,9 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 /**
+ * 公共服务
  * @author qkmango
  * @version 1.0
- * @className CommonServiceImpl
- * @Description 公共服务
  * @date 2022-08-20 20:13
  */
 

@@ -1,7 +1,8 @@
 package cn.qkmango.tms.common.exception;
 
 /**
- * 当年龄有问题时抛出异常
+ * 系统异常
+ * @author qkmango
  */
 public class SystemException extends Exception{
     public SystemException() {

@@ -3,6 +3,11 @@ package cn.qkmango.tms.common.map;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * 响应结果集Map
+ * @see HashMap
+ * @author qkmango
+ */
 public class ResponseMap extends HashMap<String, Object> {
     public ResponseMap(int initialCapacity, float loadFactor) {
         super(initialCapacity, loadFactor);
