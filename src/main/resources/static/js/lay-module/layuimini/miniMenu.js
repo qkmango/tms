@@ -166,7 +166,7 @@ layui.define(["element","laytpl" ,"jquery"], function (exports) {
              * 菜单模块切换
              */
             $('body').on('click', '[data-menu]', function () {
-                var loading = layer.load(0, {shade: false, time: 2 * 1000});
+                var loading = layer.load(1, {shade: false, time: 2 * 1000});
                 var menuId = $(this).attr('data-menu');
                 // header
                 $(".layuimini-header-menu .layui-nav-item.layui-this").removeClass('layui-this');
@@ -183,7 +183,7 @@ layui.define(["element","laytpl" ,"jquery"], function (exports) {
              * 菜单缩放
              */
             $('body').on('click', '.layuimini-site-mobile', function () {
-                var loading = layer.load(0, {shade: false, time: 2 * 1000});
+                var loading = layer.load(1, {shade: false, time: 2 * 1000});
                 var isShow = $('.layuimini-tool [data-side-fold]').attr('data-side-fold');
                 if (isShow == 1) { // 缩放
                     $('.layuimini-tool [data-side-fold]').attr('data-side-fold', 0);
@@ -204,7 +204,7 @@ layui.define(["element","laytpl" ,"jquery"], function (exports) {
              * 菜单缩放
              */
             $('body').on('click', '[data-side-fold]', function () {
-                var loading = layer.load(0, {shade: false, time: 2 * 1000});
+                var loading = layer.load(1, {shade: false, time: 2 * 1000});
                 var isShow = $('.layuimini-tool [data-side-fold]').attr('data-side-fold');
                 if (isShow == 1) { // 缩放
                     $('.layuimini-tool [data-side-fold]').attr('data-side-fold', 0);
@@ -233,7 +233,7 @@ layui.define(["element","laytpl" ,"jquery"], function (exports) {
              * 手机端点开模块
              */
             $('body').on('click', '.layuimini-header-menu.layuimini-mobile-show dd', function () {
-                var loading = layer.load(0, {shade: false, time: 2 * 1000});
+                var loading = layer.load(1, {shade: false, time: 2 * 1000});
                 var check = $('.layuimini-tool [data-side-fold]').attr('data-side-fold');
                 if(check === "1"){
                     $('.layuimini-site-mobile').trigger("click");

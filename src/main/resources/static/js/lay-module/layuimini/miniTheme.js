@@ -419,7 +419,7 @@ layui.define(["jquery", "layer"], function (exports) {
          */
         listen: function (options) {
             $('body').on('click', '[data-bgcolor]', function () {
-                var loading = layer.load(0, {shade: false, time: 2 * 1000});
+                var loading = layer.load(1, {shade: false, time: 2 * 1000});
                 var clientHeight = (document.documentElement.clientHeight) - 60;
                 var bgColorHtml = miniTheme.buildBgColorHtml(options);
                 var html = '<div class="layuimini-color"><div class="color-title"><span>主题</span></div><div class="color-content"><ul>' + bgColorHtml + '</ul></div></div>';
