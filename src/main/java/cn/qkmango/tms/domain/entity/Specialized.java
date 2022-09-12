@@ -2,10 +2,11 @@ package cn.qkmango.tms.domain.entity;
 
 
 import java.util.List;
-import java.util.StringJoiner;
 
 /**
  * 专业实体类
+ *
+ * @author qkmango
  */
 public class Specialized {
 
@@ -58,11 +59,11 @@ public class Specialized {
 
     @Override
     public String toString() {
-        return new StringJoiner(", ", Specialized.class.getSimpleName() + "[", "]")
-                .add("id=" + id)
-                .add("faculty=" + faculty)
-                .add("name='" + name + "'")
-                .add("clazzList=" + clazzList)
-                .toString();
+        return "Specialized{" +
+                "id=" + id +
+                ", faculty=" + faculty +
+                ", name='" + name + '\'' +
+                ", clazzList=" + clazzList +
+                '}';
     }
 }

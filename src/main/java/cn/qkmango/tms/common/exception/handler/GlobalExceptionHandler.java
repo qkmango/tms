@@ -3,31 +3,26 @@ package cn.qkmango.tms.common.exception.handler;
 import cn.qkmango.tms.common.exception.*;
 import cn.qkmango.tms.common.map.ResponseMap;
 import org.apache.log4j.Logger;
-import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.mail.MailException;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ConstraintViolationException;
-import javax.validation.ValidationException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.StringJoiner;
 
 /**
  * 全局异常处理类
  * <p>捕获到异常后会将异常信息返回给前端</p>
+ *
  * @author qkmango
- * @date 2021-07-20 21:04
  * @version 1.0
+ * @date 2021-07-20 21:04
  */
 @ControllerAdvice
 public class GlobalExceptionHandler {
@@ -193,12 +188,13 @@ public class GlobalExceptionHandler {
 
     /**
      * 控制器入参校验异常处理
+     *
      * @param e
      * @return
      */
     @ResponseBody
     @ExceptionHandler(BindException.class)
-    public Map<String, Object> BindExceptionHandle(BindException e){
+    public Map<String, Object> BindExceptionHandle(BindException e) {
         List<ObjectError> errors = e.getAllErrors();
         StringJoiner joiner = new StringJoiner(",", "[", "]");
         errors.forEach(er -> {

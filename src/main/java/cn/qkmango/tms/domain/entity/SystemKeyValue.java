@@ -8,26 +8,25 @@ import javax.validation.constraints.NotBlank;
 import java.util.StringJoiner;
 
 /**
+ * 系统键值对类
+ *
  * @author qkmango
  * @version 1.0
- * @className SystemKeyValue
- * @Description 系统键值对类
  * @date 2022-07-28 19:20
  */
 public class SystemKeyValue {
-    @NotBlank(message = "{valid.SystemKeyValue.key.NotBlank}",
-            groups = {Insert.InsertSystemKeyValue.class, Delete.DeleteSystemKeyValue.class,Update.UpdateSystemKeyValue.class})
+    @NotBlank(groups = {Insert.InsertSystemKeyValue.class, Delete.DeleteSystemKeyValue.class, Update.UpdateSystemKeyValue.class})
     private String key;
-    @NotBlank(message = "{valid.SystemKeyValue.value.NotBlank}", groups = {Insert.InsertSystemKeyValue.class})
+    @NotBlank(groups = {Insert.InsertSystemKeyValue.class})
     private String value;
-    @NotBlank(message = "{valid.SystemKeyValue.description.NotBlank}", groups = {Insert.InsertSystemKeyValue.class})
+    @NotBlank(groups = {Insert.InsertSystemKeyValue.class})
     private String description;
 
-    @NotBlank(message = "{valid.SystemKeyValue.newKey.NotBlank}", groups = {Update.UpdateSystemKeyValue.class,})
+    @NotBlank(groups = {Update.UpdateSystemKeyValue.class,})
     private String newKey;
-    @NotBlank(message = "{valid.SystemKeyValue.newValue.NotBlank}", groups = {Update.UpdateSystemKeyValue.class})
+    @NotBlank(groups = {Update.UpdateSystemKeyValue.class})
     private String newValue;
-    @NotBlank(message = "{valid.SystemKeyValue.newDescription.NotBlank}", groups = {Update.UpdateSystemKeyValue.class})
+    @NotBlank(groups = {Update.UpdateSystemKeyValue.class})
     private String newDescription;
 
     public SystemKeyValue() {

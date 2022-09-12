@@ -3,11 +3,11 @@ package cn.qkmango.tms.domain.param;
 import cn.qkmango.tms.domain.bind.PermissionType;
 
 /**
- * @className: UpdatePasswordParam
- * @Description: 更新密码查询参数类
- * @author: qkmango
- * @date: 2021-07-23 17:20
- * @version: 1.0
+ * 更新密码查询参数类
+ *
+ * @author qkmango
+ * @version 1.0
+ * @date 2021-07-23 17:20
  */
 public class UpdatePasswordParam {
     private String oldPassword;

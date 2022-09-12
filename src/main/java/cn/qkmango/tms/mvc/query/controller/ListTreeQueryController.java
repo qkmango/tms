@@ -14,6 +14,7 @@ import java.util.Map;
 
 /**
  * 树型列表查询
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-08-03 14:43
@@ -34,7 +35,11 @@ public class ListTreeQueryController {
     private ReloadableResourceBundleMessageSource messageSource;
 
 
-    //获取学院，专业，班级树型列表
+    /**
+     * 获取学院，专业，班级树型列表
+     *
+     * @return
+     */
     @RequestMapping("getClazzTreeList.do")
     public Map<String, Object> getClazzTreeList() {
         List<Faculty> clazzTreeList = listTreeQueryService.getClazzTreeList();
@@ -44,6 +49,11 @@ public class ListTreeQueryController {
         return map;
     }
 
+    /**
+     * 获取教师树型列表
+     *
+     * @return
+     */
     @RequestMapping("getTeacherTreeList.do")
     public Map<String, Object> getTeacherTreeList() {
         List<Faculty> teacherTreeList = listTreeQueryService.getTeacherTreeList();

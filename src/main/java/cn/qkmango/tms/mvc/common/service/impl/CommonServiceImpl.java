@@ -25,6 +25,7 @@ import java.util.concurrent.TimeUnit;
 
 /**
  * 公共服务
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-08-20 20:13
@@ -52,7 +53,7 @@ public class CommonServiceImpl implements CommonService {
     public User login(User user, Locale locale) throws LoginException, PermissionException {
         User loginUser = dao.login(user);
         if (loginUser == null) {
-            throw new LoginException(messageSource.getMessage("response.login.failure",null,locale));
+            throw new LoginException(messageSource.getMessage("response.login.failure", null, locale));
         }
 
         loginUser.setPermissionType(user.getPermissionType());
@@ -76,7 +77,7 @@ public class CommonServiceImpl implements CommonService {
 
         //判断影行数
         if (affectedRows != 1) {
-            throw new UpdateException(messageSource.getMessage("db.updatePassword.failure",null,locale));
+            throw new UpdateException(messageSource.getMessage("db.updatePassword.failure", null, locale));
         }
     }
 
@@ -86,17 +87,17 @@ public class CommonServiceImpl implements CommonService {
     public void updateRetrievePassword(RetrievePasswordParam vo, Locale locale) throws UpdateException {
         User user = vo.getUser();
 
-        String redisKey = RedisKey.RETRIEVE_PASSWORD_CAPTCHA_PREFIX.key+":"+user.getEmail();
+        String redisKey = RedisKey.RETRIEVE_PASSWORD_CAPTCHA_PREFIX.key + ":" + user.getEmail();
 
         String code = stringRedisTemplate.opsForValue().get(redisKey);
         if (vo.getCode().equals(code)) {
             int affectedRows = dao.updateRetrievePassword(user);
             if (affectedRows != 1) {
-                throw new UpdateException(messageSource.getMessage("db.updatePassword.failure",null,locale));
+                throw new UpdateException(messageSource.getMessage("db.updatePassword.failure", null, locale));
             }
             stringRedisTemplate.delete(redisKey);
         } else {
-            throw new UpdateException(messageSource.getMessage("captcha.error",null,locale));
+            throw new UpdateException(messageSource.getMessage("captcha.error", null, locale));
         }
     }
 
@@ -105,19 +106,19 @@ public class CommonServiceImpl implements CommonService {
     public void sendRetrievePasswordCaptcha(User user, Locale locale) throws Exception {
         boolean hasUser = hasUser(user);
         if (!hasUser) {
-            throw new DatabaseOperateException(messageSource.getMessage("db.hasUser.failure",null,locale));
+            throw new DatabaseOperateException(messageSource.getMessage("db.hasUser.failure", null, locale));
         }
 
         String captchaCode = CaptchaUtil.getCode();
         //发送邮件验证码
-        emailService.sendMessage(user.getEmail(),"教务系统找回密码","验证码为【"+captchaCode+"】, 有效期为5分钟");
+        emailService.sendMessage(user.getEmail(), "教务系统找回密码", "验证码为【" + captchaCode + "】, 有效期为5分钟");
 
         //验证码写入 redis
         //邮箱地址-验证码写入redis，有效期为 300 秒(5分钟)
         //redisKey示例 "RetrievePasswordCaptcha:123@qq.com"
         ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
-        String redisKey = RedisKey.RETRIEVE_PASSWORD_CAPTCHA_PREFIX.key+":"+user.getEmail();
-        ops.set(redisKey, captchaCode,300, TimeUnit.SECONDS);
+        String redisKey = RedisKey.RETRIEVE_PASSWORD_CAPTCHA_PREFIX.key + ":" + user.getEmail();
+        ops.set(redisKey, captchaCode, 300, TimeUnit.SECONDS);
     }
 
 
@@ -133,10 +134,10 @@ public class CommonServiceImpl implements CommonService {
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void updateUserBasicInfo(User updateUser,Locale locale) throws UpdateException {
+    public void updateUserBasicInfo(User updateUser, Locale locale) throws UpdateException {
         int affectedRows = dao.updateUserBasicInfo(updateUser);
         if (affectedRows != 1) {
-            throw new UpdateException(messageSource.getMessage("db.updateUserBasicInfo.failure",null,locale));
+            throw new UpdateException(messageSource.getMessage("db.updateUserBasicInfo.failure", null, locale));
         }
     }
 

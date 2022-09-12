@@ -1,13 +1,13 @@
 package cn.qkmango.tms.mvc.query.service.impl;
 
+import cn.qkmango.tms.domain.entity.*;
+import cn.qkmango.tms.domain.model.OnceCourseInfo;
+import cn.qkmango.tms.domain.model.TimeTable;
 import cn.qkmango.tms.domain.param.GetCourseListParam;
 import cn.qkmango.tms.domain.param.GetStudentTimetableParam;
 import cn.qkmango.tms.mvc.query.dao.ListQueryDao;
 import cn.qkmango.tms.mvc.query.service.ListQueryService;
 import cn.qkmango.tms.mvc.query.service.SystemQueryService;
-import cn.qkmango.tms.domain.model.OnceCourseInfo;
-import cn.qkmango.tms.domain.model.TimeTable;
-import cn.qkmango.tms.domain.entity.*;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,6 +17,7 @@ import java.util.Map;
 
 /**
  * 列表查询服务
+ *
  * @author qkmango
  */
 @Service
@@ -114,7 +115,7 @@ public class ListQueryServiceImpl implements ListQueryService {
         String currYear = systemCurrYearAndTerm.get("currYear");
         String currTerm = systemCurrYearAndTerm.get("currTerm");
 
-        List<Map<String, Object>> resList = listQueryDao.getTeachEvaluateList(currYear,currTerm, id);
+        List<Map<String, Object>> resList = listQueryDao.getTeachEvaluateList(currYear, currTerm, id);
 
         return resList;
     }

@@ -7,20 +7,21 @@ import javax.validation.constraints.NotBlank;
 import java.util.StringJoiner;
 
 /**
+ * 找回密码 查询参数类
+ *
  * @author qkmango
  * @version 1.0
- * @className RetrievePasswordParam
- * @Description 找回密码 查询参数类
  * @date 2022-08-02 20:54
  */
 public class RetrievePasswordParam {
 
     @Valid
     private User user;
-    //验证码
-    @NotBlank(message = "{}")
+    /**
+     * 验证码
+     */
+    @NotBlank
     private String code;
-
 
     public User getUser() {
         return user;

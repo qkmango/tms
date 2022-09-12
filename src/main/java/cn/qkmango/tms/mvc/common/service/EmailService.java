@@ -6,6 +6,7 @@ import java.io.File;
 
 /**
  * Email服务接口
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-08-02 14:52

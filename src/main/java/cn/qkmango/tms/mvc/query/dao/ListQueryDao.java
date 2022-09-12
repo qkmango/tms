@@ -1,8 +1,8 @@
 package cn.qkmango.tms.mvc.query.dao;
 
+import cn.qkmango.tms.domain.entity.*;
 import cn.qkmango.tms.domain.model.OnceCourseInfo;
 import cn.qkmango.tms.domain.model.TimeTable;
-import cn.qkmango.tms.domain.entity.*;
 import cn.qkmango.tms.domain.param.GetCourseListParam;
 import cn.qkmango.tms.domain.param.GetStudentTimetableParam;
 import org.apache.ibatis.annotations.Mapper;
@@ -14,6 +14,7 @@ import java.util.Map;
 
 /**
  * 列表查询DAO层
+ *
  * @author qkmango
  */
 
@@ -42,6 +43,7 @@ public interface ListQueryDao {
 
     /**
      * 获取信息，仅供课程表查询功能使用
+     *
      * @param studentId
      * @return
      */

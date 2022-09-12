@@ -20,13 +20,14 @@ import java.util.Map;
 
 /**
  * 插入系统信息
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-07-28 19:18
  */
 
 @RestController
-@RequestMapping(value = "/insert/system",method = RequestMethod.POST)
+@RequestMapping(value = "/insert/system", method = RequestMethod.POST)
 public class InsertSystemController {
 
     @Resource
@@ -39,12 +40,12 @@ public class InsertSystemController {
     @RequestMapping("/insertSystemKeyValue.do")
     public Map insertSystemKeyValue(@Validated(Insert.InsertSystemKeyValue.class) SystemKeyValue systemKeyValue, HttpSession session, Locale locale) throws InsertException {
 
-        service.insertSystemKeyValue(systemKeyValue,locale);
+        service.insertSystemKeyValue(systemKeyValue, locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
 
-        map.setMessage(messageSource.getMessage("db.insertSystemKeyValue.success",null,locale));
+        map.setMessage(messageSource.getMessage("db.insertSystemKeyValue.success", null, locale));
         return map;
     }
 

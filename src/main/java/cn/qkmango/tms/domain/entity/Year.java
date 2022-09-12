@@ -4,12 +4,17 @@ import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * 年
+ *
+ * @author qkmango
+ */
 public class Year {
-    //PK，年度，如 2020
-    @NotNull(message = "{valid.Year.year.NotNull}")
-    @Range(min = 2000,max = 2100,message = "{valid.Year.year.Range}")
+    /**PK，年度，如 2020*/
+    @NotNull
+    @Range(min = 2000,max = 2100,message = "年份取值在2000-2100")
     private Integer year;
-    //年度具体值 如 2020-2021
+    /**年度具体值 如 2020-2021*/
     private String name;
 
     public Year() {

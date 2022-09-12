@@ -3,11 +3,11 @@ package cn.qkmango.tms.domain.model;
 import cn.qkmango.tms.domain.bind.course.WeekType;
 
 /**
- * @className: OnceCourseInfo
- * @Description: 一次课的课程信息
- * @author: qkmango
- * @date: 2021-07-25 15:50
- * @version: 1.0
+ * 一次课的课程信息
+ *
+ * @author qkmango
+ * @version 1.0
+ * @date 2021-07-25 15:50
  */
 public class OnceCourseInfo {
     private String name;

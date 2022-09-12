@@ -3,10 +3,10 @@ package cn.qkmango.tms.domain.entity;
 import java.util.StringJoiner;
 
 /**
+ * 课程班级关系
+ *
  * @author qkmango
  * @version 1.0
- * @className CourseClazz
- * @Description
  * @date 2022-08-03 14:34
  */
 public class CourseClazz {

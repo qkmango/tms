@@ -10,20 +10,25 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.StringJoiner;
 
+/**
+ * 用户
+ *
+ * @author qkmango
+ */
 public class User {
-    @NotNull(message = "{valid.User.id.NotNull}", groups = {login.class, Sys.RetrievePasswordCaptcha.class})
+    @NotNull(groups = {login.class, Sys.RetrievePasswordCaptcha.class})
     protected Integer id;
 
-    @NotNull(message = "{valid.User.password.NotNull}", groups = login.class)
+    @NotNull(groups = login.class)
     protected String password;
 
     protected String name;
 
-    @NotBlank(message = "{valid.User.email.NotBlank}", groups = {Update.UpdateUserBasicInfo.class, Sys.RetrievePasswordCaptcha.class})
-    @Email(message = "{valid.User.email.Email}", groups = {Update.UpdateUserBasicInfo.class, Sys.RetrievePasswordCaptcha.class})
+    @NotBlank(groups = {Update.UpdateUserBasicInfo.class, Sys.RetrievePasswordCaptcha.class})
+    @Email(message = "不是Email地址", groups = {Update.UpdateUserBasicInfo.class, Sys.RetrievePasswordCaptcha.class})
     private String email;
 
-    @NotNull(message = "{valid.User.permissionType.NotNull}", groups = {login.class, Sys.RetrievePasswordCaptcha.class})
+    @NotNull(groups = {login.class, Sys.RetrievePasswordCaptcha.class})
     protected PermissionType permissionType;
 
     public User() {

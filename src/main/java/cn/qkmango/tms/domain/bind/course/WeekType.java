@@ -2,6 +2,7 @@ package cn.qkmango.tms.domain.bind.course;
 
 /**
  * 周类型
+ *
  * @author Mango
  */
 

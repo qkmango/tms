@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 /**
  * 登陆拦截器
  * <P>验证用户是否登陆</P>
+ *
  * @author qkmango
  * @version 1.0
  * @date 2021-06-14
@@ -26,7 +27,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             return true;
         }
 
-        ResponseUtil.responseJson(response,"{\"success\": false,\"message\": \"未登录!\"}");
+        ResponseUtil.responseJson(response, "{\"success\": false,\"message\": \"未登录!\"}");
         return false;
 
     }

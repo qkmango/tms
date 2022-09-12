@@ -7,9 +7,10 @@ import java.util.Map;
 
 /**
  * 系统信息查询DAO层
+ *
  * @author qkmango
- * @date 2021-08-17 21:41
  * @version 1.0
+ * @date 2021-08-17 21:41
  */
 
 @Mapper

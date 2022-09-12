@@ -6,10 +6,10 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
+ * 校历
+ *
  * @author qkmango
  * @version 1.0
- * @className Calendar
- * @Description 校历
  * @date 2022-08-22 10:43
  */
 public class Calendar {
@@ -18,7 +18,7 @@ public class Calendar {
     @NotNull
     private Integer year;
 
-    @Size(min = 1,max = 2)
+    @Size(min = 1, max = 2)
     @NotEmpty
     private String term;
 

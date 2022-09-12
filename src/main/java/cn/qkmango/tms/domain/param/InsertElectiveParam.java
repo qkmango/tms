@@ -5,14 +5,14 @@ import java.util.Arrays;
 import java.util.StringJoiner;
 
 /**
- * @className: InsertElectiveParam
- * @Description: 插入选课信息 插叙参数类
- * @author: qkmango
- * @date: 2021-07-20 19:55
- * @version: 1.0
+ * 插入选课信息 插叙参数类
+ *
+ * @author qkmango
+ * @version 1.0
+ * @date 2021-07-20 19:55
  */
 public class InsertElectiveParam {
-    @NotNull(message = "{valid.InsertElectiveParam.courseIds.NotNull}")
+    @NotNull(message = "课程ID列表不能为空")
     private Integer[] courseIds;
 
     private Integer studentId;

@@ -5,21 +5,22 @@ import cn.qkmango.tms.domain.bind.PermissionType;
 
 /**
  * 学生实体类
- *
  * 继承自父类 User 的属性
  * protected Integer id;
  * protected String password;
  * protected String name;
+ *
+ * @author qkmango
  */
 public class Student extends User {
 
-    //性别
+    /** 性别*/
     private Integer sex;
-    //生日
+    /** 生日*/
     private String birth;
-    //所属班级
+    /** 所属班级*/
     private Integer clazz;
-    //所属专业
+    /** 所属专业*/
     private Integer specialized;
 
     public Student() {

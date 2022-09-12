@@ -1,6 +1,5 @@
 package cn.qkmango.tms.mvc.insert.controller;
 
-
 import cn.qkmango.tms.common.annotation.Permission;
 import cn.qkmango.tms.common.exception.InsertException;
 import cn.qkmango.tms.common.map.ResponseMap;
@@ -21,6 +20,7 @@ import java.util.Map;
 
 /**
  * 插入数据控制器
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-07-28 19:18
@@ -38,6 +38,7 @@ public class InsertController {
 
     /**
      * 插入课程
+     *
      * @param query
      * @param locale
      * @return
@@ -48,7 +49,7 @@ public class InsertController {
     public Map<String, Object> insertCourse(@RequestBody @Validated InsertCourseParam query,
                                             Locale locale) throws InsertException {
 
-        service.insertCourse(query,locale);
+        service.insertCourse(query, locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
@@ -60,7 +61,7 @@ public class InsertController {
     /**
      * 添加楼宇
      *
-     * @param building 楼宇对象（楼号，楼名称）
+     * @param building 楼宇对象{楼号,楼名称}
      * @return
      * @throws InsertException
      * @validated true
@@ -180,7 +181,7 @@ public class InsertController {
     @Permission(PermissionType.admin)
     @RequestMapping("/insertCalendar.do")
     public Map insertCalendar(@Validated Calendar calendar, Locale locale) throws InsertException {
-        service.insertCalendar(calendar,locale);
+        service.insertCalendar(calendar, locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
@@ -188,8 +189,6 @@ public class InsertController {
 
         return map;
     }
-
-
 
 
 }

@@ -3,13 +3,13 @@ package cn.qkmango.tms.domain.model;
 import java.util.List;
 
 /**
- * @className: TimeTable
- * @Description: 课程表类
+ * 课程表类
  * 包含课表的基本信息和课程信息列表
+ *
+ * @author qkmango
+ * @version 1.0
+ * @date 2021-07-25 15:31
  * @see cn.qkmango.tms.domain.model.OnceCourseInfo
- * @author: qkmango
- * @date: 2021-07-25 15:31
- * @version: 1.0
  */
 public class TimeTable {
 

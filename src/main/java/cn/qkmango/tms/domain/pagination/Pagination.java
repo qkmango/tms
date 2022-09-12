@@ -1,15 +1,11 @@
 package cn.qkmango.tms.domain.pagination;
 
-
 /**
- * ，
- */
-/**
+ * 分页实体类
+ * 包含当前页码page、每页条数limit、略过的记录条数
+ *
  * @author qkmango
  * @version 1.0
- * @className Pagination
- * @Description 分页实体类
- * 包含当前页码page、每页条数limit、略过的记录条数
  * @date 2021-06-21
  */
 public class Pagination {
@@ -17,7 +13,9 @@ public class Pagination {
     protected Integer page = 1;
     protected Integer limit = 20;
     protected Integer skipCount = 0;
-    //默认就是分页
+    /**
+     * 默认就是分页
+     */
     protected Boolean pagination = true;
 
     public Pagination() {
@@ -26,7 +24,7 @@ public class Pagination {
     public Pagination(Integer page, Integer limit, Boolean pagination) {
         this.page = page;
         this.limit = limit;
-        this.skipCount = (page-1)*limit;
+        this.skipCount = (page - 1) * limit;
         this.pagination = pagination;
     }
 
@@ -35,7 +33,7 @@ public class Pagination {
     }
 
     public void setPage(Integer page) {
-        this.skipCount = (page-1)*limit;
+        this.skipCount = (page - 1) * limit;
         this.page = page;
     }
 
@@ -44,7 +42,7 @@ public class Pagination {
     }
 
     public void setLimit(Integer limit) {
-        this.skipCount = (page-1)*limit;
+        this.skipCount = (page - 1) * limit;
         this.limit = limit;
     }
 
@@ -53,7 +51,7 @@ public class Pagination {
     }
 
     public void setSkipCount() {
-        this.skipCount = (page-1)*limit;
+        this.skipCount = (page - 1) * limit;
     }
 
     public Boolean getPagination() {

@@ -13,6 +13,7 @@ import java.util.Locale;
 
 /**
  * 更新系统信息服务
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-07-28 19:57
@@ -32,7 +33,7 @@ public class UpdateSystemServiceImpl implements UpdateSystemService {
     public void updateSystemKeyValue(SystemKeyValue systemKeyValue, Locale locale) throws UpdateException {
         int affectedRows = dao.updateSystemKeyValue(systemKeyValue);
         if (affectedRows != 1) {
-            throw new UpdateException(messageSource.getMessage("db.updateSystemKeyValue.failure",null,locale));
+            throw new UpdateException(messageSource.getMessage("db.updateSystemKeyValue.failure", null, locale));
         }
     }
 }

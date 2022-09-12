@@ -8,22 +8,26 @@ import javax.validation.constraints.Size;
 
 /**
  * 课程实体类
+ *
+ * @author qkmango
  */
 public class Course {
 
     private Integer id;
-    @NotEmpty(message = "{valid.Course.name.NotEmpty}")
+    @NotEmpty
     private String name;
-    @NotNull(message = "{valid.Course.credit.NotNull}")
-    @Range(min = 1,max = 4,message = "{valid.Course.credit.Range}")
+    @NotNull
+    @Range(min = 1, max = 4)
     private Integer credit;
-    @NotNull(message = "{valid.Course.teacher.NotNull}")
+    @NotNull
     private Integer teacher;
-    @NotNull(message = "{valid.Course.courseYear.NotNull}")
-    @Range(min = 2000,max = 2100,message = "{valid.Year.year.Range}")
+    @NotNull
+    @Range(min = 2000, max = 2100)
     private Integer courseYear;
-    //1：表示第一学期；2：表示第二学期
-    @Size(min = 1,max = 2)
+    /**
+     * 1：表示第一学期；2：表示第二学期
+     */
+    @Size(min = 1, max = 2)
     @NotEmpty
     private String term;
 

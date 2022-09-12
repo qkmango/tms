@@ -13,6 +13,7 @@ import java.util.Locale;
 
 /**
  * 删除服务
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-07-28 17:55
@@ -31,7 +32,7 @@ public class DeleteServiceImpl implements DeleteService {
     public void deleteBuilding(Integer id, Locale locale) throws DeleteException {
         int affectedRows = deleteDao.deleteBuilding(id);
         if (affectedRows != 1) {
-            throw new DeleteException(messageSource.getMessage("db.deleteBuilding.failure",null,locale));
+            throw new DeleteException(messageSource.getMessage("db.deleteBuilding.failure", null, locale));
         }
     }
 
@@ -40,16 +41,16 @@ public class DeleteServiceImpl implements DeleteService {
     public void deleteRoom(Integer id, Locale locale) throws DeleteException {
         int affectedRows = deleteDao.deleteRoom(id);
         if (affectedRows != 1) {
-            throw new DeleteException(messageSource.getMessage("db.deleteRoom.failure",null,locale));
+            throw new DeleteException(messageSource.getMessage("db.deleteRoom.failure", null, locale));
         }
     }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
-    public void deleteYear(Integer year,Locale locale) throws DeleteException {
+    public void deleteYear(Integer year, Locale locale) throws DeleteException {
         int affectedRows = deleteDao.deleteYear(year);
         if (affectedRows != 1) {
-            throw new DeleteException(messageSource.getMessage("db.deleteYear.failure",null,locale));
+            throw new DeleteException(messageSource.getMessage("db.deleteYear.failure", null, locale));
         }
     }
 
@@ -58,7 +59,7 @@ public class DeleteServiceImpl implements DeleteService {
     public void deleteElective(HashMap<String, Object> param, Locale locale) throws DeleteException {
         int affectedRows = deleteDao.deleteElective(param);
         if (affectedRows != 1) {
-            throw new DeleteException(messageSource.getMessage("db.deleteElective.failure",null,locale));
+            throw new DeleteException(messageSource.getMessage("db.deleteElective.failure", null, locale));
         }
     }
 }

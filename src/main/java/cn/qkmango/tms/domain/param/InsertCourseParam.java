@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.StringJoiner;
 
 /**
+ * 插入课程 查询参数类
+ *
  * @author qkmango
  * @version 1.0
- * @className InsertCourseParam
- * @Description 插入课程 查询参数类
  * @date 2022-08-04 10:03
  */
 public class InsertCourseParam {

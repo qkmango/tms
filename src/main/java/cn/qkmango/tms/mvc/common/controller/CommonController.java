@@ -29,6 +29,7 @@ import java.util.Map;
 /**
  * 所有用户公共的接口
  * <p>如登陆更新密码，找回密码，发送验证码 等</p>
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-08-20 11:01
@@ -47,19 +48,19 @@ public class CommonController {
 
     /**
      * @param request
-     * @param user 户信息，前端传来参数：id，password
+     * @param user 用户信息，前端传来参数{id,password}
      * @return
      * @throws LoginException
      */
-    @RequestMapping(value = "/login.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/login.do", method = RequestMethod.POST)
     public Map<String, Object> login(@Validated(Query.login.class) User user, HttpServletRequest request, Locale locale) throws LoginException, PermissionException {
 
-        User loginUser = service.login(user,locale);
+        User loginUser = service.login(user, locale);
         request.getSession(true).setAttribute("user", loginUser);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("response.login.success",null,locale));
+        map.setMessage(messageSource.getMessage("response.login.success", null, locale));
 
         return map;
     }
@@ -67,10 +68,11 @@ public class CommonController {
 
     /**
      * 退出登陆
+     *
      * @param request
      * @return
      */
-    @RequestMapping(value = "/logout.do",method = RequestMethod.POST)
+    @RequestMapping(value = "/logout.do", method = RequestMethod.POST)
     public Map<String, Object> logout(HttpServletRequest request) {
         request.getSession().invalidate();
 
@@ -87,19 +89,19 @@ public class CommonController {
         HttpSession session = request.getSession(false);
         User user;
         if (session == null) {
-            user = new User(1,null,"芒果小洛",null, PermissionType.admin);
-            request.getSession(true).setAttribute("user",user);
+            user = new User(1, null, "芒果小洛", null, PermissionType.admin);
+            request.getSession(true).setAttribute("user", user);
         } else {
-            user = (User)request.getSession().getAttribute("user");
+            user = (User) request.getSession().getAttribute("user");
             if (user == null) {
-                user = new User(1,null,"芒果小洛",null,PermissionType.admin);
-                request.getSession(true).setAttribute("user",user);
+                user = new User(1, null, "芒果小洛", null, PermissionType.admin);
+                request.getSession(true).setAttribute("user", user);
             }
         }
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
-        map.put("user",user);
+        map.put("user", user);
 
         return map;
     }
@@ -107,6 +109,7 @@ public class CommonController {
 
     /**
      * 获取用户信息
+     *
      * @param request
      * @return
      */
@@ -121,6 +124,7 @@ public class CommonController {
 
     /**
      * 获取用户详细信息
+     *
      * @param request
      * @return
      */
@@ -140,6 +144,7 @@ public class CommonController {
 
     /**
      * 更改用户密码
+     *
      * @param session
      * @param updatePasswordParam
      * @param locale
@@ -162,12 +167,12 @@ public class CommonController {
         updatePasswordParam.setId(id);
         updatePasswordParam.setPermissionType(thisUserPermissionType);
 
-        service.updatePassword(updatePasswordParam,locale);
+        service.updatePassword(updatePasswordParam, locale);
 
         ResponseMap map = new ResponseMap();
 
         map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updatePassword.success",null,locale));
+        map.setMessage(messageSource.getMessage("db.updatePassword.success", null, locale));
 
         return map;
     }
@@ -175,6 +180,7 @@ public class CommonController {
 
     /**
      * 找回密码更新
+     *
      * @param session
      * @param vo
      * @param locale
@@ -186,11 +192,11 @@ public class CommonController {
                                                       @Validated RetrievePasswordParam vo,
                                                       Locale locale) throws UpdateException {
 
-        service.updateRetrievePassword(vo,locale);
+        service.updateRetrievePassword(vo, locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updatePassword.success",null,locale));
+        map.setMessage(messageSource.getMessage("db.updatePassword.success", null, locale));
 
         return map;
 
@@ -199,6 +205,7 @@ public class CommonController {
 
     /**
      * 发送找回密码验证码
+     *
      * @param user
      * @param locale
      * @return
@@ -212,15 +219,15 @@ public class CommonController {
 
         ResponseMap map = new ResponseMap(2);
         map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("response.sendRetrievePasswordCaptcha.success",null,locale));
+        map.setMessage(messageSource.getMessage("response.sendRetrievePasswordCaptcha.success", null, locale));
 
         return map;
     }
 
 
-
     /**
      * 更新用户基本信息
+     *
      * @param session
      * @param updateUser
      * @param locale
@@ -237,11 +244,11 @@ public class CommonController {
         updateUser.setId(user.getId());
         updateUser.setPermissionType(user.getPermissionType());
 
-        service.updateUserBasicInfo(updateUser,locale);
+        service.updateUserBasicInfo(updateUser, locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updateUserBasicInfo.success",null,locale));
+        map.setMessage(messageSource.getMessage("db.updateUserBasicInfo.success", null, locale));
 
         return map;
 

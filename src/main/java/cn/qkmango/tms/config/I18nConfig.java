@@ -8,10 +8,9 @@ import org.springframework.web.servlet.i18n.CookieLocaleResolver;
 import java.util.Locale;
 
 /**
+ * 国际化配置类
  * @author qkmango
  * @version 1.0
- * @className I18nConfig
- * @Description 国际化配置类
  * @date 2022-07-31 20:58
  */
 @Configuration
@@ -22,8 +21,7 @@ public class I18nConfig {
         messageBundle.setBasenames(
                 "classpath:i18n/db",
                 "classpath:i18n/query",
-                "classpath:i18n/response",
-                "classpath:i18n/valid"
+                "classpath:i18n/response"
         );
 
         messageBundle.setUseCodeAsDefaultMessage(false);

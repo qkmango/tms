@@ -1,11 +1,12 @@
 package cn.qkmango.tms.domain.entity;
 
-
 import java.util.List;
 import java.util.StringJoiner;
 
 /**
- * 院系实体类
+ * 院系
+ *
+ * @author qkmango
  */
 public class Faculty {
     private Integer id;

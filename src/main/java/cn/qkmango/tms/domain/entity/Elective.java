@@ -6,21 +6,21 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotNull;
 
 /**
- * @className: Elective
- * @Description: 选课对象，对于对应数据库 t_elective 表
- * @author: qkmango
- * @date: 2021-07-02 18:04
- * @version: 1.0
+ * 选课对象，对于对应数据库 t_elective 表
+ *
+ * @author qkmango
+ * @version 1.0
+ * @date 2021-07-02 18:04
  */
 public class Elective {
     //选课ID，学生ID，课程ID，课程分数
 
-    @NotNull(message = "{valid.Elective.id.NotNull}",groups = {UpdateStudentScore.class})
+    @NotNull(groups = {UpdateStudentScore.class})
     private Integer id;
     private Integer student;
     private Integer course;
-    @NotNull(message = "{valid.Elective.id.NotNull}",groups = {UpdateStudentScore.class})
-    @Range(min = 0,max = 100,message = "{valid.Elective.id.NotNull}",groups = {UpdateStudentScore.class})
+    @NotNull(groups = {UpdateStudentScore.class})
+    @Range(min = 0, max = 100, message = "分数取值在0-100", groups = {UpdateStudentScore.class})
     private Integer score;
 
     public Elective() {

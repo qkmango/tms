@@ -23,12 +23,13 @@ import java.util.Map;
 
 /**
  * 更新修改控制器
+ *
  * @author qkmango
  * @version 1.0
  * @date 2021-06-15
  */
 @RestController
-@RequestMapping(value="/update",method = RequestMethod.POST)
+@RequestMapping(value = "/update", method = RequestMethod.POST)
 public class UpdateController {
 
     @Resource
@@ -40,22 +41,22 @@ public class UpdateController {
 
     /**
      * 更新学生成绩
-     * @Validated true
+     *
      * @param elective
-     * @param result
      * @return
      * @throws UpdateException
+     * @Validated true
      */
     @Permission(PermissionType.teacher)
     @RequestMapping("updateStudentScore.do")
     public Map<String, Object> updateStudentScore(@Validated(UpdateStudentScore.class) Elective elective,
                                                   Locale locale) throws UpdateException {
 
-        updateService.updateStudentScore(elective,locale);
+        updateService.updateStudentScore(elective, locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updateStudentScore.success",null,locale));
+        map.setMessage(messageSource.getMessage("db.updateStudentScore.success", null, locale));
 
         return map;
     }
@@ -63,10 +64,11 @@ public class UpdateController {
 
     /**
      * 更新楼宇信息
-     * @Validated false
+     *
      * @param building
      * @return
      * @throws UpdateException
+     * @Validated false
      */
     @Permission(PermissionType.admin)
     @RequestMapping("updateBuilding.do")
@@ -76,7 +78,7 @@ public class UpdateController {
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updateBuilding.success",null,locale));
+        map.setMessage(messageSource.getMessage("db.updateBuilding.success", null, locale));
 
         return map;
     }
@@ -84,20 +86,21 @@ public class UpdateController {
 
     /**
      * 修改 教室信息
-     * @validated true
+     *
      * @param room
      * @return
      * @throws UpdateException
+     * @validated true
      */
     @Permission(PermissionType.admin)
     @RequestMapping("updateRoom.do")
     public Map<String, Object> updateRoom(@Validated(Update.class) Room room, Locale locale) throws UpdateException {
 
-        updateService.updateRoom(room,locale);
+        updateService.updateRoom(room, locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updateRoom.success",null,locale));
+        map.setMessage(messageSource.getMessage("db.updateRoom.success", null, locale));
 
         return map;
     }
@@ -105,24 +108,24 @@ public class UpdateController {
 
     /**
      * 更新修改 年份
-     * @Validated false
+     *
      * @param year
      * @return
      * @throws UpdateException
+     * @Validated false
      */
     @Permission(PermissionType.admin)
     @RequestMapping("updateYear.do")
-    public Map<String, Object> updateYear(Integer year,Integer newYear,Locale locale) throws UpdateException {
+    public Map<String, Object> updateYear(Integer year, Integer newYear, Locale locale) throws UpdateException {
 
-        updateService.updateYear(year,newYear,locale);
+        updateService.updateYear(year, newYear, locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updateYear.success",null,locale));
+        map.setMessage(messageSource.getMessage("db.updateYear.success", null, locale));
 
         return map;
     }
-
 
 
 }

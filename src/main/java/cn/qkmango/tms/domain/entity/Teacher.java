@@ -1,11 +1,17 @@
 package cn.qkmango.tms.domain.entity;
 
+/**
+ * 教师
+ *
+ * @author qkmango
+ */
 public class Teacher {
     private Integer id;
     private String name;
     private Integer sex;
     private String password;
     private Integer faculty;
+    /** 职称*/
     private String profes;
 
     public Teacher() {

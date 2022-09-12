@@ -13,6 +13,7 @@ import java.util.Locale;
 
 /**
  * 删除系统信息服务
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-07-28 17:55
@@ -32,7 +33,7 @@ public class DeleteSystemServiceImpl implements DeleteSystemService {
     public void deleteSystemKeyValue(SystemKeyValue systemKeyValue, Locale locale) throws DeleteException {
         int affectedRows = dao.deleteSystemKeyValue(systemKeyValue);
         if (affectedRows != 1) {
-            throw new DeleteException(messageSource.getMessage("db.deleteSystemKeyValue.failure",null,locale));
+            throw new DeleteException(messageSource.getMessage("db.deleteSystemKeyValue.failure", null, locale));
         }
     }
 }

@@ -9,13 +9,16 @@ import java.util.List;
 
 /**
  * 分页查询DAO层
+ *
  * @author qkmango
  */
 
 @Mapper
 public interface PaginationQueryDao {
     int getCount();
+
     List<HashMap<String, Object>> getStudentScorePagination(StudentScorePagination pagination);
+
     List<HashMap<String, Object>> getRoomPagination(RoomPagination pagination);
 
 }

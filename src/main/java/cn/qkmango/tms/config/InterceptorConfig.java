@@ -8,10 +8,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.i18n.LocaleChangeInterceptor;
 
 /**
+ * 拦截器配置类
  * @author qkmango
  * @version 1.0
- * @className InterceptorConfig
- * @Description 拦截器配置类
  * @date 2022-07-31 20:57
  */
 // @Configuration

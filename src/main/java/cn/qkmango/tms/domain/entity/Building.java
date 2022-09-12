@@ -7,6 +7,8 @@ import javax.validation.constraints.Pattern;
 
 /**
  * 教学楼
+ *
+ * @author qkmango
  */
 public class Building {
 
@@ -15,11 +17,11 @@ public class Building {
      * 楼号
      * 如 12 12A S4 S4A
      */
-    @Pattern(regexp = "^[A-Z]?\\d{1,3}[A-Z]?$",message = "{valid.Building.number.Pattern}")
+    @Pattern(regexp = "^[A-Z]?\\d{1,3}[A-Z]?$", message = "楼号长度在1-4，由数字和最多1个大写字母构成")
     private String number;
-    @NotNull(message = "{valid.Building.name.NotNull}")
+    @NotNull
     private String name;
-    @NotNull(message = "{valid.Building.BuildingType.NotNull}")
+    @NotNull
     private BuildingType buildingType;
 
     public Building() {

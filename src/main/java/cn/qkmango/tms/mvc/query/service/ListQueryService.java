@@ -1,7 +1,7 @@
 package cn.qkmango.tms.mvc.query.service;
 
-import cn.qkmango.tms.domain.model.TimeTable;
 import cn.qkmango.tms.domain.entity.*;
+import cn.qkmango.tms.domain.model.TimeTable;
 import cn.qkmango.tms.domain.param.GetCourseListParam;
 import cn.qkmango.tms.domain.param.GetStudentTimetableParam;
 
@@ -11,6 +11,7 @@ import java.util.Map;
 
 /**
  * 列表查询服务接口
+ *
  * @author qkmango
  */
 public interface ListQueryService {

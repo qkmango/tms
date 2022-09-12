@@ -3,11 +3,11 @@ package cn.qkmango.tms.domain.param;
 import javax.validation.constraints.NotNull;
 
 /**
- * @className: GetStudentTimetableParam
- * @Description: 获取学生课程表查询参数类
- * @author: qkmango
- * @date: 2021-07-25 16:08
- * @version: 1.0
+ * 获取学生课程表查询参数类
+ *
+ * @author qkmango
+ * @version 1.0
+ * @date 2021-07-25 16:08
  */
 public class GetStudentTimetableParam {
 

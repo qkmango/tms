@@ -5,8 +5,7 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotNull;
 
 /**
- * @className: TeachEvaluate
- * @Description: 教学评价对象
+ * 教学评价对象
  * student   学生ID
  * elective  选课表ID
  * attitude  教材态度
@@ -20,9 +19,9 @@ import javax.validation.constraints.NotNull;
  * composite 综合评价
  * remark    评语
  *
- * @author: qkmango
- * @date: 2021-08-18 13:47
- * @version: 1.0
+ * @author qkmango
+ * @date 2021-08-18 13:47
+ * @version 1.0
  */
 public class TeachEvaluate {
 

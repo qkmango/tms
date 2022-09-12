@@ -7,30 +7,35 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotNull;
 
 
+/**
+ * 课程信息
+ *
+ * @author qkmango
+ */
 public class CourseInfo {
 
     private Integer id;
     private Integer course;
-    @NotNull(message = "{valid.CourseInfo.courseType.NotNull}")
+    @NotNull
     private CourseType courseType;
-    @NotNull(message = "{valid.CourseInfo.weekType.NotNull}")
+    @NotNull
     private WeekType weekType;
-    @NotNull(message = "{valid.CourseInfo.beginWeek.NotNull}")
-    @Range(min = 1, message = "{valid.CourseInfo.beginWeek.Range}")
+    @NotNull
+    @Range(min = 1, message = "起始周必须>=1")
     private Integer beginWeek;
-    @NotNull(message = "{valid.CourseInfo.lengthWeek.NotNull}")
-    @Range(min = 1, message = "{valid.CourseInfo.lengthWeek.Range}")
+    @NotNull
+    @Range(min = 1, message = "持续周必须>=1")
     private Integer lengthWeek;
-    @NotNull(message = "{valid.CourseInfo.weekDay.NotNull}")
-    @Range(min = 1,max = 7,message = "{valid.CourseInfo.weekDay.Range}")
+    @NotNull
+    @Range(min = 1, max = 7, message = "星期在1-7")
     private Integer weekDay;
-    @NotNull(message = "{valid.CourseInfo.begin.NotNull}")
-    @Range(min = 1, max = 11, message = "{valid.CourseInfo.begin.Range}")
+    @NotNull
+    @Range(min = 1, max = 11, message = "起始节取值在1-11")
     private Integer begin;
-    @NotNull(message = "{valid.CourseInfo.length.NotNull}")
-    @Range(min = 1, max = 4, message = "{valid.CourseInfo.length.Range}")
+    @NotNull
+    @Range(min = 1, max = 4, message = "持续节取值在1-4")
     private Integer length;
-    @NotNull(message = "{valid.CourseInfo.address.NotNull}")
+    @NotNull
     private Integer address;
 
     public CourseInfo() {

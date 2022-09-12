@@ -19,13 +19,14 @@ import java.util.Map;
 
 /**
  * 更新系统信息控制器
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-07-28 19:56
  */
 
 @RestController
-@RequestMapping(value="/update/system",method = RequestMethod.POST)
+@RequestMapping(value = "/update/system", method = RequestMethod.POST)
 public class UpdateSystemController {
 
     @Resource
@@ -37,13 +38,13 @@ public class UpdateSystemController {
     @Permission(PermissionType.admin)
     @RequestMapping("updateSystemKeyValue.do")
     public Map<String, Object> updateSystemKeyValue(@Validated(Update.UpdateSystemKeyValue.class) SystemKeyValue systemKeyValue,
-                                                  Locale locale) throws UpdateException {
+                                                    Locale locale) throws UpdateException {
 
-        service.updateSystemKeyValue(systemKeyValue,locale);
+        service.updateSystemKeyValue(systemKeyValue, locale);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
-        map.setMessage(messageSource.getMessage("db.updateSystemKeyValue.success",null,locale));
+        map.setMessage(messageSource.getMessage("db.updateSystemKeyValue.success", null, locale));
 
         return map;
     }

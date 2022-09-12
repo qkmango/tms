@@ -5,30 +5,46 @@ import java.util.StringJoiner;
 
 
 /**
+ * 学生分数分页类
+ *
  * @author qkmango
  * @version 1.0
- * @className StudentScorePagination
- * @Description 学生分数分页类
- * @see cn.qkmango.tms.domain.pagination.Pagination
  * @date 2022-07-31 19:26
+ * @see cn.qkmango.tms.domain.pagination.Pagination
  */
 public class StudentScorePagination extends Pagination {
 
-    //学生ID
+    /**
+     * 学生ID
+     */
     private Integer student;
-    //学生姓名
+    /**
+     * 学生姓名
+     */
     private String name;
-    //授课老师ID
+    /**
+     * 授课老师ID
+     */
     private Integer teacher;
-    //班级ID
+    /**
+     * 班级ID
+     */
     private List<Integer> clazz;
-    //学科（专业课）ID
+    /**
+     * 学科（专业课）ID
+     */
     private Integer course;
-    //学科 开设年份
+    /**
+     * 学科 开设年份
+     */
     private Integer courseYear;
-    //学期
+    /**
+     * 学期
+     */
     private Integer term;
-    //课程 名称
+    /**
+     * 课程 名称
+     */
     private String courseName;
 
     public StudentScorePagination() {

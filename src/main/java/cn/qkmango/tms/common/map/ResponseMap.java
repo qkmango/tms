@@ -5,8 +5,9 @@ import java.util.Map;
 
 /**
  * 响应结果集Map
- * @see HashMap
+ *
  * @author qkmango
+ * @see HashMap
  */
 public class ResponseMap extends HashMap<String, Object> {
     public ResponseMap(int initialCapacity, float loadFactor) {
@@ -25,15 +26,15 @@ public class ResponseMap extends HashMap<String, Object> {
     }
 
     public void setSuccess(boolean flag) {
-        this.put("success",flag);
+        this.put("success", flag);
     }
 
     public void setMessage(String message) {
-        this.put("message",message);
+        this.put("message", message);
     }
 
     public void setData(Object data) {
-        this.put("data",data);
+        this.put("data", data);
     }
 
 }

@@ -4,10 +4,10 @@ import cn.qkmango.tms.domain.entity.Course;
 
 
 /**
+ * 课程分页
+ *
  * @author qkmango
  * @version 1.0
- * @className CoursePagination
- * @Description
  * @date 2022-07-31 19:26
  */
 public class CoursePagination extends Pagination {

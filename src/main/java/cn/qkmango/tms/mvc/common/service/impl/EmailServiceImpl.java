@@ -15,6 +15,7 @@ import java.io.File;
 
 /**
  * Email服务实现类
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-08-02 14:53
@@ -41,10 +42,14 @@ public class EmailServiceImpl implements EmailService {
     public void sendMessage(String to, String subject, String content) throws MailException {
         // 创建一个邮件对象
         SimpleMailMessage msg = new SimpleMailMessage();
-        msg.setFrom(from); // 设置发送发
-        msg.setTo(to); // 设置接收方
-        msg.setSubject(subject); // 设置邮件主题
-        msg.setText(content); // 设置邮件内容
+        // 设置发送发
+        msg.setFrom(from);
+        // 设置接收方
+        msg.setTo(to);
+        // 设置邮件主题
+        msg.setSubject(subject);
+        // 设置邮件内容
+        msg.setText(content);
         // 发送邮件
         mailSender.send(msg);
     }
@@ -61,11 +66,16 @@ public class EmailServiceImpl implements EmailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-            helper.setFrom(from); // 设置发送发
-            helper.setTo(to); // 设置接收方
-            helper.setSubject(subject); // 设置邮件主题
-            helper.setText(content); // 设置邮件内容
-            if (files != null && files.length > 0) { // 添加附件（多个）
+            // 设置发送发
+            helper.setFrom(from);
+            // 设置接收方
+            helper.setTo(to);
+            // 设置邮件主题
+            helper.setSubject(subject);
+            // 设置邮件内容
+            helper.setText(content);
+            // 添加附件（多个）
+            if (files != null && files.length > 0) {
                 for (File file : files) {
                     helper.addAttachment(file.getName(), file);
                 }
@@ -89,11 +99,16 @@ public class EmailServiceImpl implements EmailService {
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         try {
             MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
-            helper.setFrom(from); // 设置发送发
-            helper.setTo(to); // 设置接收方
-            helper.setSubject(subject); // 设置邮件主题
-            helper.setText(content); // 设置邮件内容
-            helper.addAttachment(file.getName(), file); // 单个附件
+            // 设置发送发
+            helper.setFrom(from);
+            // 设置接收方
+            helper.setTo(to);
+            // 设置邮件主题
+            helper.setSubject(subject);
+            // 设置邮件内容
+            helper.setText(content);
+            // 单个附件
+            helper.addAttachment(file.getName(), file);
         } catch (MessagingException e) {
             e.printStackTrace();
         }

@@ -4,7 +4,10 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.HashMap;
 
-
+/**
+ * 删除
+ * @author qkmango
+ */
 @Mapper
 public interface DeleteDao {
     int deleteBuilding(Integer id);

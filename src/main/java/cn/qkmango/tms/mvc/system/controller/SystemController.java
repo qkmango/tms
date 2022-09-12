@@ -18,6 +18,7 @@ import java.util.Map;
 
 /**
  * 系统信息控制器
+ *
  * @author qkmango
  * @version 1.0
  * @date 2021-06-13
@@ -37,15 +38,16 @@ public class SystemController {
 
     /**
      * 更改语言环境
+     *
      * @param locale 新的语言
      * @return
      */
     @RequestMapping(value = "/setLocale.do")
     public Map setLocale(String locale, Locale localeObj) {
         HashMap<Object, Object> map = new HashMap<>(3);
-        map.put("locale",localeObj.getLanguage());
-        map.put("success",true);
-        map.put("message",messageSource.getMessage("response.setLocale.success",null,localeObj));
+        map.put("locale", localeObj.getLanguage());
+        map.put("success", true);
+        map.put("message", messageSource.getMessage("response.setLocale.success", null, localeObj));
         return map;
 
     }
@@ -53,6 +55,7 @@ public class SystemController {
 
     /**
      * 获取当前活动的 session 数量（当前登陆用户数）
+     *
      * @param request
      * @return
      */
@@ -70,7 +73,7 @@ public class SystemController {
         }
 
         int active = sessionManager != null ? sessionManager.getActiveSessions() : 0;
-        String res = "{\"success\":true,\"active\":"+active+"}";
+        String res = "{\"success\":true,\"active\":" + active + "}";
 
         return res;
     }

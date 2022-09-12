@@ -8,26 +8,29 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotNull;
 
 /**
+ * 教室
  * 属性：ID，教室号，名称，所属楼宇，容纳人数，教室类型
+ *
+ * @author qkmango
  */
 public class Room {
-    @NotNull(message = "{valid.Room.id.NotNull}",groups = {UpdateRoom.class})
+    @NotNull(groups = {UpdateRoom.class})
     private Integer id;
 
-    @NotNull(message = "{valid.Room.number.NotNull}",groups = {UpdateRoom.class, InsertRoom.class})
-    @Range(min = 101,max = 999,message = "{valid.Room.number.Range}",groups = {UpdateRoom.class, InsertRoom.class})
+    @NotNull(groups = {UpdateRoom.class, InsertRoom.class})
+    @Range(min = 101, max = 999, message = "教室号为三位数101-999", groups = {UpdateRoom.class, InsertRoom.class})
     private Integer number;
 
     private String name;
 
-    @NotNull(message = "{valid.Room.building.NotNull}",groups = {UpdateRoom.class, InsertRoom.class})
+    @NotNull(groups = {UpdateRoom.class, InsertRoom.class})
     private Integer building;
 
-    @NotNull(message = "{valid.Room.capacity.NotNull}",groups = {UpdateRoom.class, InsertRoom.class})
-    @Range(min = 1,message = "{valid.Room.capacity.Range}",groups = {UpdateRoom.class, InsertRoom.class})
+    @NotNull(groups = {UpdateRoom.class, InsertRoom.class})
+    @Range(min = 1, message = "容纳人数>0", groups = {UpdateRoom.class, InsertRoom.class})
     private Integer capacity;
 
-    @NotNull(message = "{valid.Room.roomType.NotNull}",groups = {UpdateRoom.class, InsertRoom.class})
+    @NotNull(groups = {UpdateRoom.class, InsertRoom.class})
     private RoomType roomType;
 
     public Room() {

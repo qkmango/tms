@@ -12,9 +12,10 @@ import java.util.Map;
 
 /**
  * 系统信息查询服务
+ *
  * @author qkmango
- * @date 2021-08-17 21:48
  * @version 1.0
+ * @date 2021-08-17 21:48
  */
 
 @Service
@@ -34,11 +35,11 @@ public class SystemQueryServiceImpl implements SystemQueryService {
 
         if (currYear == null) {
             currYear = dao.getSystemCurrYear();
-            stringRedisTemplate.opsForValue().set("currYear",currYear);
+            stringRedisTemplate.opsForValue().set("currYear", currYear);
         }
-        if(currTerm == null) {
+        if (currTerm == null) {
             currTerm = dao.getSystemCurrTerm();
-            stringRedisTemplate.opsForValue().set("currTerm",currTerm);
+            stringRedisTemplate.opsForValue().set("currTerm", currTerm);
         }
 
         HashMap<String, String> map = new HashMap<>(2);

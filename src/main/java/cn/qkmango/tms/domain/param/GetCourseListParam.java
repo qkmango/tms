@@ -4,10 +4,10 @@ import java.util.List;
 import java.util.StringJoiner;
 
 /**
+ * 获取课程列表
+ *
  * @author qkmango
  * @version 1.0
- * @className GetCourseListParam
- * @Description 获取课程列表
  * @date 2022-08-19 18:39
  */
 public class GetCourseListParam {

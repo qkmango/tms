@@ -3,6 +3,7 @@ package cn.qkmango.tms.domain.bind.course;
 
 /**
  * 课程类型
+ *
  * @author qkmango
  */
 public enum CourseType {

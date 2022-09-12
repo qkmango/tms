@@ -9,6 +9,7 @@ import javax.annotation.Resource;
 
 /**
  * 系统信息服务
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-08-20

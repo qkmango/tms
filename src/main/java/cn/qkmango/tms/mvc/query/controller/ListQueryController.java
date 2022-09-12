@@ -1,21 +1,20 @@
 package cn.qkmango.tms.mvc.query.controller;
 
+import cn.qkmango.tms.common.annotation.Permission;
+import cn.qkmango.tms.common.map.ResponseMap;
+import cn.qkmango.tms.domain.bind.PermissionType;
+import cn.qkmango.tms.domain.entity.*;
+import cn.qkmango.tms.domain.model.TimeTable;
 import cn.qkmango.tms.domain.param.GetCourseListParam;
 import cn.qkmango.tms.domain.param.GetStudentTimetableParam;
 import cn.qkmango.tms.mvc.query.service.ListQueryService;
 import cn.qkmango.tms.mvc.query.service.SystemQueryService;
-import cn.qkmango.tms.common.annotation.Permission;
-import cn.qkmango.tms.common.map.ResponseMap;
-import cn.qkmango.tms.domain.bind.PermissionType;
-import cn.qkmango.tms.domain.model.TimeTable;
-import cn.qkmango.tms.domain.entity.*;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
@@ -23,6 +22,7 @@ import java.util.Map;
 
 /**
  * 仅提供列表查询，不提供分页
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-07-31 19:26
@@ -44,6 +44,7 @@ public class ListQueryController {
 
     /**
      * 查询院系列表
+     *
      * @return
      */
     @RequestMapping("/getFacultyList.do")
@@ -60,6 +61,7 @@ public class ListQueryController {
 
     /**
      * 条件查询专业列表
+     *
      * @return
      */
     @RequestMapping("/getSpecializedList.do")
@@ -79,10 +81,11 @@ public class ListQueryController {
      * 查询指定专业的所有班级
      * teacher 角色 在使用学生成绩修改模块时，条件查询时获取下拉列表使用的
      * Map接收的参数有
-     *      faculty     表示院系的id，数据库中存储的为 int类型，但是前端请求的是 String类型
-     *      courseYear  学科开设的年份
-     *      term        学科开设的学期
-     *      clazzYear   班级年级（如2020级）
+     * faculty     表示院系的id，数据库中存储的为 int类型，但是前端请求的是 String类型
+     * courseYear  学科开设的年份
+     * term        学科开设的学期
+     * clazzYear   班级年级（如2020级）
+     *
      * @return
      */
     @RequestMapping("/getClazzList.do")
@@ -99,14 +102,13 @@ public class ListQueryController {
 
     /**
      * 获取指定的老师和班级的 科目列表
+     *
      * @param query 查询条件
      * @return
      */
     @Permission(PermissionType.teacher)
     @RequestMapping("/getCourseList.do")
-    public Map<String, Object> getCourseList(GetCourseListParam query, HttpSession session) {
-
-        // User user = (User)session.getAttribute("user");
+    public Map<String, Object> getCourseList(GetCourseListParam query) {
 
         List<Course> courseList = listQueryService.getCourseList(query);
 
@@ -131,6 +133,7 @@ public class ListQueryController {
 
     /**
      * 条件获取 楼 列表（不分页）
+     *
      * @param building
      * @return
      */
@@ -150,6 +153,7 @@ public class ListQueryController {
 
     /**
      * 条件获取 年份 列表
+     *
      * @param year
      * @return
      */
@@ -167,6 +171,7 @@ public class ListQueryController {
 
     /**
      * 获取 当前学生选课列表（）包括已选和未选的课程
+     *
      * @param alreadyElective 是否已选（true，false，null）
      * @param session
      * @return
@@ -177,7 +182,7 @@ public class ListQueryController {
         User user = (User) session.getAttribute("user");
         Integer id = user.getId();
 
-        List<Map> data = listQueryService.getStudentElectiveCourseList(id,alreadyElective);
+        List<Map> data = listQueryService.getStudentElectiveCourseList(id, alreadyElective);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
@@ -189,11 +194,12 @@ public class ListQueryController {
 
     /**
      * 获取学生课表
+     *
      * @param session
      * @return
      */
     @RequestMapping("/getStudentTimetable.do")
-    public Map<String,Object> getStudentTimetable(@Validated GetStudentTimetableParam query, HttpSession session) {
+    public Map<String, Object> getStudentTimetable(@Validated GetStudentTimetableParam query, HttpSession session) {
         User user = (User) session.getAttribute("user");
         Integer studentId = user.getId();
 
@@ -211,17 +217,18 @@ public class ListQueryController {
 
     /**
      * 获取学生基本信息
+     *
      * @param session
      * @return
      */
     @RequestMapping("/getStudentBasicInfo.do")
-    public Map<String,Object> getStudentBasicInfo(HttpSession session) {
+    public Map<String, Object> getStudentBasicInfo(HttpSession session) {
         HashMap<String, Object> basicInfo = (HashMap<String, Object>) session.getAttribute("basicInfo");
 
         if (basicInfo == null) {
             User user = (User) session.getAttribute("user");
             basicInfo = listQueryService.getStudentBasicInfo(user.getId());
-            session.setAttribute("basicInfo",basicInfo);
+            session.setAttribute("basicInfo", basicInfo);
         }
 
         ResponseMap map = new ResponseMap();
@@ -234,6 +241,7 @@ public class ListQueryController {
 
     /**
      * 获得教学评价列表
+     *
      * @param session
      * @return
      */
@@ -254,6 +262,7 @@ public class ListQueryController {
 
     /**
      * 查询校历列表
+     *
      * @return
      */
     @Permission(PermissionType.admin)

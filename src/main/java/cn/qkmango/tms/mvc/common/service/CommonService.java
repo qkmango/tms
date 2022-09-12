@@ -11,6 +11,7 @@ import java.util.Locale;
 
 /**
  * 公共服务
+ *
  * @author qkmango
  * @version 1.0
  * @date 2022-08-20 20:13
@@ -28,6 +29,6 @@ public interface CommonService {
 
     boolean hasUser(User user);
 
-    void updateUserBasicInfo(User updateUser,Locale locale) throws UpdateException;
+    void updateUserBasicInfo(User updateUser, Locale locale) throws UpdateException;
 
 }

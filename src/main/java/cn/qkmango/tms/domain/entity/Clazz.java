@@ -1,5 +1,10 @@
 package cn.qkmango.tms.domain.entity;
 
+/**
+ * 班级
+ *
+ * @author qkmango
+ */
 public class Clazz {
 
     private Integer id;
