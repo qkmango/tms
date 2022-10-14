@@ -11,7 +11,7 @@
  Target Server Version : 50562
  File Encoding         : 65001
 
- Date: 08/08/2022 18:28:12
+ Date: 14/10/2022 17:53:41
 */
 
 SET NAMES utf8mb4;
@@ -59,7 +59,27 @@ INSERT INTO `t_building` VALUES (6, '1', '土木与环境工程学院-A', 'j');
 INSERT INTO `t_building` VALUES (7, '2', '土木与环境工程学院-B1', 'j');
 INSERT INTO `t_building` VALUES (8, '7A', '国际教育学院', 'j');
 INSERT INTO `t_building` VALUES (9, '7B', '文化与新闻传播学院', 'j');
-INSERT INTO `t_building` VALUES (10, '11', '11', 's');
+INSERT INTO `t_building` VALUES (10, '15', '科技学院', 'j');
+
+-- ----------------------------
+-- Table structure for t_calendar
+-- ----------------------------
+DROP TABLE IF EXISTS `t_calendar`;
+CREATE TABLE `t_calendar`  (
+  `year` int(11) NOT NULL COMMENT '学年',
+  `term` char(1) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学期1,2',
+  `start` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学期起始日期',
+  `end` char(10) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '学期结束日期',
+  `holiday` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '假期格式字符串\n2022-5-1,2,3,4,5,6,7\n2022-6-5,6',
+  PRIMARY KEY (`year`, `term`) USING BTREE,
+  UNIQUE INDEX `t_calendar_year_term`(`year`, `term`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '校历' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of t_calendar
+-- ----------------------------
+INSERT INTO `t_calendar` VALUES (2022, '1', '2022-02-21', '2022-07-01', '2022-5-1,2,3,4,5,6,7');
+INSERT INTO `t_calendar` VALUES (2022, '2', '2022-02-21', '2022-07-01', '2022-5-1,2,3,4,5,6,7');
 
 -- ----------------------------
 -- Table structure for t_clazz
@@ -309,7 +329,7 @@ CREATE TABLE `t_course`  (
   INDEX `FK_course_REF_year`(`courseYear`) USING BTREE,
   CONSTRAINT `FK_course_REF_teacher` FOREIGN KEY (`teacher`) REFERENCES `t_teacher` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_course_REF_year` FOREIGN KEY (`courseYear`) REFERENCES `t_year` (`year`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 45 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of t_course
@@ -328,6 +348,8 @@ INSERT INTO `t_course` VALUES (37, 'HTML5', '1', 1, 2021, '1');
 INSERT INTO `t_course` VALUES (38, 'SQL Server数据库', '1', 1, 2021, '1');
 INSERT INTO `t_course` VALUES (39, 'Android应用开发', '1', 1, 2021, '1');
 INSERT INTO `t_course` VALUES (40, 'PHP', '3', 55, 2021, '1');
+INSERT INTO `t_course` VALUES (42, '测试', '1', 1, 2019, '1');
+INSERT INTO `t_course` VALUES (44, '测试', '1', 1, 2019, '1');
 
 -- ----------------------------
 -- Table structure for t_course_clazz
@@ -359,6 +381,8 @@ INSERT INTO `t_course_clazz` VALUES (37, 1);
 INSERT INTO `t_course_clazz` VALUES (38, 1);
 INSERT INTO `t_course_clazz` VALUES (39, 1);
 INSERT INTO `t_course_clazz` VALUES (40, 1);
+INSERT INTO `t_course_clazz` VALUES (42, 1);
+INSERT INTO `t_course_clazz` VALUES (44, 1);
 INSERT INTO `t_course_clazz` VALUES (27, 3);
 INSERT INTO `t_course_clazz` VALUES (28, 3);
 INSERT INTO `t_course_clazz` VALUES (29, 3);
@@ -372,6 +396,8 @@ INSERT INTO `t_course_clazz` VALUES (36, 3);
 INSERT INTO `t_course_clazz` VALUES (37, 3);
 INSERT INTO `t_course_clazz` VALUES (38, 3);
 INSERT INTO `t_course_clazz` VALUES (39, 3);
+INSERT INTO `t_course_clazz` VALUES (42, 3);
+INSERT INTO `t_course_clazz` VALUES (44, 3);
 INSERT INTO `t_course_clazz` VALUES (40, 135);
 
 -- ----------------------------
@@ -394,25 +420,27 @@ CREATE TABLE `t_course_info`  (
   INDEX `FK_course_info_REF_room`(`address`) USING BTREE,
   CONSTRAINT `FK_course_info_REF_course` FOREIGN KEY (`course`) REFERENCES `t_course` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_course_info_REF_room` FOREIGN KEY (`address`) REFERENCES `t_room` (`id`) ON DELETE RESTRICT ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 44 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of t_course_info
 -- ----------------------------
-INSERT INTO `t_course_info` VALUES (27, 27, 'theory', 'all', 1, 10, 3, 1, 2, 1);
+INSERT INTO `t_course_info` VALUES (27, 27, 'theory', 'all', 1, 15, 3, 1, 2, 1);
 INSERT INTO `t_course_info` VALUES (28, 28, 'theory', 'all', 1, 10, 1, 1, 2, 1);
-INSERT INTO `t_course_info` VALUES (29, 29, 'theory', 'all', 1, 10, 2, 7, 2, 1);
-INSERT INTO `t_course_info` VALUES (30, 30, 'theory', 'all', 1, 10, 3, 2, 1, 1);
-INSERT INTO `t_course_info` VALUES (31, 31, 'practice', 'all', 1, 10, 3, 5, 2, 1);
+INSERT INTO `t_course_info` VALUES (29, 29, 'theory', 'sgl', 1, 18, 2, 7, 2, 1);
+INSERT INTO `t_course_info` VALUES (30, 30, 'theory', 'all', 1, 10, 4, 3, 2, 1);
+INSERT INTO `t_course_info` VALUES (31, 31, 'practice', 'all', 1, 18, 3, 5, 2, 1);
 INSERT INTO `t_course_info` VALUES (32, 32, 'practice', 'all', 1, 10, 3, 7, 1, 1);
-INSERT INTO `t_course_info` VALUES (33, 33, 'practice', 'all', 1, 10, 4, 1, 1, 1);
-INSERT INTO `t_course_info` VALUES (34, 34, 'practice', 'all', 1, 10, 4, 2, 1, 1);
-INSERT INTO `t_course_info` VALUES (35, 35, 'practice', 'all', 1, 10, 1, 3, 1, 1);
-INSERT INTO `t_course_info` VALUES (36, 36, 'practice', 'all', 1, 10, 2, 5, 2, 1);
-INSERT INTO `t_course_info` VALUES (37, 37, 'practice', 'all', 1, 10, 3, 7, 2, 1);
-INSERT INTO `t_course_info` VALUES (38, 38, 'practice', 'all', 1, 10, 4, 7, 2, 1);
-INSERT INTO `t_course_info` VALUES (39, 39, 'practice', 'all', 1, 10, 3, 9, 2, 1);
+INSERT INTO `t_course_info` VALUES (33, 33, 'practice', 'dbl', 1, 18, 4, 1, 1, 1);
+INSERT INTO `t_course_info` VALUES (34, 34, 'practice', 'all', 1, 15, 4, 2, 1, 1);
+INSERT INTO `t_course_info` VALUES (35, 35, 'practice', 'sgl', 1, 10, 1, 3, 1, 1);
+INSERT INTO `t_course_info` VALUES (36, 36, 'practice', 'all', 1, 20, 2, 5, 2, 1);
+INSERT INTO `t_course_info` VALUES (37, 37, 'practice', 'dbl', 1, 15, 6, 7, 2, 1);
+INSERT INTO `t_course_info` VALUES (38, 38, 'practice', 'dbl', 1, 10, 4, 7, 2, 1);
+INSERT INTO `t_course_info` VALUES (39, 39, 'practice', 'dbl', 1, 16, 3, 9, 2, 1);
 INSERT INTO `t_course_info` VALUES (40, 40, 'theory', 'all', 1, 10, 5, 1, 1, 1);
+INSERT INTO `t_course_info` VALUES (42, 42, 'theory', 'all', 1, 10, 1, 1, 2, 1);
+INSERT INTO `t_course_info` VALUES (43, 44, 'theory', 'all', 1, 10, 1, 1, 2, 1);
 
 -- ----------------------------
 -- Table structure for t_elective
@@ -428,17 +456,18 @@ CREATE TABLE `t_elective`  (
   INDEX `FK_elective_REF_course`(`course`) USING BTREE,
   CONSTRAINT `FK_elective_REF_course` FOREIGN KEY (`course`) REFERENCES `t_course` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `FK_elective_REF_student` FOREIGN KEY (`student`) REFERENCES `t_student` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE = InnoDB AUTO_INCREMENT = 525 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 581 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of t_elective
 -- ----------------------------
-INSERT INTO `t_elective` VALUES (516, 1, 28, NULL);
-INSERT INTO `t_elective` VALUES (517, 1, 29, NULL);
-INSERT INTO `t_elective` VALUES (518, 1, 31, 99);
-INSERT INTO `t_elective` VALUES (519, 1, 27, NULL);
-INSERT INTO `t_elective` VALUES (520, 1, 30, NULL);
-INSERT INTO `t_elective` VALUES (524, 1, 35, 85);
+INSERT INTO `t_elective` VALUES (573, 1, 32, NULL);
+INSERT INTO `t_elective` VALUES (575, 1, 33, NULL);
+INSERT INTO `t_elective` VALUES (576, 1, 35, 50);
+INSERT INTO `t_elective` VALUES (577, 1, 27, NULL);
+INSERT INTO `t_elective` VALUES (578, 1, 28, NULL);
+INSERT INTO `t_elective` VALUES (579, 1, 29, NULL);
+INSERT INTO `t_elective` VALUES (580, 1, 30, NULL);
 
 -- ----------------------------
 -- Table structure for t_faculty
@@ -485,7 +514,7 @@ CREATE TABLE `t_room`  (
 INSERT INTO `t_room` VALUES (1, 1, 402, '计算机网络实训基地', 50, 'sx');
 INSERT INTO `t_room` VALUES (4, 7, 404, '土木', 55, 'bz');
 INSERT INTO `t_room` VALUES (5, 10, 999, '11', 11, 'bz');
-INSERT INTO `t_room` VALUES (6, 2, 308, '动漫设计', 60, 'bz');
+INSERT INTO `t_room` VALUES (6, 2, 308, '动漫设计', 70, 'bz');
 INSERT INTO `t_room` VALUES (7, 1, 605, '计算机组装与维护', 60, 'bz');
 
 -- ----------------------------
@@ -778,9 +807,6 @@ CREATE TABLE `t_year`  (
 -- ----------------------------
 -- Records of t_year
 -- ----------------------------
-INSERT INTO `t_year` VALUES (2012, '2012-2013');
-INSERT INTO `t_year` VALUES (2013, '2013-2014');
-INSERT INTO `t_year` VALUES (2014, '2014-2015');
 INSERT INTO `t_year` VALUES (2015, '2015-2016');
 INSERT INTO `t_year` VALUES (2016, '2016-2017');
 INSERT INTO `t_year` VALUES (2017, '2017-2018');
@@ -791,6 +817,6 @@ INSERT INTO `t_year` VALUES (2021, '2021-2022');
 INSERT INTO `t_year` VALUES (2022, '2022-2023');
 INSERT INTO `t_year` VALUES (2023, '2023-2024');
 INSERT INTO `t_year` VALUES (2024, '2024-2025');
-INSERT INTO `t_year` VALUES (2026, '2026-2027');
+INSERT INTO `t_year` VALUES (2029, '2029-2030');
 
 SET FOREIGN_KEY_CHECKS = 1;
