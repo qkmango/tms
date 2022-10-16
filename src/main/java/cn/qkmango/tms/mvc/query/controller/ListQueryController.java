@@ -48,9 +48,9 @@ public class ListQueryController {
      * @return
      */
     @RequestMapping("/getFacultyList.do")
-    public Map<String, Object> getFacultyList() {
+    public Map<String, Object> getFacultyList(Faculty faculty) {
 
-        List<Faculty> facultyList = listQueryService.getFacultyList();
+        List<Faculty> facultyList = listQueryService.getFacultyList(faculty);
 
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
@@ -277,6 +277,5 @@ public class ListQueryController {
 
         return map;
     }
-
 
 }

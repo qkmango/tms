@@ -30,17 +30,8 @@ public class SystemQueryServiceImpl implements SystemQueryService {
     @Override
     public Map<String, String> getSystemCurrYearAndTerm() {
 
-        String currYear = stringRedisTemplate.opsForValue().get("currYear");
-        String currTerm = stringRedisTemplate.opsForValue().get("currTerm");
-
-        if (currYear == null) {
-            currYear = dao.getSystemCurrYear();
-            stringRedisTemplate.opsForValue().set("currYear", currYear);
-        }
-        if (currTerm == null) {
-            currTerm = dao.getSystemCurrTerm();
-            stringRedisTemplate.opsForValue().set("currTerm", currTerm);
-        }
+        String currYear = dao.getSystemCurrYear();
+        String currTerm = dao.getSystemCurrTerm();
 
         HashMap<String, String> map = new HashMap<>(2);
         map.put("currYear", currYear);

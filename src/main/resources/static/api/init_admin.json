@@ -32,6 +32,23 @@
 			}]
 		},
 		{
+			"title": "院系和专业管理",
+			"href": "",
+			"icon": "fa fa-tachometer",
+			"target": "_self",
+			"child": [{
+				"title": "院系管理",
+				"href": "page/admin/faculty_and_specialized/faculty/index.html",
+				"icon": "fa fa-tachometer",
+				"target": "_self"
+			}, {
+				"title": "专业管理",
+				"href": "page/admin/faculty_and_specialized/specialized/index.html",
+				"icon": "fa fa-tachometer",
+				"target": "_self"
+			}]
+		},
+		{
 			"title": "菜单管理",
 			"href": "page/menu.html",
 			"icon": "fa fa-window-maximize",

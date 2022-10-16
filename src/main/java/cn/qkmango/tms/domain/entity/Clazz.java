@@ -1,11 +1,13 @@
 package cn.qkmango.tms.domain.entity;
 
+import java.io.Serializable;
+
 /**
  * 班级
  *
  * @author qkmango
  */
-public class Clazz {
+public class Clazz implements Serializable {
 
     private Integer id;
     private String name;

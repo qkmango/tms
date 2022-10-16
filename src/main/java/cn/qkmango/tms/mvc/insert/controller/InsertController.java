@@ -3,6 +3,7 @@ package cn.qkmango.tms.mvc.insert.controller;
 import cn.qkmango.tms.common.annotation.Permission;
 import cn.qkmango.tms.common.exception.InsertException;
 import cn.qkmango.tms.common.map.ResponseMap;
+import cn.qkmango.tms.common.validate.group.Insert;
 import cn.qkmango.tms.common.validate.group.Insert.InsertRoom;
 import cn.qkmango.tms.domain.bind.PermissionType;
 import cn.qkmango.tms.domain.entity.*;
@@ -190,5 +191,17 @@ public class InsertController {
         return map;
     }
 
+
+    @Permission(PermissionType.admin)
+    @RequestMapping("insertFaculty.do")
+    public Map insertFaculty(@Validated({Insert.class}) Faculty faculty, Locale locale) throws InsertException {
+        service.insertFaculty(faculty, locale);
+
+        ResponseMap map = new ResponseMap();
+        map.setSuccess(true);
+        map.setMessage(messageSource.getMessage("db.insertFaculty.success", null, locale));
+
+        return map;
+    }
 
 }

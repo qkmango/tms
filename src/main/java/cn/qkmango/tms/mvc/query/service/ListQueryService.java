@@ -16,7 +16,7 @@ import java.util.Map;
  */
 public interface ListQueryService {
 
-    List<Faculty> getFacultyList();
+    List<Faculty> getFacultyList(Faculty faculty);
 
     List<Specialized> getSpecializedList(Specialized specialized);
 
@@ -39,4 +39,5 @@ public interface ListQueryService {
     List<Map<String, Object>> getTeachEvaluateList(Integer id);
 
     List<Calendar> getSchoolCalendarList();
+
 }

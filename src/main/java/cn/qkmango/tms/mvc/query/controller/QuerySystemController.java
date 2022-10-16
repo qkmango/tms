@@ -2,6 +2,7 @@ package cn.qkmango.tms.mvc.query.controller;
 
 import cn.qkmango.tms.common.map.ResponseMap;
 import cn.qkmango.tms.mvc.query.service.SystemQueryService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -35,6 +36,8 @@ public class QuerySystemController {
      *
      * @return
      */
+
+    @Cacheable(cacheNames="systemKV",key = "'CurrYearAndTerm'")
     @RequestMapping("/getSystemCurrYearAndTerm.do")
     public Map getSystemCurrYearAndTerm() {
         Map<String, String> systemCurrYearAndTerm = service.getSystemCurrYearAndTerm();

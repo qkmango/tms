@@ -29,4 +29,6 @@ public interface InsertService {
     void insertTeachEvaluate(TeachEvaluate teachEvaluate, Locale locale) throws InsertException;
 
     void insertCalendar(Calendar calendar, Locale locale) throws InsertException;
+
+    void insertFaculty(Faculty faculty, Locale locale) throws InsertException;
 }

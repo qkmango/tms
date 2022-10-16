@@ -3,6 +3,7 @@ package cn.qkmango.tms.mvc.update.service.impl;
 import cn.qkmango.tms.common.exception.UpdateException;
 import cn.qkmango.tms.domain.entity.Building;
 import cn.qkmango.tms.domain.entity.Elective;
+import cn.qkmango.tms.domain.entity.Faculty;
 import cn.qkmango.tms.domain.entity.Room;
 import cn.qkmango.tms.mvc.update.dao.UpdateDao;
 import cn.qkmango.tms.mvc.update.service.UpdateService;
@@ -70,5 +71,12 @@ public class UpdateServiceImpl implements UpdateService {
         }
     }
 
-
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void updateFaculty(Faculty faculty, Locale locale) throws UpdateException {
+        int affectedRows = updateDao.updateFaculty(faculty);
+        if (affectedRows != 1) {
+            throw new UpdateException(messageSource.getMessage("db.updateYear.failure", null, locale));
+        }
+    }
 }

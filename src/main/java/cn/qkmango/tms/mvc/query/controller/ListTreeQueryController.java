@@ -4,11 +4,14 @@ import cn.qkmango.tms.common.map.ResponseMap;
 import cn.qkmango.tms.domain.entity.Faculty;
 import cn.qkmango.tms.mvc.query.service.ListQueryService;
 import cn.qkmango.tms.mvc.query.service.ListTreeQueryService;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import javax.xml.crypto.dsig.keyinfo.KeyName;
 import java.util.List;
 import java.util.Map;
 
@@ -40,6 +43,7 @@ public class ListTreeQueryController {
      *
      * @return
      */
+    @Cacheable(cacheNames="@specialized@clazz",key = "'getClazzTreeList'")
     @RequestMapping("getClazzTreeList.do")
     public Map<String, Object> getClazzTreeList() {
         List<Faculty> clazzTreeList = listTreeQueryService.getClazzTreeList();

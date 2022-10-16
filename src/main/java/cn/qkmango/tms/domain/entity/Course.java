@@ -5,13 +5,14 @@ import org.hibernate.validator.constraints.Range;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * 课程实体类
  *
  * @author qkmango
  */
-public class Course {
+public class Course implements Serializable {
 
     private Integer id;
     @NotEmpty

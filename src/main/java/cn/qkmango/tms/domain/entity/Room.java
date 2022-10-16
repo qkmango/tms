@@ -6,6 +6,7 @@ import cn.qkmango.tms.domain.bind.RoomType;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * 教室
@@ -13,7 +14,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author qkmango
  */
-public class Room {
+public class Room implements Serializable {
     @NotNull(groups = {UpdateRoom.class})
     private Integer id;
 
@@ -21,6 +22,7 @@ public class Room {
     @Range(min = 101, max = 999, message = "教室号为三位数101-999", groups = {UpdateRoom.class, InsertRoom.class})
     private Integer number;
 
+    @NotNull(groups = {UpdateRoom.class, InsertRoom.class})
     private String name;
 
     @NotNull(groups = {UpdateRoom.class, InsertRoom.class})

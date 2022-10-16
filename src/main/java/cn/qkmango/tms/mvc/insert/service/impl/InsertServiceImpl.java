@@ -135,4 +135,13 @@ public class InsertServiceImpl implements InsertService {
             throw new InsertException(messageSource.getMessage("db.insertCalendar.failure", null, locale));
         }
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void insertFaculty(Faculty faculty, Locale locale) throws InsertException {
+        int affectedRows = insertDao.insertFaculty(faculty);
+        if (affectedRows != 1) {
+            throw new InsertException(messageSource.getMessage("db.insertFaculty.failure", null, locale));
+        }
+    }
 }

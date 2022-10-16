@@ -5,6 +5,7 @@ import cn.qkmango.tms.common.validate.group.Insert;
 import cn.qkmango.tms.common.validate.group.Update;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.StringJoiner;
 
 /**
@@ -14,7 +15,7 @@ import java.util.StringJoiner;
  * @version 1.0
  * @date 2022-07-28 19:20
  */
-public class SystemKeyValue {
+public class SystemKeyValue implements Serializable {
     @NotBlank(groups = {Insert.InsertSystemKeyValue.class, Delete.DeleteSystemKeyValue.class, Update.UpdateSystemKeyValue.class})
     private String key;
     @NotBlank(groups = {Insert.InsertSystemKeyValue.class})

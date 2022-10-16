@@ -1,5 +1,6 @@
 package cn.qkmango.tms.domain.entity;
 
+import java.io.Serializable;
 import java.util.StringJoiner;
 
 /**
@@ -9,7 +10,7 @@ import java.util.StringJoiner;
  * @version 1.0
  * @date 2022-08-03 14:34
  */
-public class CourseClazz {
+public class CourseClazz implements Serializable {
 
     /**
      * course ID

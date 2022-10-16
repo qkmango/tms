@@ -3,6 +3,7 @@ package cn.qkmango.tms.domain.entity;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * 教学评价对象
@@ -23,7 +24,7 @@ import javax.validation.constraints.NotNull;
  * @date 2021-08-18 13:47
  * @version 1.0
  */
-public class TeachEvaluate {
+public class TeachEvaluate implements Serializable {
 
 
     @NotNull private Integer elective;

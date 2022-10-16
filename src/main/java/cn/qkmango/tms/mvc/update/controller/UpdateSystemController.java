@@ -7,6 +7,7 @@ import cn.qkmango.tms.common.validate.group.Update;
 import cn.qkmango.tms.domain.bind.PermissionType;
 import cn.qkmango.tms.domain.entity.SystemKeyValue;
 import cn.qkmango.tms.mvc.update.service.UpdateSystemService;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -36,6 +37,7 @@ public class UpdateSystemController {
     private ReloadableResourceBundleMessageSource messageSource;
 
     @Permission(PermissionType.admin)
+    @CacheEvict(cacheNames="systemkv",key = "'CurrYearAndTerm'")
     @RequestMapping("updateSystemKeyValue.do")
     public Map<String, Object> updateSystemKeyValue(@Validated(Update.UpdateSystemKeyValue.class) SystemKeyValue systemKeyValue,
                                                     Locale locale) throws UpdateException {

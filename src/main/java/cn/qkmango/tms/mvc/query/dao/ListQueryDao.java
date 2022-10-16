@@ -23,7 +23,7 @@ public interface ListQueryDao {
 
     int getCount();
 
-    List<Faculty> getFacultyList();
+    List<Faculty> getFacultyList(@Param("faculty") Faculty faculty);
 
     List<Specialized> getSpecializedList(Specialized specialized);
 

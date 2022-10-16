@@ -85,5 +85,10 @@
         VALUES (#{year}, #{term}, #{start}, #{end}, #{holiday})
     </insert>
 
+    <insert id="insertFaculty">
+        insert into t_faculty(name)
+        values (#{name})
+    </insert>
+
 
 </mapper>

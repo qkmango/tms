@@ -5,6 +5,7 @@ import cn.qkmango.tms.domain.bind.course.WeekType;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 
 /**
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author qkmango
  */
-public class CourseInfo {
+public class CourseInfo implements Serializable {
 
     private Integer id;
     private Integer course;

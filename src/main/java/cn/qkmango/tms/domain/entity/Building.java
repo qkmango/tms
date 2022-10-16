@@ -4,13 +4,14 @@ import cn.qkmango.tms.domain.bind.building.BuildingType;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.io.Serializable;
 
 /**
  * 教学楼
  *
  * @author qkmango
  */
-public class Building {
+public class Building implements Serializable {
 
     private Integer id;
     /**

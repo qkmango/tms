@@ -4,11 +4,11 @@ package cn.qkmango.tms.mvc.update.controller;
 import cn.qkmango.tms.common.annotation.Permission;
 import cn.qkmango.tms.common.exception.UpdateException;
 import cn.qkmango.tms.common.map.ResponseMap;
-import cn.qkmango.tms.common.validate.group.Update;
-import cn.qkmango.tms.common.validate.group.Update.UpdateStudentScore;
+import cn.qkmango.tms.common.validate.group.Update.*;
 import cn.qkmango.tms.domain.bind.PermissionType;
 import cn.qkmango.tms.domain.entity.Building;
 import cn.qkmango.tms.domain.entity.Elective;
+import cn.qkmango.tms.domain.entity.Faculty;
 import cn.qkmango.tms.domain.entity.Room;
 import cn.qkmango.tms.mvc.update.service.UpdateService;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
@@ -94,7 +94,7 @@ public class UpdateController {
      */
     @Permission(PermissionType.admin)
     @RequestMapping("updateRoom.do")
-    public Map<String, Object> updateRoom(@Validated(Update.class) Room room, Locale locale) throws UpdateException {
+    public Map<String, Object> updateRoom(@Validated(UpdateRoom.class) Room room, Locale locale) throws UpdateException {
 
         updateService.updateRoom(room, locale);
 
@@ -123,6 +123,25 @@ public class UpdateController {
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
         map.setMessage(messageSource.getMessage("db.updateYear.success", null, locale));
+
+        return map;
+    }
+
+    /**
+     * 更新修改 学院信息
+     * @param faculty
+     * @param locale
+     * @return
+     * @throws UpdateException
+     */
+    @Permission(PermissionType.admin)
+    @RequestMapping("updateFaculty.do")
+    public Map<String, Object> updateFaculty(@Validated(UpdateFaculity.class) Faculty faculty, Locale locale) throws UpdateException {
+        updateService.updateFaculty(faculty,locale);
+
+        ResponseMap map = new ResponseMap();
+        map.setSuccess(true);
+        map.setMessage(messageSource.getMessage("db.updateFaculty.success", null, locale));
 
         return map;
     }

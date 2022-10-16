@@ -7,22 +7,37 @@
     <select id="getFacultyList" resultType="cn.qkmango.tms.domain.entity.Faculty">
         SELECT id, name
         FROM t_faculty
+        <if test="faculty != null">
+            <where>
+                <if test="faculty.id!=null and faculty.id!=''">
+                    id = #{faculty.id}
+                </if>
+                <if test="faculty.name!=null and faculty.name!=''">
+                    and name = #{faculty.name}
+                </if>
+            </where>
+        </if>
     </select>
 
     <select id="getSpecializedList" resultType="cn.qkmango.tms.domain.entity.Specialized">
         SELECT
-        id,name,faculty
+            s.id,
+            s.NAME,
+            s.faculty,
+            f.name as facultyName
         FROM
-        t_specialized
+            t_specialized s,
+            t_faculty f
         <where>
+            s.faculty=f.id
             <if test="id != null and id != ''">
-                id = #{id}
+                s.id = #{id}
             </if>
             <if test="faculty != null and faculty != ''">
-                and faculty = #{faculty}
+                and s.faculty = #{faculty}
             </if>
             <if test="name != null and name != ''">
-                and name like '%' #{name} '%'
+                and s.name like '%' #{name} '%'
             </if>
         </where>
     </select>

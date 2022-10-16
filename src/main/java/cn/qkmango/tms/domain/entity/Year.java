@@ -3,13 +3,14 @@ package cn.qkmango.tms.domain.entity;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * 年
  *
  * @author qkmango
  */
-public class Year {
+public class Year implements Serializable {
     /**PK，年度，如 2020*/
     @NotNull
     @Range(min = 2000,max = 2100,message = "年份取值在2000-2100")

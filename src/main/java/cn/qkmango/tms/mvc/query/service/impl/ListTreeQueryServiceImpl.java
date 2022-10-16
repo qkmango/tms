@@ -33,7 +33,7 @@ public class ListTreeQueryServiceImpl implements ListTreeQueryService {
     @Override
     public List<Faculty> getClazzTreeList() {
 
-        List<Faculty> facultyList = listQueryService.getFacultyList();
+        List<Faculty> facultyList = listQueryService.getFacultyList(null);
 
         for (Faculty faculty : facultyList) {
             List<Specialized> specializedList = dao.getSpecializedListByFacultyId(faculty.getId());
@@ -49,7 +49,7 @@ public class ListTreeQueryServiceImpl implements ListTreeQueryService {
 
     @Override
     public List<Faculty> getTeacherTreeList() {
-        List<Faculty> facultyList = listQueryService.getFacultyList();
+        List<Faculty> facultyList = listQueryService.getFacultyList(null);
 
         for (Faculty faculty : facultyList) {
             List<Teacher> teacherList = dao.getTeacherListByFacultyId(faculty.getId());

@@ -3,6 +3,7 @@ package cn.qkmango.tms.mvc.update.service;
 import cn.qkmango.tms.common.exception.UpdateException;
 import cn.qkmango.tms.domain.entity.Building;
 import cn.qkmango.tms.domain.entity.Elective;
+import cn.qkmango.tms.domain.entity.Faculty;
 import cn.qkmango.tms.domain.entity.Room;
 
 import java.util.Locale;
@@ -23,4 +24,5 @@ public interface UpdateService {
     void updateYear(Integer year, Integer newYear, Locale locale) throws UpdateException;
 
 
+    void updateFaculty(Faculty faculty, Locale locale) throws UpdateException;
 }

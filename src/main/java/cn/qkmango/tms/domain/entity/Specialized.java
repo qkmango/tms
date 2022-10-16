@@ -1,6 +1,7 @@
 package cn.qkmango.tms.domain.entity;
 
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -8,10 +9,11 @@ import java.util.List;
  *
  * @author qkmango
  */
-public class Specialized {
+public class Specialized implements Serializable {
 
     private Integer id;
     private Integer faculty;
+    private String facultyName;
     private String name;
     private List<Clazz> clazzList;
 
@@ -21,6 +23,14 @@ public class Specialized {
     public Specialized(Integer id, Integer faculty, String name, List<Clazz> clazzList) {
         this.id = id;
         this.faculty = faculty;
+        this.name = name;
+        this.clazzList = clazzList;
+    }
+
+    public Specialized(Integer id, Integer faculty, String facultyName, String name, List<Clazz> clazzList) {
+        this.id = id;
+        this.faculty = faculty;
+        this.facultyName = facultyName;
         this.name = name;
         this.clazzList = clazzList;
     }
@@ -57,11 +67,20 @@ public class Specialized {
         this.clazzList = clazzList;
     }
 
+    public String getFacultyName() {
+        return facultyName;
+    }
+
+    public void setFacultyName(String facultyName) {
+        this.facultyName = facultyName;
+    }
+
     @Override
     public String toString() {
         return "Specialized{" +
                 "id=" + id +
                 ", faculty=" + faculty +
+                ", facultyName='" + facultyName + '\'' +
                 ", name='" + name + '\'' +
                 ", clazzList=" + clazzList +
                 '}';

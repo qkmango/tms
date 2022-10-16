@@ -2,6 +2,7 @@ package cn.qkmango.tms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cache.annotation.EnableCaching;
 
 
 /**
@@ -9,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * @author qkmango
  * @date 2022-08-01 18:54
  */
+@EnableCaching
 @SpringBootApplication
 public class Application {
 

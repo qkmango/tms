@@ -4,6 +4,7 @@ import cn.qkmango.tms.common.validate.group.Update.UpdateStudentScore;
 import org.hibernate.validator.constraints.Range;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /**
  * 选课对象，对于对应数据库 t_elective 表
@@ -12,7 +13,7 @@ import javax.validation.constraints.NotNull;
  * @version 1.0
  * @date 2021-07-02 18:04
  */
-public class Elective {
+public class Elective implements Serializable {
     //选课ID，学生ID，课程ID，课程分数
 
     @NotNull(groups = {UpdateStudentScore.class})

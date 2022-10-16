@@ -8,6 +8,7 @@ import cn.qkmango.tms.domain.bind.PermissionType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.StringJoiner;
 
 /**
@@ -15,7 +16,7 @@ import java.util.StringJoiner;
  *
  * @author qkmango
  */
-public class User {
+public class User implements Serializable {
     @NotNull(groups = {login.class, Sys.RetrievePasswordCaptcha.class})
     protected Integer id;
 

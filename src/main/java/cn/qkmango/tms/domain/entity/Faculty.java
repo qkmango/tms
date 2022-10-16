@@ -1,5 +1,11 @@
 package cn.qkmango.tms.domain.entity;
 
+import cn.qkmango.tms.common.validate.group.Insert;
+import cn.qkmango.tms.common.validate.group.Update;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -8,8 +14,10 @@ import java.util.StringJoiner;
  *
  * @author qkmango
  */
-public class Faculty {
+public class Faculty implements Serializable {
+    @NotNull(groups = {Update.UpdateFaculity.class})
     private Integer id;
+    @NotBlank(groups = {Update.UpdateFaculity.class, Insert.class})
     private String name;
     private List<Specialized> specializedList;
     private List<Teacher> teacherList;

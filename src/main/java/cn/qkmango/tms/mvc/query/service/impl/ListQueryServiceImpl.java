@@ -31,8 +31,8 @@ public class ListQueryServiceImpl implements ListQueryService {
     private SystemQueryService systemQueryService;
 
     @Override
-    public List<Faculty> getFacultyList() {
-        List<Faculty> facultyList = listQueryDao.getFacultyList();
+    public List<Faculty> getFacultyList(Faculty faculty) {
+        List<Faculty> facultyList = listQueryDao.getFacultyList(faculty);
         return facultyList;
     }
 
@@ -125,4 +125,5 @@ public class ListQueryServiceImpl implements ListQueryService {
         List<Calendar> list = listQueryDao.getSchoolCalendarList();
         return list;
     }
+
 }

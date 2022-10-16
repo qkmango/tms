@@ -27,4 +27,10 @@
         WHERE year = #{year}
     </update>
 
+    <update id="updateFaculty">
+        update t_faculty
+        set name = #{name}
+        where id=#{id};
+    </update>
+
 </mapper>

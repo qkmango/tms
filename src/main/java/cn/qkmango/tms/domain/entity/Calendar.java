@@ -4,6 +4,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 /**
  * 校历
@@ -12,7 +13,7 @@ import javax.validation.constraints.Size;
  * @version 1.0
  * @date 2022-08-22 10:43
  */
-public class Calendar {
+public class Calendar implements Serializable {
     private Integer id;
 
     @NotNull
