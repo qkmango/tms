@@ -15,6 +15,7 @@ import java.util.StringJoiner;
  * @author qkmango
  */
 public class Faculty implements Serializable {
+    private static final long serialVersionUID = 5036028095163376600L;
     @NotNull(groups = {Update.UpdateFaculity.class})
     private Integer id;
     @NotBlank(groups = {Update.UpdateFaculity.class, Insert.class})

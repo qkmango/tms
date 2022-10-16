@@ -13,6 +13,7 @@ import java.io.Serializable;
  */
 public class Building implements Serializable {
 
+    private static final long serialVersionUID = 7827741338676466017L;
     private Integer id;
     /**
      * 楼号

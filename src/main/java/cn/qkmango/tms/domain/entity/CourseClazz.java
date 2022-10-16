@@ -12,6 +12,7 @@ import java.util.StringJoiner;
  */
 public class CourseClazz implements Serializable {
 
+    private static final long serialVersionUID = 1641323564398132839L;
     /**
      * course ID
      */

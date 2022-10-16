@@ -14,6 +14,7 @@ import java.io.Serializable;
  * @date 2021-07-02 18:04
  */
 public class Elective implements Serializable {
+    private static final long serialVersionUID = -7497183283278465407L;
     //选课ID，学生ID，课程ID，课程分数
 
     @NotNull(groups = {UpdateStudentScore.class})

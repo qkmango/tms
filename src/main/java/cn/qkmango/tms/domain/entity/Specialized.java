@@ -1,6 +1,11 @@
 package cn.qkmango.tms.domain.entity;
 
 
+import cn.qkmango.tms.common.validate.group.Insert;
+import cn.qkmango.tms.common.validate.group.Update;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.List;
 
@@ -10,10 +15,14 @@ import java.util.List;
  * @author qkmango
  */
 public class Specialized implements Serializable {
+    private static final long serialVersionUID = -7352076058910279778L;
 
+    @NotNull(groups = {Update.class})
     private Integer id;
+    @NotNull(groups = {Insert.class})
     private Integer faculty;
     private String facultyName;
+    @NotBlank(groups = {Insert.class})
     private String name;
     private List<Clazz> clazzList;
 

@@ -4,13 +4,13 @@ package cn.qkmango.tms.mvc.update.controller;
 import cn.qkmango.tms.common.annotation.Permission;
 import cn.qkmango.tms.common.exception.UpdateException;
 import cn.qkmango.tms.common.map.ResponseMap;
+import cn.qkmango.tms.common.validate.group.Update;
 import cn.qkmango.tms.common.validate.group.Update.*;
 import cn.qkmango.tms.domain.bind.PermissionType;
-import cn.qkmango.tms.domain.entity.Building;
-import cn.qkmango.tms.domain.entity.Elective;
-import cn.qkmango.tms.domain.entity.Faculty;
-import cn.qkmango.tms.domain.entity.Room;
+import cn.qkmango.tms.domain.entity.*;
 import cn.qkmango.tms.mvc.update.service.UpdateService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -135,6 +135,7 @@ public class UpdateController {
      * @throws UpdateException
      */
     @Permission(PermissionType.admin)
+    @CacheEvict(cacheNames="*@faculty*",allEntries = true)
     @RequestMapping("updateFaculty.do")
     public Map<String, Object> updateFaculty(@Validated(UpdateFaculity.class) Faculty faculty, Locale locale) throws UpdateException {
         updateService.updateFaculty(faculty,locale);
@@ -142,6 +143,25 @@ public class UpdateController {
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
         map.setMessage(messageSource.getMessage("db.updateFaculty.success", null, locale));
+
+        return map;
+    }
+
+    /**
+     * 更新修改 专业信息
+     * @param specialized
+     * @param locale
+     * @return
+     * @throws UpdateException
+     */
+    @Permission(PermissionType.admin)
+    @RequestMapping("updateSpecialized.do")
+    public Map<String, Object> updateSpecialized(@Validated(Update.class) Specialized specialized, Locale locale) throws UpdateException {
+        updateService.updateSpecialized(specialized,locale);
+
+        ResponseMap map = new ResponseMap();
+        map.setSuccess(true);
+        map.setMessage(messageSource.getMessage("db.updateSpecialized.success", null, locale));
 
         return map;
     }

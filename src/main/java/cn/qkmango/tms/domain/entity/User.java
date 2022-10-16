@@ -17,6 +17,7 @@ import java.util.StringJoiner;
  * @author qkmango
  */
 public class User implements Serializable {
+    private static final long serialVersionUID = 1254338299558611179L;
     @NotNull(groups = {login.class, Sys.RetrievePasswordCaptcha.class})
     protected Integer id;
 

@@ -21,4 +21,7 @@ public interface DeleteService {
 
     void deleteElective(HashMap<String, Object> param, Locale locale) throws DeleteException;
 
+    void deleteFaculty(Integer id, Locale locale) throws DeleteException;
+
+    void deleteSpecialized(Integer id, Locale locale) throws DeleteException;
 }

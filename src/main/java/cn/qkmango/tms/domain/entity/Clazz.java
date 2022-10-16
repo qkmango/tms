@@ -9,6 +9,7 @@ import java.io.Serializable;
  */
 public class Clazz implements Serializable {
 
+    private static final long serialVersionUID = 977475317742246899L;
     private Integer id;
     private String name;
     private Integer specialized;

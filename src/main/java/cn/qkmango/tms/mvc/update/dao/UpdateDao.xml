@@ -11,26 +11,40 @@
 
     <update id="updateBuilding">
         UPDATE t_building
-        SET number=#{number},name=#{name},buildingType=#{buildingType}
+        SET number=#{number},
+            name=#{name},
+            buildingType=#{buildingType}
         WHERE id = #{id}
     </update>
 
     <update id="updateRoom">
         UPDATE t_room
-        SET number=#{number},name=#{name},building=#{building},capacity=#{capacity},roomType=#{roomType}
+        SET number=#{number},
+            name=#{name},
+            building=#{building},
+            capacity=#{capacity},
+            roomType=#{roomType}
         WHERE id = #{id}
     </update>
 
     <update id="updateYear">
         UPDATE t_year
-        SET year=#{newYear},name=CONCAT_WS('-',#{newYear},#{newYear}+1)
+        SET year=#{newYear},
+            name=CONCAT_WS('-', #{newYear}, #{newYear} + 1)
         WHERE year = #{year}
     </update>
 
     <update id="updateFaculty">
         update t_faculty
         set name = #{name}
-        where id=#{id};
+        where id = #{id};
+    </update>
+
+    <update id="updateSpecialized">
+        update t_specialized
+        set name = #{name},
+            faculty = #{faculty}
+        where id = #{id}
     </update>
 
 </mapper>

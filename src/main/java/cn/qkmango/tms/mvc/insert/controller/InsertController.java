@@ -179,6 +179,13 @@ public class InsertController {
     }
 
 
+    /**
+     * 添加校历
+     * @param calendar
+     * @param locale
+     * @return
+     * @throws InsertException
+     */
     @Permission(PermissionType.admin)
     @RequestMapping("/insertCalendar.do")
     public Map insertCalendar(@Validated Calendar calendar, Locale locale) throws InsertException {
@@ -192,6 +199,13 @@ public class InsertController {
     }
 
 
+    /**
+     * 添加学院
+     * @param faculty
+     * @param locale
+     * @return
+     * @throws InsertException
+     */
     @Permission(PermissionType.admin)
     @RequestMapping("insertFaculty.do")
     public Map insertFaculty(@Validated({Insert.class}) Faculty faculty, Locale locale) throws InsertException {
@@ -200,6 +214,25 @@ public class InsertController {
         ResponseMap map = new ResponseMap();
         map.setSuccess(true);
         map.setMessage(messageSource.getMessage("db.insertFaculty.success", null, locale));
+
+        return map;
+    }
+
+    /**
+     * 添加专业
+     * @param specialized
+     * @param locale
+     * @return
+     * @throws InsertException
+     */
+    @Permission(PermissionType.admin)
+    @RequestMapping("insertSpecialized.do")
+    public Map insertSpecialized(@Validated({Insert.class}) Specialized specialized, Locale locale) throws InsertException {
+        service.insertSpecialized(specialized, locale);
+
+        ResponseMap map = new ResponseMap();
+        map.setSuccess(true);
+        map.setMessage(messageSource.getMessage("db.insertSpecialized.success", null, locale));
 
         return map;
     }

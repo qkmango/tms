@@ -90,5 +90,10 @@
         values (#{name})
     </insert>
 
+    <insert id="insertSpecialized">
+        insert into t_specialized(faculty, name)
+        VALUES (#{faculty},#{name})
+    </insert>
+
 
 </mapper>

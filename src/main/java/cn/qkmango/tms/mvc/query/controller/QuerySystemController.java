@@ -36,8 +36,7 @@ public class QuerySystemController {
      *
      * @return
      */
-
-    @Cacheable(cacheNames="systemKV",key = "'CurrYearAndTerm'")
+    @Cacheable(cacheNames="@system",key = "'CurrYearAndTerm'")
     @RequestMapping("/getSystemCurrYearAndTerm.do")
     public Map getSystemCurrYearAndTerm() {
         Map<String, String> systemCurrYearAndTerm = service.getSystemCurrYearAndTerm();

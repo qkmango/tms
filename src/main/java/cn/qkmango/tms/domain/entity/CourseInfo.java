@@ -15,6 +15,7 @@ import java.io.Serializable;
  */
 public class CourseInfo implements Serializable {
 
+    private static final long serialVersionUID = 7153500823408238626L;
     private Integer id;
     private Integer course;
     @NotNull

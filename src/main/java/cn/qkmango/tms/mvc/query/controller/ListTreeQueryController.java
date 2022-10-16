@@ -43,7 +43,7 @@ public class ListTreeQueryController {
      *
      * @return
      */
-    @Cacheable(cacheNames="@specialized@clazz",key = "'getClazzTreeList'")
+    @Cacheable(cacheNames="@faculty@specialized@clazz",key = "'getClazzTreeList'")
     @RequestMapping("getClazzTreeList.do")
     public Map<String, Object> getClazzTreeList() {
         List<Faculty> clazzTreeList = listTreeQueryService.getClazzTreeList();
@@ -58,6 +58,7 @@ public class ListTreeQueryController {
      *
      * @return
      */
+    @Cacheable(cacheNames="@faculty@teacher",key = "'getTeacherTreeList'")
     @RequestMapping("getTeacherTreeList.do")
     public Map<String, Object> getTeacherTreeList() {
         List<Faculty> teacherTreeList = listTreeQueryService.getTeacherTreeList();

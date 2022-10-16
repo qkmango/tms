@@ -62,4 +62,22 @@ public class DeleteServiceImpl implements DeleteService {
             throw new DeleteException(messageSource.getMessage("db.deleteElective.failure", null, locale));
         }
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteFaculty(Integer id, Locale locale) throws DeleteException {
+        int affectedRows = deleteDao.deleteFaculty(id);
+        if (affectedRows != 1) {
+            throw new DeleteException(messageSource.getMessage("db.deleteFaculty.failure", null, locale));
+        }
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void deleteSpecialized(Integer id, Locale locale) throws DeleteException {
+        int affectedRows = deleteDao.deleteSpecialized(id);
+        if (affectedRows != 1) {
+            throw new DeleteException(messageSource.getMessage("db.deleteSpecialized.failure", null, locale));
+        }
+    }
 }

@@ -15,6 +15,7 @@ import java.io.Serializable;
  * @author qkmango
  */
 public class Room implements Serializable {
+    private static final long serialVersionUID = 1564405491363677117L;
     @NotNull(groups = {UpdateRoom.class})
     private Integer id;
 

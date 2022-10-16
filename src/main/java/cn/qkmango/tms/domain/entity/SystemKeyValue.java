@@ -16,6 +16,7 @@ import java.util.StringJoiner;
  * @date 2022-07-28 19:20
  */
 public class SystemKeyValue implements Serializable {
+    private static final long serialVersionUID = -5479675748985483562L;
     @NotBlank(groups = {Insert.InsertSystemKeyValue.class, Delete.DeleteSystemKeyValue.class, Update.UpdateSystemKeyValue.class})
     private String key;
     @NotBlank(groups = {Insert.InsertSystemKeyValue.class})

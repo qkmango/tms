@@ -26,7 +26,7 @@ import java.io.Serializable;
  */
 public class TeachEvaluate implements Serializable {
 
-
+    private static final long serialVersionUID = 971309357091274181L;
     @NotNull private Integer elective;
 
     private Integer student;

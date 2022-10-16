@@ -11,6 +11,7 @@ import java.io.Serializable;
  * @author qkmango
  */
 public class Year implements Serializable {
+    private static final long serialVersionUID = 1169747475303827795L;
     /**PK，年度，如 2020*/
     @NotNull
     @Range(min = 2000,max = 2100,message = "年份取值在2000-2100")

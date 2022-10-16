@@ -18,5 +18,9 @@ public interface DeleteDao {
 
     int deleteElective(HashMap<String, Object> param);
 
+    int deleteFaculty(Integer id);
+
+    int deleteSpecialized(Integer id);
+
     // int deleteSystemKeyValue(String key);
 }

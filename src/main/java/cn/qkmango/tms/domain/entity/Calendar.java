@@ -14,6 +14,7 @@ import java.io.Serializable;
  * @date 2022-08-22 10:43
  */
 public class Calendar implements Serializable {
+    private static final long serialVersionUID = -3987743929040013483L;
     private Integer id;
 
     @NotNull

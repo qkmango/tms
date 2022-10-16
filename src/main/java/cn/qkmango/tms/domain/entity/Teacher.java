@@ -8,6 +8,7 @@ import java.io.Serializable;
  * @author qkmango
  */
 public class Teacher implements Serializable {
+    private static final long serialVersionUID = 4107824742769684166L;
     private Integer id;
     private String name;
     private Integer sex;

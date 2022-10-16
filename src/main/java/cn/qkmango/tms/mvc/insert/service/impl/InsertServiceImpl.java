@@ -144,4 +144,13 @@ public class InsertServiceImpl implements InsertService {
             throw new InsertException(messageSource.getMessage("db.insertFaculty.failure", null, locale));
         }
     }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void insertSpecialized(Specialized specialized, Locale locale) throws InsertException {
+        int affectedRows = insertDao.insertSpecialized(specialized);
+        if (affectedRows != 1) {
+            throw new InsertException(messageSource.getMessage("db.insertSpecialized.failure", null, locale));
+        }
+    }
 }

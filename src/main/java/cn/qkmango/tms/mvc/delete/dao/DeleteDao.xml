@@ -20,7 +20,16 @@
         delete from t_elective where student=#{studentId} and course=#{courseId}
     </delete>
 
-<!--    <delete id="deleteSystemKeyValue">-->
+    <delete id="deleteFaculty">
+        delete from t_faculty where id=#{id}
+    </delete>
+
+
+    <delete id="deleteSpecialized">
+        delete from t_specialized where id=#{id}
+    </delete>
+
+    <!--    <delete id="deleteSystemKeyValue">-->
 <!--        delete-->
 <!--        from t_system-->
 <!--        where `key` = #{key}-->

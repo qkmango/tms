@@ -105,4 +105,46 @@ public class DeleteController {
     }
 
 
+    /**
+     * 删除学院
+     * @param id 学院ID
+     * @param locale
+     * @return
+     * @throws DeleteException
+     */
+    @Permission(PermissionType.admin)
+    @RequestMapping("/deleteFaculty.do")
+    public Map<String,Object> deleteFaculty(Integer id, Locale locale) throws DeleteException {
+
+        service.deleteFaculty(id, locale);
+
+        ResponseMap map = new ResponseMap();
+        map.setSuccess(true);
+
+        map.setMessage(messageSource.getMessage("db.deleteFaculty.success", null, locale));
+        return map;
+
+    }
+
+    /**
+     * 删除专业
+     * @param id 专业ID
+     * @param locale
+     * @return
+     * @throws DeleteException
+     */
+    @Permission(PermissionType.admin)
+    @RequestMapping("/deleteSpecialized.do")
+    public Map<String,Object> deleteSpecialized(Integer id, Locale locale) throws DeleteException {
+
+        service.deleteSpecialized(id, locale);
+
+        ResponseMap map = new ResponseMap();
+        map.setSuccess(true);
+
+        map.setMessage(messageSource.getMessage("db.deleteSpecialized.success", null, locale));
+        return map;
+
+    }
+
 }

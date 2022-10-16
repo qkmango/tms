@@ -14,6 +14,7 @@ import cn.qkmango.tms.domain.bind.PermissionType;
  */
 public class Student extends User {
 
+    private static final long serialVersionUID = 4372212607094115125L;
     /** 性别*/
     private Integer sex;
     /** 生日*/

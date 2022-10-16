@@ -38,4 +38,6 @@ public interface InsertDao {
     int insertCalendar(Calendar calendar);
 
     int insertFaculty(Faculty faculty);
+
+    int insertSpecialized(Specialized specialized);
 }
